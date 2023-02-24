@@ -1,9 +1,11 @@
 #pragma once
+
+#include "BaseComponent.h"
 #include <glm/glm.hpp>
 
 namespace dae
 {
-	class Transform final
+	class Transform final : public BaseComponent
 	{
 	public:
 		const glm::vec3& GetPosition() const { return m_position; }

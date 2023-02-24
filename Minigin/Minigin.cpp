@@ -92,7 +92,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	while (doContinue)
 	{
 		const auto currentTime = std::chrono::high_resolution_clock::now();
-		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		//const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 
 		doContinue = input.ProcessInput();
 		sceneManager.Update(/*deltaTime*/);
