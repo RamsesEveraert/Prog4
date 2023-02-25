@@ -1,7 +1,10 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
-#include <unordered_map>
+#include "TransformComponent.h"
+#include <vector>
+#include <iostream>
+
+#include <glm/glm.hpp>
 
 namespace dae
 {
@@ -16,24 +19,41 @@ namespace dae
 		virtual void Render() const;
 
 		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
+		/*void SetPosition(const glm::vec3& position);*/
 
 
-		template<typename T>
-		T* AddComponent(const std::string& nameComponent, T* pComponent)
-		{
+        template<typename T>
+        void addComponent(std::shared_ptr<T> component) {
+            m_Components.push_back(component);
+        }
 
-			static_assert(std::is_base_of< BaseComponent, T>::value, "T isn't derived from BaseComponent class!")
+        template<typename T>
+        void removeComponent() {
+            auto it = std::find_if(m_Components.begin(), m_Components.end(), [](const std::shared_ptr<BaseComponent>& c) {
+                return dynamic_cast<T*>(c.get()) != nullptr;
+                });
+            if (it != m_Components.end()) {
+                m_Components.erase(it);
+            }
+        }
 
-			std::pair<std::string, T*> component(nameComponent, pComponent);
-			m_ComponentPntrs.insert(component);
+        template<typename T>
+        std::shared_ptr<T> getComponent() const {
+            for (const auto& component : m_Components) {
+                if (std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(component)) {
+                    return t;
+                }
+            }
+            return nullptr;
+        }
 
-			std::cout << "Component: " << nameComponent << " created!\n"
+        template<typename T>
 
-			return pComponent;
-		}
-		template <typename T> T* GetComponent() const;
-		template <typename T> void RemoveComponent();
+
+        bool hasComponent() const {
+            return getComponent<T>() != nullptr;
+        }
+
 
 		GameObject() = default;
 		virtual ~GameObject();
@@ -43,8 +63,8 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		Transform m_transform{};
-		std::unordered_map<std::string, BaseComponent*> m_ComponentPntrs;
+		//TransformComponent m_transform{};
+		std::vector<std::shared_ptr<BaseComponent>> m_Components;
 
 		// todo: mmm, every gameobject has a texture? Is that correct?
 		std::shared_ptr<Texture2D> m_texture{};
