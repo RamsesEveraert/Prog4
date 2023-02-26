@@ -10,6 +10,11 @@ namespace dae
 	public:
 
 		TransformComponent(const std::weak_ptr<GameObject>& gameObject);
+		
+		void Update(/*float deltaTime*/) override;
+		void Render() const override;
+
+
 
 		const glm::vec3 GetPosition() const { return m_Position; }
 		void SetPosition(const glm::vec3& position){ m_Position = position; }

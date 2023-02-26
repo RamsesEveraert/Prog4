@@ -5,3 +5,11 @@ dae::TransformComponent::TransformComponent(const std::weak_ptr<GameObject>& gam
 {
 
 }
+
+void dae::TransformComponent::Update()
+{
+}
+
+void dae::TransformComponent::Render() const
+{
+}

@@ -1,6 +1,7 @@
 
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "TextureComponent.h"
 #include "Renderer.h"
 
 #include <string>
@@ -20,16 +21,9 @@ void dae::GameObject::Update()
 
 void dae::GameObject::Render() const
 {
-	/*const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);*/
+	for (const auto& component : m_Components)
+	{
+		if(component)
+		component.get()->Render();
+	}
 }
-
-void dae::GameObject::SetTexture(const std::string& filename)
-{
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
-
-//void dae::GameObject::SetPosition(const glm::vec3& position)
-//{
-//	//m_transform.SetPosition(position);
-//}

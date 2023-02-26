@@ -18,12 +18,10 @@ namespace dae
 		virtual void Update();
 		virtual void Render() const;
 
-		void SetTexture(const std::string& filename);
-		/*void SetPosition(const glm::vec3& position);*/
-
 
         template<typename T>
         void addComponent(std::shared_ptr<T> component) {
+            
             m_Components.push_back(component);
         }
 
@@ -63,10 +61,7 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		//TransformComponent m_transform{};
 		std::vector<std::shared_ptr<BaseComponent>> m_Components;
 
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
 	};
 }
