@@ -75,6 +75,9 @@
     <ClInclude Include="RenderComponent.h">
       <Filter>Engin files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Engin files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Engin files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Engin files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

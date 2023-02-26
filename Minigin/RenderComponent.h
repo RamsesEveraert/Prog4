@@ -9,10 +9,11 @@
 namespace dae
 {
 	class Texture2D;
-	class RenderComponent : public BaseComponent
+	class RenderComponent final : public BaseComponent
 	{
 	public:
 		RenderComponent(const std::weak_ptr<GameObject>& gameObject);
+		~RenderComponent() = default;
 
 
 		void Update(/*float deltaTime*/) override;

@@ -17,7 +17,7 @@ void dae::TextureComponent::Update(/*float deltaTime*/)
 
 void dae::TextureComponent::Render() const
 {
-	m_GameObject.lock()->getComponent<dae::RenderComponent>()->Render();
+	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
 
 }
 
@@ -26,7 +26,12 @@ const std::shared_ptr<dae::Texture2D> dae::TextureComponent::GetTexture() const
 	return m_pTexture;
 }
 
-void dae::TextureComponent::SetTexture(const std::string& filename)
+void dae::TextureComponent::SetTextureByPath(const std::string& filename)
 {
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(filename);
+}
+
+void dae::TextureComponent::SetTexture(std::shared_ptr<Texture2D> texture)
+{
+	m_pTexture = texture;
 }

@@ -20,7 +20,7 @@ namespace dae
 
 
         template<typename T>
-        void addComponent(std::shared_ptr<T> component) {
+        void AddComponent(std::shared_ptr<T> component) {
             
             m_Components.push_back(component);
         }
@@ -36,7 +36,7 @@ namespace dae
         }
 
         template<typename T>
-        std::shared_ptr<T> getComponent() const {
+        std::shared_ptr<T> GetComponent() const {
             for (const auto& component : m_Components) {
                 if (std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(component)) {
                     return t;
@@ -49,7 +49,7 @@ namespace dae
 
 
         bool hasComponent() const {
-            return getComponent<T>() != nullptr;
+            return GetComponent<T>() != nullptr;
         }
 
 
