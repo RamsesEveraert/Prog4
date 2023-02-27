@@ -5,40 +5,44 @@
 namespace dae
 {
 
-    class Timer final : dae::Singleton<Timer> {
+    class Timer final : public Singleton<Timer> {
     public:
         
-        Timer();
+        
         virtual ~Timer() override = default;
 
-        const double getDeltaTimeMs() const; 
-        const double msToSeconds(double ms) const;
+        // dt functions
+
+        const float getDeltaTimeMs() const; 
+        const float msToSeconds(float ms) const;
+       
+        void updateDeltaTime(Timer& timer);
         
         //stopwatch functions
 
         void startStopwatch();
-        const double stopStopwatch();
+        const float stopStopwatch();
 
         // timer functions
 
-        void startTimer(double durationSeconds);
+        void startTimer(float durationSeconds);
         bool isTimerFinished() const;
 
     private:
+        friend class Singleton<Timer>;
+        Timer();
+
+        
+
 
         std::chrono::high_resolution_clock::time_point stopwatchStart;
         std::chrono::high_resolution_clock::time_point timerStart;
-        std::chrono::duration<double> timerDuration;
-        std::chrono::duration<double> deltaTime;
+        std::chrono::duration<float> timerDuration;
+        std::chrono::duration<float> deltaTime;
 
-        friend void updateDeltaTime(Timer& timer);
+       
     };
 
-    void updateDeltaTime(Timer& timer) {
-        static auto previousTime = std::chrono::high_resolution_clock::now();
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        timer.deltaTime = currentTime - previousTime;
-        previousTime = currentTime;
-    }
+    
 
 }

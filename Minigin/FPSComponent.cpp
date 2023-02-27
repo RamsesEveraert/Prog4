@@ -2,31 +2,33 @@
 
 #include "GameObject.h"
 #include "TextComponent.h"
+#include "Timer.h"
 
 dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject), m_frames{ 0 }, m_fps{ 0 }
+    : BaseComponent(gameObject), m_fps{ 0 }, m_timeRunning{ 0.0f }
 {
-	m_startTime = std::chrono::high_resolution_clock::now();
+	
 }
 
 void dae::FPSComponent::Update()
 {
-    ++m_frames;
-    auto currentTime = std::chrono::high_resolution_clock::now();
-    auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - m_startTime).count();
+    auto& timer = Timer::GetInstance();
 
-    if (elapsedTime >= 1000)
+    m_timeRunning += timer.msToSeconds(timer.getDeltaTimeMs());
+    const float timeLimit{1.f};
+
+    if (m_timeRunning >= timeLimit)
     {
-        m_fps = m_frames;
-        m_frames = 0;
-        m_startTime = currentTime;
+        m_fps = static_cast<int>(1000 / timer.getDeltaTimeMs());
+        if (m_gameObject.lock()->hasComponent<dae::TextComponent>())
+        {
+            m_gameObject.lock()->GetComponent<dae::TextComponent>()->SetText("FPS: " + std::to_string(m_fps));
+        }
+
+        m_timeRunning -= timeLimit;
     }
 
-    if (m_gameObject.lock()->hasComponent<dae::TextComponent>())
-    {
-        m_gameObject.lock()->GetComponent<dae::TextComponent>()->SetText("FPS: " + std::to_string(m_fps));
-    }
-    
+   
 }
 
 const int dae::FPSComponent::getFPS() const

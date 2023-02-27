@@ -19,9 +19,10 @@ namespace dae
 
 
         template<typename T>
-        void AddComponent(std::shared_ptr<T> component) {
+        std::shared_ptr<T> AddComponent(std::shared_ptr<T> component) {
             
             m_Components.push_back(component);
+            return component;
         }
 
         template<typename T>

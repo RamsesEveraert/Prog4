@@ -16,8 +16,7 @@ namespace dae
         const int getFPS() const;
 
     private:
-        int m_frames;
         int m_fps;
-        std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
+        float m_timeRunning;
     };
 }

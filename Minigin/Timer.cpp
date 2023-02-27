@@ -1,20 +1,27 @@
-#include "Time.h"
 #include "Timer.h"
 
 dae::Timer::Timer()
-: deltaTime(0.0) 
+    : deltaTime{ 0.0 }, timerDuration{ 0.0 }
 {
 
 }
 
-const double dae::Timer::getDeltaTimeMs() const
+void dae::Timer::updateDeltaTime(Timer& timer)
 {
-	return std::chrono::duration<double, std::milli>(deltaTime).count();
+    static auto previousTime = std::chrono::high_resolution_clock::now();
+    auto currentTime = std::chrono::high_resolution_clock::now();
+    timer.deltaTime = currentTime - previousTime;
+    previousTime = currentTime;
 }
 
-const double dae::Timer::msToSeconds(double ms) const
+const float dae::Timer::getDeltaTimeMs() const
 {
-	return ms / 1000.0;
+	return std::chrono::duration<float, std::milli>(deltaTime).count();
+}
+
+const float dae::Timer::msToSeconds(float ms) const
+{
+	return ms / 1000.0f;
 }
 
 void dae::Timer::startStopwatch()
@@ -22,17 +29,17 @@ void dae::Timer::startStopwatch()
 	stopwatchStart = std::chrono::high_resolution_clock::now();
 }
 
-const double dae::Timer::stopStopwatch()
+const float dae::Timer::stopStopwatch()
 {
     auto end = std::chrono::high_resolution_clock::now();
     auto elapsed = end - stopwatchStart;
-    return std::chrono::duration<double>(elapsed).count();
+    return std::chrono::duration<float>(elapsed).count();
 }
 
-void dae::Timer::startTimer(double durationSeconds)
+void dae::Timer::startTimer(float durationSeconds)
 {
     timerStart = std::chrono::high_resolution_clock::now();
-    timerDuration = std::chrono::duration<double>(durationSeconds);
+    timerDuration = std::chrono::duration<float>(durationSeconds);
 }
 
 bool dae::Timer::isTimerFinished() const
