@@ -12,17 +12,17 @@
 
 
 dae::TextComponent::TextComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& text, std::shared_ptr<Font> font)
-	: BaseComponent(gameObject), m_needsUpdate(true), m_text(text), m_font(std::move(font))
+	: BaseComponent(gameObject), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font))
 {
 	
 }
 
 void dae::TextComponent::Update()
 {
-		if (m_needsUpdate)
+		if (m_NeedsUpdate)
 	{
 		const SDL_Color color = { 255,255,255 }; // only white text is supported now
-		const auto surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
+		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr)
 		{
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
@@ -33,27 +33,27 @@ void dae::TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		if (m_gameObject.lock()->hasComponent<dae::TextureComponent>())
+		if (m_GameObject.lock()->hasComponent<dae::TextureComponent>())
 		{
 			auto pTexture = std::make_shared<Texture2D>(texture);
-			m_gameObject.lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
+			m_GameObject.lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
 		}
 		
 		;
-		m_needsUpdate = false;
+		m_NeedsUpdate = false;
 	}
 }
 
 void dae::TextComponent::Render() const
 {
-	if (m_gameObject.lock()->hasComponent<dae::RenderComponent>())
+	if (m_GameObject.lock()->hasComponent<dae::RenderComponent>())
 	{
-		m_gameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
+		m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
 	}
 }
 
 void dae::TextComponent::SetText(const std::string& text)
 {
-	m_text = text;
-	m_needsUpdate = true;
+	m_Text = text;
+	m_NeedsUpdate = true;
 }

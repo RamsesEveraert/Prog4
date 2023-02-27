@@ -13,7 +13,7 @@ namespace dae
 		TextureComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& texturePath);
 		~TextureComponent() = default;
 
-		void Update(/*float deltaTime*/) override;
+		void Update() override;
 		void Render() const override;
 
 		const std::shared_ptr<Texture2D> GetTexture() const;
@@ -21,7 +21,7 @@ namespace dae
 		void SetTexture(std::shared_ptr<Texture2D> texture);
 
 	private:
-		std::string m_texturePath;
+		std::string m_TexturePath;
 		std::shared_ptr<Texture2D> m_pTexture;
 	};
 }

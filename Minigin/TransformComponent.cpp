@@ -13,3 +13,23 @@ void dae::TransformComponent::Update()
 void dae::TransformComponent::Render() const
 {
 }
+
+const glm::vec3 dae::TransformComponent::GetPosition() const
+{
+	return m_Position;
+}
+
+void dae::TransformComponent::SetPosition(const glm::vec3& position)
+{
+	m_Position = position;
+}
+
+const glm::quat dae::TransformComponent::getRotation() const
+{
+	return m_Rotation;
+}
+
+void dae::TransformComponent::setRotation(const glm::quat& rotation)
+{
+	m_Rotation = rotation;
+}

@@ -38,8 +38,8 @@ namespace dae
         template<typename T>
         std::shared_ptr<T> GetComponent() const {
             for (const auto& component : m_Components) {
-                if (std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(component)) {
-                    return t;
+                if (std::shared_ptr<T> pointerType = std::dynamic_pointer_cast<T>(component)) {
+                    return pointerType;
                 }
             }
             return nullptr;

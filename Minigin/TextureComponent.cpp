@@ -12,13 +12,14 @@ dae::TextureComponent::TextureComponent(const std::weak_ptr<GameObject>& gameObj
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(texturePath);
 }
 
-void dae::TextureComponent::Update(/*float deltaTime*/)
+void dae::TextureComponent::Update()
 {
+	//TODO later
 }
 
 void dae::TextureComponent::Render() const
 {
-	m_gameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
+	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
 
 }
 

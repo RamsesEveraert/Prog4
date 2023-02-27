@@ -13,10 +13,10 @@ namespace dae
         ~FPSComponent() = default;
 
         void Update() override;
-        const int getFPS() const;
+        const int GetFPS() const;
 
     private:
-        int m_fps;
-        float m_timeRunning;
+        int m_Fps;
+        float m_TimeRunning;
     };
 }

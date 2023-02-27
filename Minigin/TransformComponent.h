@@ -2,6 +2,7 @@
 
 #include "BaseComponent.h"
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace dae
 {
@@ -12,24 +13,24 @@ namespace dae
 		TransformComponent(const std::weak_ptr<GameObject>& gameObject);
 		~TransformComponent() = default;
 		
-		void Update(/*float deltaTime*/) override;
+		void Update() override;
 		void Render() const override;
 
 
 
-		const glm::vec3 getPosition() const { return m_position; }
-		void setPosition(const glm::vec3& position){ m_position = position; }
+		const glm::vec3 GetPosition() const; 
+		void SetPosition(const glm::vec3& position);
 
-		/*const glm::quat getRotation() const { return m_Rotation; }
-		void setRotation(const glm::quat& rotation) { m_Rotation = rotation; }*/
+		const glm::quat getRotation() const;
+		void setRotation(const glm::quat& rotation);
 
-		const glm::vec3 getScale() const { return m_scale; }
-		void setScale(const glm::vec3& scale) { m_scale = scale; }
+		const glm::vec3 GetScale() const { return m_Scale; }
+		void setScale(const glm::vec3& scale) { m_Scale = scale; }
 		
 	private:
-		glm::vec3 m_position{ glm::vec3(0.0f) };
-		/*glm::quat m_rotation{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };*/
-		glm::vec3 m_scale{ glm::vec3(1.0f) };
+		glm::vec3 m_Position{ glm::vec3(0.0f) };
+		glm::quat m_Rotation{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };
+		glm::vec3 m_Scale{ glm::vec3(1.0f) };
 	};
 }
 

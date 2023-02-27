@@ -5,7 +5,7 @@
 #include "Timer.h"
 
 dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
-    : BaseComponent(gameObject), m_fps{ 0 }, m_timeRunning{ 0.0f }
+    : BaseComponent(gameObject), m_Fps{ 0 }, m_TimeRunning{ 0.0f }
 {
 	
 }
@@ -14,24 +14,24 @@ void dae::FPSComponent::Update()
 {
     auto& timer = Timer::GetInstance();
 
-    m_timeRunning += timer.msToSeconds(timer.getDeltaTimeMs());
+    m_TimeRunning += timer.msToSeconds(timer.getDeltaTimeMs());
     const float timeLimit{1.f};
 
-    if (m_timeRunning >= timeLimit)
+    if (m_TimeRunning >= timeLimit) // display fps every sec
     {
-        m_fps = static_cast<int>(1000 / timer.getDeltaTimeMs());
-        if (m_gameObject.lock()->hasComponent<dae::TextComponent>())
+        m_Fps = static_cast<int>(1000 / timer.getDeltaTimeMs());
+        if (m_GameObject.lock()->hasComponent<dae::TextComponent>())
         {
-            m_gameObject.lock()->GetComponent<dae::TextComponent>()->SetText("FPS: " + std::to_string(m_fps));
+            m_GameObject.lock()->GetComponent<dae::TextComponent>()->SetText("FPS: " + std::to_string(m_Fps));
         }
 
-        m_timeRunning -= timeLimit;
+        m_TimeRunning -= timeLimit;
     }
 
    
 }
 
-const int dae::FPSComponent::getFPS() const
+const int dae::FPSComponent::GetFPS() const
 {
-    return m_fps;
+    return m_Fps;
 }
