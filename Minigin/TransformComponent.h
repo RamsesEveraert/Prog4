@@ -1,8 +1,9 @@
 #pragma once
 
 #include "BaseComponent.h"
-#include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/glm.hpp>
+
 
 namespace dae
 {
@@ -21,15 +22,15 @@ namespace dae
 		const glm::vec3 GetPosition() const; 
 		void SetPosition(const glm::vec3& position);
 
-		const glm::quat getRotation() const;
-		void setRotation(const glm::quat& rotation);
+		/*const glm::quat getRotation() const;
+		void setRotation(const glm::quat& rotation);*/
 
-		const glm::vec3 GetScale() const { return m_Scale; }
-		void setScale(const glm::vec3& scale) { m_Scale = scale; }
+		const glm::vec3 GetScale() const;
+		void setScale(const glm::vec3& scale);
 		
 	private:
 		glm::vec3 m_Position{ glm::vec3(0.0f) };
-		glm::quat m_Rotation{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };
+		/*glm::quat m_Rotation{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };*/
 		glm::vec3 m_Scale{ glm::vec3(1.0f) };
 	};
 }
