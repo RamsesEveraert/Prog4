@@ -15,8 +15,8 @@ namespace dae
 			return m_GameObject.lock();
 		}
 
-		virtual void Update(/*float deltaTime*/) = 0 ;
-		virtual void Render() const = 0;
+		virtual void Update(/*float deltaTime*/);
+		virtual void Render() const;
 
 		virtual ~BaseComponent() = default;
 
