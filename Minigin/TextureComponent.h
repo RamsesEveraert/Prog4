@@ -2,11 +2,7 @@
 
 #include "BaseComponent.h"
 
-#include <memory>
 #include <string>
-
-
-
 
 namespace dae
 {
@@ -24,14 +20,8 @@ namespace dae
 		void SetTextureByPath(const std::string& filename);
 		void SetTexture(std::shared_ptr<Texture2D> texture);
 
-		// Disabling copy/move constructors and assignment operators   
-		TextureComponent(const TextureComponent& other) = delete;
-		TextureComponent(TextureComponent&& other) noexcept = delete;
-		TextureComponent& operator=(const TextureComponent& other) = delete;
-		TextureComponent& operator=(TextureComponent&& other) noexcept = delete;
-
 	private:
-		std::string m_TexturePath;
+		std::string m_texturePath;
 		std::shared_ptr<Texture2D> m_pTexture;
 	};
 }

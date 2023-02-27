@@ -75,8 +75,11 @@
     <ClInclude Include="RenderComponent.h">
       <Filter>Engin files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="Timer.h">
       <Filter>Engin files</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Engin files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,8 +140,11 @@
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Engin files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="Timer.cpp">
       <Filter>Engin files</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Engin files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

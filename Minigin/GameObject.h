@@ -12,7 +12,7 @@ namespace dae
 	class BaseComponent;
 
 	// todo: this should become final.
-	class GameObject 
+	class GameObject final
 	{
 	public:
 		virtual void Update();
@@ -61,6 +61,7 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
+
 		std::vector<std::shared_ptr<BaseComponent>> m_Components;
 
 	};

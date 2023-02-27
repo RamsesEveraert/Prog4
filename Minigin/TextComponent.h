@@ -2,9 +2,7 @@
 
 #include "BaseComponent.h"
 
-#include <memory>
 #include <string>
-
 
 namespace dae
 {
@@ -20,15 +18,6 @@ namespace dae
 		void Render() const override;
 
 		void SetText(const std::string& text);
-
-
-		// Disabling copy/move constructors and assignment operators   
-		TextComponent(const TextComponent& other) = delete;
-		TextComponent(TextComponent&& other) noexcept = delete;
-		TextComponent& operator=(const TextComponent& other) = delete;
-		TextComponent& operator=(TextComponent&& other) noexcept = delete;
-
-		
 
 	private:
 

@@ -17,7 +17,7 @@ void dae::TextureComponent::Update(/*float deltaTime*/)
 
 void dae::TextureComponent::Render() const
 {
-	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
+	m_gameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
 
 }
 

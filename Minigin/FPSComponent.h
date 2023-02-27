@@ -13,13 +13,7 @@ namespace dae
         ~FPSComponent() = default;
 
         void Update() override;
-        const int GetFPS() const;
-
-        // Disabling copy/move constructors and assignment operators   
-        FPSComponent(const FPSComponent& other) = delete;
-        FPSComponent(FPSComponent&& other) noexcept = delete;
-        FPSComponent& operator=(const FPSComponent& other) = delete;
-        FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
+        const int getFPS() const;
 
     private:
         int m_frames;
