@@ -15,9 +15,6 @@ void dae::GameObject::Render() const
 {
 	for (const auto& component : m_Components)
 	{
-
-		// every component renders (for possible debug use of certain components)
-
 		if(component)
 		component.get()->Render();
 	}
