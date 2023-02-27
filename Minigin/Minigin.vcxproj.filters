@@ -42,9 +42,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engin files</Filter>
     </ClInclude>
-    <ClInclude Include="TextObject.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Engin files</Filter>
     </ClInclude>
@@ -108,9 +105,6 @@
       <Filter>Engin files</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextObject.cpp">
       <Filter>Engin files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">

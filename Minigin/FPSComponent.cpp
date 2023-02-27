@@ -1,5 +1,8 @@
 #include "FPSComponent.h"
 
+#include "GameObject.h"
+#include "TextComponent.h"
+
 dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
 	: BaseComponent(gameObject), m_frames{ 0 }, m_fps{ 0 }
 {
@@ -18,6 +21,12 @@ void dae::FPSComponent::Update()
         m_frames = 0;
         m_startTime = currentTime;
     }
+
+    if (m_gameObject.lock()->hasComponent<dae::TextComponent>())
+    {
+        m_gameObject.lock()->GetComponent<dae::TextComponent>()->SetText("FPS: " + std::to_string(m_fps));
+    }
+    
 }
 
 const int dae::FPSComponent::getFPS() const

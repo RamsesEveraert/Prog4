@@ -8,6 +8,7 @@
 dae::TextureComponent::TextureComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& texturePath)
 	: BaseComponent(gameObject), m_pTexture(nullptr)
 {
+	if(texturePath != "")
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(texturePath);
 }
 

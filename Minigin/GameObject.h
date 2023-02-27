@@ -11,12 +11,11 @@ namespace dae
 	class Texture2D;
 	class BaseComponent;
 
-	// todo: this should become final.
 	class GameObject final
 	{
 	public:
-		virtual void Update();
-		virtual void Render() const;
+		void Update();
+		void Render() const;
 
 
         template<typename T>
@@ -54,7 +53,8 @@ namespace dae
 
 
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject() = default;
+
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
