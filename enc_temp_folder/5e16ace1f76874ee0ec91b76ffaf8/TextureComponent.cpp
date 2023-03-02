@@ -17,6 +17,12 @@ void dae::TextureComponent::Update()
 	//TODO later
 }
 
+//void dae::TextureComponent::Render() const
+//{
+//	GetParent()->GetComponent<dae::RenderComponent>()->Render();
+//
+//}
+
 const std::shared_ptr<dae::Texture2D> dae::TextureComponent::GetTexture() const
 {
 	return m_pTexture;

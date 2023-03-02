@@ -14,6 +14,7 @@ namespace dae
 		~TextureComponent() = default;
 
 		void Update() override;
+		/*void Render() const override;*/
 
 		const std::shared_ptr<Texture2D> GetTexture() const;
 		void SetTextureByPath(const std::string& filename);

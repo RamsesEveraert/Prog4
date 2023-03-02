@@ -13,9 +13,7 @@ namespace dae
 		TextComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& text, std::shared_ptr<Font> font);
 		~TextComponent() = default;
 
-
-		void Update(/*float deltaTime*/) override;
-		void Render() const override;
+		void Update() override;
 
 		void SetText(const std::string& text);
 

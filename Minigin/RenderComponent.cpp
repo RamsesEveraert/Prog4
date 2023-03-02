@@ -4,19 +4,19 @@
 #include "Renderer.h"
 #include "TextureComponent.h"
 
-dae::RenderComponent::RenderComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject), m_TransformComponent {nullptr}, m_TextureComponent{nullptr}
+dae::RenderComponent::RenderComponent(const std::weak_ptr<GameObject>& parent)
+	: BaseComponent(parent), m_TransformComponent {nullptr}, m_TextureComponent{nullptr}
 {
 
-	/*if (gameObject.lock()->hasComponent<dae::TransformComponent>())
+	if (parent.lock()->hasComponent<dae::TransformComponent>())
 	{
-		m_TransformComponent = gameObject.lock()->GetComponent<dae::TransformComponent>();
+		m_TransformComponent = parent.lock()->GetComponent<dae::TransformComponent>();
 	}
 
-	if (gameObject.lock()->hasComponent<dae::TextureComponent>())
+	if (parent.lock()->hasComponent<dae::TextureComponent>())
 	{
-		m_TextureComponent = gameObject.lock()->GetComponent<dae::TextureComponent>();
-	}*/
+		m_TextureComponent = parent.lock()->GetComponent<dae::TextureComponent>();
+	}
 }
 
 void dae::RenderComponent::Update()
@@ -24,22 +24,19 @@ void dae::RenderComponent::Update()
 }
 
 void dae::RenderComponent::Render() const
-
-// zie feedback over cache component in initialisation
-// zie feedabck over render
 {
-	if (auto gameObject = m_Parent.lock())  //  checks if the game object associated with this RenderComponent instance still exists.
+	if (!GetParent())
+		return;
+
+	if (!m_TransformComponent)
+		return;
+
+	const auto& pos = m_TransformComponent->GetPosition();
+
+	if (m_TextureComponent)
 	{
-		auto transformComp = gameObject->GetComponent<dae::TransformComponent>(); // checks if there is a transform component
-		if (!transformComp)
-			return;
-
-		const auto& pos = transformComp->GetPosition();
-
-		
-		if (auto texture = gameObject->GetComponent<dae::TextureComponent>()->GetTexture()) // checks if there is a texture component + texture
-		{
-			Renderer::GetInstance().RenderTexture(*texture, pos.x, pos.y);
-		}
+		auto texture = m_TextureComponent->GetTexture();
+		Renderer::GetInstance().RenderTexture(*texture, pos.x, pos.y);
 	}
+
 }

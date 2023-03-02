@@ -9,14 +9,11 @@ namespace dae
 
 	public:
 
-		
-
 		virtual void Update();
 		virtual void Render() const;
 
 		virtual ~BaseComponent() = default;
 
-		// Disabling copy/move constructors and assignment operators   
 		BaseComponent(const BaseComponent& other) = delete;
 		BaseComponent(BaseComponent&& other) noexcept = delete;
 		BaseComponent& operator=(const BaseComponent& other) = delete;
@@ -24,13 +21,15 @@ namespace dae
 
 	
 	protected:
+
 		BaseComponent(const std::weak_ptr<GameObject>& parent) : m_Parent(parent) {}
 
 		std::shared_ptr<GameObject> GetParent() const;
 
-		std::weak_ptr<GameObject> m_Parent;
 
 	private:
+
+		std::weak_ptr<GameObject> m_Parent;
 		
 
 	};

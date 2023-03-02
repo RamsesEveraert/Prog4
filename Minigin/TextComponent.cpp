@@ -32,26 +32,15 @@ void dae::TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		if (m_Parent.lock()->hasComponent<dae::TextureComponent>())
+		if (GetParent()->hasComponent<dae::TextureComponent>())
 		{
 			auto pTexture = std::make_shared<Texture2D>(texture);
-			m_Parent.lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
+			GetParent()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
 		}
 		
 		;
 		m_NeedsUpdate = false;
 	}
-}
-
-void dae::TextComponent::Render() const
-{
-
-	//// mag niet , object twee keer renderen
-
-	//if (m_GameObject.lock()->hasComponent<dae::RenderComponent>())
-	//{
-	//	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
-	//}
 }
 
 void dae::TextComponent::SetText(const std::string& text)
