@@ -7,7 +7,7 @@
 namespace dae
 {
 	class Texture2D;
-	class TextureComponent final: public BaseComponent
+	class TextureComponent final : public BaseComponent
 	{
 	public:
 		TextureComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& texturePath);

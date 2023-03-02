@@ -18,7 +18,7 @@ dae::TextComponent::TextComponent(const std::weak_ptr<GameObject>& gameObject, c
 
 void dae::TextComponent::Update()
 {
-		if (m_NeedsUpdate)
+	if (m_NeedsUpdate)
 	{
 		const SDL_Color color = { 255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
@@ -32,12 +32,12 @@ void dae::TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		if (GetOwner().lock()->HasComponent<dae::TextureComponent>())
+		if (GetOwner()->hasComponent<dae::TextureComponent>())
 		{
 			auto pTexture = std::make_shared<Texture2D>(texture);
-			GetOwner().lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
+			GetOwner()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
 		}
-		
+
 		;
 		m_NeedsUpdate = false;
 	}

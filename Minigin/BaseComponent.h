@@ -24,7 +24,7 @@ namespace dae
 
 		BaseComponent(const std::weak_ptr<GameObject>& owner) : m_pOwner(owner) {}
 
-		std::weak_ptr<GameObject> GetOwner() const;
+		std::shared_ptr<GameObject> GetOwner() const;
 
 
 	private:

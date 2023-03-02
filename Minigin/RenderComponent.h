@@ -17,7 +17,7 @@ namespace dae
 		void Render() const override;
 
 	private:
-		std::weak_ptr<dae::TransformComponent> m_TransformComponent;
-		std::weak_ptr<dae::TextureComponent> m_TextureComponent;
+		std::shared_ptr<dae::TransformComponent> m_TransformComponent;
+		std::shared_ptr<dae::TextureComponent> m_TextureComponent;
 	};
 }
