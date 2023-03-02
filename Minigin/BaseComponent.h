@@ -9,11 +9,7 @@ namespace dae
 
 	public:
 
-		BaseComponent(const std::weak_ptr<GameObject>& gameObject) : m_GameObject(gameObject) {}
-
-		std::shared_ptr<GameObject> getGameObject() const {
-			return m_GameObject.lock();
-		}
+		
 
 		virtual void Update();
 		virtual void Render() const;
@@ -28,7 +24,13 @@ namespace dae
 
 	
 	protected:
-		std::weak_ptr<GameObject> m_GameObject;
+		BaseComponent(const std::weak_ptr<GameObject>& parent) : m_Parent(parent) {}
+
+		std::shared_ptr<GameObject> GetParent() const;
+
+		std::weak_ptr<GameObject> m_Parent;
+
+	private:
 		
 
 	};

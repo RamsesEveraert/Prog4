@@ -19,7 +19,7 @@ void dae::TextureComponent::Update()
 
 void dae::TextureComponent::Render() const
 {
-	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
+	m_Parent.lock()->GetComponent<dae::RenderComponent>()->Render();
 
 }
 

@@ -2,10 +2,11 @@
 #include "BaseComponent.h"
 
 #include <chrono>
-#include <memory>
 
 namespace dae
 {
+
+    class TextComponent;
     class FPSComponent final : public BaseComponent
     {
     public:
@@ -18,5 +19,6 @@ namespace dae
     private:
         int m_Fps;
         float m_TimeRunning;
+        std::shared_ptr<dae::TextComponent> m_TextComponent;
     };
 }

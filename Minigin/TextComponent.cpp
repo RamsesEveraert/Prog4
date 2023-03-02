@@ -14,7 +14,6 @@
 dae::TextComponent::TextComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& text, std::shared_ptr<Font> font)
 	: BaseComponent(gameObject), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font))
 {
-	
 }
 
 void dae::TextComponent::Update()
@@ -33,10 +32,10 @@ void dae::TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		if (m_GameObject.lock()->hasComponent<dae::TextureComponent>())
+		if (m_Parent.lock()->hasComponent<dae::TextureComponent>())
 		{
 			auto pTexture = std::make_shared<Texture2D>(texture);
-			m_GameObject.lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
+			m_Parent.lock()->GetComponent<dae::TextureComponent>()->SetTexture(pTexture);
 		}
 		
 		;
@@ -46,10 +45,13 @@ void dae::TextComponent::Update()
 
 void dae::TextComponent::Render() const
 {
-	if (m_GameObject.lock()->hasComponent<dae::RenderComponent>())
-	{
-		m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
-	}
+
+	//// mag niet , object twee keer renderen
+
+	//if (m_GameObject.lock()->hasComponent<dae::RenderComponent>())
+	//{
+	//	m_GameObject.lock()->GetComponent<dae::RenderComponent>()->Render();
+	//}
 }
 
 void dae::TextComponent::SetText(const std::string& text)

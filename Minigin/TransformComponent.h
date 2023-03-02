@@ -1,6 +1,12 @@
 #pragma once
 
 #include "BaseComponent.h"
+#pragma warning( push )
+#pragma warning( disable: 4201 )
+//code with ThatWarning here
+#include "glm/gtc/quaternion.hpp"
+#pragma warning( pop )
+
 #include <glm/glm.hpp>
 
 

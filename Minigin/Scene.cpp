@@ -28,8 +28,23 @@ void Scene::Update()
 {
 	for(auto& object : m_objects)
 	{
+		// TODO : marked for delete function that returns bool
+		// TODO: add vector with to delete objects
+
+		/*if (object.IsMarkedForDeletion)
+		{
+
+			continue;
+		}*/
+
 		object->Update();
+
+		// delete marked objects from loop
+		
+
 	}
+
+
 }
 
 void Scene::Render() const

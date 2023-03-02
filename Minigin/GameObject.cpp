@@ -2,12 +2,12 @@
 #include "GameObject.h"
 
 
-void dae::GameObject::Update(/*deltaTime*/)
+void dae::GameObject::Update()
 {
 	for (const auto& component : m_Components)
 	{
 		if (component)
-		component.get()->Update(/*deltaTime*/);
+		component.get()->Update();
 	}
 }
 

@@ -18,11 +18,11 @@ dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
 void dae::FPSComponent::Update()
 {
 
-    auto& timer =Timer::GetInstance();
+    auto& timer = Timer::GetInstance();
     float dt = timer.getDeltaTimeMs();
     
     m_TimeRunning += timer.msToSeconds(dt);
-    const float timeLimit = 1.f;
+    const float timeLimit{1.f};
 
     if (m_TimeRunning >= timeLimit) // display fps every sec
     {

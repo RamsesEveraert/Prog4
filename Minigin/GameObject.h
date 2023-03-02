@@ -43,11 +43,11 @@ namespace dae
                 }
             }
             return nullptr;
+            
         }
 
+
         template<typename T>
-
-
         bool hasComponent() const {
             return GetComponent<T>() != nullptr;
         }
