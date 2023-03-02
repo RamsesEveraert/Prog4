@@ -22,14 +22,14 @@ namespace dae
 	
 	protected:
 
-		BaseComponent(const std::weak_ptr<GameObject>& parent) : m_Parent(parent) {}
+		BaseComponent(const std::weak_ptr<GameObject>& owner) : m_pOwner(owner) {}
 
-		std::shared_ptr<GameObject> GetParent() const;
+		std::weak_ptr<GameObject> GetOwner() const;
 
 
 	private:
 
-		std::weak_ptr<GameObject> m_Parent;
+		std::weak_ptr<GameObject> m_pOwner;
 		
 
 	};

@@ -8,7 +8,7 @@ dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
     : BaseComponent(gameObject), m_Fps{ 0 }, m_TimeRunning{ 0.0f }
 {
     
-    if (gameObject.lock()->hasComponent<dae::TextComponent>())
+    if (gameObject.lock()->HasComponent<dae::TextComponent>())
     {
         m_TextComponent = gameObject.lock()->GetComponent<dae::TextComponent>();
     }

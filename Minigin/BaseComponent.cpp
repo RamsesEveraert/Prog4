@@ -1,9 +1,9 @@
 #include "BaseComponent.h"
 #include "GameObject.h"
 
-std::shared_ptr<dae::GameObject> dae::BaseComponent::GetParent() const
+std::weak_ptr<dae::GameObject> dae::BaseComponent::GetOwner() const
 {
-	return m_Parent.lock();
+	return m_pOwner;
 }
 
 void dae::BaseComponent::Update()
@@ -13,3 +13,4 @@ void dae::BaseComponent::Update()
 void dae::BaseComponent::Render() const
 {
 }
+
