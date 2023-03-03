@@ -9,6 +9,7 @@ namespace dae
 
 	public:
 
+
 		virtual void Update();
 		virtual void Render() const;
 
@@ -22,15 +23,14 @@ namespace dae
 	
 	protected:
 
-		BaseComponent(const std::weak_ptr<GameObject>& owner) : m_pOwner(owner) {}
+		explicit BaseComponent(std::weak_ptr<GameObject> owner);
 
 		std::shared_ptr<GameObject> GetOwner() const;
 
 
 	private:
 
-		std::weak_ptr<GameObject> m_pOwner;
-		
+		std::weak_ptr<GameObject> m_pOwner;		
 
 	};
 

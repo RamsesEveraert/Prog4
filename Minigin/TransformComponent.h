@@ -20,12 +20,16 @@ namespace dae
 		~TransformComponent() = default;
 		
 		void Update() override;
-		void Render() const override;
+		void UpdateWorldPosition();
+
+		const glm::vec3 GetWorldPosition() const; 
+		const glm::vec3 GetLocalPosition() const; 
 
 
 
-		const glm::vec3 GetPosition() const; 
-		void SetPosition(const glm::vec3& position);
+		void SetLocalPosition(const glm::vec3& pos);
+
+		void SetPositionDirty();
 
 		/*const glm::quat getRotation() const;
 		void setRotation(const glm::quat& rotation);*/
@@ -34,9 +38,12 @@ namespace dae
 		void setScale(const glm::vec3& scale);
 		
 	private:
-		glm::vec3 m_Position{ glm::vec3(0.0f) };
+		glm::vec3 m_LocalPosition, m_WorldPosition;
+
 		/*glm::quat m_Rotation{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };*/
 		glm::vec3 m_Scale{ glm::vec3(1.0f) };
+
+		bool m_PositionIsDirty;
 	};
 }
 

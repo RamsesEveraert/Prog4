@@ -1,27 +1,54 @@
 #include "TransformComponent.h"
+#include "GameObject.h"
 
 dae::TransformComponent::TransformComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject)
+	: BaseComponent(gameObject), m_LocalPosition{ glm::vec3(0.0f) }, m_WorldPosition{ glm::vec3(0.0f) }, m_PositionIsDirty{ true }
 {
 
 }
 
 void dae::TransformComponent::Update()
 {
+	if (m_PositionIsDirty)
+		UpdateWorldPosition();
 }
 
-void dae::TransformComponent::Render() const
+void dae::TransformComponent::UpdateWorldPosition()
 {
+		
+		if (GetOwner()->GetParent() == nullptr)
+		{
+			m_WorldPosition = m_LocalPosition;
+		}
+		else
+		{
+			auto worldPositionParent = GetOwner()->GetParent()->GetComponent<dae::TransformComponent>()->GetWorldPosition();
+			m_WorldPosition = worldPositionParent + m_LocalPosition;
+		}	
+			
+		m_PositionIsDirty = false;
 }
 
-const glm::vec3 dae::TransformComponent::GetPosition() const
+
+const glm::vec3 dae::TransformComponent::GetWorldPosition() const
 {
-	return m_Position;
+	return m_WorldPosition;
 }
 
-void dae::TransformComponent::SetPosition(const glm::vec3& position)
+const glm::vec3 dae::TransformComponent::GetLocalPosition() const
 {
-	m_Position = position;
+	return m_LocalPosition;
+}
+
+void dae::TransformComponent::SetLocalPosition(const glm::vec3& pos)
+{
+	m_LocalPosition = pos;
+	SetPositionDirty();
+}
+
+void dae::TransformComponent::SetPositionDirty()
+{
+	m_PositionIsDirty = true;
 }
 
 //const glm::quat dae::TransformComponent::getRotation() const

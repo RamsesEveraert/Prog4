@@ -34,7 +34,7 @@ void dae::RenderComponent::Render() const
 	if (!m_TransformComponent)
 		return;
 
-	const auto& pos = m_TransformComponent->GetPosition();
+	const auto& pos = m_TransformComponent->GetWorldPosition();
 
 	if (m_TextureComponent)
 	{

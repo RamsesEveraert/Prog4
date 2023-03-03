@@ -23,8 +23,8 @@ namespace dae
         void SetParent(std::shared_ptr<dae::GameObject> parent, bool keepWorldPosition);
         const std::shared_ptr<dae::GameObject> GetParent() const;
 
-        void AddChild(std::shared_ptr<dae::GameObject> child);
-        void RemoveChild(std::shared_ptr<dae::GameObject> child);
+        
+       
 
         template<typename T>
         std::shared_ptr<T> AddComponent(std::shared_ptr<T> component) {
@@ -71,10 +71,11 @@ namespace dae
     private:
 
         std::shared_ptr<GameObject> m_pParent;
-        std::vector<std::shared_ptr<GameObject>> m_Children;
 
         std::vector<std::shared_ptr<BaseComponent>> m_Components;
+
         bool m_MarkedForDelete;
+             
 
     };
 }
