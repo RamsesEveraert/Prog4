@@ -20,11 +20,16 @@ namespace dae
         void MarkForDelete();
         bool IsMarkedForDelete() const;
 
-        void SetParent(std::shared_ptr<dae::GameObject> parent, bool keepWorldPosition);
-        const std::shared_ptr<dae::GameObject> GetParent() const;
+        void SetParent(std::shared_ptr<GameObject> parent, bool keepWorldPosition);
+        const std::shared_ptr<GameObject> GetParent() const;
 
-        
+        const int GetChildCount() const;
+        std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
+                
+       // extra child methods
+        bool IsChild(const std::shared_ptr<GameObject>& pChild) const;
        
+        
 
         template<typename T>
         std::shared_ptr<T> AddComponent(std::shared_ptr<T> component) {

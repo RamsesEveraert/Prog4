@@ -58,6 +58,8 @@ const std::shared_ptr<dae::GameObject> dae::GameObject::GetParent() const
     return m_pParent;
 }
 
+
+
 void dae::GameObject::MarkForDelete()
 {
     m_MarkedForDelete = true;
@@ -85,4 +87,28 @@ void dae::GameObject::RemoveChild(std::shared_ptr<GameObject> pChild)
         m_Children.erase(it);
     }
 }
+
+const int dae::GameObject::GetChildCount() const
+{
+    return m_Children.size();
+}
+
+std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int index) const
+{
+    if (index < 0 || index >= m_Children.size())
+    {
+        return nullptr;
+    }
+    return m_Children[index];
+}
+
+// extra methods
+
+bool dae::GameObject::IsChild(const std::shared_ptr<GameObject>& pChild) const
+{
+    auto it = std::find(m_Children.begin(), m_Children.end(), pChild);
+    return (it != m_Children.end());
+}
+
+
 
