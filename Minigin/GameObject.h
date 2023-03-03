@@ -11,7 +11,7 @@ namespace dae
     class Texture2D;
     class BaseComponent;
 
-    class GameObject final
+    class GameObject final : public std::enable_shared_from_this<GameObject>
     {
     public:
         void Update();
@@ -70,12 +70,16 @@ namespace dae
 
     private:
 
+        void AddChild(std::shared_ptr<GameObject> pChild);
+        void RemoveChild(std::shared_ptr<GameObject> pChild);
+
         std::shared_ptr<GameObject> m_pParent;
+        std::vector<std::shared_ptr<GameObject>> m_Children;
 
         std::vector<std::shared_ptr<BaseComponent>> m_Components;
-
         bool m_MarkedForDelete;
-             
+
+      
 
     };
 }
