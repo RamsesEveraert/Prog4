@@ -13,7 +13,6 @@ namespace dae
 		RenderComponent(const std::weak_ptr<GameObject>& gameObject);
 		~RenderComponent() = default;
 
-		void Update() override;
 		void Render() const override;
 
 	private:

@@ -19,15 +19,10 @@ dae::RenderComponent::RenderComponent(const std::weak_ptr<GameObject>& gameObjec
 	}
 }
 
-void dae::RenderComponent::Update()
-{
-}
-
 void dae::RenderComponent::Render() const
 
 
 {
-
 	if (!GetOwner())
 		return;
 

@@ -5,11 +5,13 @@
 #include "GameObject.h"
 #include "Timer.h"
 #include <cmath>
+#include <glm/gtc/constants.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 namespace dae
 {
 	RotatorComponent::RotatorComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject), m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Angle(0.0f)
+		: BaseComponent(gameObject), m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Radius{ 0 }, m_Angle(0.0f)
 	{
 		if (gameObject.lock()->hasComponent<dae::TransformComponent>())
 		{
@@ -21,12 +23,17 @@ namespace dae
 	{
 		if (m_TransformComponent)
 		{
+			auto& timer = Timer::GetInstance();
 			// Calculate new angle based on time passed and rotation speed
-			const float deltaTime = Timer::GetInstance().getDeltaTimeMs();
-			m_Angle += m_RotationSpeed * deltaTime;
+			const float dt = timer.getDeltaTimeMs();
+			const float dtSecs = timer.msToSeconds(dt);
+
+			m_Angle += m_RotationSpeed * dtSecs;
 
 			// Calculate new position using center point and angle
-			glm::vec3 newPos = m_CenterPoint + glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f);
+
+
+			glm::vec3 newPos = m_CenterPoint + (glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f)) * m_Radius;
 			m_TransformComponent->SetLocalPosition(newPos);
 		}
 	}
@@ -36,8 +43,12 @@ namespace dae
 		m_CenterPoint = centerPoint;
 	}
 
-	void RotatorComponent::SetRotationSpeed(float speed)
+	void RotatorComponent::SetRotationSpeed(float degreesPerSecond)
 	{
-		m_RotationSpeed = speed;
+		m_RotationSpeed = degreesPerSecond;
+	}
+	void RotatorComponent::SetRadius(float radius)
+	{
+		m_Radius = radius;
 	}
 }

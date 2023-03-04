@@ -24,35 +24,40 @@ void dae::GameObject::Render() const
 	}
 }
 
-void dae::GameObject::SetParent(std::shared_ptr<dae::GameObject> parent, bool keepWorldPosition)
+void dae::GameObject::SetParent(std::shared_ptr<dae::GameObject> pParent, bool keepWorldPosition)
 {
-    
+
     auto transformComponent = GetComponent<dae::TransformComponent>();
-    auto parentTransformComponent = parent->GetComponent<dae::TransformComponent>();
+    auto parentTransformComponent = pParent ? pParent->GetComponent<dae::TransformComponent>() : nullptr;
 
-        if (parent == nullptr)
-            transformComponent->SetLocalPosition(transformComponent->GetWorldPosition());
-        else
+    if (!pParent)
+    {
+        transformComponent->SetLocalPosition(transformComponent->GetWorldPosition());
+    }
+    else
+    {
+        if (keepWorldPosition)
         {
-            if (keepWorldPosition)
-            {
-                transformComponent->SetLocalPosition(transformComponent->GetLocalPosition() - parentTransformComponent->GetWorldPosition());
-            }
-            
-            transformComponent->SetPositionDirty();
-        }
-        if (m_pParent)
-        {
-            m_pParent->RemoveChild(shared_from_this());
-        }           
-        m_pParent = parent;
-        if (m_pParent)
-        {
-            m_pParent->AddChild(shared_from_this());
+            transformComponent->SetLocalPosition(transformComponent->GetLocalPosition() - parentTransformComponent->GetWorldPosition());
         }
 
-   
+        transformComponent->SetPositionDirty();
+    }
+
+    if (m_pParent)
+    {
+        m_pParent->RemoveChild(shared_from_this());
+    }
+
+    m_pParent = pParent;
+
+    if (m_pParent)
+    {
+        m_pParent->AddChild(shared_from_this());
+    }
 }
+
+
 const std::shared_ptr<dae::GameObject> dae::GameObject::GetParent() const
 {
     return m_pParent;
@@ -90,7 +95,7 @@ void dae::GameObject::RemoveChild(std::shared_ptr<GameObject> pChild)
 
 const int dae::GameObject::GetChildCount() const
 {
-    return m_Children.size();
+    return static_cast<int>( m_Children.size());
 }
 
 std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int index) const
@@ -100,6 +105,11 @@ std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int index) con
         return nullptr;
     }
     return m_Children[index];
+}
+
+std::vector<std::shared_ptr<dae::GameObject>> dae::GameObject::GetChildren()
+{
+    return m_Children;
 }
 
 // extra methods

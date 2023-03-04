@@ -10,7 +10,15 @@ dae::TransformComponent::TransformComponent(const std::weak_ptr<GameObject>& gam
 void dae::TransformComponent::Update()
 {
 	if (m_PositionIsDirty)
+	{
 		UpdateWorldPosition();
+		for (auto& child : GetOwner()->GetChildren())
+		{
+			child->GetComponent<TransformComponent>()->UpdateWorldPosition();
+		}
+	}
+
+	
 }
 
 void dae::TransformComponent::UpdateWorldPosition()
@@ -25,7 +33,7 @@ void dae::TransformComponent::UpdateWorldPosition()
 			auto worldPositionParent = GetOwner()->GetParent()->GetComponent<dae::TransformComponent>()->GetWorldPosition();
 			m_WorldPosition = worldPositionParent + m_LocalPosition;
 		}	
-			
+
 		m_PositionIsDirty = false;
 }
 
