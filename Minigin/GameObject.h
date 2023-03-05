@@ -43,25 +43,55 @@ namespace dae
         }
 
         template<typename T>
-        void removeComponent() {
-            auto it = std::find_if(m_Components.begin(), m_Components.end(), [](const std::shared_ptr<BaseComponent>& c) {
-                return dynamic_cast<T*>(c.get()) != nullptr;
-                });
-            if (it != m_Components.end()) {
-                m_Components.erase(it);
+        void removeComponent(std::shared_ptr<T> componentToRemove = nullptr) {
+            auto componentsToRemove = std::vector<std::shared_ptr<BaseComponent>>{};
+            auto componentType = std::dynamic_pointer_cast<T>(nullptr);
+            for (auto& component : m_Components)
+            {
+                componentType = std::dynamic_pointer_cast<T>(component);
+                if (componentType)
+                {
+                    if (componentToRemove == nullptr || componentType == componentToRemove)
+                    {
+                        componentsToRemove.push_back(component);
+                    }
+                }
+            }
+
+            for (auto& component : componentsToRemove)
+            {
+                m_Components.erase(std::remove(m_Components.begin(), m_Components.end(), component), m_Components.end());
             }
         }
 
+
         template<typename T>
-        std::shared_ptr<T> GetComponent() const {
+        std::shared_ptr<T> GetComponent(const std::string& identifier = "") const {
             for (const auto& component : m_Components) {
                 if (std::shared_ptr<T> pointerType = std::dynamic_pointer_cast<T>(component)) {
-                    return pointerType;
+                    // Check if the component's identifier matches the requested identifier
+                    if (pointerType->GetIdentifier() == identifier) {
+                        return pointerType;
+                    }
                 }
             }
             return nullptr;
-
         }
+
+
+        
+
+        template<typename T>
+        std::vector<std::shared_ptr<T>> GetAllInstancesOfComponent() const {
+            std::vector<std::shared_ptr<T>> components;
+            for (const auto& component : m_Components) {
+                if (std::shared_ptr<T> pointerType = std::dynamic_pointer_cast<T>(component)) {
+                    components.push_back(pointerType);
+                }
+            }
+            return components;
+        }
+
 
 
         template<typename T>

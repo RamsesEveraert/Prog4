@@ -11,8 +11,8 @@
 #include "RenderComponent.h"
 
 
-dae::TextComponent::TextComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& text, std::shared_ptr<Font> font)
-	: BaseComponent(gameObject), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font))
+dae::TextComponent::TextComponent(std::weak_ptr<GameObject> pOwner, const std::string& text, std::shared_ptr<Font> font, const std::string& identifier)
+	: BaseComponent(pOwner,identifier), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font))
 {
 }
 

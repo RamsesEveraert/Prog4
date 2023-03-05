@@ -1,6 +1,6 @@
 #include "PhysicsComponent.h"
 
-dae::PhysicsComponent::PhysicsComponent(const std::weak_ptr<GameObject>& gameObject)
-	:BaseComponent(gameObject)
+dae::PhysicsComponent::PhysicsComponent(std::weak_ptr<GameObject> owner, const std::string& identifier)
+	:BaseComponent(owner, identifier)
 {
 }

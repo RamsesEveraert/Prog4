@@ -10,7 +10,7 @@ namespace dae
     class FPSComponent final : public BaseComponent
     {
     public:
-        FPSComponent(const std::weak_ptr<GameObject>& gameObject);
+        FPSComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
         ~FPSComponent() = default;
 
         void Update() override;

@@ -10,7 +10,7 @@ namespace dae
 	{
 	public:
 
-		RotatorComponent(const std::weak_ptr<GameObject>& gameObject);
+		RotatorComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier = "");
 		~RotatorComponent() = default;
 
 		void Update();

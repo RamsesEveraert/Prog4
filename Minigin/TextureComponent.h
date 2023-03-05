@@ -10,7 +10,7 @@ namespace dae
 	class TextureComponent final : public BaseComponent
 	{
 	public:
-		TextureComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& texturePath);
+		TextureComponent(std::weak_ptr<GameObject> pOwner, const std::string& texturePath, const std::string& identifier = "");
 		~TextureComponent() = default;
 
 		void Update() override;

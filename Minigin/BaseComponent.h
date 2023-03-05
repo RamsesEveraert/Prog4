@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <string>
 
 namespace dae
 {
@@ -22,10 +23,13 @@ namespace dae
 		BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
 
 		std::shared_ptr<GameObject> GetOwner() const;
+		const std::string GetIdentifier() const;
 	
 	protected:
 
-		explicit BaseComponent(std::weak_ptr<GameObject> owner);
+		explicit BaseComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
+
+		std::string m_Identifier;
 
 		
 

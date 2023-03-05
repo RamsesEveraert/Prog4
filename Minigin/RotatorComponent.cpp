@@ -10,12 +10,13 @@
 
 namespace dae
 {
-	RotatorComponent::RotatorComponent(const std::weak_ptr<GameObject>& gameObject)
-		: BaseComponent(gameObject), m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
+	RotatorComponent::RotatorComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier)
+		: BaseComponent(pOwner,identifier), m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
 	{
-		if (gameObject.lock()->hasComponent<dae::TransformComponent>())
+		auto owner = pOwner.lock();
+		if (owner->hasComponent<dae::TransformComponent>())
 		{
-			m_TransformComponent = gameObject.lock()->GetComponent<dae::TransformComponent>();
+			m_TransformComponent = owner->GetComponent<dae::TransformComponent>();
 		}
 	}
 
@@ -25,6 +26,7 @@ namespace dae
 		if (m_TransformComponent)
 		{
 			auto& timer = Timer::GetInstance();
+
 			// Calculate new angle based on time passed and rotation speed
 			const float dt = timer.getDeltaTimeMs();
 			const float dtSecs = timer.msToSeconds(dt);

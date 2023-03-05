@@ -10,7 +10,7 @@ namespace dae
 	class RenderComponent final : public BaseComponent
 	{
 	public:
-		RenderComponent(const std::weak_ptr<GameObject>& gameObject);
+		RenderComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
 		~RenderComponent() = default;
 
 		void Render() const override;

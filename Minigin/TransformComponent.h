@@ -16,7 +16,7 @@ namespace dae
 	{
 	public:
 
-		TransformComponent(const std::weak_ptr<GameObject>& gameObject);
+		TransformComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
 		~TransformComponent() = default;
 		
 		void Update() override;

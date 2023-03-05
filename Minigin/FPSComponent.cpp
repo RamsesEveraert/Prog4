@@ -4,13 +4,13 @@
 #include "TextComponent.h"
 #include "Timer.h"
 
-dae::FPSComponent::FPSComponent(const std::weak_ptr<GameObject>& gameObject)
-    : BaseComponent(gameObject), m_Fps{ 0 }, m_TimeRunning{ 0.0f }
+dae::FPSComponent::FPSComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier)
+    : BaseComponent(pOwner,identifier), m_Fps{ 0 }, m_TimeRunning{ 0.0f }
 {
-
-    if (gameObject.lock()->hasComponent<dae::TextComponent>())
+    auto owner = pOwner.lock();
+    if (owner->hasComponent<dae::TextComponent>())
     {
-        m_TextComponent = gameObject.lock()->GetComponent<dae::TextComponent>();
+        m_TextComponent = owner->GetComponent<dae::TextComponent>();
     }
 
 }

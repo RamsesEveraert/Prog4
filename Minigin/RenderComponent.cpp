@@ -4,18 +4,18 @@
 #include "Renderer.h"
 #include "TextureComponent.h"
 
-dae::RenderComponent::RenderComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject), m_TransformComponent{ nullptr }, m_TextureComponent{ nullptr }
+dae::RenderComponent::RenderComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier)
+	: BaseComponent(pOwner, identifier), m_TransformComponent{ nullptr }, m_TextureComponent{ nullptr }
 {
-
-	if (gameObject.lock()->hasComponent<dae::TransformComponent>())
+	auto owner = pOwner.lock();
+	if (owner->hasComponent<dae::TransformComponent>())
 	{
-		m_TransformComponent = gameObject.lock()->GetComponent<dae::TransformComponent>();
+		m_TransformComponent = owner->GetComponent<dae::TransformComponent>();
 	}
 
-	if (gameObject.lock()->hasComponent<dae::TextureComponent>())
+	if (owner->hasComponent<dae::TextureComponent>())
 	{
-		m_TextureComponent = gameObject.lock()->GetComponent<dae::TextureComponent>();
+		m_TextureComponent = owner->GetComponent<dae::TextureComponent>();
 	}
 }
 

@@ -10,7 +10,7 @@ namespace dae
     class InputComponent final : public BaseComponent
     {
     public:
-        InputComponent(const std::weak_ptr<GameObject>& gameObject);
+        InputComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
         ~InputComponent() = default;
 
         //TODO: functions

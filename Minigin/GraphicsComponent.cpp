@@ -1,6 +1,6 @@
 #include "GraphicsComponent.h"
 
-dae::GraphicsComponent::GraphicsComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject)
+dae::GraphicsComponent::GraphicsComponent(std::weak_ptr<GameObject> owner, const std::string& identifier)
+	: BaseComponent(owner, identifier)
 {
 }

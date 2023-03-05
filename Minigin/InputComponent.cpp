@@ -1,6 +1,6 @@
 #include "InputComponent.h"
 
-dae::InputComponent::InputComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject)
+dae::InputComponent::InputComponent(std::weak_ptr<GameObject> owner, const std::string& identifier)
+	: BaseComponent(owner, identifier)
 {
 }

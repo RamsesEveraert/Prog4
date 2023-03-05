@@ -10,7 +10,7 @@ namespace dae
     class PhysicsComponent final : public BaseComponent
     {
     public:
-        PhysicsComponent(const std::weak_ptr<GameObject>& gameObject);
+        PhysicsComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier = "");
         ~PhysicsComponent() = default;
 
         //TODO: functions

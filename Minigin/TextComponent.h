@@ -2,15 +2,13 @@
 
 #include "BaseComponent.h"
 
-#include <string>
-
 namespace dae
 {
 	class Font;
 	class TextComponent final : public BaseComponent
 	{
 	public:
-		TextComponent(const std::weak_ptr<GameObject>& gameObject, const std::string& text, std::shared_ptr<Font> font);
+		TextComponent(std::weak_ptr<GameObject> pOwner, const std::string& text, std::shared_ptr<Font> font, const std::string& identifier = "");
 		~TextComponent() = default;
 
 		void Update() override;

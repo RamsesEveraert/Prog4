@@ -1,8 +1,8 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-dae::TransformComponent::TransformComponent(const std::weak_ptr<GameObject>& gameObject)
-	: BaseComponent(gameObject), m_LocalPosition{ glm::vec3(0.0f) }, m_WorldPosition{ glm::vec3(0.0f) }, m_PositionIsDirty{ true }
+dae::TransformComponent::TransformComponent(std::weak_ptr<GameObject> owner, const std::string& identifier)
+	: BaseComponent(owner,identifier), m_LocalPosition{ glm::vec3(0.0f) }, m_WorldPosition{ glm::vec3(0.0f) }, m_PositionIsDirty{ true }
 {
 
 }
