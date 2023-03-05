@@ -23,7 +23,6 @@ namespace dae
 
 	private:
 		std::shared_ptr<TransformComponent> m_TransformComponent;
-		bool m_IsTransformComponentChecked;
 		float m_RotationSpeed; // degrees per second
 		float m_Radius; // distance from center point
 		float m_Angle; // current angle around the center point

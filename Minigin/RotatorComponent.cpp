@@ -11,7 +11,7 @@
 namespace dae
 {
 	RotatorComponent::RotatorComponent(const std::weak_ptr<GameObject>& gameObject)
-		: BaseComponent(gameObject), m_IsTransformComponentChecked{false}, m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
+		: BaseComponent(gameObject), m_CenterPoint(glm::vec3(0.0f)), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
 	{
 		if (gameObject.lock()->hasComponent<dae::TransformComponent>())
 		{

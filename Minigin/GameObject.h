@@ -20,12 +20,12 @@ namespace dae
         void MarkForDelete();
         bool IsMarkedForDelete() const;
 
-        void SetParent(std::shared_ptr<dae::GameObject> pParent, bool keepWorldPosition);
+        void SetParent(std::weak_ptr<dae::GameObject> pParent, bool keepWorldPosition);
         const std::shared_ptr<GameObject> GetParent() const;
 
         const int GetChildCount() const;
-        std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
-        std::vector<std::shared_ptr<GameObject>> GetChildren();
+        const std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
+        const std::vector<std::shared_ptr<GameObject>> GetChildren();
         
                 
        // extra child methods
@@ -80,7 +80,9 @@ namespace dae
         void AddChild(std::shared_ptr<GameObject> pChild);
         void RemoveChild(std::shared_ptr<GameObject> pChild);
 
-        std::shared_ptr<GameObject> m_pParent;
+        std::weak_ptr<GameObject> m_pParent; // reference other object
+
+        // momenteel voor vector geopteerd , later zien of unordered map beter is
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
         std::vector<std::shared_ptr<BaseComponent>> m_Components;
