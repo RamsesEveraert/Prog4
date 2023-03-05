@@ -13,6 +13,7 @@
 #include "Timer.h"
 
 #include <chrono>
+#include <thread>
 
 SDL_Window* g_window{};
 
@@ -105,7 +106,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		doContinue = input.ProcessInput();
 
-		// fixed timestep update loop
+		// fixedtimestep update loop
 
 		while (accumulatedTime >= fixedTimeStep)
 		{
@@ -116,9 +117,16 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update();
 
 		renderer.Render();
+
+		if (accumulatedTime < fixedTimeStep)
+		{
+			// sleep to avoid using GPU resources unnecessarily
+			std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>((fixedTimeStep - accumulatedTime) * 1000)));
+		}
 		
 	}
 
 
 
 }
+
