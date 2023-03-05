@@ -25,22 +25,20 @@ void Scene::RemoveAll()
 	m_Objects.clear();
 }
 
-void dae::Scene::DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>>& objects)
+std::vector<std::shared_ptr<GameObject>> Scene::DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>> objects)
 {
 	// Partition the vector into two parts:
 	// - Objects marked for deletion
 	// - Objects not marked for deletion
 
-	auto partitionIt = std::partition(objects.begin(), objects.end(), [](const std::shared_ptr<GameObject>& obj) {
+	auto partitionIt = std::partition(objects.begin(), objects.end(), []( std::shared_ptr<GameObject> obj) {
 		return !obj->IsMarkedForDelete();
 		});
 
-	// Erase the objects marked for deletion
-	objects.erase(partitionIt, objects.end());
-
-	// Replace the vector with a new vector filled with the objects not marked for deletion
+	// Create a new vector filled with the objects not marked for deletion
 	std::vector<std::shared_ptr<GameObject>> newObjects(objects.begin(), partitionIt);
-	objects = std::move(newObjects);
+
+	return newObjects;
 }
 
 
@@ -48,6 +46,8 @@ void Scene::Update()
 {
 
 	//TODO delete marked objets gives error
+	auto newObjects = DeleteMarkedObjects(m_Objects);
+	m_Objects = std::move(newObjects);
 	
 		for (auto& object : m_Objects)
 		{
@@ -60,7 +60,7 @@ void Scene::Update()
 			object->Update();
 		}
 
-		//DeleteMarkedObjects(m_Objects);
+		DeleteMarkedObjects(m_Objects);
 
 }
 

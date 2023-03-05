@@ -25,7 +25,7 @@ namespace dae
 	private: 
 		explicit Scene(const std::string& name);
 
-		void DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>>& objects);
+		std::vector<std::shared_ptr<GameObject>> DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>> objects);
 		
 
 		std::string m_name;
