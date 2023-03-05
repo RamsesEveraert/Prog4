@@ -9,6 +9,19 @@ void dae::SceneManager::Update()
 	}
 }
 
+//todo ^for physics
+
+void dae::SceneManager::FixedUpdate()
+{
+	/*m_FixedTimeStep = fixedTimeStep;*/
+
+	for (auto& scene : m_scenes)
+	{
+		scene->FixedUpdate();
+	}
+}
+
+
 void dae::SceneManager::Render()
 {
 	for (const auto& scene : m_scenes)

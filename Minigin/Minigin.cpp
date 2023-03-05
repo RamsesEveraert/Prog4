@@ -82,26 +82,43 @@ dae::Minigin::~Minigin()
 void dae::Minigin::Run(const std::function<void()>& load)
 {
 	load();
-	
 
 	auto& timer = Timer::GetInstance();
-
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
-	// todo: this update loop could use some work.
+	const float targetFPS = 60.f;
+	const float fixedTimeStep = 1.0f / targetFPS; // target frame time is 1/60th of a second
+	float accumulatedTime = 0.0f;
 
 	bool doContinue = true;
 
 	while (doContinue)
 	{
-		timer.updateDeltaTime(Timer::GetInstance());
-		
-		doContinue = input.ProcessInput();
-		sceneManager.Update();
-		renderer.Render();
+		timer.updateDeltaTime(timer);
 
+		float dtMs = timer.getDeltaTimeMs(); // dt in ms
+		float dt = timer.msToSeconds(dtMs); // dt in secs
+
+		accumulatedTime += dt;
+
+		doContinue = input.ProcessInput();
+
+		// fixed timestep update loop
+
+		while (accumulatedTime >= fixedTimeStep)
+		{
+			sceneManager.FixedUpdate(/*fixedTimeStep*/);
+			accumulatedTime -= fixedTimeStep;
+		}
+				
+		sceneManager.Update();
+
+		renderer.Render();
+		
 	}
-	
+
+
+
 }

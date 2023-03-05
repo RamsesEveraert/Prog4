@@ -64,6 +64,14 @@ void Scene::Update()
 
 }
 
+void dae::Scene::FixedUpdate()
+{
+	for (auto& object : m_Objects)
+	{
+		object->FixedUpdate();
+	}
+}
+
 void Scene::Render() const
 {
 	for (const auto& object : m_Objects)

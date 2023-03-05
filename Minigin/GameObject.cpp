@@ -12,15 +12,23 @@ void dae::GameObject::Update()
 	for (const auto& component : m_Components)
 	{
 		if (component)
-		component.get()->Update();
+		component->Update();
 	}
+}
+void dae::GameObject::FixedUpdate()
+{
+    for (auto& component : m_Components)
+    {
+        if (component)
+            component->FixedUpdate();
+    }
 }
 void dae::GameObject::Render() const
 {
 	for (const auto& component : m_Components)
 	{
 		if(component)
-		component.get()->Render();
+		component->Render();
 	}
 }
 
