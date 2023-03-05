@@ -20,13 +20,13 @@ namespace dae
 		BaseComponent& operator=(const BaseComponent& other) = delete;
 		BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
 
+		std::shared_ptr<GameObject> GetOwner() const;
 	
 	protected:
 
 		explicit BaseComponent(std::weak_ptr<GameObject> owner);
 
-		std::shared_ptr<GameObject> GetOwner() const;
-
+		
 
 	private:
 

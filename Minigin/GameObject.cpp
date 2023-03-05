@@ -26,6 +26,10 @@ void dae::GameObject::Render() const
 
 void dae::GameObject::SetParent(std::shared_ptr<dae::GameObject> pParent, bool keepWorldPosition)
 {
+    if (m_pParent == pParent)
+    {
+        return;
+    }
 
     auto transformComponent = GetComponent<dae::TransformComponent>();
     auto parentTransformComponent = pParent ? pParent->GetComponent<dae::TransformComponent>() : nullptr;
@@ -100,7 +104,7 @@ const int dae::GameObject::GetChildCount() const
 
 std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int index) const
 {
-    if (index < 0 || index >= m_Children.size())
+    if (index < 0 || index >= static_cast<int>(m_Children.size()))
     {
         return nullptr;
     }

@@ -12,10 +12,6 @@ void dae::TransformComponent::Update()
 	if (m_PositionIsDirty)
 	{
 		UpdateWorldPosition();
-		for (auto& child : GetOwner()->GetChildren())
-		{
-			child->GetComponent<TransformComponent>()->UpdateWorldPosition();
-		}
 	}
 
 	
@@ -33,6 +29,11 @@ void dae::TransformComponent::UpdateWorldPosition()
 			auto worldPositionParent = GetOwner()->GetParent()->GetComponent<dae::TransformComponent>()->GetWorldPosition();
 			m_WorldPosition = worldPositionParent + m_LocalPosition;
 		}	
+
+		for (auto& child : GetOwner()->GetChildren())
+		{
+			child->GetComponent<dae::TransformComponent>()->UpdateWorldPosition();
+		}
 
 		m_PositionIsDirty = false;
 }
@@ -54,20 +55,16 @@ void dae::TransformComponent::SetLocalPosition(const glm::vec3& pos)
 	SetPositionDirty();
 }
 
+void dae::TransformComponent::SetWorldPosition(const glm::vec3& pos)
+{
+	m_WorldPosition = pos;
+}
+
 void dae::TransformComponent::SetPositionDirty()
 {
 	m_PositionIsDirty = true;
 }
 
-//const glm::quat dae::TransformComponent::getRotation() const
-//{
-//	return m_Rotation;
-//}
-//
-//void dae::TransformComponent::setRotation(const glm::quat& rotation)
-//{
-//	m_Rotation = rotation;
-//}
 
 const glm::vec3 dae::TransformComponent::GetScale() const
 {
