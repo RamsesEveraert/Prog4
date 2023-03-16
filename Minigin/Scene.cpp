@@ -7,7 +7,10 @@ using namespace dae;
 
 unsigned int Scene::m_idCounter = 0;
 
-Scene::Scene(const std::string& name) : m_name(name) {}
+Scene::Scene(const std::string& name) : m_name(name)
+{
+
+}
 Scene::~Scene() = default;
 
 void Scene::Add(std::shared_ptr<GameObject> object)
@@ -44,8 +47,6 @@ std::vector<std::shared_ptr<GameObject>> Scene::DeleteMarkedObjects(std::vector<
 
 void Scene::Update()
 {
-
-	//TODO delete marked objets gives error
 	auto newObjects = DeleteMarkedObjects(m_Objects);
 	m_Objects = std::move(newObjects);
 	
@@ -53,7 +54,6 @@ void Scene::Update()
 		{
 			if (object->IsMarkedForDelete())
 			{
-				std::cout << "Object marked for deletion and skipped\n";
 				continue;
 			}
 

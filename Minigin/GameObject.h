@@ -114,7 +114,7 @@ namespace dae
 
         std::weak_ptr<GameObject> m_pParent; // reference other object
 
-        // momenteel voor vector geopteerd , later zien of unordered map beter is
+        // momenteel voor vector geopteerd , later zien of unordered map beter is -> unordermap pakken
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
         std::vector<std::shared_ptr<BaseComponent>> m_Components;

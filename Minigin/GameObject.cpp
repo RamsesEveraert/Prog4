@@ -14,6 +14,8 @@ void dae::GameObject::Update()
 		if (component)
 		component->Update();
 	}
+
+    // children updaten! - ik begrijp het niet echt hoe (best vragen hoe aan te passen)
 }
 void dae::GameObject::FixedUpdate()
 {

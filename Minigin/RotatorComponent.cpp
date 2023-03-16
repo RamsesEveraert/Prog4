@@ -33,6 +33,8 @@ namespace dae
 
 			m_Angle += m_RotationSpeed * dtSecs;
 
+			if (m_Angle >= 360.f) m_Angle -= 360.f;
+
 			// Calculate new position using center point and angle
 
 			glm::vec3 newPos = m_CenterPoint + (glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f)) * m_Radius;
