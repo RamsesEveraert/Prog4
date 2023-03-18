@@ -23,6 +23,6 @@ void dae::BaseComponent::FixedUpdate()
 {
 }
 
-void dae::BaseComponent::Render() const
+void dae::BaseComponent::Render()
 {
 }

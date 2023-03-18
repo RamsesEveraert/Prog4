@@ -13,7 +13,7 @@ namespace dae
 
 		virtual void Update();
 		virtual void FixedUpdate();
-		virtual void Render() const;
+		virtual void Render();
 
 		virtual ~BaseComponent() = default;
 

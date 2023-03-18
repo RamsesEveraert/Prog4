@@ -13,7 +13,7 @@ namespace dae
 		RenderComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
 		~RenderComponent() = default;
 
-		void Render() const override;
+		void Render() override;
 
 	private:
 		std::shared_ptr<dae::TransformComponent> m_TransformComponent;

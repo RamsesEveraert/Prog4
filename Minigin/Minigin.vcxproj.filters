@@ -19,6 +19,12 @@
     <Filter Include="Engin files\Imgui">
       <UniqueIdentifier>{1e5439bd-99ff-4fcb-85d4-2fce1843b099}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exercices">
+      <UniqueIdentifier>{5b5d1368-2246-4045-8389-30d6ee677ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exercices\TrashingTheCache">
+      <UniqueIdentifier>{aca36e15-5a6f-44e2-af58-be216e9eb93f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -108,6 +114,15 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.h">
       <Filter>Engin files\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_plot.h">
+      <Filter>Engin files\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashTheCache.h">
+      <Filter>Exercices\TrashingTheCache</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashCacheComponent.h">
+      <Filter>Engin files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -193,6 +208,15 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp">
       <Filter>Engin files\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_plot.cpp">
+      <Filter>Engin files\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCache.cpp">
+      <Filter>Exercices\TrashingTheCache</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashCacheComponent.cpp">
+      <Filter>Engin files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

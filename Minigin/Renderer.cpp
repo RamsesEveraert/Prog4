@@ -6,6 +6,9 @@
 #include "imgui.h"
 #include <backends/imgui_impl_sdl2.h>
 #include <backends/imgui_impl_opengl2.h>
+#include "imgui_plot.h"
+
+
 
 int GetOpenGLDriverIndex()
 {
@@ -42,16 +45,20 @@ void dae::Renderer::Render()
 	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderClear(m_renderer);
 
-	SceneManager::GetInstance().Render();
+	//SceneManager::GetInstance().Render();
 
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 
+	SceneManager::GetInstance().Render();
+
 	// hint: something should come here :)
 
-	if (m_showDemo)
-		ImGui::ShowDemoWindow(&m_showDemo);
+	/*if (m_showDemo)
+		ImGui::ShowDemoWindow(&m_showDemo);*/
+
+
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	

@@ -19,7 +19,7 @@ dae::RenderComponent::RenderComponent(std::weak_ptr<GameObject> pOwner, const st
 	}
 }
 
-void dae::RenderComponent::Render() const
+void dae::RenderComponent::Render()
 
 
 {
