@@ -23,7 +23,7 @@ dae::TrashCacheComponent::TrashCacheComponent(std::weak_ptr<dae::GameObject> own
 
     // Parameters for ImGui
     m_XDataIntArray.reserve(m_NumSamplesEx1);
-    m_YDataIntArray.reserve(m_NumSamplesEx1); 
+    m_YDataIntArray.reserve(m_NumSamplesEx1);
     m_XDataGameObject3D.reserve(m_NumSamplesEx1);
     m_YDataGameObject3D.reserve(m_NumSamplesEx1);
     m_XDataGameObject3DAlt.reserve(m_NumSamplesEx1);
@@ -69,10 +69,7 @@ void dae::TrashCacheComponent::Update()
         CalculateEx2();
         UpdateConfig();
     }
-   /* else if (m_Graph2State == GraphState::CanPlot and m_Graph3State == GraphState::CanPlot)
-    {
-        CalculateCombined();
-    }*/
+     
 }
 
 void dae::TrashCacheComponent::Render()
@@ -139,7 +136,8 @@ void dae::TrashCacheComponent::RenderEx2()
     if (m_Graph2State == GraphState::CanPlot and m_Graph3State == GraphState::CanPlot)
     {
         ImGui::Text("Combined:");
-        ImGui::Plot("combination", m_ConfigGameObject3DAndAltCombined);
+        CalculateCombined();
+        
     }
 
     ImGui::End();
@@ -148,7 +146,7 @@ void dae::TrashCacheComponent::RenderEx2()
 
 void dae::TrashCacheComponent::UpdateConfig()
 {
-  
+
 
     if (m_Graph1State == GraphState::CalculationInProgress)
     {
@@ -184,7 +182,7 @@ void dae::TrashCacheComponent::UpdateConfig()
     {
         m_ConfigGraphObjectsAlt.values.xs = m_XDataGameObject3DAlt.data(); // stepsizes
         m_ConfigGraphObjectsAlt.values.ys = m_YDataGameObject3DAlt.data(); // average time samples
-        m_ConfigGraphObjectsAlt.values.count =  static_cast<int>(m_XDataGameObject3DAlt.size());
+        m_ConfigGraphObjectsAlt.values.count = static_cast<int>(m_XDataGameObject3DAlt.size());
         m_ConfigGraphObjectsAlt.scale.min = 0;
 
         const auto maxElement{ std::max_element(m_YDataGameObject3DAlt.begin(), m_YDataGameObject3DAlt.end()) };
@@ -193,7 +191,7 @@ void dae::TrashCacheComponent::UpdateConfig()
             : m_ConfigGraphObjectsAlt.scale.max = *maxElement;
         m_Graph3State = GraphState::CanPlot;
     }
-   
+
 }
 
 void dae::TrashCacheComponent::CalculateEx1()
@@ -203,38 +201,38 @@ void dae::TrashCacheComponent::CalculateEx1()
 
     int* pBuffer{ new int[m_BufferSize] {} };
 
-        for (int stepsize{ 1 }; stepsize <= m_MaxSteps; stepsize *= 2)
+    for (int stepsize{ 1 }; stepsize <= m_MaxSteps; stepsize *= 2)
+    {
+
+        m_XDataIntArray.push_back(static_cast<float>(stepsize));
+
+        std::vector<float> samples;
+        samples.reserve(m_NumSamplesEx1);
+
+        for (int sample{ 0 }; sample < m_NumSamplesEx1; ++sample)
         {
-            
-            m_XDataIntArray.push_back(static_cast<float>(stepsize));
+            auto start = std::chrono::high_resolution_clock::now();
 
-            std::vector<float> samples;
-            samples.reserve(m_NumSamplesEx1);
-
-            for (int sample{ 0 }; sample < m_NumSamplesEx1; ++sample)
+            for (int i = 0; i < m_BufferSize; i += stepsize)
             {
-                auto start = std::chrono::high_resolution_clock::now();
-
-                for (int i = 0; i < m_BufferSize; i += stepsize)
-                {
-                    pBuffer[i] *= 2;
-                }
-
-                auto end = std::chrono::high_resolution_clock::now();
-                auto elapsedTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-                samples.push_back(static_cast<float>(elapsedTime));
+                pBuffer[i] *= 2;
             }
 
-            // Remove the highest and lowest value 
-            std::sort(samples.begin(), samples.end());
-            samples.erase(samples.begin());
-            samples.pop_back();
-
-            float averageElapsedTime = std::accumulate(samples.begin(), samples.end(), 0.0f) / samples.size();
-            m_YDataIntArray.push_back(averageElapsedTime / 1000.f);
-
-            samples.clear();
+            auto end = std::chrono::high_resolution_clock::now();
+            auto elapsedTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+            samples.push_back(static_cast<float>(elapsedTime));
         }
+
+        // Remove the highest and lowest value 
+        std::sort(samples.begin(), samples.end());
+        samples.erase(samples.begin());
+        samples.pop_back();
+
+        float averageElapsedTime = std::accumulate(samples.begin(), samples.end(), 0.0f) / samples.size();
+        m_YDataIntArray.push_back(averageElapsedTime / 1000.f);
+
+        samples.clear();
+    }
 
     delete[] pBuffer;
 }
@@ -255,7 +253,7 @@ void dae::TrashCacheComponent::CalculateEx2()
         m_XDataGameObject3D.push_back(static_cast<float>(stepsize));
         m_XDataGameObject3DAlt.push_back(static_cast<float>(stepsize));
         m_XDataGraphcombined.push_back(static_cast<float>(stepsize));
-        
+
 
         std::vector<float> samples;
         samples.reserve(m_NumSamplesEx2);
@@ -325,17 +323,12 @@ void dae::TrashCacheComponent::CalculateCombined()
     m_YDataGraphcombined.push_back(m_YDataGameObject3DAlt.data());
     m_ConfigGameObject3DAndAltCombined.values.ys_list = m_YDataGraphcombined.data();
 
-    float highestNumber{};
+    m_ConfigGameObject3DAndAltCombined.scale.max = m_ConfigGameObject3DAndAltCombined.scale.max;
+    m_ConfigGameObject3DAndAltCombined.values.xs = m_ConfigGraphObjects.values.xs;
 
+    m_ConfigGameObject3DAndAltCombined.values.count = static_cast<int>(std::min(m_XDataGameObject3D.size(), m_XDataGameObject3DAlt.size()));
+    m_ConfigGameObject3DAndAltCombined.scale.max = std::max(m_ConfigGraphObjects.scale.max, m_ConfigGraphObjectsAlt.scale.max);
 
-    for (size_t index{}; index < m_YDataGameObject3DAlt.size(); ++index)
-    {
-        if (m_YDataGameObject3D[index] > highestNumber)
-            highestNumber = m_YDataGameObject3D[index];
+    ImGui::Plot("combination", m_ConfigGameObject3DAndAltCombined);
 
-        if (m_YDataGameObject3DAlt[index] > highestNumber)
-            highestNumber = m_YDataGameObject3DAlt[index];
-    }
-    m_ConfigGameObject3DAndAltCombined.scale.max = highestNumber;
-    
 }

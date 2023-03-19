@@ -71,7 +71,7 @@ namespace dae
 
         // ex1
         void RenderEx1();
-        void CalculateEx1();        
+        void CalculateEx1();
 
         // ex2
         void RenderEx2();
