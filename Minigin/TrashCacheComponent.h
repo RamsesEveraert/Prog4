@@ -5,6 +5,38 @@
 
 namespace dae
 {
+
+    enum class GraphState
+    {
+        NotActivated,
+        CalculationInProgress,
+        CanPlot
+    };
+
+    struct Transform
+    {
+        float matrix[16] = {
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        };
+    };
+
+    class GameObject3D
+    {
+    public:
+        Transform transform{};
+        int ID{};
+    };
+
+    class GameObject3DAlt
+    {
+    public:
+        Transform* transform{};
+        int ID{};
+    };
+
     class TrashCacheComponent : public dae::BaseComponent
     {
     public:
@@ -15,20 +47,36 @@ namespace dae
 
 
     private:
-        int m_NumSamples;
-        const int m_BufferSize;
 
-        bool m_CanCalcEx1, m_IsCalculatingEx1, m_CanPlotEx1;
+        std::vector<float> m_XDataIntArray, m_XDataGameObject3D, m_XDataGameObject3DAlt, m_XDataGraphcombined;
+        std::vector<float> m_YDataIntArray, m_YDataGameObject3D, m_YDataGameObject3DAlt;
+        std::vector<const float*> m_YDataGraphcombined;
+        int m_NumSamplesEx1;
+        int m_NumSamplesEx2;
+        int m_BufferSize;
+        int m_MaxSteps;
+        ImColor m_Red;
+        ImColor m_Green;
+        ImColor m_Bleu;
+        ImGui::PlotConfig m_ConfigIntArray;
+        ImGui::PlotConfig m_ConfigGraphObjects;
+        ImGui::PlotConfig m_ConfigGraphObjectsAlt;
+        ImGui::PlotConfig m_ConfigGameObject3DAndAltCombined;
 
-        ImGui::PlotConfig m_PlotConfigEx1{};
+        GraphState m_Graph1State;
+        GraphState m_Graph2State;
+        GraphState m_Graph3State;
 
-        std::vector<float> m_YAxisValues;
-        std::vector<float> m_XAxisValues;
+        void UpdateConfig();
 
+        // ex1
         void RenderEx1();
-        void CalculateEx1();
+        void CalculateEx1();        
 
-        void UpdateConfigEx1();
+        // ex2
+        void RenderEx2();
+        void CalculateEx2();
+        void CalculateCombined();
     };
 
 }
