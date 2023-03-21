@@ -54,14 +54,14 @@ namespace dae
         int m_NumSamplesEx1;
         int m_NumSamplesEx2;
         int m_BufferSize;
-        int m_MaxSteps;
+       
         ImColor m_Red;
         ImColor m_Green;
         ImColor m_Bleu;
         ImGui::PlotConfig m_ConfigIntArray;
         ImGui::PlotConfig m_ConfigGraphObjects;
         ImGui::PlotConfig m_ConfigGraphObjectsAlt;
-        ImGui::PlotConfig m_ConfigGameObject3DAndAltCombined;
+        ImGui::PlotConfig m_ConfigCombined;
 
         GraphState m_Graph1State;
         GraphState m_Graph2State;
@@ -69,9 +69,14 @@ namespace dae
 
         void UpdateConfig();
 
+
         // ex1
         void RenderEx1();
         void CalculateEx1();
+
+        std::vector<double> m_TimingsEx1;
+        int m_MaxSteps;
+        std::vector<double> m_XAxisTicks;
 
         // ex2
         void RenderEx2();

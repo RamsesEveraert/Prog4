@@ -49,9 +49,11 @@ dae::TrashCacheComponent::TrashCacheComponent(std::weak_ptr<dae::GameObject> own
 
     ImU32 combinedGraphColors[2]{ m_Green, m_Bleu };
 
-    m_ConfigGameObject3DAndAltCombined = m_ConfigIntArray;
-    m_ConfigGameObject3DAndAltCombined.values.colors = combinedGraphColors;
-    m_ConfigGameObject3DAndAltCombined.frame_size = ImVec2(150, 100);
+    m_ConfigCombined = m_ConfigIntArray;
+    m_ConfigCombined.values.colors = combinedGraphColors;
+    m_ConfigCombined.values.color = m_Red;
+    m_ConfigCombined.frame_size = ImVec2(150, 100);
+    m_ConfigCombined.values.ys_count = 2;
 }
 
 void dae::TrashCacheComponent::Update()
@@ -69,41 +71,60 @@ void dae::TrashCacheComponent::Update()
         CalculateEx2();
         UpdateConfig();
     }
-     
+
 }
 
 void dae::TrashCacheComponent::Render()
 {
-    RenderEx1();
-    RenderEx2();
+    ImGui::SetNextWindowSize(ImVec2(400, 400));
+    ImGui::SetNextWindowPos(ImVec2(50, 50));
+
+    if (ImGui::Begin("Trash the cache!"))
+    {
+        if (ImGui::BeginTabBar("Exercises"))
+        {
+            if (ImGui::BeginTabItem("Exercise 1"))
+            {
+                RenderEx1();
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Exercise 2"))
+            {
+                RenderEx2();
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+        }
+    }
+    ImGui::End();
 }
 
 void dae::TrashCacheComponent::RenderEx1()
 {
-    ImGui::Begin("Exercice 1");
-    ImGui::InputInt("# samples", &m_NumSamplesEx1, 1);
 
-    if (m_Graph1State == GraphState::NotActivated or m_Graph1State == GraphState::CanPlot)
+    ImGui::PushItemWidth(275.f);
+    ImGui::InputInt("#Sample", &m_NumSamplesEx1, 1, 100);
+    ImGui::PopItemWidth();
+
+    if (ImGui::Button("Trash the cache!"))
     {
-        if (ImGui::Button("Trash the cache!"))
-        {
-            m_Graph1State = GraphState::CalculationInProgress;
-            ImGui::Text("Wait for it...");
-        }
-
-        if (m_Graph1State == GraphState::CanPlot) ImGui::Plot("Exercice 1", m_ConfigIntArray);
-
+        m_Graph1State = GraphState::CalculationInProgress;
+        ImGui::Text("Wait for it...");
     }
 
-    ImGui::End();
+    if (m_Graph1State == GraphState::CanPlot) ImGui::Plot("Exercice 1", m_ConfigIntArray);
+
+
 }
 
 void dae::TrashCacheComponent::RenderEx2()
 {
-    ImGui::Begin("Exercice 2");
-    ImGui::InputInt("# samples", &m_NumSamplesEx2, 1);
 
-    ImGui::PushItemWidth(250);
+    ImGui::PushItemWidth(275.f);
+    ImGui::InputInt("# Sample", &m_NumSamplesEx1, 1, 100);
+    ImGui::PopItemWidth();
 
     // graph 2
 
@@ -137,7 +158,7 @@ void dae::TrashCacheComponent::RenderEx2()
     {
         ImGui::Text("Combined:");
         CalculateCombined();
-        
+
     }
 
     ImGui::End();
@@ -314,21 +335,22 @@ void dae::TrashCacheComponent::CalculateEx2()
     delete[] pBufferAlt;
 }
 
-void dae::TrashCacheComponent::CalculateCombined()
+void dae::TrashCacheComponent::CalculateCombined() // PlotCombined
 {
+
     m_YDataGraphcombined.clear();
     m_XDataGraphcombined.clear();
 
     m_YDataGraphcombined.push_back(m_YDataGameObject3D.data());
     m_YDataGraphcombined.push_back(m_YDataGameObject3DAlt.data());
-    m_ConfigGameObject3DAndAltCombined.values.ys_list = m_YDataGraphcombined.data();
+    m_ConfigCombined.values.ys_list = m_YDataGraphcombined.data();
 
-    m_ConfigGameObject3DAndAltCombined.scale.max = m_ConfigGameObject3DAndAltCombined.scale.max;
-    m_ConfigGameObject3DAndAltCombined.values.xs = m_ConfigGraphObjects.values.xs;
+    m_ConfigCombined.scale.max = m_ConfigCombined.scale.max;
+    m_ConfigCombined.values.xs = m_ConfigGraphObjects.values.xs;
 
-    m_ConfigGameObject3DAndAltCombined.values.count = static_cast<int>(std::min(m_XDataGameObject3D.size(), m_XDataGameObject3DAlt.size()));
-    m_ConfigGameObject3DAndAltCombined.scale.max = std::max(m_ConfigGraphObjects.scale.max, m_ConfigGraphObjectsAlt.scale.max);
+    m_ConfigCombined.values.count = static_cast<int>(std::min(m_XDataGameObject3D.size(), m_XDataGameObject3DAlt.size()));
+    m_ConfigCombined.scale.max = std::max(m_ConfigGraphObjects.scale.max, m_ConfigGraphObjectsAlt.scale.max);
 
-    ImGui::Plot("combination", m_ConfigGameObject3DAndAltCombined);
+    ImGui::Plot("combination", m_ConfigCombined);
 
 }

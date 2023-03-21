@@ -25,6 +25,9 @@
     <Filter Include="Exercices\TrashingTheCache">
       <UniqueIdentifier>{aca36e15-5a6f-44e2-af58-be216e9eb93f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engin files\Implot">
+      <UniqueIdentifier>{9660c3c7-300e-4567-aedb-302f5708413e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -117,11 +120,14 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_plot.h">
       <Filter>Engin files\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="TrashTheCache.h">
-      <Filter>Exercices\TrashingTheCache</Filter>
-    </ClInclude>
     <ClInclude Include="TrashCacheComponent.h">
       <Filter>Engin files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\implot\implot.h">
+      <Filter>Engin files\Implot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\implot\implot_internal.h">
+      <Filter>Engin files\Implot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,11 +218,17 @@
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_plot.cpp">
       <Filter>Engin files\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="TrashTheCache.cpp">
-      <Filter>Exercices\TrashingTheCache</Filter>
-    </ClCompile>
     <ClCompile Include="TrashCacheComponent.cpp">
       <Filter>Engin files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\implot\implot.cpp">
+      <Filter>Engin files\Implot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\implot\implot_demo.cpp">
+      <Filter>Engin files\Implot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\implot\implot_items.cpp">
+      <Filter>Engin files\Implot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
