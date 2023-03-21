@@ -16,6 +16,7 @@ dae::TrashCacheComponent::TrashCacheComponent(std::weak_ptr<dae::GameObject> own
     , m_Red{ ImColor(255, 0, 0) }
     , m_Green{ ImColor(0, 255, 0) }
     , m_Bleu{ ImColor(0, 0, 255) }
+    , m_CombinedGraphColors {m_Green, m_Bleu}
     , m_Graph1State{ GraphState::NotActivated }
     , m_Graph2State{ GraphState::NotActivated }
     , m_Graph3State{ GraphState::NotActivated }
@@ -47,11 +48,8 @@ dae::TrashCacheComponent::TrashCacheComponent(std::weak_ptr<dae::GameObject> own
     m_ConfigGraphObjectsAlt.values.color = m_Bleu;
     m_ConfigGraphObjectsAlt.frame_size = ImVec2(150, 100);
 
-    ImU32 combinedGraphColors[2]{ m_Green, m_Bleu };
-
     m_ConfigCombined = m_ConfigIntArray;
-    m_ConfigCombined.values.colors = combinedGraphColors;
-    m_ConfigCombined.values.color = m_Red;
+    m_ConfigCombined.values.colors = m_CombinedGraphColors;
     m_ConfigCombined.frame_size = ImVec2(150, 100);
     m_ConfigCombined.values.ys_count = 2;
 }

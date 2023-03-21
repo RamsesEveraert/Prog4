@@ -54,10 +54,12 @@ namespace dae
         int m_NumSamplesEx1;
         int m_NumSamplesEx2;
         int m_BufferSize;
+        int m_MaxSteps;
        
         ImColor m_Red;
         ImColor m_Green;
         ImColor m_Bleu;
+        ImU32 m_CombinedGraphColors[2];
         ImGui::PlotConfig m_ConfigIntArray;
         ImGui::PlotConfig m_ConfigGraphObjects;
         ImGui::PlotConfig m_ConfigGraphObjectsAlt;
@@ -73,11 +75,6 @@ namespace dae
         // ex1
         void RenderEx1();
         void CalculateEx1();
-
-        std::vector<double> m_TimingsEx1;
-        int m_MaxSteps;
-        std::vector<double> m_XAxisTicks;
-
         // ex2
         void RenderEx2();
         void CalculateEx2();
