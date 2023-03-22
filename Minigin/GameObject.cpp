@@ -1,8 +1,13 @@
 
 #include "GameObject.h"
 
-dae::GameObject::GameObject()
-    :m_Components{}, m_MarkedForDelete{ false }, m_Children{}
+const std::string& dae::GameObject::GetObjectName() const
+{
+    return m_NameObject;
+}
+
+dae::GameObject::GameObject(const std::string& objectName)
+    :m_Components{}, m_MarkedForDelete{ false }, m_Children{}, m_NameObject{ objectName }
 {
 
 }
@@ -15,7 +20,13 @@ void dae::GameObject::Update()
 		component->Update();
 	}
 
-    // children updaten! - ik begrijp het niet echt hoe (best vragen hoe aan te passen)
+    for (const auto& child : m_Children)
+    {
+        if (child)
+            child->Update();
+    }
+
+
 }
 void dae::GameObject::FixedUpdate()
 {
@@ -23,6 +34,11 @@ void dae::GameObject::FixedUpdate()
     {
         if (component)
             component->FixedUpdate();
+    }
+    for (const auto& child : m_Children)
+    {
+        if (child)
+            child->FixedUpdate();
     }
 }
 void dae::GameObject::Render() const
@@ -32,7 +48,27 @@ void dae::GameObject::Render() const
 		if(component)
 		component->Render();
 	}
+    for (const auto& child : m_Children)
+    {
+        if (child)
+            child->Render();
+    }
 }
+
+void dae::GameObject::RenderImGui()
+{
+    for (const auto& component : m_Components)
+    {
+        if (component)
+            component->RenderImGui();
+    }
+    for (const auto& child : m_Children)
+    {
+        if (child)
+            child->RenderImGui();
+    }
+}
+
 
 void dae::GameObject::SetParent(std::weak_ptr<dae::GameObject> pParent, bool keepWorldPosition)
 {

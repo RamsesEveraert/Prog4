@@ -18,6 +18,7 @@ namespace dae
         void FixedUpdate();
 
         void Render() const;
+        void RenderImGui();
 
         void MarkForDelete();
         bool IsMarkedForDelete() const;
@@ -99,7 +100,9 @@ namespace dae
             return GetComponent<T>() != nullptr;
         }
 
-        GameObject();
+        const std::string& GetObjectName() const;
+
+        GameObject(const std::string& objectName);
         ~GameObject() = default;
 
         GameObject(const GameObject& other) = delete;
@@ -108,6 +111,8 @@ namespace dae
         GameObject& operator=(GameObject&& other) = delete;
 
     private:
+
+        const std::string m_NameObject;
 
         void AddChild(std::shared_ptr<GameObject> pChild);
         void RemoveChild(std::shared_ptr<GameObject> pChild);
@@ -118,9 +123,7 @@ namespace dae
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
         std::vector<std::shared_ptr<BaseComponent>> m_Components;
-        bool m_MarkedForDelete;
-
-      
+        bool m_MarkedForDelete;      
 
     };
 }

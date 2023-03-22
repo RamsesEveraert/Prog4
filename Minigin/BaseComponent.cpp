@@ -26,3 +26,7 @@ void dae::BaseComponent::FixedUpdate()
 void dae::BaseComponent::Render()
 {
 }
+
+void dae::BaseComponent::RenderImGui()
+{
+}
