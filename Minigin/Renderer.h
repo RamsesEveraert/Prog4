@@ -1,10 +1,13 @@
 #pragma once
 #include <SDL.h>
 #include "Singleton.h"
+#include "Debugger.h"
+#include <memory>
 
 namespace dae
 {
 	class Texture2D;
+	class Debugger;
 	/**
 	 * Simple RAII wrapper for the SDL renderer
 	 */
@@ -28,7 +31,8 @@ namespace dae
 		SDL_Renderer* m_renderer{};
 		SDL_Window* m_window{};
 		SDL_Color m_clearColor{};
-		bool m_showDemo{ true };
+		std::unique_ptr<Debugger> m_pDebugger; 
+
 	};
 }
 

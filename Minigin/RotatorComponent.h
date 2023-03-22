@@ -10,7 +10,7 @@ namespace dae
 	{
 	public:
 
-		RotatorComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier = "");
+		RotatorComponent(std::weak_ptr<GameObject> pOwner, const glm::vec3& cnterPoint = glm::vec3(0,0,0), const std::string& identifier = "");
 		~RotatorComponent() = default;
 
 		void Update();

@@ -1,7 +1,10 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-void dae::SceneManager::Update()
+
+using namespace dae;
+
+void SceneManager::Update()
 {
 	for(auto& scene : m_scenes)
 	{
@@ -11,7 +14,7 @@ void dae::SceneManager::Update()
 
 //todo ^for physics
 
-void dae::SceneManager::FixedUpdate()
+void SceneManager::FixedUpdate()
 {
 	/*m_FixedTimeStep = fixedTimeStep;*/
 
@@ -22,7 +25,7 @@ void dae::SceneManager::FixedUpdate()
 }
 
 
-void dae::SceneManager::Render()
+void SceneManager::Render()
 {
 	for (const auto& scene : m_scenes)
 	{
@@ -30,7 +33,12 @@ void dae::SceneManager::Render()
 	}
 }
 
-dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
+std::vector<std::shared_ptr<Scene>> dae::SceneManager::GetScenes() const
+{
+	return m_scenes;
+}
+
+Scene& SceneManager::CreateScene(const std::string& name)
 {
 	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
 	m_scenes.push_back(scene);

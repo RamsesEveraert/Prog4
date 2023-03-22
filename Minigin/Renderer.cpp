@@ -11,6 +11,15 @@
 
 
 
+#ifdef _DEBUG
+#define DEBUG_MODE true
+#else
+#define DEBUG_MODE false
+#endif
+
+using namespace dae;
+
+
 int GetOpenGLDriverIndex()
 {
 	auto openglIndex = -1;
@@ -27,6 +36,7 @@ int GetOpenGLDriverIndex()
 
 void dae::Renderer::Init(SDL_Window* window)
 {
+	m_pDebugger = std::make_unique<Debugger>();
 	m_window = window;
 	m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
 	if (m_renderer == nullptr) 
@@ -57,8 +67,9 @@ void dae::Renderer::Render()
 
 	// hint: something should come here :)
 
-	/*if (m_showDemo)
-		ImGui::ShowDemoWindow(&m_showDemo);*/
+	#ifdef DEBUG_MODE
+	m_pDebugger->Render();
+	#endif
 
 
 	ImGui::Render();

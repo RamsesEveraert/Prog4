@@ -16,7 +16,7 @@ namespace dae
 	{
 	public:
 
-		TransformComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
+		TransformComponent(std::weak_ptr<GameObject> owner, const glm::vec3& startPoint = glm::vec3(0, 0, 0), const std::string& identifier = "");
 		~TransformComponent() = default;
 		
 		void Update() override;

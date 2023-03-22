@@ -37,7 +37,7 @@ namespace dae
         int ID{};
     };
 
-    class TrashCacheComponent : public dae::BaseComponent
+    class TrashCacheComponent final: public dae::BaseComponent
     {
     public:
         TrashCacheComponent(std::weak_ptr<dae::GameObject> owner, const std::string& identifier = "");

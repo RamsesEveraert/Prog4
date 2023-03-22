@@ -10,6 +10,9 @@ namespace dae
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
+
+		std::vector<std::shared_ptr<Scene>> GetScenes() const;
+
 		Scene& CreateScene(const std::string& name);
 
 		void Update();
