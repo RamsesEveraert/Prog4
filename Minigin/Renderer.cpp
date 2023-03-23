@@ -12,9 +12,7 @@
 
 
 #ifdef _DEBUG
-#define DEBUG_MODE true
-#else
-#define DEBUG_MODE false
+#define DEBUG_MODE 
 #endif
 
 using namespace dae;
@@ -57,15 +55,13 @@ void dae::Renderer::Render()
 	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderClear(m_renderer);
 
-	//SceneManager::GetInstance().Render();
+	SceneManager::GetInstance().Render();
 
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 
-	SceneManager::GetInstance().Render();
-
-	// hint: something should come here :)
+	SceneManager::GetInstance().RenderImGui();
 
 	#ifdef DEBUG_MODE
 	m_pDebugger->Render();

@@ -194,6 +194,8 @@
     <ClInclude Include="..\3rdParty\implot\implot.h" />
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="DebugComponent.h" />
+    <ClInclude Include="Debugger.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSComponent.h" />
     <ClInclude Include="GameObject.h" />
@@ -254,6 +256,8 @@
     <ClCompile Include="..\3rdParty\implot\implot_demo.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="DebugComponent.cpp" />
+    <ClCompile Include="Debugger.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />

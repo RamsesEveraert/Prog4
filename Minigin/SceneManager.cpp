@@ -33,6 +33,14 @@ void SceneManager::Render()
 	}
 }
 
+void dae::SceneManager::RenderImGui()
+{
+	for (const auto& scene : m_scenes)
+	{
+		scene->RenderImGui();
+	}
+}
+
 std::vector<std::shared_ptr<Scene>> dae::SceneManager::GetScenes() const
 {
 	return m_scenes;

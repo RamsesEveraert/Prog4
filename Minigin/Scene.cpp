@@ -60,6 +60,14 @@ void Scene::Render() const
 	}
 }
 
+void dae::Scene::RenderImGui()
+{
+	for (const auto& object : m_Objects)
+	{
+		object->RenderImGui();
+	}
+}
+
 
 std::vector<std::shared_ptr<GameObject>> Scene::DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>> objects)
 {
