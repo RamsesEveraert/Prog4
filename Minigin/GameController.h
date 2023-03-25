@@ -1,4 +1,4 @@
-
+#pragma once
 #include "Command.h"
 #include <memory>
 #include <vector>

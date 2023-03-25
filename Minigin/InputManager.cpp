@@ -1,9 +1,7 @@
-#include <SDL.h>
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
 
-//#include <windows.h>
-//#include <XInput.h>
+
 #include <iostream>
 
 using namespace dae;
@@ -12,20 +10,14 @@ bool InputManager::ProcessInput()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) {
-			return false;
-		}
-		if (e.type == SDL_KEYDOWN) {
-			
-		}
-		if (e.type == SDL_MOUSEBUTTONDOWN) {
-			
-		}
-		// etc...
+
+		m_pKeyboard->Update(e);
 
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
+
+	m_pKeyboard->UpdatePressed();
 	
 	// update controllers
 
@@ -45,3 +37,7 @@ GameController* InputManager::AddController()
 	return m_Controllers[idx].get();
 }
 
+Keyboard* dae::InputManager::GetKeyboard()
+{
+	return m_pKeyboard.get();
+}

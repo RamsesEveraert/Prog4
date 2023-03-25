@@ -153,6 +153,9 @@
     <ClInclude Include="PlayerCommand.h">
       <Filter>Engin files\Commands\Player Specific Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Engin files\Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -271,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="PlayerCommand.cpp">
       <Filter>Engin files\Commands\Player Specific Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Engin files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
