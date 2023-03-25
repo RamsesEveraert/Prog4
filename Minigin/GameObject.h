@@ -1,6 +1,8 @@
 #pragma once
+
+#include "Transform.h"
+
 #include <memory>
-#include "TransformComponent.h"
 #include <vector>
 #include <iostream>
 
@@ -14,17 +16,31 @@ namespace dae
     class GameObject final : public std::enable_shared_from_this<GameObject>
     {
     public:
+
+        const std::string& GetObjectName() const;
+
+        // updating
+
         void Update();
         void FixedUpdate();
+
+        // rendering
 
         void Render() const;
         void RenderImGui();
 
-        void MarkForDelete();
-        bool IsMarkedForDelete() const;
+        // transform 
 
-        void SetParent(std::weak_ptr<dae::GameObject> pParent, bool keepWorldPosition);
-        const std::shared_ptr<GameObject> GetParent() const;
+        void SetPosition(float x, float y, float z = 0);
+        void SetPosition(const glm::vec3& pos);
+
+        glm::vec3 GetWorldPosition();
+        glm::vec3 GetLocalPosition() const;
+
+        // parenting
+
+        void SetParent(GameObject* pNewParent, bool keepWorldPosition);
+        GameObject* GetParent() const;
 
         const int GetChildCount() const;
         const std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
@@ -34,7 +50,7 @@ namespace dae
        // extra child methods
         bool IsChild(const std::shared_ptr<GameObject>& pChild) const;
        
-        
+        // components
 
         template<typename T>
         std::shared_ptr<T> AddComponent(std::shared_ptr<T> component) {
@@ -96,13 +112,17 @@ namespace dae
 
 
         template<typename T>
-        bool hasComponent() const {
+      constexpr bool HasComponent() const {
             return GetComponent<T>() != nullptr;
         }
 
-        const std::string& GetObjectName() const;
 
-        GameObject(const std::string& objectName);
+        // cleanup
+
+        void MarkForDelete();
+        bool IsMarkedForDelete() const;
+
+        explicit GameObject(const std::string& objectName);
         ~GameObject() = default;
 
         GameObject(const GameObject& other) = delete;
@@ -114,15 +134,27 @@ namespace dae
 
         const std::string m_NameObject;
 
+        //Transform
+        void UpdateWorldPos();
+        void SetTransformDirty();
+        bool m_IsTransformDirty;
+
+        TransformComponent m_TransformComponent;
+
+        // child parents
+
         void AddChild(std::shared_ptr<GameObject> pChild);
         void RemoveChild(std::shared_ptr<GameObject> pChild);
 
-        std::weak_ptr<GameObject> m_pParent; // reference other object
+        GameObject* m_pParent; // reference other object
 
         // momenteel voor vector geopteerd , later zien of unordered map beter is -> unordermap pakken
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
+        // components
         std::vector<std::shared_ptr<BaseComponent>> m_Components;
+
+        // cleanup
         bool m_MarkedForDelete;      
 
     };

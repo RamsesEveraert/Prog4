@@ -2,7 +2,6 @@
 #include "GameObject.h"
 #include "Texture2D.h"
 #include "ResourceManager.h"
-#include "TransformComponent.h"
 #include "RenderComponent.h"
 
 dae::TextureComponent::TextureComponent(std::weak_ptr<GameObject> pOwner, const std::string& texturePath , const std::string& identifier)

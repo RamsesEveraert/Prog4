@@ -19,6 +19,11 @@ const float dae::Timer::getDeltaTimeMs() const
 	return std::chrono::duration<float, std::milli>(deltaTime).count();
 }
 
+const float dae::Timer::getDeltaTimeSec() const
+{
+    return std::chrono::duration<float, std::milli>(deltaTime).count() / 1000.f;
+}
+
 const float dae::Timer::msToSeconds(float ms) const
 {
 	return ms / 1000.0f;

@@ -16,7 +16,6 @@ namespace dae
 		void Render() override;
 
 	private:
-		std::shared_ptr<dae::TransformComponent> m_TransformComponent;
 		std::shared_ptr<dae::TextureComponent> m_TextureComponent;
 	};
 }

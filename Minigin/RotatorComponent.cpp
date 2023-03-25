@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RotatorComponent.h"
-#include "TransformComponent.h"
 #include "GameObject.h"
 #include "Timer.h"
 #include <cmath>
@@ -14,38 +13,25 @@ namespace dae
 		: BaseComponent(pOwner,identifier), m_CenterPoint(cnterPoint), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
 	{
 		auto owner = pOwner.lock();
-		if (owner->hasComponent<dae::TransformComponent>())
-		{
-			m_TransformComponent = owner->GetComponent<dae::TransformComponent>();
-		}
 	}
 
 	void RotatorComponent::Update()
 	{
-		
-		if (m_TransformComponent)
-		{
 			auto& timer = Timer::GetInstance();
 
 			// Calculate new angle based on time passed and rotation speed
-			const float dt = timer.getDeltaTimeMs();
-			const float dtSecs = timer.msToSeconds(dt);
+			const float dt = timer.getDeltaTimeSec();
 
-			m_Angle += m_RotationSpeed * dtSecs;
+			m_Angle += m_RotationSpeed * dt;
 
 			if (m_Angle >= 360.f) m_Angle -= 360.f;
 
 			// Calculate new position using center point and angle
 
 			glm::vec3 newPos = m_CenterPoint + (glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f)) * m_Radius;
-
-			m_TransformComponent->SetLocalPosition(newPos);
-		}
+			GetOwner()->SetPosition(newPos);
 	}
-
-
-
-
+	
 	void RotatorComponent::SetCenterPoint(const glm::vec3& centerPoint)
 	{
 		m_CenterPoint = centerPoint;

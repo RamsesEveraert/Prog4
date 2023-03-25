@@ -9,8 +9,6 @@
 #include "imgui_plot.h"
 #include "../3rdParty/implot/implot.h"
 
-
-
 #ifdef _DEBUG
 #define DEBUG_MODE 
 #endif
@@ -63,9 +61,9 @@ void dae::Renderer::Render()
 
 	SceneManager::GetInstance().RenderImGui();
 
-	#ifdef DEBUG_MODE
-	m_pDebugger->Render();
-	#endif
+	//#ifdef DEBUG_MODE
+	//m_pDebugger->Render();
+	//#endif
 
 
 	ImGui::Render();

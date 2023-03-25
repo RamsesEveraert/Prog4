@@ -14,6 +14,7 @@ namespace dae
         // dt functions
 
         const float getDeltaTimeMs() const; 
+        const float getDeltaTimeSec() const; 
         const float msToSeconds(float ms) const;
        
         void updateDeltaTime(Timer& timer);

@@ -19,14 +19,20 @@
     <Filter Include="Engin files\Imgui">
       <UniqueIdentifier>{1e5439bd-99ff-4fcb-85d4-2fce1843b099}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Exercices">
-      <UniqueIdentifier>{5b5d1368-2246-4045-8389-30d6ee677ef0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Exercices\TrashingTheCache">
-      <UniqueIdentifier>{aca36e15-5a6f-44e2-af58-be216e9eb93f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engin files\Implot">
       <UniqueIdentifier>{9660c3c7-300e-4567-aedb-302f5708413e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engin files\Controller">
+      <UniqueIdentifier>{f6822162-29e4-4b63-8add-725364c093de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engin files\Commands">
+      <UniqueIdentifier>{aafcdad6-9b5d-4218-b094-98973ae12570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engin files\Commands\Enemy Specific Commands">
+      <UniqueIdentifier>{ff247e18-4c6a-4088-ab7b-b727ce6ad61b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engin files\Commands\Player Specific Commands">
+      <UniqueIdentifier>{1cc25b30-7b32-4529-823b-7948dfe9c963}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +73,6 @@
       <Filter>Engin files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsComponent.h">
-      <Filter>Engin files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformComponent.h">
       <Filter>Engin files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
@@ -135,6 +138,21 @@
     <ClInclude Include="Debugger.h">
       <Filter>Engin files</Filter>
     </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Engin files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Engin files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Engin files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engin files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCommand.h">
+      <Filter>Engin files\Commands\Player Specific Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -174,9 +192,6 @@
       <Filter>Engin files\Components</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsComponent.cpp">
-      <Filter>Engin files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
       <Filter>Engin files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
@@ -241,6 +256,21 @@
     </ClCompile>
     <ClCompile Include="Debugger.cpp">
       <Filter>Engin files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Engin files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Engin files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Engin files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engin files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCommand.cpp">
+      <Filter>Engin files\Commands\Player Specific Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

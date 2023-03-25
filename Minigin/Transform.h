@@ -1,6 +1,5 @@
 #pragma once
 
-#include "BaseComponent.h"
 //#pragma warning( push )
 //#pragma warning( disable: 4201 )
 ////code with ThatWarning here
@@ -12,20 +11,21 @@
 
 namespace dae
 {
-	class TransformComponent final : public BaseComponent
+	class TransformComponent final
 	{
 	public:
 
-		TransformComponent(std::weak_ptr<GameObject> owner, const glm::vec3& startPoint = glm::vec3(0, 0, 0), const std::string& identifier = "");
+		TransformComponent();
 		~TransformComponent() = default;
 		
-		void Update() override;
-		void UpdateWorldPosition();
+		void UpdateWorldPosition(const glm::vec3& position);
 
 		const glm::vec3 GetWorldPosition() const; 
 		const glm::vec3 GetLocalPosition() const; 
 
 
+		void SetPosition(float x, float y, float z = 0);
+		void SetPosition(const glm::vec3& pos);
 
 		void SetLocalPosition(const glm::vec3& pos);
 		void SetWorldPosition(const glm::vec3& pos);
