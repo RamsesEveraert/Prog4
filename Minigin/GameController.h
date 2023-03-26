@@ -44,7 +44,7 @@ namespace dae
 
 		using ControllerButton = std::pair<GameController::ControllerButtons, GameController::ButtonState>;
 
-		void AttachCommandToButton(std::unique_ptr<Command> command, const ControllerButton& button);
+		void AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button);
 		void DetachCommandFromButton(const ControllerButton& button);
 		
 

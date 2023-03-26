@@ -13,20 +13,18 @@ void Keyboard::Update(const SDL_Event& e)
 	switch (e.type)
 	{
 	case SDL_KEYDOWN:
-		m_KeyStatesMap[e.key.keysym.scancode] = KeyState::Down;
-		for (const auto& [keyboardKey, command] : m_KeyCommandsMap)
+		for (const auto& [keyboardKey, command] : m_KeyCommandsMapDown)
 		{
-			if (keyboardKey.first == e.key.keysym.scancode && keyboardKey.second == KeyState::Down)
+			if (keyboardKey.first == e.key.keysym.scancode)
 			{
 				command->Execute();
 			}
 		}
 		break;
 	case SDL_KEYUP:
-		m_KeyStatesMap[e.key.keysym.scancode] = KeyState::Up;
-		for (const auto& [keyboardKey, command] : m_KeyCommandsMap)
+		for (const auto& [keyboardKey, command] : m_KeyCommandsMapUp)
 		{
-			if (keyboardKey.first == e.key.keysym.scancode && keyboardKey.second == KeyState::Up)
+			if (keyboardKey.first == e.key.keysym.scancode)
 			{
 				command->Execute();
 			}
@@ -37,28 +35,30 @@ void Keyboard::Update(const SDL_Event& e)
 	}
 }
 
-void Keyboard::UpdateWhenPressed()
+void Keyboard::UpdateWhenPressed(const SDL_Event& e)
 {
 	SDL_PumpEvents();
-	for (const auto& [keyboardKey, command] : m_KeyCommandsMap)
+	for (const auto& [keyboardKey, command] : m_KeyCommandsMapPressed)
 	{
-		if (m_pKeyboardState[keyboardKey.first])
+		if (keyboardKey.first == e.key.keysym.scancode)
 		{
-			if (m_KeyStatesMap[keyboardKey.first] != KeyState::Pressed)
-			{
-				command->Execute();
-			}
-			m_KeyStatesMap[keyboardKey.first] = KeyState::Pressed;
-		}
-		else
-		{
-			m_KeyStatesMap[keyboardKey.first] = KeyState::Up;
+			command->Execute();
 		}
 	}
 }
 
-void Keyboard::AttachCommandToButton(std::unique_ptr<Command> command, const KeyboardKey& key)
+void Keyboard::AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key)
 {
-	m_KeyCommandsMap[key] = std::move(command);
-	m_KeyStatesMap[key.first] = KeyState::Up;
+	switch (key.second)
+	{
+	case KeyState::Up:
+		m_KeyCommandsMapUp[key] = std::move(command);
+		break;
+	case KeyState::Down:
+		m_KeyCommandsMapDown[key] = std::move(command);
+		break;
+	case KeyState::Pressed:
+		m_KeyCommandsMapPressed[key] = std::move(command);
+		break;
+	}
 }

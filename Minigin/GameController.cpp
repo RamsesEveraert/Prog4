@@ -76,9 +76,9 @@ public:
 		return m_CurrentState.Gamepad.wButtons & button;
 	}
 
-	void AttachCommandToButton(std::unique_ptr<Command> command, ControllerButton button)
+	void AttachCommandToButton(std::shared_ptr<Command> command, ControllerButton button)
 	{
-		m_ControllerCommands.insert(std::pair<ControllerButton, std::unique_ptr<Command>>(button, std::move(command)));
+		m_ControllerCommands.insert(std::pair<ControllerButton, std::shared_ptr<Command>>(button, command));
 	}
 
 	void DetachCommandFromButton(ControllerButton button)
@@ -97,7 +97,7 @@ private:
 	WORD m_ButtonsPressedThisFrame{};
 	WORD m_ButtonsReleasedThisFrame{};
 
-	using ControllerCommandsMap = std::map<ControllerButton, std::unique_ptr<Command>>;
+	using ControllerCommandsMap = std::map<ControllerButton, std::shared_ptr<Command>>;
 	ControllerCommandsMap m_ControllerCommands;
 
 	const int m_ControllerIndex;
@@ -138,9 +138,9 @@ bool GameController::IsPressed(unsigned int button) const
 	return m_pImplController->IsPressed(static_cast<unsigned int>(button));
 }
 
-void dae::GameController::AttachCommandToButton(std::unique_ptr<Command> command, const ControllerButton& button)
+void dae::GameController::AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button)
 {
-	m_pImplController->AttachCommandToButton(std::move(command), button);
+	m_pImplController->AttachCommandToButton(command, button);
 }
 
 void dae::GameController::DetachCommandFromButton(const ControllerButton& button)

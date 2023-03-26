@@ -10,15 +10,16 @@ bool InputManager::ProcessInput()
 {
 	// update keyboard 
 
-	m_pKeyboard->UpdateWhenPressed();
-
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
 			return false;
 		}
+		m_pKeyboard->UpdateWhenPressed(e);
 
 		m_pKeyboard->Update(e);
+
+		
 
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);

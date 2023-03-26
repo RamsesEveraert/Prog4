@@ -16,15 +16,16 @@ namespace dae
 		Keyboard();
 
 		void Update(const SDL_Event& e);
-		void UpdateWhenPressed();
+		void UpdateWhenPressed(const SDL_Event&);
 
 		using KeyboardKey = std::pair<SDL_Scancode, KeyState>;
 
-		void AttachCommandToButton(std::unique_ptr<Command> command, const KeyboardKey& key);
+		void AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key);
 
 	private:
-		const Uint8* m_pState;
-		std::map<KeyboardKey, std::unique_ptr<Command>> m_KeyCommands;
-		std::map<SDL_Scancode, KeyState> m_KeyStates;
+		const Uint8* m_pKeyboardState;
+		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapPressed;
+		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapUp;
+		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapDown;
 	};
 }
