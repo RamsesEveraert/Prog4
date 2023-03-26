@@ -138,12 +138,12 @@ bool GameController::IsPressed(unsigned int button) const
 	return m_pImplController->IsPressed(static_cast<unsigned int>(button));
 }
 
-void dae::GameController::AttachCommandToButton(std::unique_ptr<Command> command, ControllerButton button)
+void dae::GameController::AttachCommandToButton(std::unique_ptr<Command> command, const ControllerButton& button)
 {
 	m_pImplController->AttachCommandToButton(std::move(command), button);
 }
 
-void dae::GameController::DetachCommandFromButton(ControllerButton button)
+void dae::GameController::DetachCommandFromButton(const ControllerButton& button)
 {
 	m_pImplController->DetachCommandFromButton(button);
 }

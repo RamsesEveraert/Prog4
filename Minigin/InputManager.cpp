@@ -8,8 +8,15 @@ using namespace dae;
 
 bool InputManager::ProcessInput()
 {
+	// update keyboard 
+
+	m_pKeyboard->UpdateWhenPressed();
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
+		if (e.type == SDL_QUIT) {
+			return false;
+		}
 
 		m_pKeyboard->Update(e);
 
@@ -17,8 +24,6 @@ bool InputManager::ProcessInput()
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
 
-	m_pKeyboard->UpdatePressed();
-	
 	// update controllers
 
 	for (auto& controller : m_Controllers)
@@ -41,3 +46,4 @@ Keyboard* dae::InputManager::GetKeyboard()
 {
 	return m_pKeyboard.get();
 }
+

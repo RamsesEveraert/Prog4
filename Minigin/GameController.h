@@ -43,8 +43,9 @@ namespace dae
 		void Update();
 
 		using ControllerButton = std::pair<GameController::ControllerButtons, GameController::ButtonState>;
-		void AttachCommandToButton(std::unique_ptr<Command> command, ControllerButton button);
-		void DetachCommandFromButton(ControllerButton button);
+
+		void AttachCommandToButton(std::unique_ptr<Command> command, const ControllerButton& button);
+		void DetachCommandFromButton(const ControllerButton& button);
 		
 
 		explicit GameController(int controllerIndex);
