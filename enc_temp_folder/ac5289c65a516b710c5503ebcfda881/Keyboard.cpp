@@ -18,6 +18,7 @@ void Keyboard::Update(const SDL_Event& e)
 			if (keyboardKey.first == e.key.keysym.scancode)
 			{
 				command->Execute();
+				/*m_pKeyboardState = SDL_GetKeyboardState(nullptr);*/
 			}
 			
 		}
@@ -28,6 +29,7 @@ void Keyboard::Update(const SDL_Event& e)
 			if (keyboardKey.first == e.key.keysym.scancode)
 			{
 				command->Execute();
+				/*m_pKeyboardState = SDL_GetKeyboardState(nullptr);*/
 			}
 		}
 		break;

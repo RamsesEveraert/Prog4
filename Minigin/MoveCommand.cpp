@@ -23,6 +23,8 @@ void MoveCommand::Execute()
     glm::vec3 newPosition = m_OldPosition + m_Direction * Timer::GetInstance().getDeltaTimeSec() * m_Speed;
 
     pGameObject->SetPosition(newPosition);
+
+    std::cout << "Pos: [" << newPosition.x << ", " << newPosition.y << "] \n";
 }
 
 void MoveCommand::Undo()

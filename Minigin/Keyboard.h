@@ -16,7 +16,7 @@ namespace dae
 		Keyboard();
 
 		void Update(const SDL_Event& e);
-		void UpdateWhenPressed(const SDL_Event&);
+		void UpdateWhenPressed();
 
 		using KeyboardKey = std::pair<SDL_Scancode, KeyState>;
 
@@ -27,5 +27,6 @@ namespace dae
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapPressed;
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapUp;
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapDown;
+
 	};
 }
