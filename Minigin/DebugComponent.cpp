@@ -4,12 +4,10 @@
 
 #include <stdio.h>
 
-dae::DebugComponent::DebugComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier)
-	: BaseComponent(pOwner, identifier)
-    , m_NameGameObject{ pOwner.lock()->GetObjectName() }
-    , m_Io {ImGui::GetIO()}
+dae::DebugComponent::DebugComponent()
+    : m_Io {ImGui::GetIO()}
 {
-
+    m_NameGameObject = GetOwner()->GetObjectName();
    
 }
 

@@ -10,7 +10,7 @@ namespace dae
     class FPSComponent final : public BaseComponent
     {
     public:
-        FPSComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
+        FPSComponent();
         ~FPSComponent() = default;
 
         void Update() override;
@@ -19,6 +19,6 @@ namespace dae
     private:
         int m_Fps;
         float m_TimeRunning;
-        std::shared_ptr<dae::TextComponent> m_TextComponent;
+        TextComponent* m_TextComponent;
     };
 }

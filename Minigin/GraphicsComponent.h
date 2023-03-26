@@ -10,7 +10,7 @@ namespace dae
     class GraphicsComponent final : public BaseComponent
     {
     public:
-        GraphicsComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
+        GraphicsComponent();
         ~GraphicsComponent() = default;
 
         //TODO: functions

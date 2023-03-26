@@ -1,6 +1,6 @@
 #pragma once
-
 #include "Transform.h"
+#include "BaseComponent.h"
 
 #include <memory>
 #include <vector>
@@ -11,7 +11,6 @@
 namespace dae
 {
     class Texture2D;
-    class BaseComponent;
 
     class GameObject final : public std::enable_shared_from_this<GameObject>
     {
@@ -37,7 +36,7 @@ namespace dae
         glm::vec3 GetWorldPosition();
         glm::vec3 GetLocalPosition() const;
 
-        // parenting
+        // parent and children
 
         void SetParent(GameObject* pNewParent, bool keepWorldPosition);
         GameObject* GetParent() const;
@@ -45,75 +44,78 @@ namespace dae
         const int GetChildCount() const;
         const std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
         const std::vector<std::shared_ptr<GameObject>> GetChildren();
-        
-                
-       // extra child methods
+
         bool IsChild(const std::shared_ptr<GameObject>& pChild) const;
        
-        // components
+        // components -> to do best pracyise: onderaan plaatsen en forward declareren
 
         template<typename T>
-        std::shared_ptr<T> AddComponent(std::shared_ptr<T> component) {
+        inline T* AddComponent() {
 
-            m_Components.push_back(component);
-            return component;
+            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+            auto pComponent = std::make_unique<T>();
+            T* returnComponontenPtr = pComponent.get();
+
+            //automatically make owner of components
+
+            pComponent->SetOwner(this);
+
+            m_Components.push_back(std::move(pComponent));
+
+            return returnComponontenPtr;
         }
-
         template<typename T>
-        void removeComponent(std::shared_ptr<T> componentToRemove = nullptr) {
-            auto componentsToRemove = std::vector<std::shared_ptr<BaseComponent>>{};
-            auto componentType = std::dynamic_pointer_cast<T>(nullptr);
-            for (auto& component : m_Components)
+        inline bool removeComponent() {
+            static_assert(!std::is_same<Transform, T>(), "Transform component cannot be removed");
+            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+            for (auto it = m_Components.begin(); it != m_Components.end(); ++it)
             {
-                componentType = std::dynamic_pointer_cast<T>(component);
-                if (componentType)
-                {
-                    if (componentToRemove == nullptr || componentType == componentToRemove)
-                    {
-                        componentsToRemove.push_back(component);
-                    }
+                if (auto* pComponent = dynamic_cast<T*>(it->get())) {
+                    m_Components.erase(it);
+                    return true;
                 }
             }
-
-            for (auto& component : componentsToRemove)
-            {
-                m_Components.erase(std::remove(m_Components.begin(), m_Components.end(), component), m_Components.end());
-            }
+            return false;
         }
-
-
         template<typename T>
-        std::shared_ptr<T> GetComponent(const std::string& identifier = "") const {
-            for (const auto& component : m_Components) {
-                if (std::shared_ptr<T> pointerType = std::dynamic_pointer_cast<T>(component)) {
-                    // Check if the component's identifier matches the requested identifier
-                    if (pointerType->GetIdentifier() == identifier) {
-                        return pointerType;
-                    }
-                }
+        inline T* GetComponent() const {
+            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+            for (const auto& pComponent : m_Components)
+            {
+                T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
+                if (derivedComponent) return derivedComponent;
             }
+
             return nullptr;
         }
-
-
-        
-
         template<typename T>
-        std::vector<std::shared_ptr<T>> GetAllInstancesOfComponent() const {
-            std::vector<std::shared_ptr<T>> components;
-            for (const auto& component : m_Components) {
-                if (std::shared_ptr<T> pointerType = std::dynamic_pointer_cast<T>(component)) {
-                    components.push_back(pointerType);
-                }
+        inline std::vector<T*> GetAllInstancesOfComponent() const {
+            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+            std::vector<T*> pComponents{};
+
+            for (const auto& pComponent : m_Components)
+            {
+                T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
+                if (derivedComponent) pComponents.push_back(derivedComponent);
             }
-            return components;
+
+            return pComponents;
         }
+        template<class T>
+        inline bool HasComponent() const
+        {
+            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
 
-
-
-        template<typename T>
-      constexpr bool HasComponent() const {
-            return GetComponent<T>() != nullptr;
+            for (auto& component : m_Components)
+            {
+                T* derivedComponent = dynamic_cast<T*>(component.get());
+                if (derivedComponent) return true;
+            }
+            return false;
         }
 
 
@@ -139,23 +141,24 @@ namespace dae
         void SetTransformDirty();
         bool m_IsTransformDirty;
 
-        TransformComponent m_TransformComponent;
+        Transform m_Transform;
 
         // child parents
 
         void AddChild(std::shared_ptr<GameObject> pChild);
         void RemoveChild(std::shared_ptr<GameObject> pChild);
 
-        GameObject* m_pParent; // reference other object
+        GameObject* m_pParent;
 
         // momenteel voor vector geopteerd , later zien of unordered map beter is -> unordermap pakken
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
-        // components
-        std::vector<std::shared_ptr<BaseComponent>> m_Components;
-
         // cleanup
-        bool m_MarkedForDelete;      
+        bool m_MarkedForDelete;     
 
+        // components
+        std::vector<std::unique_ptr<BaseComponent>> m_Components;
     };
+
+   
 }

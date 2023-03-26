@@ -10,7 +10,7 @@ namespace dae
 	{
 	public:
 
-		DebugComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier = "");
+		DebugComponent();
 		~DebugComponent() = default;
 
 		virtual void Render();

@@ -9,10 +9,13 @@
 
 namespace dae
 {
-	RotatorComponent::RotatorComponent(std::weak_ptr<GameObject> pOwner, const glm::vec3& cnterPoint, const std::string& identifier)
-		: BaseComponent(pOwner,identifier), m_CenterPoint(cnterPoint), m_RotationSpeed(0.0f), m_Radius{0}, m_Angle(0.0f)
+	RotatorComponent::RotatorComponent()
+		: m_CenterPoint(glm::vec3(0,0,0)), 
+		m_RotationSpeed(0.0f), 
+		m_Radius{0}, 
+		m_Angle(0.0f)
 	{
-		auto owner = pOwner.lock();
+		
 	}
 
 	void RotatorComponent::Update()

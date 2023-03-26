@@ -7,9 +7,8 @@
 #include <numeric> 
 
 
-dae::TrashCacheComponent::TrashCacheComponent(std::weak_ptr<dae::GameObject> owner, const std::string& identifier)
-    : BaseComponent(owner, identifier)
-    , m_NumSamplesEx1{ 20 }
+dae::TrashCacheComponent::TrashCacheComponent()
+    : m_NumSamplesEx1{ 20 }
     , m_NumSamplesEx2{ 20 }
     , m_BufferSize{ 10000000 }
     , m_MaxSteps{ 1024 }

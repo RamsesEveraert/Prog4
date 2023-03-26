@@ -4,29 +4,32 @@
 #include "Renderer.h"
 #include "TextureComponent.h"
 
-dae::RenderComponent::RenderComponent(std::weak_ptr<GameObject> pOwner, const std::string& identifier)
-	: BaseComponent(pOwner, identifier),  m_TextureComponent{ nullptr }
+dae::RenderComponent::RenderComponent()
+	: m_pTextureComponent{ nullptr }
 {
-	auto owner = pOwner.lock();
-
-	if (owner->HasComponent<dae::TextureComponent>())
-	{
-		m_TextureComponent = owner->GetComponent<dae::TextureComponent>();
-	}
 }
 
 void dae::RenderComponent::Render()
-
-
 {
+	if (!m_pTextureComponent)
+	{
+		m_pTextureComponent = GetOwner()->GetComponent<TextureComponent>();
+
+		if (!m_pTextureComponent)
+		{
+			std::cout << "No TextureComponent found! \n";
+			return;
+		}
+	}
+
 	if (!GetOwner())
 		return;
 
-	if (m_TextureComponent)
+	if (m_pTextureComponent)
 	{
 		auto pos = GetOwner()->GetWorldPosition();
 
-		auto texture = m_TextureComponent->GetTexture();
+		auto texture = m_pTextureComponent->GetTexture();
 		Renderer::GetInstance().RenderTexture(*texture, pos.x, pos.y);
 	}
 

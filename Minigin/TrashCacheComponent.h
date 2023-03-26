@@ -13,7 +13,7 @@ namespace dae
         CanPlot
     };
 
-    struct Transform
+    struct TransformObject
     {
         float matrix[16] = {
             1, 0, 0, 0,
@@ -26,21 +26,21 @@ namespace dae
     class GameObject3D
     {
     public:
-        Transform transform{};
+        TransformObject transform{};
         int ID{};
     };
 
     class GameObject3DAlt
     {
     public:
-        Transform* transform{};
+        TransformObject* transform{};
         int ID{};
     };
 
     class TrashCacheComponent final: public dae::BaseComponent
     {
     public:
-        TrashCacheComponent(std::weak_ptr<dae::GameObject> owner, const std::string& identifier = "");
+        TrashCacheComponent();
 
         virtual void Update() override;
         virtual void Render() override;

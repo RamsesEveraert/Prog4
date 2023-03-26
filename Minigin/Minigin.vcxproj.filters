@@ -46,33 +46,33 @@
     <Filter Include="ImGui\Implot">
       <UniqueIdentifier>{9660c3c7-300e-4567-aedb-302f5708413e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Exercices">
+      <UniqueIdentifier>{03843cf4-3582-4542-9d73-70b435262159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{171c832a-bda9-4e82-a592-7656ffab6289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Debug">
+      <UniqueIdentifier>{64e8f801-759c-4396-874d-1ec91ad28c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{07f8d8c4-c951-46a0-9d84-41a0c9e3d0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{6de46459-d0de-4ef4-bcd2-248ce61960f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\GameObjects">
+      <UniqueIdentifier>{001933fd-f929-414d-bc59-b8b0fab84fc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
       <Filter>Engin files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Engin files</Filter>
     </ClInclude>
     <ClInclude Include="Texture2D.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Engin files</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
       <Filter>Engin files</Filter>
     </ClInclude>
     <ClInclude Include="Minigin.h">
@@ -86,9 +86,6 @@
     </ClInclude>
     <ClInclude Include="..\3rdParty\implot\implot_internal.h">
       <Filter>ImGui\Implot</Filter>
-    </ClInclude>
-    <ClInclude Include="Debugger.h">
-      <Filter>Engin files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCommand.h">
       <Filter>Commands\Player Specific Commands</Filter>
@@ -118,18 +115,6 @@
       <Filter>Components\TransformComponents</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TrashCacheComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameController.h">
@@ -165,17 +150,44 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="TrashCacheComponent.h">
+      <Filter>Components\Exercices</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsComponent.h">
+      <Filter>Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugComponent.h">
+      <Filter>Components\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h">
+      <Filter>Components\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Scenes\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Font.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Engin files</Filter>
     </ClCompile>
@@ -183,15 +195,6 @@
       <Filter>Engin files</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Engin files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
       <Filter>Engin files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
@@ -208,9 +211,6 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp">
       <Filter>ImGui\Implot</Filter>
-    </ClCompile>
-    <ClCompile Include="Debugger.cpp">
-      <Filter>Engin files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCommand.cpp">
       <Filter>Commands\Player Specific Commands</Filter>
@@ -242,18 +242,6 @@
     <ClCompile Include="BaseComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="DebugComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TrashCacheComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
@@ -283,6 +271,42 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashCacheComponent.cpp">
+      <Filter>Components\Exercices</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsComponent.cpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugComponent.cpp">
+      <Filter>Components\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Debugger.cpp">
+      <Filter>Components\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Scenes\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

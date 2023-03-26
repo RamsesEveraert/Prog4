@@ -23,12 +23,14 @@ namespace dae
 		BaseComponent& operator=(const BaseComponent& other) = delete;
 		BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
 
-		std::shared_ptr<GameObject> GetOwner() const;
+		GameObject* GetOwner() const;
+		void SetOwner(GameObject* owner);
 		const std::string GetIdentifier() const;
+
 	
 	protected:
 
-		explicit BaseComponent(std::weak_ptr<GameObject> owner, const std::string& identifier = "");
+		BaseComponent() = default;
 
 		std::string m_Identifier;
 
@@ -36,7 +38,7 @@ namespace dae
 
 	private:
 
-		std::weak_ptr<GameObject> m_pOwner;		
+		GameObject* m_pOwner;	
 
 	};
 

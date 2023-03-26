@@ -11,12 +11,12 @@
 
 namespace dae
 {
-	class TransformComponent final
+	class Transform final
 	{
 	public:
 
-		TransformComponent();
-		~TransformComponent() = default;
+		Transform();
+		~Transform() = default;
 		
 		void UpdateWorldPosition(const glm::vec3& position);
 

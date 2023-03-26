@@ -4,11 +4,9 @@
 #include "ResourceManager.h"
 #include "RenderComponent.h"
 
-dae::TextureComponent::TextureComponent(std::weak_ptr<GameObject> pOwner, const std::string& texturePath , const std::string& identifier)
-	: BaseComponent(pOwner,identifier), m_pTexture(nullptr)
+dae::TextureComponent::TextureComponent()
+	: m_pTexture(nullptr)
 {
-	if (texturePath != "")
-		m_pTexture = ResourceManager::GetInstance().LoadTexture(texturePath);
 }
 
 void dae::TextureComponent::Update()
