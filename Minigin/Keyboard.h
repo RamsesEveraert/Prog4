@@ -21,6 +21,8 @@ namespace dae
 		using KeyboardKey = std::pair<SDL_Scancode, KeyState>;
 
 		void AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key);
+		void Keyboard::DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key);
+		
 
 	private:
 		const Uint8* m_pKeyboardState;

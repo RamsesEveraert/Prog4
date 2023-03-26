@@ -66,3 +66,19 @@ void Keyboard::AttachCommandToButton(std::shared_ptr<Command> command, const Key
 		break;
 	}
 }
+
+void Keyboard::DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key)
+{
+	switch (key.second)
+	{
+	case KeyState::Up:
+		m_KeyCommandsMapUp.erase(key);
+		break;
+	case KeyState::Down:
+		m_KeyCommandsMapDown.erase(key);
+		break;
+	case KeyState::Pressed:
+		m_KeyCommandsMapPressed.erase(key);
+		break;
+	}
+}
