@@ -1,14 +1,10 @@
-
 #include "GameObject.h"
 #include "SceneManager.h"
-#include "BaseComponent.h"
+#include "Transform.h"
 
 using namespace dae;
 
-const std::string& dae::GameObject::GetObjectName() const
-{
-    return m_NameObject;
-}
+
 
 dae::GameObject::GameObject(const std::string& objectName)
     : m_Components{} 
@@ -19,7 +15,22 @@ dae::GameObject::GameObject(const std::string& objectName)
     , m_Children {}
     , m_NameObject{ objectName }
 {
-    m_Transform.SetLocalPosition(glm::vec3(0, 0, 0));
+    InitGameObject();
+}
+
+const std::string& dae::GameObject::GetObjectName() const
+{
+    return m_NameObject;
+}
+
+void dae::GameObject::InitGameObject()
+{
+    m_Transform = AddComponent<Transform>();
+    if (m_Transform)
+    {
+        m_Transform->SetLocalPosition(glm::vec3(0, 0, 0));
+    }
+    
 }
 
 void dae::GameObject::Update()
@@ -36,8 +47,8 @@ void dae::GameObject::Update()
             child->Update();
     }
 
-    if (m_IsTransformDirty)
-        UpdateWorldPos();
+    if (m_Transform->IsDirty())
+        m_Transform->UpdateWorldPosition();
 
 
 }
@@ -100,8 +111,8 @@ void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
         if (m_pParent == nullptr)
         {
             //Local position is now world position
-            const auto position{ m_Transform.GetWorldPosition() };
-            SetPosition(position.x, position.y);
+            const auto position{ m_Transform->GetWorldPosition() };
+            m_Transform->SetPosition(position.x, position.y);
         }
         else
         {
@@ -110,13 +121,13 @@ void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
 
             if (keepWorldPosition)
             {
-                const auto position{ m_Transform.GetLocalPosition() - m_pParent->GetWorldPosition() };
-                SetPosition(position.x, position.y);
+                const auto position{ m_Transform->GetLocalPosition() - m_pParent->GetTransform()->GetWorldPosition()};
+                m_Transform->SetPosition(position.x, position.y);
             }
             else
             {
                 //Recalculate world position
-                SetTransformDirty();
+                m_Transform->SetDirty();
             }
         }
     
@@ -157,7 +168,7 @@ const std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int inde
     }
     return m_Children[index];
 }
-const std::vector<std::shared_ptr<dae::GameObject>> dae::GameObject::GetChildren()
+ std::vector<std::shared_ptr<dae::GameObject>> dae::GameObject::GetChildren()
 {
     return m_Children;
 }
@@ -167,45 +178,19 @@ bool dae::GameObject::IsChild(const std::shared_ptr<GameObject>& pChild) const
     return (it != m_Children.end());
 }
 
-void dae::GameObject::UpdateWorldPos()
+Transform* dae::GameObject::GetTransform() const
 {
-        m_IsTransformDirty = false;
+    const auto transform = GetComponent<Transform>();
+    return transform ? transform : nullptr;
+}
 
-        if (m_pParent)
-        {
-            m_Transform.UpdateWorldPosition(m_Transform.GetLocalPosition() + m_pParent->GetWorldPosition());
-        }
-        else
-        {
-            m_Transform.UpdateWorldPosition(m_Transform.GetLocalPosition());
-        }
-}
-glm::vec3 dae::GameObject::GetWorldPosition()
+void dae::GameObject::Translate(float x, float y, float z)
 {
-   return m_Transform.GetWorldPosition();
+    m_Transform->Translate(glm::vec3(x, y, z));
 }
-glm::vec3 dae::GameObject::GetLocalPosition() const
+void dae::GameObject::Translate(const glm::vec3& translation)
 {
-   return m_Transform.GetLocalPosition();
-}
-void dae::GameObject::SetPosition(float x, float y, float z)
-{
-        SetTransformDirty();
-        m_Transform.SetLocalPosition(glm::vec3(x, y, z));
-}
-void dae::GameObject::SetPosition(const glm::vec3& pos)
-{
-        SetTransformDirty();
-        m_Transform.SetLocalPosition(pos);
-}
-void dae::GameObject::SetTransformDirty()
-{
-    m_IsTransformDirty = true;
-
-    for (const auto& pChild : m_Children)
-    {
-        pChild->SetTransformDirty();
-    }
+    m_Transform->Translate(translation);
 }
 
 void dae::GameObject::MarkForDelete()

@@ -15,6 +15,7 @@
 #include "FPSComponent.h"
 #include "RotatorComponent.h"
 #include "TrashCacheComponent.h"
+#include "Transform.h"
 
 // Commands
 
@@ -31,8 +32,8 @@ void DemoScene::LoadDemoScene()
     CreateLogo(scene);
     CreateTextObject(scene);
     CreateFPSObject(scene);
-	CreateRotatingObjects(scene);
-	InputsExercice(scene);
+	/*CreateRotatingObjects(scene);
+	InputsExercice(scene);*/
 
 }
 
@@ -47,7 +48,7 @@ void dae::DemoScene::CreateBackground(Scene& scene)
 void dae::DemoScene::CreateLogo(Scene& scene)
 {
     auto logo = std::make_shared<dae::GameObject>("logo");
-    logo->SetPosition(glm::vec3{ 216,190,0 });
+    logo->GetTransform()->SetPosition(glm::vec3{ 216,190,0 });
     logo->AddComponent<dae::TextureComponent>()->SetTextureByPath("logo.tga");
     logo->AddComponent<dae::RenderComponent>();
     scene.Add(logo);
@@ -56,7 +57,7 @@ void dae::DemoScene::CreateLogo(Scene& scene)
 void dae::DemoScene::CreateTextObject(Scene& scene)
 {
     auto textObject = std::make_shared<dae::GameObject>("textObject");
-    textObject->SetPosition(glm::vec3{ 190,250,0 });
+    textObject->GetTransform()->SetPosition(glm::vec3{ 190,250,0 });
     textObject->AddComponent<dae::TextureComponent>();
     textObject->AddComponent<dae::TextComponent>()->SetFont(dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36));
     textObject->GetComponent<TextComponent>()->SetText("Programming 4:");
@@ -67,7 +68,7 @@ void dae::DemoScene::CreateTextObject(Scene& scene)
 void dae::DemoScene::CreateFPSObject(Scene& scene)
 {
     auto fpsCounter = std::make_shared<dae::GameObject>("fpsCounter");
-    fpsCounter->SetPosition(glm::vec3{ 20,20,0 });
+    fpsCounter->GetTransform()->SetPosition(glm::vec3{ 20,20,0 });
     fpsCounter->AddComponent<dae::TextureComponent>();
     fpsCounter->AddComponent<dae::TextComponent>()->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
     fpsCounter->GetComponent<TextComponent>()->SetText(" ");
@@ -81,7 +82,7 @@ void dae::DemoScene::CreateRotatingObjects(Scene& scene)
 	// test centerpoint
 
 	auto centerPoint = std::make_shared<dae::GameObject>("centerPoint");
-	centerPoint->SetPosition(glm::vec3{ 300,300,0 });
+	centerPoint->GetTransform()->SetPosition(glm::vec3{ 300,300,0 });
 
 	centerPoint->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
 	centerPoint->AddComponent<RenderComponent>();
@@ -91,7 +92,7 @@ void dae::DemoScene::CreateRotatingObjects(Scene& scene)
 	// Rotating object 1 --> werkt niet?
 
 	auto parentObject = std::make_shared<dae::GameObject>("ParentObject");
-	parentObject->SetPosition(glm::vec3{ 300,300, 0 });
+	parentObject->GetTransform()->SetPosition(glm::vec3{ 300,300, 0 });
     parentObject->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
     parentObject->AddComponent<RotatorComponent>()->SetCenterPoint(glm::vec3{ 300,300, 0 });
     parentObject->GetComponent<RotatorComponent>()->SetRadius(100.f);
@@ -106,7 +107,7 @@ void dae::DemoScene::CreateRotatingObjects(Scene& scene)
     childObject->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
     childObject->AddComponent<RotatorComponent>();
     childObject->SetParent(parentObject.get(),true);
-    childObject->GetComponent<RotatorComponent>()->SetCenterPoint(parentObject->GetWorldPosition());
+    childObject->GetComponent<RotatorComponent>()->SetCenterPoint(parentObject->GetTransform()->GetWorldPosition());
     childObject->GetComponent<RotatorComponent>()->SetRadius(25.f);
     childObject->GetComponent<RotatorComponent>()->SetRotationSpeed(-4.f);
     childObject->AddComponent<RenderComponent>();
@@ -117,7 +118,7 @@ void dae::DemoScene::CreateRotatingObjects(Scene& scene)
 void dae::DemoScene::InputsExercice(Scene& scene)
 {
     auto player1 = std::make_shared<dae::GameObject>("p1");
-    player1->SetPosition(glm::vec3{ 300,300,0 });
+    player1->GetTransform()->SetPosition(glm::vec3{ 300,300,0 });
     player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
     player1->AddComponent<RenderComponent>();
 
@@ -125,16 +126,16 @@ void dae::DemoScene::InputsExercice(Scene& scene)
 
 	auto controller = dae::InputManager::GetInstance().AddController();
 	auto player = player1.get();
-	std::vector<std::pair<dae::GameController::ControllerButtons, glm::vec3>> buttonDirections = {
-		{ dae::GameController::ControllerButtons::DPadUp, {0.f, -1.f, 0.f} },
-		{ dae::GameController::ControllerButtons::DPadDown, {0.f, 1.f, 0.f} },
-		{ dae::GameController::ControllerButtons::DPadRight, {1.f, 0.f, 0.f} },
-		{ dae::GameController::ControllerButtons::DPadLeft, {-1.f, 0.f, 0.f} }
+	std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec3>> buttonDirections = {
+		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f, 0.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadDown, {0.f, 1.f, 0.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadRight, {1.f, 0.f, 0.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadLeft, {-1.f, 0.f, 0.f} }
 	};
 
 	for (auto& buttonDirection : buttonDirections)
 	{
-		auto button = std::make_pair(buttonDirection.first, dae::GameController::ButtonState::Pressed);
+		auto button = std::make_pair(buttonDirection.first, dae::ControllerInput::ButtonState::Pressed);
 		auto direction = buttonDirection.second;
 		float speed{ 40.f };
 
@@ -148,7 +149,7 @@ void dae::DemoScene::InputsExercice(Scene& scene)
 	//*** commands keyboard ***//
 
 	auto player2 = std::make_shared<GameObject>("p2");
-	player2->SetPosition(glm::vec3{ 350,350,0 });
+	player2->GetTransform()->SetPosition(glm::vec3{ 350,350,0 });
 	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
 	player2->AddComponent<RenderComponent>();
 
@@ -164,8 +165,8 @@ void dae::DemoScene::InputsExercice(Scene& scene)
 
 	for (auto& keyDirection : keyDirections)
 	{
-		auto keyPressed = std::make_pair(keyDirection.first, dae::Keyboard::KeyState::Pressed);
-		auto keyDown = std::make_pair(keyDirection.first, dae::Keyboard::KeyState::Down);
+		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
+		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
 		auto direction = keyDirection.second;
 		float speed{ 80.f };
 		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);

@@ -8,7 +8,7 @@
 
 namespace dae
 {
-	class GameController final
+	class ControllerInput final
 	{
 	public:
 		
@@ -42,18 +42,18 @@ namespace dae
 
 		void Update();
 
-		using ControllerButton = std::pair<GameController::ControllerButtons, GameController::ButtonState>;
+		using ControllerButton = std::pair<ControllerInput::ControllerButtons, ControllerInput::ButtonState>;
 
 		void AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button);
 		void DetachCommandFromButton(const ControllerButton& button);
 		
 
-		explicit GameController(int controllerIndex);
-		~GameController();
-		GameController(const GameController& other) = delete;
-		GameController(GameController&& other) = delete;
-		GameController& operator=(const GameController& other) = delete;
-		GameController& operator=(GameController&& other) = delete;
+		explicit ControllerInput(int controllerIndex);
+		~ControllerInput();
+		ControllerInput(const ControllerInput& other) = delete;
+		ControllerInput(ControllerInput&& other) = delete;
+		ControllerInput& operator=(const ControllerInput& other) = delete;
+		ControllerInput& operator=(ControllerInput&& other) = delete;
 
 	private:
 

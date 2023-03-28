@@ -2,12 +2,12 @@
 #include <windows.h>
 #include <Xinput.h>
 #pragma comment(lib, "xinput.lib")
-#include "GameController.h"
+#include "ControllerInput.h"
 #include "Command.h"
 
 using namespace dae;
 
-class GameController::GameControllerImpl
+class ControllerInput::GameControllerImpl
 {
 public:
 	GameControllerImpl(int controllerIndex)
@@ -24,7 +24,7 @@ public:
 		{
 			switch (command.first.second) 
 			{
-			case dae::GameController::ButtonState::Up:
+			case dae::ControllerInput::ButtonState::Up:
 				if (IsDownThisFrame(static_cast<unsigned int>(command.first.first)))
 				{
 					command.second->Execute();
@@ -105,45 +105,45 @@ private:
 
 
 
-GameController::GameController(int controllerIndex)
+ControllerInput::ControllerInput(int controllerIndex)
 	:m_pImplController(new GameControllerImpl{ controllerIndex })
 {
 }
 
-dae::GameController::~GameController()
+dae::ControllerInput::~ControllerInput()
 {
 	delete m_pImplController;
 }
 
-void GameController::Update()
+void ControllerInput::Update()
 {
 
 	m_pImplController->Update();
 
 }
 
-bool GameController::IsDown(unsigned int button) const
+bool ControllerInput::IsDown(unsigned int button) const
 {
 	return m_pImplController->IsDownThisFrame(static_cast<unsigned int>(button));
 }
 
-bool GameController::IsUp(unsigned int button) const
+bool ControllerInput::IsUp(unsigned int button) const
 {
 	return m_pImplController->IsUpThisFrame(static_cast<unsigned int>(button));
 }
 
-bool GameController::IsPressed(unsigned int button) const
+bool ControllerInput::IsPressed(unsigned int button) const
 {
 
 	return m_pImplController->IsPressed(static_cast<unsigned int>(button));
 }
 
-void dae::GameController::AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button)
+void dae::ControllerInput::AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button)
 {
 	m_pImplController->AttachCommandToButton(command, button);
 }
 
-void dae::GameController::DetachCommandFromButton(const ControllerButton& button)
+void dae::ControllerInput::DetachCommandFromButton(const ControllerButton& button)
 {
 	m_pImplController->DetachCommandFromButton(button);
 }

@@ -5,7 +5,7 @@
 namespace dae
 {
     class GameObject;
-
+    class Transform;
     class MoveCommand : public Command
     {
     public:
@@ -18,5 +18,6 @@ namespace dae
         glm::vec3 m_OldPosition;
         glm::vec3 m_Direction;
         float m_Speed;
+
     };
 }

@@ -1,14 +1,14 @@
 #include <windows.h>
-#include "Keyboard.h"
+#include "KeyboardInput.h"
 
 using namespace dae;
 
-Keyboard::Keyboard()
+KeyboardInput::KeyboardInput()
 	: m_pKeyboardState{ SDL_GetKeyboardState(nullptr) }
 {
 }
 
-void Keyboard::Update(const SDL_Event& e)
+void KeyboardInput::Update(const SDL_Event& e)
 {
 	switch (e.type)
 	{
@@ -38,7 +38,7 @@ void Keyboard::Update(const SDL_Event& e)
 }
 
 
-void Keyboard::UpdateWhenPressed()
+void KeyboardInput::UpdateWhenPressed()
 {
 	SDL_PumpEvents();
 	for (const auto& [keyboardKey, command] : m_KeyCommandsMapPressed)
@@ -51,7 +51,7 @@ void Keyboard::UpdateWhenPressed()
 }
 
 
-void Keyboard::AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key)
+void KeyboardInput::AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key)
 {
 	switch (key.second)
 	{
@@ -67,7 +67,7 @@ void Keyboard::AttachCommandToButton(std::shared_ptr<Command> command, const Key
 	}
 }
 
-void Keyboard::DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key)
+void KeyboardInput::DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key)
 {
 	switch (key.second)
 	{

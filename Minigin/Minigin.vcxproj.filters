@@ -37,9 +37,6 @@
     <Filter Include="Components\TransformComponents">
       <UniqueIdentifier>{c06b75fb-ca0f-400d-bb7a-31dec93dd0a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{73d54ef5-ff38-4e1d-82c3-ad9d4923fe22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{84e524d3-20c0-48ae-8292-34fdedd1102d}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,24 @@
     </Filter>
     <Filter Include="Scenes\GameObjects">
       <UniqueIdentifier>{001933fd-f929-414d-bc59-b8b0fab84fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Inputs">
+      <UniqueIdentifier>{bfe392a8-41f9-4c8f-a30f-23cfa99c2744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Audio">
+      <UniqueIdentifier>{3af5ee48-43db-448b-b605-c92b39496a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animations">
+      <UniqueIdentifier>{f96c4f8f-2784-450e-8b8b-2cfdabea72d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{f783b25a-fa35-4b6d-8c48-eb9f914c124c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Interface">
+      <UniqueIdentifier>{537af039-3bae-46f8-957f-99367bc18e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Navigation">
+      <UniqueIdentifier>{87a9544f-8a8b-41ce-8ed0-e3bd58d64ad1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +117,6 @@
     <ClInclude Include="RenderComponent.h">
       <Filter>Components\RenderComponents</Filter>
     </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Components\TransformComponents</Filter>
-    </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>Components\RenderComponents</Filter>
     </ClInclude>
@@ -116,12 +128,6 @@
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GameController.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imconfig.h">
       <Filter>ImGui</Filter>
@@ -186,6 +192,33 @@
     <ClInclude Include="DemoScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="ControllerInput.h">
+      <Filter>Components\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardInput.h">
+      <Filter>Components\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Components\Exercices</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Components\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfaceComponent.h">
+      <Filter>Components\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="NavigationComponent.h">
+      <Filter>Components\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -227,9 +260,6 @@
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Components\RenderComponents</Filter>
     </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Components\TransformComponents</Filter>
-    </ClCompile>
     <ClCompile Include="TextComponent.cpp">
       <Filter>Components\RenderComponents</Filter>
     </ClCompile>
@@ -241,12 +271,6 @@
     </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GameController.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>Controller</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui.cpp">
       <Filter>ImGui</Filter>
@@ -307,6 +331,33 @@
     </ClCompile>
     <ClCompile Include="DemoScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerInput.cpp">
+      <Filter>Components\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardInput.cpp">
+      <Filter>Components\Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Components\Exercices</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Components\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceComponent.cpp">
+      <Filter>Components\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="NavigationComponent.cpp">
+      <Filter>Components\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #pragma once
 #include "Singleton.h"
-#include "GameController.h"
-#include "Keyboard.h"
+#include "ControllerInput.h"
+#include "KeyboardInput.h"
 
 #include <vector>
 #include <map>
@@ -13,15 +13,15 @@ namespace dae
 	public:
 		bool ProcessInput();
 
-		GameController* AddController();
-		Keyboard* GetKeyboard();
+		ControllerInput* AddController();
+		KeyboardInput* GetKeyboard();
 
 		int GetAmountOfControllers() const { return static_cast<int>(m_Controllers.size()); }
 
 	private:
 
-		std::vector<std::unique_ptr<GameController>> m_Controllers{};
-		std::unique_ptr<Keyboard>m_pKeyboard = std::make_unique<Keyboard>();
+		std::vector<std::unique_ptr<ControllerInput>> m_Controllers{};
+		std::unique_ptr<KeyboardInput>m_pKeyboard = std::make_unique<KeyboardInput>();
 
 	};
 

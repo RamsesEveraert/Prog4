@@ -1,6 +1,4 @@
 #pragma once
-#include "Transform.h"
-#include "BaseComponent.h"
 
 #include <memory>
 #include <vector>
@@ -11,12 +9,17 @@
 namespace dae
 {
     class Texture2D;
-
+    class Transform;
+    class BaseComponent;
     class GameObject final : public std::enable_shared_from_this<GameObject>
     {
     public:
 
         const std::string& GetObjectName() const;
+
+        void InitGameObject();
+
+       /* GameObject* CreateGameObject(Scene* pScene, const std::string& objectName);*/
 
         // updating
 
@@ -29,12 +32,9 @@ namespace dae
         void RenderImGui();
 
         // transform 
-
-        void SetPosition(float x, float y, float z = 0);
-        void SetPosition(const glm::vec3& pos);
-
-        glm::vec3 GetWorldPosition();
-        glm::vec3 GetLocalPosition() const;
+        Transform* GetTransform()const;
+        void Translate(float x, float y, float z = 0);
+        void Translate(const glm::vec3& translation);
 
         // parent and children
 
@@ -43,7 +43,7 @@ namespace dae
 
         const int GetChildCount() const;
         const std::shared_ptr<GameObject> GetChildAtIndex(int index) const;
-        const std::vector<std::shared_ptr<GameObject>> GetChildren();
+        std::vector<std::shared_ptr<GameObject>> GetChildren();
 
         bool IsChild(const std::shared_ptr<GameObject>& pChild) const;
        
@@ -141,7 +141,7 @@ namespace dae
         void SetTransformDirty();
         bool m_IsTransformDirty;
 
-        Transform m_Transform;
+        Transform* m_Transform;
 
         // child parents
 

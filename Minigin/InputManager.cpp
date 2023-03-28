@@ -34,15 +34,15 @@ bool InputManager::ProcessInput()
 	return true;
 }
 
-GameController* InputManager::AddController()
+ControllerInput* InputManager::AddController()
 {
 	const int idx{ static_cast<int>(m_Controllers.size()) };
-	m_Controllers.push_back(std::make_unique<GameController>(idx));
+	m_Controllers.push_back(std::make_unique<ControllerInput>(idx));
 
 	return m_Controllers[idx].get();
 }
 
-Keyboard* dae::InputManager::GetKeyboard()
+KeyboardInput* dae::InputManager::GetKeyboard()
 {
 	return m_pKeyboard.get();
 }

@@ -6,14 +6,14 @@
 
 namespace dae
 {
-	class Keyboard final
+	class KeyboardInput final
 	{
 	public:
 		enum class KeyState {
 			Up, Down, Pressed
 		};
 
-		Keyboard();
+		KeyboardInput();
 
 		void Update(const SDL_Event& e);
 		void UpdateWhenPressed();
@@ -21,7 +21,7 @@ namespace dae
 		using KeyboardKey = std::pair<SDL_Scancode, KeyState>;
 
 		void AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key);
-		void Keyboard::DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key);
+		void DetachCommandFromButton(std::shared_ptr<Command> command, const KeyboardKey& key);
 		
 
 	private:

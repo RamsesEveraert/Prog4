@@ -3,6 +3,7 @@
 #include "RotatorComponent.h"
 #include "GameObject.h"
 #include "Timer.h"
+#include "Transform.h"
 #include <cmath>
 #include <glm/gtc/constants.hpp>
 #include <glm/gtx/rotate_vector.hpp>
@@ -32,7 +33,7 @@ namespace dae
 			// Calculate new position using center point and angle
 
 			glm::vec3 newPos = m_CenterPoint + (glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f)) * m_Radius;
-			GetOwner()->SetPosition(newPos);
+			GetOwner()->GetTransform()->SetPosition(newPos);
 	}
 	
 	void RotatorComponent::SetCenterPoint(const glm::vec3& centerPoint)
