@@ -184,15 +184,6 @@ Transform* dae::GameObject::GetTransform() const
     return transform ? transform : nullptr;
 }
 
-void dae::GameObject::Translate(float x, float y, float z)
-{
-    m_Transform->Translate(glm::vec3(x, y, z));
-}
-void dae::GameObject::Translate(const glm::vec3& translation)
-{
-    m_Transform->Translate(translation);
-}
-
 void dae::GameObject::MarkForDelete()
 {
     m_MarkedForDelete = true;

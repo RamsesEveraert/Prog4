@@ -9,10 +9,6 @@
 #include "imgui_plot.h"
 #include "../3rdParty/implot/implot.h"
 
-#ifdef _DEBUG
-#define DEBUG_MODE 
-#endif
-
 using namespace dae;
 
 
@@ -32,7 +28,6 @@ int GetOpenGLDriverIndex()
 
 void dae::Renderer::Init(SDL_Window* window)
 {
-	m_pDebugger = std::make_unique<Debugger>();
 	m_window = window;
 	m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
 	if (m_renderer == nullptr) 
@@ -60,11 +55,6 @@ void dae::Renderer::Render()
 	ImGui::NewFrame();
 
 	SceneManager::GetInstance().RenderImGui();
-
-	//#ifdef DEBUG_MODE
-	//m_pDebugger->Render();
-	//#endif
-
 
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());

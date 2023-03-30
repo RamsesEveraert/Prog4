@@ -1,4 +1,4 @@
-#include "DemoScene.h"
+#include "DemoSceneLoader.h"
 
 // managers
 #include "SceneManager.h"
@@ -23,21 +23,20 @@
 
 using namespace dae;
 
-void DemoScene::LoadDemoScene()
+dae::DemoSceneLoader::DemoSceneLoader()
 {
-    // Create scene
-    auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
+	// Create scene
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
-    CreateBackground(scene);
-    CreateLogo(scene);
-    CreateTextObject(scene);
-    CreateFPSObject(scene);
-	/*CreateRotatingObjects(scene);
-	InputsExercice(scene);*/
-
+	CreateBackground(scene);
+	CreateLogo(scene);
+	CreateTextObject(scene);
+	CreateFPSObject(scene);
+	/*CreateRotatingObjects(scene);*/
+	InputsExercice(scene);
 }
 
-void dae::DemoScene::CreateBackground(Scene& scene)
+void dae::DemoSceneLoader::CreateBackground(Scene& scene)
 {
     auto background = std::make_shared<dae::GameObject>("background");
     background->AddComponent<dae::TextureComponent>()->SetTextureByPath("background.tga");
@@ -45,7 +44,7 @@ void dae::DemoScene::CreateBackground(Scene& scene)
     scene.Add(background);
 }
 
-void dae::DemoScene::CreateLogo(Scene& scene)
+void dae::DemoSceneLoader::CreateLogo(Scene& scene)
 {
     auto logo = std::make_shared<dae::GameObject>("logo");
     logo->GetTransform()->SetPosition(glm::vec3{ 216,190,0 });
@@ -54,7 +53,7 @@ void dae::DemoScene::CreateLogo(Scene& scene)
     scene.Add(logo);
 }
 
-void dae::DemoScene::CreateTextObject(Scene& scene)
+void dae::DemoSceneLoader::CreateTextObject(Scene& scene)
 {
     auto textObject = std::make_shared<dae::GameObject>("textObject");
     textObject->GetTransform()->SetPosition(glm::vec3{ 190,250,0 });
@@ -65,7 +64,7 @@ void dae::DemoScene::CreateTextObject(Scene& scene)
     scene.Add(textObject);
 }
 
-void dae::DemoScene::CreateFPSObject(Scene& scene)
+void dae::DemoSceneLoader::CreateFPSObject(Scene& scene)
 {
     auto fpsCounter = std::make_shared<dae::GameObject>("fpsCounter");
     fpsCounter->GetTransform()->SetPosition(glm::vec3{ 20,20,0 });
@@ -77,7 +76,7 @@ void dae::DemoScene::CreateFPSObject(Scene& scene)
     scene.Add(fpsCounter);
 }
 
-void dae::DemoScene::CreateRotatingObjects(Scene& scene)
+void dae::DemoSceneLoader::CreateRotatingObjects(Scene& scene)
 {
 	// test centerpoint
 
@@ -115,7 +114,7 @@ void dae::DemoScene::CreateRotatingObjects(Scene& scene)
 	scene.Add(childObject);
 }
 
-void dae::DemoScene::InputsExercice(Scene& scene)
+void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 {
     auto player1 = std::make_shared<dae::GameObject>("p1");
     player1->GetTransform()->SetPosition(glm::vec3{ 300,300,0 });

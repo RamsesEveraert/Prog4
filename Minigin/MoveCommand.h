@@ -6,10 +6,11 @@ namespace dae
 {
     class GameObject;
     class Transform;
-    class MoveCommand : public Command
+    class MoveCommand final: public Command
     {
     public:
         MoveCommand(GameObject* pGameObject, float speed ,const glm::vec3& direction);
+        ~MoveCommand() = default;
 
        virtual void Execute() override;
        virtual void Undo() override;

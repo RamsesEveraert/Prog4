@@ -3,14 +3,12 @@
 namespace dae
 {
     class Scene;
-    class DemoScene
+    class DemoSceneLoader
     {
     public:
 
-        DemoScene() = default;
-        ~DemoScene() = default;
-
-        void LoadDemoScene();
+        DemoSceneLoader();
+        ~DemoSceneLoader() = default;
 
     private:
         void CreateBackground(Scene& scene);

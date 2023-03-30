@@ -25,7 +25,7 @@ void MoveCommand::Execute()
 
     pGameObject->GetTransform()->SetPosition(newPosition);
 
-    std::cout << "Pos: [" << newPosition.x << ", " << newPosition.y << "] \n";
+   // std::cout << "Pos: [" << newPosition.x << ", " << newPosition.y << "] \n";
 }
 
 void MoveCommand::Undo()

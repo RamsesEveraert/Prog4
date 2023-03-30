@@ -189,7 +189,7 @@
     <ClInclude Include="Font.h">
       <Filter>Components\RenderComponents</Filter>
     </ClInclude>
-    <ClInclude Include="DemoScene.h">
+    <ClInclude Include="DemoSceneLoader.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ControllerInput.h">
@@ -329,7 +329,7 @@
     <ClCompile Include="Font.cpp">
       <Filter>Components\RenderComponents</Filter>
     </ClCompile>
-    <ClCompile Include="DemoScene.cpp">
+    <ClCompile Include="DemoSceneLoader.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ControllerInput.cpp">

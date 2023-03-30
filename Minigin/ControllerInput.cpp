@@ -122,22 +122,6 @@ void ControllerInput::Update()
 
 }
 
-bool ControllerInput::IsDown(unsigned int button) const
-{
-	return m_pImplController->IsDownThisFrame(static_cast<unsigned int>(button));
-}
-
-bool ControllerInput::IsUp(unsigned int button) const
-{
-	return m_pImplController->IsUpThisFrame(static_cast<unsigned int>(button));
-}
-
-bool ControllerInput::IsPressed(unsigned int button) const
-{
-
-	return m_pImplController->IsPressed(static_cast<unsigned int>(button));
-}
-
 void dae::ControllerInput::AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button)
 {
 	m_pImplController->AttachCommandToButton(command, button);

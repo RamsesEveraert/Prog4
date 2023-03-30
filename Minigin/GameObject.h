@@ -1,5 +1,4 @@
 #pragma once
-
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -33,8 +32,6 @@ namespace dae
 
         // transform 
         Transform* GetTransform()const;
-        void Translate(float x, float y, float z = 0);
-        void Translate(const glm::vec3& translation);
 
         // parent and children
 
@@ -137,8 +134,6 @@ namespace dae
         const std::string m_NameObject;
 
         //Transform
-        void UpdateWorldPos();
-        void SetTransformDirty();
         bool m_IsTransformDirty;
 
         Transform* m_Transform;

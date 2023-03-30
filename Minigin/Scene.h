@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneManager.h"
+#include "Debugger.h"
 
 namespace dae
 {
@@ -17,6 +18,9 @@ namespace dae
 		void Render() const;
 		void RenderImGui();
 
+		const std::string& GetName() const;
+		std::vector< std::shared_ptr<GameObject>> GetSceneObjects() const;
+
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
@@ -32,6 +36,10 @@ namespace dae
 		std::string m_name;
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};
 		std::vector < std::shared_ptr<GameObject>> m_DeletedObjects{};
+
+		// debugger
+		std::unique_ptr<Debugger> m_pDebugger;
+		bool m_Debug;
 
 		static unsigned int m_idCounter; 
 	};
