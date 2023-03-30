@@ -79,6 +79,15 @@
     <Filter Include="Components\Navigation">
       <UniqueIdentifier>{87a9544f-8a8b-41ce-8ed0-e3bd58d64ad1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{cb6fd129-3195-47d6-bd0c-cdcf86750897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Observer">
+      <UniqueIdentifier>{5cda8d77-af7c-4d17-838c-fb9ece03e275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Subject">
+      <UniqueIdentifier>{7f078224-836c-4346-9279-ec22df2968c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -219,6 +228,18 @@
     <ClInclude Include="NavigationComponent.h">
       <Filter>Components\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Events\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Achievements.h">
+      <Filter>Events\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Events\Subject</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Components\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -358,6 +379,18 @@
     </ClCompile>
     <ClCompile Include="NavigationComponent.cpp">
       <Filter>Components\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Events\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Achievements.cpp">
+      <Filter>Events\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Events\Subject</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Components\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,11 +6,9 @@ namespace dae
 	class Command
 	{
 	public:
-		virtual void Execute();
-		virtual void Undo();
-		virtual void Redo();
+		virtual void Execute() = 0;
 
-		Command(GameObject* gameObject);
+		Command() = default;
 		virtual ~Command() = default;
 
 		Command(const Command&) = default;
@@ -18,10 +16,5 @@ namespace dae
 		Command& operator=(const Command&) = default;
 		Command& operator=(Command&&) = default;
 
-	protected:
-		GameObject* GetGameObject() const;
-
-	private:
-		GameObject* m_pGameObject;
 	};
 }

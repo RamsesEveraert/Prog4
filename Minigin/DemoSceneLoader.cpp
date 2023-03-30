@@ -32,8 +32,9 @@ dae::DemoSceneLoader::DemoSceneLoader()
 	CreateLogo(scene);
 	CreateTextObject(scene);
 	CreateFPSObject(scene);
-	/*CreateRotatingObjects(scene);*/
-	InputsExercice(scene);
+	//CreateRotatingObjects(scene);
+	//InputsExercice(scene);
+	ExerciceLivesDisplay(scene);
 }
 
 void dae::DemoSceneLoader::CreateBackground(Scene& scene)
@@ -116,15 +117,43 @@ void dae::DemoSceneLoader::CreateRotatingObjects(Scene& scene)
 
 void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 {
+	//*** commands Controller ***//
+
     auto player1 = std::make_shared<dae::GameObject>("p1");
     player1->GetTransform()->SetPosition(glm::vec3{ 300,300,0 });
     player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
     player1->AddComponent<RenderComponent>();
 
-	//*** commands controller ***//
+	BindControllerButtons(player1.get());
 
+	scene.Add(player1);
+
+
+	//*** commands keyboard ***//
+
+	auto player2 = std::make_shared<GameObject>("p2");
+	player2->GetTransform()->SetPosition(glm::vec3{ 350,350,0 });
+	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
+	player2->AddComponent<RenderComponent>();
+	
+	BindKeyboardKeys(player2.get());
+
+	scene.Add(player2);
+}
+
+void dae::DemoSceneLoader::ExerciceLivesDisplay(Scene& scene)
+{
+	auto player1 = std::make_shared<dae::GameObject>("Player1");
+	player1->GetTransform()->SetPosition(glm::vec3{ 300,300,0 });
+	player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
+	player1->AddComponent<RenderComponent>();
+	BindKeyboardKeys(player1.get());
+	scene.Add(player1);
+}
+
+void dae::DemoSceneLoader::BindControllerButtons(GameObject* player)
+{
 	auto controller = dae::InputManager::GetInstance().AddController();
-	auto player = player1.get();
 	std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec3>> buttonDirections = {
 		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f, 0.f} },
 		{ dae::ControllerInput::ControllerButtons::DPadDown, {0.f, 1.f, 0.f} },
@@ -140,26 +169,18 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 
 		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
 		controller->AttachCommandToButton(pMoveCommand, button);
-	}	
+	}
+}
 
-	scene.Add(player1);
-
-
-	//*** commands keyboard ***//
-
-	auto player2 = std::make_shared<GameObject>("p2");
-	player2->GetTransform()->SetPosition(glm::vec3{ 350,350,0 });
-	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
-	player2->AddComponent<RenderComponent>();
-
-	player = player2.get();
+void dae::DemoSceneLoader::BindKeyboardKeys(GameObject* player)
+{
 	auto keyboard = dae::InputManager::GetInstance().GetKeyboard();
 
 	std::vector<std::pair<SDL_Scancode, glm::vec3>> keyDirections = {
-	{ SDL_SCANCODE_W, {0.f, -1.f, 0.f} },
-	{ SDL_SCANCODE_S, {0.f, 1.f, 0.f} },
-	{ SDL_SCANCODE_D, {1.f, 0.f, 0.f} },
-	{ SDL_SCANCODE_A, {-1.f, 0.f, 0.f} }
+		{ SDL_SCANCODE_W, {0.f, -1.f, 0.f} },
+		{ SDL_SCANCODE_S, {0.f, 1.f, 0.f} },
+		{ SDL_SCANCODE_D, {1.f, 0.f, 0.f} },
+		{ SDL_SCANCODE_A, {-1.f, 0.f, 0.f} }
 	};
 
 	for (auto& keyDirection : keyDirections)
@@ -171,5 +192,4 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
 		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
 	}
-	scene.Add(player2);
 }

@@ -193,6 +193,7 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h" />
     <ClInclude Include="..\3rdParty\implot\implot.h" />
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
+    <ClInclude Include="Achievements.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="BaseComponent.h" />
@@ -207,14 +208,17 @@
     <ClInclude Include="ControllerInput.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InterfaceComponent.h" />
     <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="NavigationComponent.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PlayerCommand.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="TrashCacheComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
@@ -266,6 +270,7 @@
     <ClCompile Include="..\3rdParty\implot\implot.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_demo.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp" />
+    <ClCompile Include="Achievements.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
@@ -280,6 +285,7 @@
     <ClCompile Include="ControllerInput.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InterfaceComponent.cpp" />
     <ClCompile Include="KeyboardInput.cpp" />
@@ -287,8 +293,10 @@
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="NavigationComponent.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PlayerCommand.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TrashCacheComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
