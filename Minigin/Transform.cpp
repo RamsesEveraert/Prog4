@@ -52,64 +52,64 @@ bool Transform::IsDirty()
 	return m_IsTransformDirty;
 }
 
-void Transform::SetPosition(float x, float y, float z)
+void Transform::SetPosition(float x, float y)
 {
-	m_LocalPosition = glm::vec3(x, y, z);
+	m_LocalPosition = glm::vec2(x, y);
 	SetDirty();
 }
-void Transform::SetPosition(const glm::vec3& pos)
-{
-	m_LocalPosition = pos;
-	SetDirty();
-}
-void Transform::SetLocalPosition(float x, float y, float z)
-{
-	m_LocalPosition = glm::vec3(x, y, z);
-	SetDirty();
-}
-void Transform::SetLocalPosition(const glm::vec3& pos)
+void Transform::SetPosition(const glm::vec2& pos)
 {
 	m_LocalPosition = pos;
 	SetDirty();
 }
-void Transform::SetWorldPosition(float x, float y, float z)
+void Transform::SetLocalPosition(float x, float y)
 {
-	m_WorldPosition = glm::vec3(x,y,z);
+	m_LocalPosition = glm::vec2(x, y);
 	SetDirty();
 }
-void Transform::SetWorldPosition(const glm::vec3& pos)
+void Transform::SetLocalPosition(const glm::vec2& pos)
+{
+	m_LocalPosition = pos;
+	SetDirty();
+}
+void Transform::SetWorldPosition(float x, float y)
+{
+	m_WorldPosition = glm::vec2(x,y);
+	SetDirty();
+}
+void Transform::SetWorldPosition(const glm::vec2& pos)
 {
 	m_WorldPosition = pos;
 	SetDirty();
 }
 
-const glm::vec3 Transform::GetWorldPosition() const
+const glm::vec2 Transform::GetWorldPosition() const
 {
 	return m_WorldPosition;
 }
-const glm::vec3 Transform::GetLocalPosition() const
+const glm::vec2 Transform::GetLocalPosition() const
 {
 	return m_LocalPosition;
 }
 
-const glm::vec3 Transform::GetScale() const
+const glm::vec2 Transform::GetScale() const
 {
 	return m_Scale;
 }
-void Transform::setScale(const glm::vec3& scale)
+void Transform::setScale(const glm::vec2& scale)
 {
 	m_Scale = scale;
 }
 
-glm::vec3 Transform::Translate(float x, float y, float z)
+glm::vec2 Transform::Translate(float x, float y)
 {
 	SetDirty();
-	glm::vec3 translation(x, y, z);
+	glm::vec2 translation(x, y);
 	m_LocalPosition += translation;
 
 	return m_LocalPosition;
 }
-glm::vec3 Transform::Translate(const glm::vec3& translation)
+glm::vec2 Transform::Translate(const glm::vec2& translation)
 {
 	SetDirty();
 

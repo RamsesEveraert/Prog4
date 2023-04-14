@@ -23,28 +23,28 @@ namespace dae
 		bool IsDirty();
 
 		// position
-		const glm::vec3 GetWorldPosition() const; 
-		const glm::vec3 GetLocalPosition() const; 
+		const glm::vec2 GetWorldPosition() const; 
+		const glm::vec2 GetLocalPosition() const; 
 
-		void SetPosition(float x, float y, float z = 0);
-		void SetPosition(const glm::vec3& pos);
-		void SetLocalPosition(float x, float y, float z = 0);
-		void SetLocalPosition(const glm::vec3& pos);
-		void SetWorldPosition(float x, float y, float z = 0);
-		void SetWorldPosition(const glm::vec3& pos);
+		void SetPosition(float x, float y);
+		void SetPosition(const glm::vec2& pos);
+		void SetLocalPosition(float x, float y);
+		void SetLocalPosition(const glm::vec2& pos);
+		void SetWorldPosition(float x, float y);
+		void SetWorldPosition(const glm::vec2& pos);
 
 		// scaling
-		const glm::vec3 GetScale() const;
-		void setScale(const glm::vec3& scale);
+		const glm::vec2 GetScale() const;
+		void setScale(const glm::vec2& scale);
 
 		// translate
 
-		glm::vec3 Translate(float x, float y, float z = 0);
-		glm::vec3 Translate(const glm::vec3& translation);
+		glm::vec2 Translate(float x, float y);
+		glm::vec2 Translate(const glm::vec2& translation);
 
 	private:
-		glm::vec3 m_LocalPosition, m_WorldPosition;
-		glm::vec3 m_Scale;;
+		glm::vec2 m_LocalPosition, m_WorldPosition;
+		glm::vec2 m_Scale;;
 		glm::quat m_Rotation;
 
 		bool m_IsTransformDirty;

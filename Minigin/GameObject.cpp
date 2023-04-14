@@ -1,9 +1,6 @@
 #include "GameObject.h"
 #include "SceneManager.h"
 #include "Transform.h"
-#include "HealthComponent.h"
-
-#include <regex>
 
 using namespace dae;
 
@@ -28,18 +25,10 @@ const std::string& dae::GameObject::GetObjectName() const
 
 void dae::GameObject::InitGameObject()
 {
-
     m_Transform = AddComponent<Transform>();
     if (m_Transform)
     {
-        m_Transform->SetLocalPosition(glm::vec3(0, 0, 0));
-    }
-
-    std::regex playerTag("Player\\d+");
-
-    if (std::regex_match(m_NameObject, playerTag)) 
-    { 
-       AddComponent<Health>(); // health is standard 3, can be adapted
+        m_Transform->SetLocalPosition(glm::vec2(0, 0));
     }
     
 }

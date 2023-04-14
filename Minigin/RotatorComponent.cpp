@@ -11,7 +11,7 @@
 namespace dae
 {
 	RotatorComponent::RotatorComponent()
-		: m_CenterPoint(glm::vec3(0,0,0)), 
+		: m_CenterPoint(glm::vec2(0,0)), 
 		m_RotationSpeed(0.0f), 
 		m_Radius{0}, 
 		m_Angle(0.0f)
@@ -32,16 +32,16 @@ namespace dae
 
 			// Calculate new position using center point and angle
 
-			glm::vec3 newPos = m_CenterPoint + (glm::vec3(cos(m_Angle), sin(m_Angle), 0.0f)) * m_Radius;
+			glm::vec2 newPos = m_CenterPoint + (glm::vec2(cos(m_Angle), sin(m_Angle)) * m_Radius);
 			GetOwner()->GetTransform()->SetPosition(newPos);
 	}
 	
-	void RotatorComponent::SetCenterPoint(const glm::vec3& centerPoint)
+	void RotatorComponent::SetCenterPoint(const glm::vec2& centerPoint)
 	{
 		m_CenterPoint = centerPoint;
 	}
 
-	const glm::vec3& RotatorComponent::GetCenterPoint()const
+	const glm::vec2& RotatorComponent::GetCenterPoint()const
 	{
 		return m_CenterPoint;
 	}

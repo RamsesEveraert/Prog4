@@ -11,7 +11,7 @@ Scene::Scene(const std::string& name)
 	: m_name(name)
 	, m_Debug {true}
 {
-	m_pDebugger = std::make_unique<Debugger>(*this);
+	//m_pDebugger = std::make_unique<Debugger>(*this);
 }
 Scene::~Scene() = default;
 
@@ -43,7 +43,6 @@ void Scene::Update()
 		}
 
 		DeleteMarkedObjects(m_Objects);
-		if (m_Debug) m_pDebugger->HandleShortKeys();
 
 
 }
@@ -66,7 +65,7 @@ void Scene::Render() const
 
 void dae::Scene::RenderImGui()
 {
-	if(m_Debug) m_pDebugger->Render();
+	//if(m_Debug) m_pDebugger->Render();
 	
 	for (const auto& object : m_Objects)
 	{

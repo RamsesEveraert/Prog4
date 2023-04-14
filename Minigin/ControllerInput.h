@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <glm/glm.hpp>
 
 
 namespace dae
@@ -42,13 +43,22 @@ namespace dae
 
 		void Update();
 
-		using ControllerButton = std::pair<ControllerInput::ControllerButtons, ControllerInput::ButtonState>;
+		using Button = std::pair<ControllerInput::ControllerButtons, ControllerInput::ButtonState>;
 
-		void AttachCommandToButton(std::shared_ptr<Command> command, const ControllerButton& button);
-		void DetachCommandFromButton(const ControllerButton& button);
+		void AttachCommandToButton(std::shared_ptr<Command> command, const Button& button);
+		void DetachCommandFromButton(const Button& button);
+
+		void AttachCommandToThumbStick(std::shared_ptr<Command> command, const ControllerButtons& button);
+		void DetachCommandToThumbStick( const ControllerButtons& button);
+
+		void AttachCommandToTrigger(std::shared_ptr<Command> command, const ControllerButtons& button);
+		void DetachCommandToTrigger(const ControllerButtons& button);
+
+		const glm::vec2& GetDirectionLeftThumbStick() const;
+		const glm::vec2& GetDirectionRightThumbStick() const;
 		
 
-		explicit ControllerInput(int controllerIndex);
+		explicit ControllerInput(int controllerIndex, bool inertYAxis = true);
 		~ControllerInput();
 		ControllerInput(const ControllerInput& other) = delete;
 		ControllerInput(ControllerInput&& other) = delete;

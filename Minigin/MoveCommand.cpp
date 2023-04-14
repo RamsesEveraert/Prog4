@@ -5,26 +5,29 @@
 
 using namespace dae;
 
-MoveCommand::MoveCommand(GameObject* pGameObject, float speed, const glm::vec3& direction)
-    : m_pGameObject {pGameObject}
-    , m_OldPosition(pGameObject->GetTransform()->GetLocalPosition())
-    , m_Direction(direction) 
-    , m_Speed{speed}
-    , m_pTransform{ pGameObject->GetTransform() }
+MoveCommand::MoveCommand(GameObject* pGameObject, float speed, const glm::vec2& direction)
+    : Command(pGameObject)
+    , m_pGameObject { pGameObject }
+    , m_OldPosition{ pGameObject->GetTransform()->GetLocalPosition() }
+    , m_Direction{ direction }
+    , m_Speed{ speed }
 {
 
 };
 
+void dae::MoveCommand::SetDirection(const glm::vec2& direction)
+{
+    m_Direction = direction;
+}
+
 void MoveCommand::Execute()
 {
-   /* GameObject* pGameObject = GetGameObject();*/
-
     if (m_pGameObject == nullptr) return;
 
     m_OldPosition = m_pGameObject->GetTransform()->GetLocalPosition();
-    glm::vec3 newPosition = m_OldPosition + m_Direction * Timer::GetInstance().getDeltaTimeSec() * m_Speed;
+    glm::vec2 newPosition = m_OldPosition + m_Direction * Timer::GetInstance().getDeltaTimeSec() * m_Speed;
 
-    m_pTransform->SetPosition(newPosition);
+    m_pGameObject->GetTransform()->SetPosition(newPosition);
 
-   // std::cout << "Pos: [" << newPosition.x << ", " << newPosition.y << "] \n";
+    //std::cout << "Pos: [" << newPosition.x << ", " << newPosition.y << "] \n";
 }
