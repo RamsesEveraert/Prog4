@@ -16,10 +16,13 @@
 #include "RotatorComponent.h"
 #include "TrashCacheComponent.h"
 #include "Transform.h"
+#include "LivesDisplayComponent.h"
 
 // Commands
 
 #include "MoveCommand.h"
+#include "MoveStickCommand.h"
+#include "HealthCommand.h"
 
 using namespace dae;
 
@@ -32,8 +35,9 @@ dae::DemoSceneLoader::DemoSceneLoader()
 	CreateLogo(scene);
 	CreateTextObject(scene);
 	CreateFPSObject(scene);
-	/*CreateRotatingObjects(scene);*/
-	InputsExercice(scene);
+	//CreateRotatingObjects(scene);
+	//InputsExercice(scene);
+	EventExercice(scene);
 }
 
 void dae::DemoSceneLoader::CreateBackground(Scene& scene)
@@ -116,7 +120,7 @@ void dae::DemoSceneLoader::CreateRotatingObjects(Scene& scene)
 
 void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 {
-    auto player1 = std::make_shared<dae::GameObject>("p1");
+    auto player1 = std::make_shared<dae::GameObject>("player1");
     player1->GetTransform()->SetPosition(glm::vec2{ 300,300 });
     player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
     player1->AddComponent<RenderComponent>();
@@ -148,7 +152,7 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 	// thumbsticks controls
 	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
 	float stickSpeed{ 40.f };
-	auto pMoveCommandStick = std::make_shared<dae::MoveCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick());
+	auto pMoveCommandStick = std::make_shared<dae::MoveStickCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick());
 
 	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
 
@@ -166,7 +170,7 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 
 	//*** commands keyboard ***//
 
-	auto player2 = std::make_shared<GameObject>("p2");
+	auto player2 = std::make_shared<GameObject>("player2");
 	player2->GetTransform()->SetPosition(glm::vec2{ 350,350 });
 	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
 	player2->AddComponent<RenderComponent>();
@@ -188,6 +192,82 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 		auto direction = keyDirection.second;
 		float speed{ 80.f };
 		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
+		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
+	}
+	scene.Add(player2);
+}
+
+void dae::DemoSceneLoader::EventExercice(Scene& scene)
+{
+	auto controller = dae::InputManager::GetInstance().AddController();
+
+	// player 1
+
+	auto player1 = std::make_shared<dae::GameObject>("player 1");
+	player1->GetTransform()->SetPosition(glm::vec2{ 300,300 });
+	player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
+	player1->AddComponent<RenderComponent>();
+
+	// Add controller inputs
+
+	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
+	float stickSpeed{ 40.f };
+	auto pMoveCommandStick = std::make_shared<dae::MoveStickCommand>(player1.get(), stickSpeed, controller->GetDirectionLeftThumbStick());
+
+	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
+
+	// Create KeyboardKeys for the left and right keys
+	KeyboardInput::KeyboardKey leftKey(SDL_SCANCODE_LEFT, KeyboardInput::KeyState::Down);
+	KeyboardInput::KeyboardKey rightKey(SDL_SCANCODE_RIGHT, KeyboardInput::KeyState::Down);
+
+	// Get the KeyboardInput
+	auto keyboard = dae::InputManager::GetInstance().GetKeyboard();
+
+	// Create a HealthCommand
+	auto healthCommand = std::make_shared<HealthCommand>(player1.get());
+
+	// Attach the HealthCommand to the left and right keys
+	keyboard->AttachCommandToButton(healthCommand, leftKey);
+	keyboard->AttachCommandToButton(healthCommand, rightKey);
+
+
+
+
+	scene.Add(player1);
+
+	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer1");
+	livesPlayer1->GetTransform()->SetPosition(glm::vec2{ 10,300 });
+	auto livesDisplayComponent = livesPlayer1->AddComponent<LivesDisplayComponent>();
+	livesDisplayComponent->SetOwnerLives(player1.get());
+
+	livesPlayer1->AddComponent<RenderComponent>();
+
+	scene.Add(livesPlayer1);
+
+
+	// player 2
+
+	//*** commands keyboard ***//
+
+	auto player2 = std::make_shared<GameObject>("player2");
+	player2->GetTransform()->SetPosition(glm::vec2{ 350,350 });
+	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
+	player2->AddComponent<RenderComponent>();
+
+	std::vector<std::pair<SDL_Scancode, glm::vec2>> keyDirections = {
+	{ SDL_SCANCODE_W, {0.f, -1.f} },
+	{ SDL_SCANCODE_S, {0.f, 1.f} },
+	{ SDL_SCANCODE_D, {1.f, 0.f} },
+	{ SDL_SCANCODE_A, {-1.f, 0.f} }
+	};
+
+	for (auto& keyDirection : keyDirections)
+	{
+		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
+		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
+		auto direction = keyDirection.second;
+		float speed{ 80.f };
+		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player2.get(), speed, direction);
 		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
 	}
 	scene.Add(player2);

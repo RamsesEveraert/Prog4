@@ -4,17 +4,17 @@
 
 namespace dae
 {
-	class ObserverInterface;
+	class Observer;
 	class Subject
 	{
 	public:
-		void addObserver(ObserverInterface* observer);
-		void removeObserver(ObserverInterface* observer);
-		
+		void AddObserver(Observer* observer);
+		void RemoveObserver(Observer* observer);
+
 	protected:
 		virtual void NotifyObserver(/*Event event*/) = 0;
 
 	private:
-		std::vector<ObserverInterface*> m_Observers; 
+		std::vector<Observer*> m_Observers;
 	};
 }

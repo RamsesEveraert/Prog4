@@ -94,7 +94,7 @@ public:
 		m_RightStickDirection.y = static_cast<float>(m_CurrentState.Gamepad.sThumbRY) / SHRT_MAX;
 		ApplyDeadZoneSticks(m_RightStickDirection);
 
-		for (const auto& command : m_ThumbstickCommandMap)
+		for (const auto& command : m_StickCommandMap)
 		{
 			if (m_LeftStickDirection != glm::vec2{ 0,0 })
 			{
@@ -168,9 +168,9 @@ public:
 		m_ButtonCommands.insert(std::pair<Button, std::shared_ptr<Command>>(button, command));
 	}
 
-	void AttachCommandToThumbStick(std::shared_ptr<Command> command, const ControllerButtons& button)
+	void AttachCommandToThumbStick(std::shared_ptr<StickCommand> command, const ControllerButtons& button)
 	{
-		m_ThumbstickCommandMap.insert(std::make_pair(button, command));
+		m_StickCommandMap.insert(std::make_pair(button, command));
 	}
 
 	void AttachCommandToTrigger(std::shared_ptr<Command> command, const ControllerButtons& button)
@@ -189,10 +189,10 @@ public:
 
 	void DetachCommandFromThumbStick(const ControllerButtons& button)
 	{
-		auto it = m_ThumbstickCommandMap.find(button);
-		if (it != m_ThumbstickCommandMap.end())
+		auto it = m_StickCommandMap.find(button);
+		if (it != m_StickCommandMap.end())
 		{
-			m_ThumbstickCommandMap.erase(it);
+			m_StickCommandMap.erase(it);
 		}
 	}
 
@@ -205,6 +205,7 @@ public:
 		}
 	}
 
+
 private:
 	XINPUT_STATE m_PreviousState{};
 	XINPUT_STATE m_CurrentState{};
@@ -215,7 +216,7 @@ private:
 	using ControllerCommandsMap = std::map<Button, std::shared_ptr<Command>>;
 	ControllerCommandsMap m_ButtonCommands{};
 
-	std::map<ControllerButtons, std::shared_ptr<Command>> m_ThumbstickCommandMap{};
+	std::map<ControllerButtons, std::shared_ptr<StickCommand>> m_StickCommandMap{};
 	std::map<ControllerButtons, std::shared_ptr<Command>> m_TriggerCommandMap{};
 
 	const int m_ControllerIndex;
@@ -257,7 +258,7 @@ void dae::ControllerInput::DetachCommandFromButton(const Button& button)
 	m_pImplController->DetachCommandFromButton(button);
 }
 
-void dae::ControllerInput::AttachCommandToThumbStick(std::shared_ptr<Command> command, const ControllerButtons& button)
+void dae::ControllerInput::AttachCommandToThumbStick(std::shared_ptr<StickCommand> command, const ControllerButtons& button)
 {
 	m_pImplController->AttachCommandToThumbStick(command, button);
 }

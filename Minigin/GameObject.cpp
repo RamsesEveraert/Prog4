@@ -1,18 +1,23 @@
 #include "GameObject.h"
 #include "SceneManager.h"
+
 #include "Transform.h"
+#include "MoveComponent.h"
+#include "Health.h"
+
+#include <regex>
 
 using namespace dae;
 
 
 
 dae::GameObject::GameObject(const std::string& objectName)
-    : m_Components{} 
+    : m_Components{}
     , m_pParent{ nullptr }
     , m_MarkedForDelete{ false }
     , m_IsTransformDirty{ true }
     , m_Transform{}
-    , m_Children {}
+    , m_Children{}
     , m_NameObject{ objectName }
 {
     InitGameObject();
@@ -26,20 +31,21 @@ const std::string& dae::GameObject::GetObjectName() const
 void dae::GameObject::InitGameObject()
 {
     m_Transform = AddComponent<Transform>();
-    if (m_Transform)
-    {
-        m_Transform->SetLocalPosition(glm::vec2(0, 0));
-    }
-    
+    m_Transform->SetLocalPosition(glm::vec2(0, 0));
+
+    std::regex playerTag("player.*", std::regex_constants::icase); // .* every character after Player is also accepted and * idicates >= 0, icase : capital insensitive
+
+    if (std::regex_match(m_NameObject, playerTag)) InitPlayer();
+
 }
 
 void dae::GameObject::Update()
 {
-	for (const auto& component : m_Components)
-	{
-		if (component)
-		component->Update();
-	}
+    for (const auto& component : m_Components)
+    {
+        if (component)
+            component->Update();
+    }
 
     for (const auto& child : m_Children)
     {
@@ -67,11 +73,11 @@ void dae::GameObject::FixedUpdate()
 }
 void dae::GameObject::Render() const
 {
-	for (const auto& component : m_Components)
-	{
-		if(component)
-		component->Render();
-	}
+    for (const auto& component : m_Components)
+    {
+        if (component)
+            component->Render();
+    }
     for (const auto& child : m_Children)
     {
         if (child)
@@ -94,53 +100,59 @@ void dae::GameObject::RenderImGui()
 
 void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
 {
-        if (m_pParent == pNewParent)
-        {
-            return;
-        }
+    if (m_pParent == pNewParent)
+    {
+        return;
+    }
 
-        //Remove itself as a child from the previous parent
-        if (m_pParent)
-        {
-            m_pParent->RemoveChild(shared_from_this());
-        }
+    //Remove itself as a child from the previous parent
+    if (m_pParent)
+    {
+        m_pParent->RemoveChild(shared_from_this());
+    }
 
-        m_pParent = pNewParent;
+    m_pParent = pNewParent;
 
-        //Update position
-        if (m_pParent == nullptr)
+    //Update position
+    if (m_pParent == nullptr)
+    {
+        //Local position is now world position
+        const auto position{ m_Transform->GetWorldPosition() };
+        m_Transform->SetPosition(position.x, position.y);
+    }
+    else
+    {
+        //Add itself as a child to the given parent
+        m_pParent->AddChild(shared_from_this());
+
+        if (keepWorldPosition)
         {
-            //Local position is now world position
-            const auto position{ m_Transform->GetWorldPosition() };
+            const auto position{ m_Transform->GetLocalPosition() - m_pParent->GetTransform()->GetWorldPosition() };
             m_Transform->SetPosition(position.x, position.y);
         }
         else
         {
-            //Add itself as a child to the given parent
-            m_pParent->AddChild(shared_from_this());
-
-            if (keepWorldPosition)
-            {
-                const auto position{ m_Transform->GetLocalPosition() - m_pParent->GetTransform()->GetWorldPosition()};
-                m_Transform->SetPosition(position.x, position.y);
-            }
-            else
-            {
-                //Recalculate world position
-                m_Transform->SetDirty();
-            }
+            //Recalculate world position
+            m_Transform->SetDirty();
         }
-    
-   
+    }
+
+
 }
 GameObject* dae::GameObject::GetParent() const
 {
     return m_pParent;
 }
 
+void dae::GameObject::InitPlayer()
+{
+    AddComponent<Health>(); // standard 3, can be adapted
+    AddComponent<MovementComponent>();
+}
+
 void dae::GameObject::AddChild(std::shared_ptr<GameObject> pChild)
 {
-     for (const auto& child : m_Children)
+    for (const auto& child : m_Children)
     {
         if (child == pChild)
             return;
@@ -158,7 +170,7 @@ void dae::GameObject::RemoveChild(std::shared_ptr<GameObject> pChild)
 }
 const int dae::GameObject::GetChildCount() const
 {
-    return static_cast<int>( m_Children.size());
+    return static_cast<int>(m_Children.size());
 }
 const std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int index) const
 {
@@ -168,7 +180,7 @@ const std::shared_ptr<dae::GameObject> dae::GameObject::GetChildAtIndex(int inde
     }
     return m_Children[index];
 }
- std::vector<std::shared_ptr<dae::GameObject>> dae::GameObject::GetChildren()
+std::vector<std::shared_ptr<dae::GameObject>> dae::GameObject::GetChildren()
 {
     return m_Children;
 }

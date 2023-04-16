@@ -17,6 +17,7 @@ namespace dae
         void CreateFPSObject(Scene& scene);
         void CreateRotatingObjects(Scene& scene);
         void InputsExercice(Scene& scene);
+        void EventExercice(Scene& scene);
         
     };
 }

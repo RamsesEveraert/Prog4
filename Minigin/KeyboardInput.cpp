@@ -82,3 +82,15 @@ void KeyboardInput::DetachCommandFromButton(std::shared_ptr<Command> command, co
 		break;
 	}
 }
+
+KeyboardInput::KeyState KeyboardInput::GetButtonState(SDL_Scancode key) const
+{
+	if (m_pKeyboardState[key])
+	{
+		return KeyboardInput::KeyState::Pressed;
+	}
+	else
+	{
+		return KeyboardInput::KeyState::Up;
+	}
+}

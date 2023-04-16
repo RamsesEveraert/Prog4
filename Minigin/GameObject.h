@@ -18,9 +18,9 @@ namespace dae
 
         void InitGameObject();
 
-       /* GameObject* CreateGameObject(Scene* pScene, const std::string& objectName);*/
+        /* GameObject* CreateGameObject(Scene* pScene, const std::string& objectName);*/
 
-        // updating
+         // updating
 
         void Update();
         void FixedUpdate();
@@ -43,78 +43,21 @@ namespace dae
         std::vector<std::shared_ptr<GameObject>> GetChildren();
 
         bool IsChild(const std::shared_ptr<GameObject>& pChild) const;
-       
-        // components -> to do best pracyise: onderaan plaatsen en forward declareren
 
-        template<typename T>
-        inline T* AddComponent() {
+        // components
 
-            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
-
-            auto pComponent = std::make_unique<T>();
-            T* returnComponontenPtr = pComponent.get();
-
-            //automatically make owner of components
-
-            pComponent->SetOwner(this);
-
-            m_Components.push_back(std::move(pComponent));
-
-            return returnComponontenPtr;
-        }
-        template<typename T>
-        inline bool removeComponent() {
-            static_assert(!std::is_same<Transform, T>(), "Transform component cannot be removed");
-            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
-
-            for (auto it = m_Components.begin(); it != m_Components.end(); ++it)
-            {
-                if (auto* pComponent = dynamic_cast<T*>(it->get())) {
-                    m_Components.erase(it);
-                    return true;
-                }
-            }
-            return false;
-        }
-        template<typename T>
-        inline T* GetComponent() const {
-            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
-
-            for (const auto& pComponent : m_Components)
-            {
-                T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
-                if (derivedComponent) return derivedComponent;
-            }
-
-            return nullptr;
-        }
-        template<typename T>
-        inline std::vector<T*> GetAllInstancesOfComponent() const {
-            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
-
-            std::vector<T*> pComponents{};
-
-            for (const auto& pComponent : m_Components)
-            {
-                T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
-                if (derivedComponent) pComponents.push_back(derivedComponent);
-            }
-
-            return pComponents;
-        }
         template<class T>
-        inline bool HasComponent() const
-        {
-            static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
-
-            for (auto& component : m_Components)
-            {
-                T* derivedComponent = dynamic_cast<T*>(component.get());
-                if (derivedComponent) return true;
-            }
-            return false;
-        }
-
+        T* AddComponent();
+        template<class T>
+        T* AddComponent(GameObject* gameObject);
+        template<class T>
+        inline bool removeComponent();
+        template<class T>
+        T* GetComponent() const;
+        template<class T>
+        std::vector<T*> GetAllInstancesOfComponent() const;
+        template<class T>
+        bool HasComponent() const;
 
         // cleanup
 
@@ -133,6 +76,9 @@ namespace dae
 
         const std::string m_NameObject;
 
+        //Player
+        void InitPlayer();
+
         //Transform
         bool m_IsTransformDirty;
 
@@ -149,11 +95,102 @@ namespace dae
         std::vector<std::shared_ptr<GameObject>> m_Children;
 
         // cleanup
-        bool m_MarkedForDelete;     
+        bool m_MarkedForDelete;
 
         // components
         std::vector<std::unique_ptr<BaseComponent>> m_Components;
     };
 
-   
+#pragma region TemplateFunctions
+
+    template<class T>
+    inline T* GameObject::AddComponent() {
+
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        auto pComponent = std::make_unique<T>();
+        T* returnComponontenPtr = pComponent.get();
+
+        //automatically make owner of components
+
+        pComponent->SetOwner(this);
+
+        m_Components.push_back(std::move(pComponent));
+
+        return returnComponontenPtr;
+    }
+
+    template<class T>
+    inline T* GameObject::AddComponent(GameObject* gameObject) {
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        auto pComponent = std::make_unique<T>(gameObject);
+        T* returnComponentPtr = pComponent.get();
+
+        // automatically make owner of components
+        pComponent->SetOwner(this);
+
+        m_Components.push_back(std::move(pComponent));
+
+        return returnComponentPtr;
+    }
+
+    template<class T>
+    inline bool GameObject::removeComponent() {
+        static_assert(!std::is_same<Transform, T>(), "Transform component cannot be removed");
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        for (auto it = m_Components.begin(); it != m_Components.end(); ++it)
+        {
+            if (auto* pComponent = dynamic_cast<T*>(it->get())) {
+                m_Components.erase(it);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    template<class T>
+    inline T* GameObject::GetComponent() const {
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        for (const auto& pComponent : m_Components)
+        {
+            T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
+            if (derivedComponent) return derivedComponent;
+        }
+
+        return nullptr;
+    }
+
+    template<class T>
+    inline std::vector<T*> GameObject::GetAllInstancesOfComponent() const {
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        std::vector<T*> pComponents{};
+
+        for (const auto& pComponent : m_Components)
+        {
+            T* derivedComponent{ dynamic_cast<T*>(pComponent.get()) };
+            if (derivedComponent) pComponents.push_back(derivedComponent);
+        }
+
+        return pComponents;
+    }
+
+    template<class T>
+    inline bool GameObject::HasComponent() const
+    {
+        static_assert(std::is_base_of<BaseComponent, T>(), "Component is NOT derived from the ComponentBase class");
+
+        for (auto& component : m_Components)
+        {
+            T* derivedComponent = dynamic_cast<T*>(component.get());
+            if (derivedComponent) return true;
+        }
+        return false;
+    }
+
+#pragma endregion
 }
+

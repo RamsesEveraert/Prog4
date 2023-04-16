@@ -13,71 +13,80 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Commands">
-      <UniqueIdentifier>{28db6e56-2018-4f9d-91d6-4881e91be12f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Commands\Enemy Specific Commands">
-      <UniqueIdentifier>{ff247e18-4c6a-4088-ab7b-b727ce6ad61b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Commands\General Commands">
-      <UniqueIdentifier>{1f32707a-7d8b-4ef9-ba21-d0d23eda6330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Commands\Player Specific Commands">
-      <UniqueIdentifier>{1cc25b30-7b32-4529-823b-7948dfe9c963}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{1e87f8b3-cb8d-4ed8-8d8c-37174e728738}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\HUD">
-      <UniqueIdentifier>{93fa7943-6c35-4d34-9cdd-40d557962d19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\RenderComponents">
-      <UniqueIdentifier>{1b38bcc0-8805-461c-a420-1e4af8cf95ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\TransformComponents">
-      <UniqueIdentifier>{c06b75fb-ca0f-400d-bb7a-31dec93dd0a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{84e524d3-20c0-48ae-8292-34fdedd1102d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ImGui\Implot">
       <UniqueIdentifier>{9660c3c7-300e-4567-aedb-302f5708413e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Exercices">
-      <UniqueIdentifier>{03843cf4-3582-4542-9d73-70b435262159}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Physics">
-      <UniqueIdentifier>{171c832a-bda9-4e82-a592-7656ffab6289}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Debug">
-      <UniqueIdentifier>{64e8f801-759c-4396-874d-1ec91ad28c09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers">
+    <Filter Include="Engin files\Managers">
       <UniqueIdentifier>{07f8d8c4-c951-46a0-9d84-41a0c9e3d0d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{6de46459-d0de-4ef4-bcd2-248ce61960f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\GameObjects">
-      <UniqueIdentifier>{001933fd-f929-414d-bc59-b8b0fab84fc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Inputs">
+    <Filter Include="Engin files\Inputs">
       <UniqueIdentifier>{bfe392a8-41f9-4c8f-a30f-23cfa99c2744}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Audio">
+    <Filter Include="Game Files\Commands">
+      <UniqueIdentifier>{28db6e56-2018-4f9d-91d6-4881e91be12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Commands\Enemy Specific Commands">
+      <UniqueIdentifier>{ff247e18-4c6a-4088-ab7b-b727ce6ad61b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Commands\General Commands">
+      <UniqueIdentifier>{1f32707a-7d8b-4ef9-ba21-d0d23eda6330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Commands\Player Specific Commands">
+      <UniqueIdentifier>{1cc25b30-7b32-4529-823b-7948dfe9c963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components">
+      <UniqueIdentifier>{1e87f8b3-cb8d-4ed8-8d8c-37174e728738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\HUD">
+      <UniqueIdentifier>{93fa7943-6c35-4d34-9cdd-40d557962d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\RenderComponents">
+      <UniqueIdentifier>{1b38bcc0-8805-461c-a420-1e4af8cf95ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\TransformComponents">
+      <UniqueIdentifier>{c06b75fb-ca0f-400d-bb7a-31dec93dd0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Exercices">
+      <UniqueIdentifier>{03843cf4-3582-4542-9d73-70b435262159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Physics">
+      <UniqueIdentifier>{171c832a-bda9-4e82-a592-7656ffab6289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Debug">
+      <UniqueIdentifier>{64e8f801-759c-4396-874d-1ec91ad28c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Audio">
       <UniqueIdentifier>{3af5ee48-43db-448b-b605-c92b39496a20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Animations">
+    <Filter Include="Game Files\Components\Animations">
       <UniqueIdentifier>{f96c4f8f-2784-450e-8b8b-2cfdabea72d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Camera">
+    <Filter Include="Game Files\Components\Camera">
       <UniqueIdentifier>{f783b25a-fa35-4b6d-8c48-eb9f914c124c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Interface">
+    <Filter Include="Game Files\Components\Interface">
       <UniqueIdentifier>{537af039-3bae-46f8-957f-99367bc18e2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Navigation">
+    <Filter Include="Game Files\Components\Navigation">
       <UniqueIdentifier>{87a9544f-8a8b-41ce-8ed0-e3bd58d64ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Scenes">
+      <UniqueIdentifier>{6de46459-d0de-4ef4-bcd2-248ce61960f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Scenes\GameObjects">
+      <UniqueIdentifier>{001933fd-f929-414d-bc59-b8b0fab84fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\EntityComponents">
+      <UniqueIdentifier>{c44ee259-c5b0-46a2-b389-f18e79fc93ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Commands\TemporaryCommands">
+      <UniqueIdentifier>{1de64fb4-087a-4b5b-85a2-b645c53c51c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Events">
+      <UniqueIdentifier>{209c59ec-7989-4650-a5ec-95a747391a86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,31 +112,31 @@
       <Filter>ImGui\Implot</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCommand.h">
-      <Filter>Commands\Player Specific Commands</Filter>
+      <Filter>Game Files\Commands\Player Specific Commands</Filter>
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
-      <Filter>Commands\General Commands</Filter>
+      <Filter>Game Files\Commands\General Commands</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Commands</Filter>
+      <Filter>Game Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
-      <Filter>Components\HUD</Filter>
+      <Filter>Game Files\Components\HUD</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="TextureComponent.h">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Components\TransformComponents</Filter>
+      <Filter>Game Files\Components\TransformComponents</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
+      <Filter>Game Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imconfig.h">
       <Filter>ImGui</Filter>
@@ -157,67 +166,97 @@
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="TrashCacheComponent.h">
-      <Filter>Components\Exercices</Filter>
+      <Filter>Game Files\Components\Exercices</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsComponent.h">
-      <Filter>Components\Physics</Filter>
+      <Filter>Game Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsComponent.h">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="DebugComponent.h">
-      <Filter>Components\Debug</Filter>
+      <Filter>Game Files\Components\Debug</Filter>
     </ClInclude>
     <ClInclude Include="Debugger.h">
-      <Filter>Components\Debug</Filter>
+      <Filter>Game Files\Components\Debug</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
+      <Filter>Game Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Scenes\GameObjects</Filter>
+      <Filter>Game Files\Scenes\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="DemoSceneLoader.h">
-      <Filter>Scenes</Filter>
+      <Filter>Game Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ControllerInput.h">
-      <Filter>Components\Inputs</Filter>
+      <Filter>Engin files\Inputs</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardInput.h">
-      <Filter>Components\Inputs</Filter>
+      <Filter>Engin files\Inputs</Filter>
     </ClInclude>
     <ClInclude Include="RotatorComponent.h">
-      <Filter>Components\Exercices</Filter>
+      <Filter>Game Files\Components\Exercices</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
-      <Filter>Components\Audio</Filter>
+      <Filter>Game Files\Components\Audio</Filter>
     </ClInclude>
     <ClInclude Include="AnimationComponent.h">
-      <Filter>Components\Animations</Filter>
+      <Filter>Game Files\Components\Animations</Filter>
     </ClInclude>
     <ClInclude Include="ColliderComponent.h">
-      <Filter>Components\Physics</Filter>
+      <Filter>Game Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
-      <Filter>Components\Camera</Filter>
+      <Filter>Game Files\Components\Camera</Filter>
     </ClInclude>
     <ClInclude Include="InterfaceComponent.h">
-      <Filter>Components\Interface</Filter>
+      <Filter>Game Files\Components\Interface</Filter>
     </ClInclude>
     <ClInclude Include="NavigationComponent.h">
-      <Filter>Components\Navigation</Filter>
+      <Filter>Game Files\Components\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="StickCommand.h">
+      <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveStickCommand.h">
+      <Filter>Game Files\Commands\General Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Game Files\Components\EntityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesDisplayComponent.h">
+      <Filter>Game Files\Components\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Game Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.h">
+      <Filter>Game Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Game Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Game Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthCommand.h">
+      <Filter>Game Files\Commands\TemporaryCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Game Files\Components\EntityComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -246,31 +285,31 @@
       <Filter>ImGui\Implot</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCommand.cpp">
-      <Filter>Commands\Player Specific Commands</Filter>
+      <Filter>Game Files\Commands\Player Specific Commands</Filter>
     </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
-      <Filter>Commands\General Commands</Filter>
+      <Filter>Game Files\Commands\General Commands</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Commands</Filter>
+      <Filter>Game Files\Commands</Filter>
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components\HUD</Filter>
+      <Filter>Game Files\Components\HUD</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Components\TransformComponents</Filter>
+      <Filter>Game Files\Components\TransformComponents</Filter>
     </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
-      <Filter>Components</Filter>
+      <Filter>Game Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui.cpp">
       <Filter>ImGui</Filter>
@@ -297,67 +336,97 @@
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="TrashCacheComponent.cpp">
-      <Filter>Components\Exercices</Filter>
+      <Filter>Game Files\Components\Exercices</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsComponent.cpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Game Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsComponent.cpp">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="DebugComponent.cpp">
-      <Filter>Components\Debug</Filter>
+      <Filter>Game Files\Components\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Debugger.cpp">
-      <Filter>Components\Debug</Filter>
+      <Filter>Game Files\Components\Debug</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Engin files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Game Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Scenes\GameObjects</Filter>
+      <Filter>Game Files\Scenes\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Components\RenderComponents</Filter>
+      <Filter>Game Files\Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="DemoSceneLoader.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Game Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ControllerInput.cpp">
-      <Filter>Components\Inputs</Filter>
+      <Filter>Engin files\Inputs</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardInput.cpp">
-      <Filter>Components\Inputs</Filter>
+      <Filter>Engin files\Inputs</Filter>
     </ClCompile>
     <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Components\Exercices</Filter>
+      <Filter>Game Files\Components\Exercices</Filter>
     </ClCompile>
     <ClCompile Include="AudioComponent.cpp">
-      <Filter>Components\Audio</Filter>
+      <Filter>Game Files\Components\Audio</Filter>
     </ClCompile>
     <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Components\Animations</Filter>
+      <Filter>Game Files\Components\Animations</Filter>
     </ClCompile>
     <ClCompile Include="ColliderComponent.cpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Game Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
-      <Filter>Components\Camera</Filter>
+      <Filter>Game Files\Components\Camera</Filter>
     </ClCompile>
     <ClCompile Include="InterfaceComponent.cpp">
-      <Filter>Components\Interface</Filter>
+      <Filter>Game Files\Components\Interface</Filter>
     </ClCompile>
     <ClCompile Include="NavigationComponent.cpp">
-      <Filter>Components\Navigation</Filter>
+      <Filter>Game Files\Components\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="StickCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveStickCommand.cpp">
+      <Filter>Game Files\Commands\General Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Game Files\Components\EntityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesDisplayComponent.cpp">
+      <Filter>Game Files\Components\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Game Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="EventQueue.cpp">
+      <Filter>Game Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Game Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Game Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthCommand.cpp">
+      <Filter>Game Files\Commands\TemporaryCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Game Files\Components\EntityComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

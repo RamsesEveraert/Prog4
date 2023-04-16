@@ -1,5 +1,6 @@
 #pragma once
 #include "Command.h"
+#include "StickCommand.h"
 #include <memory>
 #include <vector>
 #include <map>
@@ -48,7 +49,7 @@ namespace dae
 		void AttachCommandToButton(std::shared_ptr<Command> command, const Button& button);
 		void DetachCommandFromButton(const Button& button);
 
-		void AttachCommandToThumbStick(std::shared_ptr<Command> command, const ControllerButtons& button);
+		void AttachCommandToThumbStick(std::shared_ptr<StickCommand> command, const ControllerButtons& button);
 		void DetachCommandToThumbStick( const ControllerButtons& button);
 
 		void AttachCommandToTrigger(std::shared_ptr<Command> command, const ControllerButtons& button);

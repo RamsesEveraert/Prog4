@@ -6,17 +6,17 @@
 
 
 
-void dae::Subject::addObserver(ObserverInterface* observer)
+void dae::Subject::AddObserver(Observer* observer)
 {
-	if (observer == nullptr) return;
+    if (observer == nullptr) return;
     for (const auto& pObserver : m_Observers)
     {
-        if(pObserver == observer) throw std::runtime_error("Observer already exists in the observer container.");
+        if (pObserver == observer) throw std::runtime_error("Observer already exists in the observer container.");
     }
     m_Observers.push_back(observer);
 }
 
-void dae::Subject::removeObserver(ObserverInterface* observer)
+void dae::Subject::RemoveObserver(Observer* observer)
 {
     if (observer == nullptr) return;
     for (auto it = m_Observers.begin(); it != m_Observers.end(); ++it)

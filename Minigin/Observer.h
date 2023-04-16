@@ -3,11 +3,10 @@
 
 namespace dae
 {
-	class ObserverInterface
+	class Observer
 	{
 	public:
-		virtual ~ObserverInterface() = default;
+		virtual ~Observer() = default;
 		virtual void Notify(const GameObject& gameObject/*, Event event*/) = 0;
 	};
 }
-
