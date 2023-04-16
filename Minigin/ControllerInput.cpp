@@ -278,6 +278,11 @@ void dae::ControllerInput::DetachCommandToTrigger(const ControllerButtons& butto
 	m_pImplController->DetachCommandToTrigger(button);
 }
 
+bool dae::ControllerInput::IsButtonPressed(unsigned int button) const
+{
+	return m_pImplController->IsDownThisFrame(button);
+}
+
 const glm::vec2& dae::ControllerInput::GetDirectionLeftThumbStick() const
 {
 	return m_pImplController->GetDirectionLeftThumbStick();

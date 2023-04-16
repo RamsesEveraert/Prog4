@@ -14,14 +14,16 @@ namespace dae
 		bool ProcessInput();
 
 		ControllerInput* AddController();
-		KeyboardInput* GetKeyboard();
+		KeyboardInput* AddKeyboard();
+		KeyboardInput* GetKeyboard(int idx);
+		ControllerInput* GetController(int idx);
 
 		int GetAmountOfControllers() const { return static_cast<int>(m_Controllers.size()); }
 
 	private:
 
 		std::vector<std::unique_ptr<ControllerInput>> m_Controllers{};
-		std::unique_ptr<KeyboardInput>m_pKeyboard = std::make_unique<KeyboardInput>();
+		std::vector<std::unique_ptr<KeyboardInput>> m_Keyboards{};
 
 	};
 

@@ -258,6 +258,15 @@
     <ClInclude Include="Health.h">
       <Filter>Game Files\Components\EntityComponents</Filter>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Game Files\Components\EntityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreDisplayComponent.h">
+      <Filter>Game Files\Components\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreCommand.h">
+      <Filter>Game Files\Commands\TemporaryCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -427,6 +436,15 @@
     </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Game Files\Components\EntityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Game Files\Components\EntityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreDisplayComponent.cpp">
+      <Filter>Game Files\Components\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreCommand.cpp">
+      <Filter>Game Files\Commands\TemporaryCommands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

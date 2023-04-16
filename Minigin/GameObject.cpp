@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "MoveComponent.h"
 #include "Health.h"
+#include "Score.h"
 
 #include <regex>
 
@@ -146,6 +147,7 @@ GameObject* dae::GameObject::GetParent() const
 
 void dae::GameObject::InitPlayer()
 {
+    AddComponent<Score>();
     AddComponent<Health>(); // standard 3, can be adapted
     AddComponent<MovementComponent>();
 }

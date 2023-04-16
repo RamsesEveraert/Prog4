@@ -18,7 +18,8 @@ dae::HealthCommand::HealthCommand(GameObject* gameObject)
 
 void dae::HealthCommand::Execute()
 {
-    auto keyboard = InputManager::GetInstance().GetKeyboard();
+    //auto controller = InputManager::GetInstance().GetController(0);
+    auto keyboard = InputManager::GetInstance().GetKeyboard(0);
     if (keyboard->GetButtonState(SDL_SCANCODE_LEFT) == KeyboardInput::KeyState::Pressed)
     {
         std::cout << "Hit pressed! \n";

@@ -55,6 +55,8 @@ namespace dae
 		void AttachCommandToTrigger(std::shared_ptr<Command> command, const ControllerButtons& button);
 		void DetachCommandToTrigger(const ControllerButtons& button);
 
+		bool IsButtonPressed(unsigned int button) const;
+
 		const glm::vec2& GetDirectionLeftThumbStick() const;
 		const glm::vec2& GetDirectionRightThumbStick() const;
 		

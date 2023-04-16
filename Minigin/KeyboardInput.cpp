@@ -3,8 +3,9 @@
 
 using namespace dae;
 
-KeyboardInput::KeyboardInput()
+KeyboardInput::KeyboardInput(int idx)
 	: m_pKeyboardState{ SDL_GetKeyboardState(nullptr) }
+	, m_KeyboardIndex{idx}
 {
 }
 

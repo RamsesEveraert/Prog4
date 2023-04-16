@@ -13,7 +13,7 @@ namespace dae
 			Up, Down, Pressed
 		};
 
-		KeyboardInput();
+		KeyboardInput(int idx);
 
 		void Update(const SDL_Event& e);
 		void UpdateWhenPressed();
@@ -28,6 +28,7 @@ namespace dae
 
 	private:
 		const Uint8* m_pKeyboardState;
+		const int m_KeyboardIndex;
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapPressed;
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapUp;
 		std::map<KeyboardKey, std::shared_ptr<Command>> m_KeyCommandsMapDown;

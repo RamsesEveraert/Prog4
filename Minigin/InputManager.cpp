@@ -16,13 +16,19 @@ bool InputManager::ProcessInput()
 			return false;
 		}		
 
-		m_pKeyboard->Update(e);			
+		for (auto& keyboard : m_Keyboards)
+		{
+			keyboard->Update(e);
+		}	
 
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
 
-	m_pKeyboard->UpdateWhenPressed();
+	for (auto& keyboard : m_Keyboards)
+	{
+		keyboard->UpdateWhenPressed();
+	}
 
 	// update controllers
 
@@ -42,8 +48,38 @@ ControllerInput* InputManager::AddController()
 	return m_Controllers[idx].get();
 }
 
-KeyboardInput* dae::InputManager::GetKeyboard()
+KeyboardInput* dae::InputManager::AddKeyboard()
 {
-	return m_pKeyboard.get();
+	const int idx{ static_cast<int>(m_Keyboards.size()) };
+	m_Keyboards.push_back(std::make_unique<KeyboardInput>(idx));
+
+	return m_Keyboards[idx].get();
 }
+
+KeyboardInput* dae::InputManager::GetKeyboard(int idx)
+{
+	if (idx >= 0 && idx < m_Controllers.size())
+	{
+		return m_Keyboards[idx].get();
+	}
+	else
+	{
+		std::cout << "Error: Keyboard index out of range.\n";
+		return nullptr;
+	}
+}
+
+ControllerInput* InputManager::GetController(int idx)
+{
+	if (idx >= 0 && idx < m_Controllers.size())
+	{
+		return m_Controllers[idx].get();
+	}
+	else
+	{
+		std::cout << "Error: Controller index out of range.\n";
+		return nullptr;
+	}
+}
+
 
