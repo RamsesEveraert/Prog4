@@ -1,6 +1,7 @@
 #include "Subject.h"
 
 #include "Observer.h"
+#include "Event.h"
 
 #include <stdexcept>
 
@@ -31,11 +32,11 @@ void dae::Subject::RemoveObserver(Observer* observer)
 }
 
 
-//
-//void dae::Subject::NotifyObserver(/*Event event*/)
-//{
-//	for (auto observer : m_Observers)
-//	{
-//		observer->Notify(this /*,event*/)
-//	}
-//}
+
+void dae::Subject::NotifyObserver(const Event& event)
+{
+	for (auto observer : m_Observers)
+	{
+        observer->Notify(event);
+	}
+}

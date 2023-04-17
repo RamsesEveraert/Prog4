@@ -19,6 +19,13 @@ void dae::Score::DecrementScore()
 void dae::Score::IncrementScore()
 {
 	if (m_Score >= 0) m_Score += 100;
+
+	if (m_Score >= 500)
+	{
+		Event winner{ "Winner", { m_Score } };
+		EventQueue::GetInstance().Dispatch(winner);
+	}
+
 	Event incrementScore{ "IncrementScore", { m_Score } };
 	EventQueue::GetInstance().Dispatch(incrementScore);
 }

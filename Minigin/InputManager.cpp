@@ -58,7 +58,7 @@ KeyboardInput* dae::InputManager::AddKeyboard()
 
 KeyboardInput* dae::InputManager::GetKeyboard(int idx)
 {
-	if (idx >= 0 && idx < m_Controllers.size())
+	if (idx >= 0 && idx < static_cast<int>( m_Controllers.size()))
 	{
 		return m_Keyboards[idx].get();
 	}
@@ -71,7 +71,7 @@ KeyboardInput* dae::InputManager::GetKeyboard(int idx)
 
 ControllerInput* InputManager::GetController(int idx)
 {
-	if (idx >= 0 && idx < m_Controllers.size())
+	if (idx >= 0 && idx < static_cast<int>(m_Controllers.size()))
 	{
 		return m_Controllers[idx].get();
 	}

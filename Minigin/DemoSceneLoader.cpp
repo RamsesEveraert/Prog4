@@ -272,7 +272,7 @@ void dae::DemoSceneLoader::EventExercice(Scene& scene)
 
 	playerIdx = 1;
 
-	auto scoreCommandP2 = std::make_shared<ScoreCommand>(player2.get(), playerIdx, HealthCommand::InputType::Keyboard);
+	auto scoreCommandP2 = std::make_shared<ScoreCommand>(player2.get(), playerIdx, ScoreCommand::InputType::Keyboard);
 	auto healthCommandP2 = std::make_shared<HealthCommand>(player2.get(), playerIdx, HealthCommand::InputType::Keyboard);
 
 	keyboard->AttachCommandToButton(scoreCommandP2, keyLeft);
