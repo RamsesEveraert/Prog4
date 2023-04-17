@@ -10,27 +10,38 @@
 
 using namespace dae;
 
-dae::ScoreCommand::ScoreCommand(GameObject* gameObject, bool ignoreKeyboardInput)
+dae::ScoreCommand::ScoreCommand(GameObject* gameObject, int playerIdx, InputType inputType)
     : m_pScore{ gameObject->GetComponent<Score>() }
-    , m_IgnoreKeyboardInput{ ignoreKeyboardInput }
+    , m_PlayerIdx{ playerIdx }
+    , m_InputType {inputType} 
 {
 }
 
 void dae::ScoreCommand::Execute()
 {
-    auto controller = InputManager::GetInstance().GetController(0);
-    auto keyboard = InputManager::GetInstance().GetKeyboard(0);
-
-    if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonB))
-        || (!m_IgnoreKeyboardInput && keyboard->GetButtonState(SDL_SCANCODE_RIGHT) == KeyboardInput::KeyState::Pressed))
+    if (m_InputType == InputType::Keyboard)
     {
-        m_pScore->IncrementScore();
+        auto keyboard = InputManager::GetInstance().GetKeyboard(m_PlayerIdx);
+        if (keyboard->GetButtonState(SDL_SCANCODE_RIGHT) == KeyboardInput::KeyState::Pressed)
+        {
+            m_pScore->IncrementScore();
+        }
+        else if (keyboard->GetButtonState(SDL_SCANCODE_LEFT) == KeyboardInput::KeyState::Pressed)
+        {
+            m_pScore->DecrementScore();
+        }
     }
-    else if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonX))
-        || (!m_IgnoreKeyboardInput && keyboard->GetButtonState(SDL_SCANCODE_LEFT) == KeyboardInput::KeyState::Pressed))
+    else if (m_InputType == InputType::Controller)
     {
-        m_pScore->DecrementScore();
+        auto controller = InputManager::GetInstance().GetController(m_PlayerIdx);
+        if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonB)))
+        {
+            m_pScore->IncrementScore();
+        }
+        else if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonX)))
+        {
+            m_pScore->DecrementScore();
+        }
     }
 }
-
 

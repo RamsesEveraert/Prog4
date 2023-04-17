@@ -8,13 +8,20 @@ namespace dae
 	class ScoreCommand final : public Command
 	{
 	public:
-		ScoreCommand(GameObject* gameObject, bool ignoreKeyboardInput);
+
+		enum class InputType
+		{
+			Keyboard, Controller
+		};
+
+		ScoreCommand(GameObject* gameObject, int playerIdx, InputType inputType);
 		~ScoreCommand() = default;
 
 		virtual void Execute() override;
 	private:
 		Score* m_pScore;
-		bool m_IgnoreKeyboardInput;
+		int m_PlayerIdx;
+		InputType m_InputType;
 	};
 
 }
