@@ -3,7 +3,7 @@
 
 namespace dae
 {
-	class Event;
+	struct Event;
 	class Observer
 	{
 	public:

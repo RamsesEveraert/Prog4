@@ -5,7 +5,7 @@
 namespace dae
 {
 	class Observer;
-	class Event;
+	struct Event;
 	class Subject
 	{
 	public:
