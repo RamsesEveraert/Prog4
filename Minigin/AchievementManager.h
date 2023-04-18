@@ -7,7 +7,7 @@ namespace dae
     {
     public:
         AchievementsManager();
-        ~AchievementsManager() = default;
+        ~AchievementsManager();
         AchievementsManager(const AchievementsManager& other) = default;
         AchievementsManager(AchievementsManager&& other) = default;
         AchievementsManager& operator=(const AchievementsManager& other) = default;

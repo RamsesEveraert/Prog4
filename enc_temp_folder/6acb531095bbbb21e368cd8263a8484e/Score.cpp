@@ -24,6 +24,7 @@ void dae::Score::IncrementScore()
 
 	if (m_Score == 500)
 	{
+		std::cout << "winner event dispatched \n";
 		Event winner{ "Winner", { m_Score } };
 		EventQueue::GetInstance().Dispatch(winner);
 		

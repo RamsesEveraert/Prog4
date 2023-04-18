@@ -11,7 +11,10 @@ namespace dae
     {
     public:
         LivesDisplayComponent();
+        ~LivesDisplayComponent();
+
         void OnPlayerDied(const dae::Event& event);
+
         void UpdateLivesDisplay(const dae::Event& event);
 
         void SetOwnerLives(GameObject* gameObject);

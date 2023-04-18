@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "SteamAchievements.h"
 
 #include "Timer.h"
 
@@ -82,6 +83,16 @@ dae::Minigin::~Minigin()
 
 void dae::Minigin::Run(const std::function<void()>& load)
 {
+	std::vector<Achievement_t> achievements
+	{
+		_ACH_ID(ACH_WIN_ONE_GAME, "Winner"),
+		_ACH_ID(ACH_WIN_100_GAMES, "Champion"),
+		_ACH_ID(ACH_TRAVEL_FAR_ACCUM, "Interstellar"),
+		_ACH_ID(ACH_TRAVEL_FAR_SINGLE, "Orbiter"),
+	};
+
+	dae::SteamAchievements::GetInstance().Initialize(achievements, true);
+
 	load();
 
 	auto& timer = Timer::GetInstance();
@@ -99,8 +110,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	{
 		timer.updateDeltaTime(timer);
 
-		float dtMs = timer.getDeltaTimeMs(); // dt in ms
-		float dt = timer.msToSeconds(dtMs); // dt in secs
+		float dt = timer.getDeltaTimeSec();
 
 		accumulatedTime += dt;
 

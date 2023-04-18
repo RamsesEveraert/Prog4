@@ -17,6 +17,13 @@ dae::LivesDisplayComponent::LivesDisplayComponent()
     EventQueue::GetInstance().AddListener("HealEvent", std::bind(&LivesDisplayComponent::UpdateLivesDisplay, this, std::placeholders::_1));
 }
 
+dae::LivesDisplayComponent::~LivesDisplayComponent()
+{
+    EventQueue::GetInstance().RemoveListener("PlayerDied", std::bind(&LivesDisplayComponent::OnPlayerDied, this, std::placeholders::_1));
+    EventQueue::GetInstance().RemoveListener("HitEvent", std::bind(&LivesDisplayComponent::UpdateLivesDisplay, this, std::placeholders::_1));
+    EventQueue::GetInstance().RemoveListener("HealEvent", std::bind(&LivesDisplayComponent::UpdateLivesDisplay, this, std::placeholders::_1));
+}
+
 void dae::LivesDisplayComponent::OnPlayerDied(const dae::Event& event)
 {
     if (event.name == "PlayerDied")

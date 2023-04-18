@@ -19,34 +19,6 @@ dae::HealthCommand::HealthCommand(GameObject* gameObject, int playerIdx, InputTy
 {
 }
 
-//void dae::HealthCommand::Execute()
-//{
-//    if (m_InputType == InputType::Keyboard)
-//    {
-//        auto keyboard = InputManager::GetInstance().GetKeyboard(m_PlayerIdx);
-//        if (keyboard->GetButtonState(SDL_SCANCODE_UP) == KeyboardInput::KeyState::Pressed)
-//        {
-//            m_pHealth->Heal();
-//        }
-//        else if (keyboard->GetButtonState(SDL_SCANCODE_DOWN) == KeyboardInput::KeyState::Pressed)
-//        {
-//            m_pHealth->Hit();
-//        }
-//    }
-//    else if (m_InputType == InputType::Controller)
-//    {
-//        auto controller = InputManager::GetInstance().GetController(m_PlayerIdx);
-//        if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonY)))
-//        {
-//            m_pHealth->Heal();
-//        }
-//        else if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonA)))
-//        {
-//            m_pHealth->Hit();
-//        }
-//    }
-//}
-
 void dae::HealthCommand::Execute()
 {
     if (m_InputType == InputType::Keyboard)
@@ -54,21 +26,11 @@ void dae::HealthCommand::Execute()
         auto keyboard = InputManager::GetInstance().GetKeyboard(m_PlayerIdx);
         if (keyboard->GetButtonState(SDL_SCANCODE_UP) == KeyboardInput::KeyState::Pressed)
         {
-            if (m_pGameObject == nullptr || m_pGameObject->GetComponent<Health>() == nullptr)
-            {
-                // Error handling: health component or game object not found
-                return;
-            }
-            m_pGameObject->GetComponent<Health>()->Heal();
+            m_pHealth->Heal();
         }
         else if (keyboard->GetButtonState(SDL_SCANCODE_DOWN) == KeyboardInput::KeyState::Pressed)
         {
-            if (m_pGameObject == nullptr || m_pGameObject->GetComponent<Health>() == nullptr)
-            {
-                // Error handling: health component or game object not found
-                return;
-            }
-            m_pGameObject->GetComponent<Health>()->Hit();
+            m_pHealth->Hit();
         }
     }
     else if (m_InputType == InputType::Controller)
@@ -76,21 +38,11 @@ void dae::HealthCommand::Execute()
         auto controller = InputManager::GetInstance().GetController(m_PlayerIdx);
         if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonY)))
         {
-            if (m_pGameObject == nullptr || m_pGameObject->GetComponent<Health>() == nullptr)
-            {
-                // Error handling: health component or game object not found
-                return;
-            }
-            m_pGameObject->GetComponent<Health>()->Heal();
+            m_pHealth->Heal();
         }
         else if (controller->IsButtonPressed(static_cast<unsigned int>(ControllerInput::ControllerButtons::ButtonA)))
         {
-            if (m_pGameObject == nullptr || m_pGameObject->GetComponent<Health>() == nullptr)
-            {
-                // Error handling: health component or game object not found
-                return;
-            }
-            m_pGameObject->GetComponent<Health>()->Hit();
+            m_pHealth->Hit();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace dae
     {
     public:
         ScoreDisplayComponent();
+        ~ScoreDisplayComponent();
+
         void UpdateScoreDisplay(const dae::Event& event);
         void SetOwnerScore(GameObject* gameObject);
         void OnPlayerDied(const dae::Event& event);
