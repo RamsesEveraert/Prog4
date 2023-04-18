@@ -18,8 +18,8 @@
 #include "Transform.h"
 #include "LivesDisplayComponent.h"
 #include "ScoreDisplayComponent.h"
-
 #include "Health.h"
+#include "InstructionsComponent.h"
 
 // Commands
 
@@ -203,6 +203,14 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 
 void dae::DemoSceneLoader::EventExercice(Scene& scene)
 {
+
+	// instructions
+
+	auto instructions = std::make_shared<GameObject>("Instructions");
+	instructions->AddComponent<InstructionsComponent>();
+
+	scene.Add(instructions);
+
 	//******* player 1 **********//
 
 	auto player1 = std::make_shared<GameObject>("player 1");

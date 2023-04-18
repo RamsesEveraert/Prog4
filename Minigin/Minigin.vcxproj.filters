@@ -67,9 +67,6 @@
     <Filter Include="Game Files\Components\Camera">
       <UniqueIdentifier>{f783b25a-fa35-4b6d-8c48-eb9f914c124c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Files\Components\Interface">
-      <UniqueIdentifier>{537af039-3bae-46f8-957f-99367bc18e2c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game Files\Components\Navigation">
       <UniqueIdentifier>{87a9544f-8a8b-41ce-8ed0-e3bd58d64ad1}</UniqueIdentifier>
     </Filter>
@@ -225,9 +222,6 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Game Files\Components\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="InterfaceComponent.h">
-      <Filter>Game Files\Components\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="NavigationComponent.h">
       <Filter>Game Files\Components\Navigation</Filter>
     </ClInclude>
@@ -275,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="AchievementManager.h">
       <Filter>Engin files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InstructionsComponent.h">
+      <Filter>Game Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +407,6 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Game Files\Components\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="InterfaceComponent.cpp">
-      <Filter>Game Files\Components\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="NavigationComponent.cpp">
       <Filter>Game Files\Components\Navigation</Filter>
     </ClCompile>
@@ -460,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="AchievementManager.cpp">
       <Filter>Engin files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InstructionsComponent.cpp">
+      <Filter>Game Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

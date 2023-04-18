@@ -237,7 +237,7 @@ xcopy "$(SolutionDir)3rdParty\steamworks\redistributable_bin\win64\*.dll" "$(Out
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthCommand.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="InterfaceComponent.h" />
+    <ClInclude Include="InstructionsComponent.h" />
     <ClInclude Include="KeyboardInput.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
     <ClInclude Include="Minigin.h" />
@@ -325,7 +325,7 @@ xcopy "$(SolutionDir)3rdParty\steamworks\redistributable_bin\win64\*.dll" "$(Out
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthCommand.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="InterfaceComponent.cpp" />
+    <ClCompile Include="InstructionsComponent.cpp" />
     <ClCompile Include="KeyboardInput.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
     <ClCompile Include="Main.cpp" />
