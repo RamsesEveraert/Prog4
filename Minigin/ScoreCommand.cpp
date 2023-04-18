@@ -44,4 +44,3 @@ void dae::ScoreCommand::Execute()
         }
     }
 }
-

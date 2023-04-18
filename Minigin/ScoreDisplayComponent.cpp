@@ -7,19 +7,21 @@
 #include "TextComponent.h"
 #include "TextureComponent.h"
 
+#include <sstream>
+
 dae::ScoreDisplayComponent::ScoreDisplayComponent()
     : m_pScore{nullptr}, m_Score{0}, m_pOwnerScore {nullptr}, m_pTextcomponent{ nullptr }
 {
-    EventQueue::GetInstance().AddListener("PlayerDied", std::bind(&ScoreDisplayComponent::OnPlayerDied, this, std::placeholders::_1));
-    EventQueue::GetInstance().AddListener("DecrementEvent", std::bind(&ScoreDisplayComponent::UpdateScoreDisplay, this, std::placeholders::_1));
-    EventQueue::GetInstance().AddListener("IncrementScore", std::bind(&ScoreDisplayComponent::UpdateScoreDisplay, this, std::placeholders::_1));
+    EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); // []scope, () parameters, {} fction body
+    EventQueue::GetInstance().AddListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
+    EventQueue::GetInstance().AddListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
 }
 
 dae::ScoreDisplayComponent::~ScoreDisplayComponent()
 {
-    EventQueue::GetInstance().RemoveListener("PlayerDied", std::bind(&ScoreDisplayComponent::OnPlayerDied, this, std::placeholders::_1));
-    EventQueue::GetInstance().RemoveListener("DecrementEvent", std::bind(&ScoreDisplayComponent::UpdateScoreDisplay, this, std::placeholders::_1));
-    EventQueue::GetInstance().RemoveListener("IncrementScore", std::bind(&ScoreDisplayComponent::UpdateScoreDisplay, this, std::placeholders::_1));
+    EventQueue::GetInstance().RemoveListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
+    EventQueue::GetInstance().RemoveListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
+    EventQueue::GetInstance().RemoveListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
 }
 
 void dae::ScoreDisplayComponent::UpdateScoreDisplay(const dae::Event& event)
@@ -30,12 +32,40 @@ void dae::ScoreDisplayComponent::UpdateScoreDisplay(const dae::Event& event)
         return;
     }
 
-    int updatedScore = std::any_cast<int>(event.data[0]);
-    m_pTextcomponent->SetText("Score " + m_pOwnerScore->GetObjectName() + ":    " + std::to_string(updatedScore));
+    int updatedScore = 0;
+    std::string ownerName;
+    for (const auto& data : event.data)
+    {
+        if (data.type() == typeid(int))
+        {
+            updatedScore = std::any_cast<int>(data);
+        }
+        else if (data.type() == typeid(std::string))
+        {
+            ownerName = std::any_cast<std::string>(data);
+        }
+    }
+
+    if (ownerName != m_pOwnerScore->GetObjectName()) return; // Event is not for this player
+    
+    std::stringstream ss;
+    ss << "Score " << m_pOwnerScore->GetObjectName() << ":    " << updatedScore;
+    m_pTextcomponent->SetText(ss.str());
 }
 
 void dae::ScoreDisplayComponent::OnPlayerDied(const dae::Event& event)
 {
+    std::string ownerName;
+
+    for (const auto& data : event.data)
+    {
+        if (data.type() == typeid(std::string))
+        {
+            ownerName = std::any_cast<std::string>(data);
+        }
+    }
+
+    if (ownerName != m_pOwnerScore->GetObjectName()) return; // Event is not for this player
     if (event.name == "PlayerDied")
         m_pTextcomponent->SetText("Score " + m_pOwnerScore->GetObjectName() + ":    0, Player died :(");
 }
