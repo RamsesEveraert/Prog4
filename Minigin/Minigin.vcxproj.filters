@@ -49,9 +49,6 @@
     <Filter Include="Game Files\Components\TransformComponents">
       <UniqueIdentifier>{c06b75fb-ca0f-400d-bb7a-31dec93dd0a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Files\Components\Exercices">
-      <UniqueIdentifier>{03843cf4-3582-4542-9d73-70b435262159}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game Files\Components\Physics">
       <UniqueIdentifier>{171c832a-bda9-4e82-a592-7656ffab6289}</UniqueIdentifier>
     </Filter>
@@ -84,9 +81,6 @@
     </Filter>
     <Filter Include="Game Files\Events">
       <UniqueIdentifier>{209c59ec-7989-4650-a5ec-95a747391a86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Files\SteamAchievements">
-      <UniqueIdentifier>{cfda6972-4100-4b97-b533-4f4793eacb58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +159,6 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="TrashCacheComponent.h">
-      <Filter>Game Files\Components\Exercices</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Game Files\Components\Physics</Filter>
     </ClInclude>
@@ -206,9 +197,6 @@
     </ClInclude>
     <ClInclude Include="KeyboardInput.h">
       <Filter>Engin files\Inputs</Filter>
-    </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Game Files\Components\Exercices</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
       <Filter>Game Files\Components\Audio</Filter>
@@ -263,9 +251,6 @@
     </ClInclude>
     <ClInclude Include="ScoreCommand.h">
       <Filter>Game Files\Commands\TemporaryCommands</Filter>
-    </ClInclude>
-    <ClInclude Include="SteamAchievements.h">
-      <Filter>Game Files\SteamAchievements</Filter>
     </ClInclude>
     <ClInclude Include="AchievementManager.h">
       <Filter>Engin files\Managers</Filter>
@@ -350,9 +335,6 @@
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="TrashCacheComponent.cpp">
-      <Filter>Game Files\Components\Exercices</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Game Files\Components\Physics</Filter>
     </ClCompile>
@@ -391,9 +373,6 @@
     </ClCompile>
     <ClCompile Include="KeyboardInput.cpp">
       <Filter>Engin files\Inputs</Filter>
-    </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Game Files\Components\Exercices</Filter>
     </ClCompile>
     <ClCompile Include="AudioComponent.cpp">
       <Filter>Game Files\Components\Audio</Filter>
@@ -448,9 +427,6 @@
     </ClCompile>
     <ClCompile Include="ScoreCommand.cpp">
       <Filter>Game Files\Commands\TemporaryCommands</Filter>
-    </ClCompile>
-    <ClCompile Include="SteamAchievements.cpp">
-      <Filter>Game Files\SteamAchievements</Filter>
     </ClCompile>
     <ClCompile Include="AchievementManager.cpp">
       <Filter>Engin files\Managers</Filter>

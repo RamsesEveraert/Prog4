@@ -13,8 +13,6 @@
 #include "RenderComponent.h"
 #include "TextComponent.h"
 #include "FPSComponent.h"
-#include "RotatorComponent.h"
-#include "TrashCacheComponent.h"
 #include "Transform.h"
 #include "LivesDisplayComponent.h"
 #include "ScoreDisplayComponent.h"
@@ -39,7 +37,6 @@ dae::DemoSceneLoader::DemoSceneLoader()
 	CreateLogo(scene);
 	CreateTextObject(scene);
 	CreateFPSObject(scene);
-	//CreateRotatingObjects(scene);
 	//InputsExercice(scene);
 	EventExercice(scene);
 }
@@ -84,43 +81,6 @@ void dae::DemoSceneLoader::CreateFPSObject(Scene& scene)
     scene.Add(fpsCounter);
 }
 
-void dae::DemoSceneLoader::CreateRotatingObjects(Scene& scene)
-{
-	// test centerpoint
-
-	auto centerPoint = std::make_shared<dae::GameObject>("centerPoint");
-	centerPoint->GetTransform()->SetPosition(glm::vec2{ 300,300 });
-
-	centerPoint->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
-	centerPoint->AddComponent<RenderComponent>();
-
-	scene.Add(centerPoint);
-
-	// Rotating object 1 --> werkt niet?
-
-	auto parentObject = std::make_shared<dae::GameObject>("ParentObject");
-	parentObject->GetTransform()->SetPosition(glm::vec2{ 300,300});
-    parentObject->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
-    parentObject->AddComponent<RotatorComponent>()->SetCenterPoint(glm::vec2{ 300,300});
-    parentObject->GetComponent<RotatorComponent>()->SetRadius(100.f);
-    parentObject->GetComponent<RotatorComponent>()->SetRotationSpeed(1.f);
-    parentObject->AddComponent<RenderComponent>();
-
-	scene.Add(parentObject);
-
-	// Rotating object 2
-
-	auto childObject = std::make_shared<dae::GameObject>("childObject");
-    childObject->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
-    childObject->AddComponent<RotatorComponent>();
-    childObject->SetParent(parentObject.get(),true);
-    childObject->GetComponent<RotatorComponent>()->SetCenterPoint(parentObject->GetTransform()->GetWorldPosition());
-    childObject->GetComponent<RotatorComponent>()->SetRadius(25.f);
-    childObject->GetComponent<RotatorComponent>()->SetRotationSpeed(-4.f);
-    childObject->AddComponent<RenderComponent>();
-
-	scene.Add(childObject);
-}
 
 void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 {
