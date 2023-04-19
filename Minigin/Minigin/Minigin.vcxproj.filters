@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{84e524d3-20c0-48ae-8292-34fdedd1102d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui\Implot">
+      <UniqueIdentifier>{9660c3c7-300e-4567-aedb-302f5708413e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{78ff1f86-fbc6-4fed-93cc-f9c87ff2bf0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\AssetsComponents">
+      <UniqueIdentifier>{0a8f366b-77ca-4a47-9c40-c407ffdd5d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\HUD">
+      <UniqueIdentifier>{4a3314b9-470f-4e2d-abe5-515068fdd1b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inputs">
+      <UniqueIdentifier>{bfe392a8-41f9-4c8f-a30f-23cfa99c2744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{07f8d8c4-c951-46a0-9d84-41a0c9e3d0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameplayComponents">
+      <UniqueIdentifier>{58cac80b-bf63-4ba2-864a-db0032cdec00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameplayComponents\Commands">
+      <UniqueIdentifier>{77c8191c-7f70-45cf-849d-f22992bb71ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{c0f18a49-6613-4acc-b549-82b2d62a2235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{5830e7f3-ee9a-4e2c-af51-7523f7454735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{a1fce411-1431-4be5-b538-1774d829f55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{cde5f621-5a91-4404-95cc-9a5eb7ebe44e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{a103ed6d-ee84-4705-ab01-988c941c48c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Temporary">
+      <UniqueIdentifier>{7b1c69ca-bc71-472a-bd53-07f0abd33c29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{1e56fc3a-3bd0-4d81-8575-e88148ed3e1e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\3rdParty\implot\implot.h">
+      <Filter>ImGui\Implot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\implot\implot_internal.h">
+      <Filter>ImGui\Implot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_plot.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\TextureComponent.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\TextComponent.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\Transform.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\RenderComponent.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\Font.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\Audio.h">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\HUD\FPSComponent.h">
+      <Filter>Components\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\InputManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\AchievementManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\SceneManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputs\ControllerInput.h">
+      <Filter>Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputs\KeyboardInput.h">
+      <Filter>Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\BaseComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Commands\MoveStickCommand.h">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Commands\Command.h">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EventQueue.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture2D.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Debugger.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Minigin.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\Observer.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\Subject.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\DemoSceneLoader.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameObject.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Temporary\HealthCommand.h">
+      <Filter>Temporary</Filter>
+    </ClInclude>
+    <ClInclude Include="Temporary\ScoreCommand.h">
+      <Filter>Temporary</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Timer.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Singleton.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\MoveComponent.h">
+      <Filter>Components\GameplayComponents</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\3rdParty\implot\implot.cpp">
+      <Filter>ImGui\Implot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\implot\implot_demo.cpp">
+      <Filter>ImGui\Implot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\implot\implot_items.cpp">
+      <Filter>ImGui\Implot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_plot.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\Audio.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\Font.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\RenderComponent.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\TextComponent.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\TextureComponent.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\Transform.cpp">
+      <Filter>Components\AssetsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\HUD\FPSComponent.cpp">
+      <Filter>Components\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\AchievementManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\InputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\SceneManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Inputs\ControllerInput.cpp">
+      <Filter>Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="Inputs\KeyboardInput.cpp">
+      <Filter>Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Commands\MoveCommand.cpp">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Commands\MoveStickCommand.cpp">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp">
+      <Filter>Components\GameplayComponents\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\Event.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EventQueue.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Texture2D.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Debugger.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Minigin.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\Observer.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer\Subject.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\DemoSceneLoader.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameObject.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Temporary\HealthCommand.cpp">
+      <Filter>Temporary</Filter>
+    </ClCompile>
+    <ClCompile Include="Temporary\ScoreCommand.cpp">
+      <Filter>Temporary</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Timer.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\MoveComponent.cpp">
+      <Filter>Components\GameplayComponents</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
