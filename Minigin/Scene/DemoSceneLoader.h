@@ -15,9 +15,8 @@ namespace dae
         void CreateLogo(Scene& scene);
         void CreateTextObject(Scene& scene);
         void CreateFPSObject(Scene& scene);
-        void CreateRotatingObjects(Scene& scene);
         void InputsExercice(Scene& scene);
-        void EventExercice(Scene& scene);
+       /* void EventExercice(Scene& scene);*/
         
     };
 }

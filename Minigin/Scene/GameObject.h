@@ -82,7 +82,7 @@ namespace dae
         //Transform
         bool m_IsTransformDirty;
 
-        Transform* m_Transform;
+        Transform* m_pTransform;
 
         // child parents
 

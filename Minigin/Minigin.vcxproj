@@ -27,26 +27,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -81,21 +81,29 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(SolutionDir)Minigin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(SolutionDir)Minigin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(SolutionDir)Minigin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
+    <IncludePath>$(SolutionDir)Minigin;$(IncludePath)</IncludePath>
+    <ExecutablePath>$(SolutionDir)Minigin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -120,9 +128,14 @@
 
 xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
 
-xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
-</Command>
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -131,7 +144,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -151,6 +164,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 
 </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -161,7 +180,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -179,9 +198,14 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 
 xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
 
-xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y
-</Command>
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -192,7 +216,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -214,6 +238,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 
 </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.h" />
@@ -227,53 +257,40 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h" />
     <ClInclude Include="..\3rdParty\implot\implot.h" />
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
-    <ClInclude Include="AchievementManager.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="AudioComponent.h" />
-    <ClInclude Include="BaseComponent.h" />
-    <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="DebugComponent.h" />
-    <ClInclude Include="Debugger.h" />
-    <ClInclude Include="DemoSceneLoader.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="EventQueue.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="FPSComponent.h" />
-    <ClInclude Include="ControllerInput.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GraphicsComponent.h" />
-    <ClInclude Include="Health.h" />
-    <ClInclude Include="HealthCommand.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="InstructionsComponent.h" />
-    <ClInclude Include="KeyboardInput.h" />
-    <ClInclude Include="LivesDisplayComponent.h" />
-    <ClInclude Include="Minigin.h" />
-    <ClInclude Include="MoveCommand.h" />
-    <ClInclude Include="MoveComponent.h" />
-    <ClInclude Include="MoveStickCommand.h" />
-    <ClInclude Include="NavigationComponent.h" />
-    <ClInclude Include="Observer.h" />
-    <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="PlayerCommand.h" />
-    <ClInclude Include="Score.h" />
-    <ClInclude Include="ScoreCommand.h" />
-    <ClInclude Include="ScoreDisplayComponent.h" />
-    <ClInclude Include="StickCommand.h" />
-    <ClInclude Include="Subject.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="TextComponent.h" />
-    <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="TextureComponent.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Components\AssetsComponents\Audio.h" />
+    <ClInclude Include="Components\AssetsComponents\Font.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponent.h" />
+    <ClInclude Include="Components\AssetsComponents\TextComponent.h" />
+    <ClInclude Include="Components\AssetsComponents\TextureComponent.h" />
+    <ClInclude Include="Components\AssetsComponents\Transform.h" />
+    <ClInclude Include="Components\BaseComponent.h" />
+    <ClInclude Include="Components\GameplayComponents\Commands\Command.h" />
+    <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h" />
+    <ClInclude Include="Components\GameplayComponents\Commands\MoveStickCommand.h" />
+    <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h" />
+    <ClInclude Include="Components\GameplayComponents\MoveComponent.h" />
+    <ClInclude Include="Components\HUD\FPSComponent.h" />
+    <ClInclude Include="Events\Event.h" />
+    <ClInclude Include="Events\EventQueue.h" />
+    <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Graphics\Texture2D.h" />
+    <ClInclude Include="Inputs\ControllerInput.h" />
+    <ClInclude Include="Inputs\KeyboardInput.h" />
+    <ClInclude Include="Main\Debugger.h" />
+    <ClInclude Include="Main\Minigin.h" />
+    <ClInclude Include="Managers\AchievementManager.h" />
+    <ClInclude Include="Managers\InputManager.h" />
+    <ClInclude Include="Managers\ResourceManager.h" />
+    <ClInclude Include="Managers\SceneManager.h" />
+    <ClInclude Include="Observer\Observer.h" />
+    <ClInclude Include="Observer\Subject.h" />
+    <ClInclude Include="Scene\DemoSceneLoader.h" />
+    <ClInclude Include="Scene\GameObject.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Temporary\HealthCommand.h" />
+    <ClInclude Include="Temporary\ScoreCommand.h" />
+    <ClInclude Include="Utility\Singleton.h" />
+    <ClInclude Include="Utility\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.cpp" />
@@ -312,53 +329,39 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\implot\implot.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_demo.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp" />
-    <ClCompile Include="AchievementManager.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AudioComponent.cpp" />
-    <ClCompile Include="BaseComponent.cpp" />
-    <ClCompile Include="CameraComponent.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="DebugComponent.cpp" />
-    <ClCompile Include="Debugger.cpp" />
-    <ClCompile Include="DemoSceneLoader.cpp" />
-    <ClCompile Include="Event.cpp" />
-    <ClCompile Include="EventQueue.cpp" />
-    <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FPSComponent.cpp" />
-    <ClCompile Include="ControllerInput.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphicsComponent.cpp" />
-    <ClCompile Include="Health.cpp" />
-    <ClCompile Include="HealthCommand.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="InstructionsComponent.cpp" />
-    <ClCompile Include="KeyboardInput.cpp" />
-    <ClCompile Include="LivesDisplayComponent.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Minigin.cpp" />
-    <ClCompile Include="MoveCommand.cpp" />
-    <ClCompile Include="MoveComponent.cpp" />
-    <ClCompile Include="MoveStickCommand.cpp" />
-    <ClCompile Include="NavigationComponent.cpp" />
-    <ClCompile Include="Observer.cpp" />
-    <ClCompile Include="PhysicsComponent.cpp" />
-    <ClCompile Include="PlayerCommand.cpp" />
-    <ClCompile Include="Score.cpp" />
-    <ClCompile Include="ScoreCommand.cpp" />
-    <ClCompile Include="ScoreDisplayComponent.cpp" />
-    <ClCompile Include="StickCommand.cpp" />
-    <ClCompile Include="Subject.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="TextComponent.cpp" />
-    <ClCompile Include="Texture2D.cpp" />
-    <ClCompile Include="TextureComponent.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Components\AssetsComponents\Audio.cpp" />
+    <ClCompile Include="Components\AssetsComponents\Font.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponent.cpp" />
+    <ClCompile Include="Components\AssetsComponents\TextComponent.cpp" />
+    <ClCompile Include="Components\AssetsComponents\TextureComponent.cpp" />
+    <ClCompile Include="Components\AssetsComponents\Transform.cpp" />
+    <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Commands\MoveCommand.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Commands\MoveStickCommand.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp" />
+    <ClCompile Include="Components\GameplayComponents\MoveComponent.cpp" />
+    <ClCompile Include="Components\HUD\FPSComponent.cpp" />
+    <ClCompile Include="Events\Event.cpp" />
+    <ClCompile Include="Events\EventQueue.cpp" />
+    <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\Texture2D.cpp" />
+    <ClCompile Include="Inputs\ControllerInput.cpp" />
+    <ClCompile Include="Inputs\KeyboardInput.cpp" />
+    <ClCompile Include="Main\Debugger.cpp" />
+    <ClCompile Include="Main\Minigin.cpp" />
+    <ClCompile Include="Managers\AchievementManager.cpp" />
+    <ClCompile Include="Managers\InputManager.cpp" />
+    <ClCompile Include="Managers\ResourceManager.cpp" />
+    <ClCompile Include="Managers\SceneManager.cpp" />
+    <ClCompile Include="Observer\Observer.cpp" />
+    <ClCompile Include="Observer\Subject.cpp" />
+    <ClCompile Include="Scene\DemoSceneLoader.cpp" />
+    <ClCompile Include="Scene\GameObject.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Temporary\HealthCommand.cpp" />
+    <ClCompile Include="Temporary\ScoreCommand.cpp" />
+    <ClCompile Include="Utility\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,8 +3,8 @@
 
 #include "Transform.h"
 #include "MoveComponent.h"
-#include "Health.h"
-#include "Score.h"
+//#include "Health.h"
+//#include "Score.h"
 
 #include <regex>
 
@@ -17,7 +17,7 @@ dae::GameObject::GameObject(const std::string& objectName)
     , m_pParent{ nullptr }
     , m_MarkedForDelete{ false }
     , m_IsTransformDirty{ true }
-    , m_Transform{}
+    , m_pTransform{}
     , m_Children{}
     , m_NameObject{ objectName }
 {
@@ -31,8 +31,8 @@ const std::string& dae::GameObject::GetObjectName() const
 
 void dae::GameObject::InitGameObject()
 {
-    m_Transform = AddComponent<Transform>();
-    m_Transform->SetLocalPosition(glm::vec2(0, 0));
+    m_pTransform = AddComponent<Transform>();
+    m_pTransform->SetLocalPosition(glm::vec2(0, 0));
 
     std::regex playerTag("player.*", std::regex_constants::icase); // .* every character after Player is also accepted and * idicates >= 0, icase : capital insensitive
 
@@ -54,8 +54,8 @@ void dae::GameObject::Update()
             child->Update();
     }
 
-    if (m_Transform->IsDirty())
-        m_Transform->UpdateWorldPosition();
+    if (m_pTransform->IsDirty())
+        m_pTransform->UpdateWorldPosition();
 
 
 }
@@ -118,8 +118,8 @@ void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
     if (m_pParent == nullptr)
     {
         //Local position is now world position
-        const auto position{ m_Transform->GetWorldPosition() };
-        m_Transform->SetPosition(position.x, position.y);
+        const auto position{ m_pTransform->GetWorldPosition() };
+        m_pTransform->SetPosition(position.x, position.y);
     }
     else
     {
@@ -128,13 +128,13 @@ void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
 
         if (keepWorldPosition)
         {
-            const auto position{ m_Transform->GetLocalPosition() - m_pParent->GetTransform()->GetWorldPosition() };
-            m_Transform->SetPosition(position.x, position.y);
+            const auto position{ m_pTransform->GetLocalPosition() - m_pParent->GetTransform()->GetWorldPosition() };
+            m_pTransform->SetPosition(position.x, position.y);
         }
         else
         {
             //Recalculate world position
-            m_Transform->SetDirty();
+            m_pTransform->SetDirty();
         }
     }
 
@@ -147,9 +147,13 @@ GameObject* dae::GameObject::GetParent() const
 
 void dae::GameObject::InitPlayer()
 {
-    AddComponent<Score>();
-    AddComponent<Health>(); // standard 3, can be adapted
-    AddComponent<MovementComponent>();
+
+    // TODO : add to project DIGDUG not in engin
+    
+
+    //AddComponent<Score>();
+    //AddComponent<Health>(); // standard 3, can be adapted
+    //AddComponent<MovementComponent>();
 }
 
 void dae::GameObject::AddChild(std::shared_ptr<GameObject> pChild)
