@@ -1,13 +1,13 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 
 #include <chrono>
 
 namespace dae
 {
 
-    class TextComponent;
-    class FPSComponent final : public BaseComponent
+    class Text;
+    class FPSComponent final : public Component
     {
     public:
         FPSComponent();
@@ -19,6 +19,6 @@ namespace dae
     private:
         int m_Fps;
         float m_TimeRunning;
-        TextComponent* m_TextComponent;
+        Text* m_TextComponent;
     };
 }

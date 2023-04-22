@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -144,7 +144,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -180,7 +180,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -216,7 +216,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -259,20 +259,23 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
     <ClInclude Include="Components\AssetsComponents\Audio.h" />
     <ClInclude Include="Components\AssetsComponents\Font.h" />
-    <ClInclude Include="Components\AssetsComponents\RenderComponent.h" />
-    <ClInclude Include="Components\AssetsComponents\TextComponent.h" />
-    <ClInclude Include="Components\AssetsComponents\TextureComponent.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h" />
+    <ClInclude Include="Components\AssetsComponents\Text.h" />
+    <ClInclude Include="Components\AssetsComponents\Texture.h" />
     <ClInclude Include="Components\AssetsComponents\Transform.h" />
-    <ClInclude Include="Components\BaseComponent.h" />
+    <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\Command.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\MoveStickCommand.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h" />
-    <ClInclude Include="Components\GameplayComponents\MoveComponent.h" />
+    <ClInclude Include="Components\GameplayComponents\MovementComponent.h" />
     <ClInclude Include="Components\HUD\FPSComponent.h" />
     <ClInclude Include="Events\Event.h" />
     <ClInclude Include="Events\EventQueue.h" />
     <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Graphics\Sprites\Sprite.h" />
     <ClInclude Include="Graphics\Texture2D.h" />
     <ClInclude Include="Inputs\ControllerInput.h" />
     <ClInclude Include="Inputs\KeyboardInput.h" />
@@ -331,20 +334,23 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp" />
     <ClCompile Include="Components\AssetsComponents\Audio.cpp" />
     <ClCompile Include="Components\AssetsComponents\Font.cpp" />
-    <ClCompile Include="Components\AssetsComponents\RenderComponent.cpp" />
-    <ClCompile Include="Components\AssetsComponents\TextComponent.cpp" />
-    <ClCompile Include="Components\AssetsComponents\TextureComponent.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp" />
+    <ClCompile Include="Components\AssetsComponents\Text.cpp" />
+    <ClCompile Include="Components\AssetsComponents\Texture.cpp" />
     <ClCompile Include="Components\AssetsComponents\Transform.cpp" />
-    <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\MoveCommand.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\MoveStickCommand.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp" />
-    <ClCompile Include="Components\GameplayComponents\MoveComponent.cpp" />
+    <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp" />
     <ClCompile Include="Components\HUD\FPSComponent.cpp" />
     <ClCompile Include="Events\Event.cpp" />
     <ClCompile Include="Events\EventQueue.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\Sprites\Sprite.cpp" />
     <ClCompile Include="Graphics\Texture2D.cpp" />
     <ClCompile Include="Inputs\ControllerInput.cpp" />
     <ClCompile Include="Inputs\KeyboardInput.cpp" />

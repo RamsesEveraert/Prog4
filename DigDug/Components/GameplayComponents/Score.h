@@ -1,9 +1,9 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 
 namespace dae 
 {
-	class Score final : public BaseComponent
+	class Score final : public Component
 	{
 	public:
 		Score();

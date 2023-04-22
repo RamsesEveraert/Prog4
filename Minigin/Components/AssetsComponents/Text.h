@@ -1,15 +1,15 @@
 #pragma once
 
-#include "BaseComponent.h"
+#include "Component.h"
 
 namespace dae
 {
 	class Font;
-	class TextComponent final : public BaseComponent
+	class Text final : public Component
 	{
 	public:
-		TextComponent();
-		~TextComponent() = default;
+		Text();
+		~Text() = default;
 
 		void Update() override;
 

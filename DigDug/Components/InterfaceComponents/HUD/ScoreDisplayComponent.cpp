@@ -4,8 +4,8 @@
 #include "Event.h"
 #include "GameObject.h"
 #include "Score.h"
-#include "TextComponent.h"
-#include "TextureComponent.h"
+#include "Text.h"
+#include "Texture.h"
 
 #include <sstream>
 
@@ -74,13 +74,13 @@ void dae::ScoreDisplayComponent::SetOwnerScore(GameObject* gameObject)
 {
     m_pScore = gameObject->GetComponent<Score>();
     m_Score = m_pScore->GetScore();
-    m_pTextcomponent = gameObject->GetComponent<TextComponent>();
+    m_pTextcomponent = gameObject->GetComponent<Text>();
     m_pOwnerScore = gameObject;
 
     if (!m_pTextcomponent)
     {
-        if (!GetOwner()->HasComponent<TextureComponent>()) GetOwner()->AddComponent<TextureComponent>();
-        m_pTextcomponent = GetOwner()->AddComponent<TextComponent>();
+        if (!GetOwner()->HasComponent<Texture>()) GetOwner()->AddComponent<Texture>();
+        m_pTextcomponent = GetOwner()->AddComponent<Text>();
         m_pTextcomponent->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
     }
 

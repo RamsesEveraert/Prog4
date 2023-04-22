@@ -1,8 +1,8 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 namespace dae
 {
-	class InstructionsComponent final : public BaseComponent
+	class InstructionsComponent final : public Component
 	{
 	public:
 		InstructionsComponent() = default;

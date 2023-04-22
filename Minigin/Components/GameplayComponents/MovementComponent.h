@@ -1,15 +1,15 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 #include <glm/glm.hpp>
 
 namespace dae
 {
     class GameObject;
-    class MovementComponent final : public BaseComponent
+    class MovementComponent final : public Component
     {
     public:
 
-        MovementComponent() = default;
+        MovementComponent();
         void Move(const glm::vec2& direction);
         void SetSpeed(float speed);
         const float GetSpeed() const;

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Timer.h"
 #include "Transform.h"
-#include "MoveComponent.h"
+#include "MovementComponent.h"
 
 using namespace dae;
 

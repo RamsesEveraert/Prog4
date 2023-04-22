@@ -9,9 +9,9 @@
 #include "Scene.h"
 
 // components
-#include "TextureComponent.h"
+#include "Texture.h"
 #include "RenderComponent.h"
-#include "TextComponent.h"
+#include "Text.h"
 #include "FPSComponent.h"
 #include "Transform.h"
 //#include "LivesDisplayComponent.h"
@@ -44,7 +44,7 @@ dae::DemoSceneLoader::DemoSceneLoader()
 void dae::DemoSceneLoader::CreateBackground(Scene& scene)
 {
     auto background = std::make_shared<dae::GameObject>("background");
-    background->AddComponent<dae::TextureComponent>()->SetTextureByPath("background.tga");
+    background->AddComponent<dae::Texture>()->SetTextureByPath("background.tga");
     background->AddComponent<dae::RenderComponent>();
     scene.Add(background);
 }
@@ -53,7 +53,7 @@ void dae::DemoSceneLoader::CreateLogo(Scene& scene)
 {
     auto logo = std::make_shared<dae::GameObject>("logo");
     logo->GetTransform()->SetPosition(glm::vec2{ 216,190 });
-    logo->AddComponent<dae::TextureComponent>()->SetTextureByPath("logo.tga");
+    logo->AddComponent<dae::Texture>()->SetTextureByPath("logo.tga");
     logo->AddComponent<dae::RenderComponent>();
     scene.Add(logo);
 }
@@ -62,9 +62,9 @@ void dae::DemoSceneLoader::CreateTextObject(Scene& scene)
 {
     auto textObject = std::make_shared<dae::GameObject>("textObject");
     textObject->GetTransform()->SetPosition(glm::vec2{ 190,250 });
-    textObject->AddComponent<dae::TextureComponent>();
-    textObject->AddComponent<dae::TextComponent>()->SetFont(dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36));
-    textObject->GetComponent<TextComponent>()->SetText("Programming 4:");
+    textObject->AddComponent<dae::Texture>();
+    textObject->AddComponent<dae::Text>()->SetFont(dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36));
+    textObject->GetComponent<Text>()->SetText("Programming 4:");
     textObject->AddComponent<dae::RenderComponent>();
     scene.Add(textObject);
 }
@@ -73,9 +73,9 @@ void dae::DemoSceneLoader::CreateFPSObject(Scene& scene)
 {
     auto fpsCounter = std::make_shared<dae::GameObject>("fpsCounter");
     fpsCounter->GetTransform()->SetPosition(glm::vec2{ 20,20 });
-    fpsCounter->AddComponent<dae::TextureComponent>();
-    fpsCounter->AddComponent<dae::TextComponent>()->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
-    fpsCounter->GetComponent<TextComponent>()->SetText(" ");
+    fpsCounter->AddComponent<dae::Texture>();
+    fpsCounter->AddComponent<dae::Text>()->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
+    fpsCounter->GetComponent<Text>()->SetText(" ");
     fpsCounter->AddComponent<dae::RenderComponent>();
     fpsCounter->AddComponent<dae::FPSComponent>();
     scene.Add(fpsCounter);
@@ -86,7 +86,7 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 {
     auto player1 = std::make_shared<dae::GameObject>("player1");
     player1->GetTransform()->SetPosition(glm::vec2{ 300,300 });
-    player1->AddComponent<TextureComponent>()->SetTextureByPath("char1.png");
+    player1->AddComponent<Texture>()->SetTextureByPath("char1.png");
     player1->AddComponent<RenderComponent>();
 
 	//*** commands controller ***//
@@ -136,7 +136,7 @@ void dae::DemoSceneLoader::InputsExercice(Scene& scene)
 
 	auto player2 = std::make_shared<GameObject>("player2");
 	player2->GetTransform()->SetPosition(glm::vec2{ 350,350 });
-	player2->AddComponent<TextureComponent>()->SetTextureByPath("char2.png");
+	player2->AddComponent<Texture>()->SetTextureByPath("char2.png");
 	player2->AddComponent<RenderComponent>();
 
 	player = player2.get();

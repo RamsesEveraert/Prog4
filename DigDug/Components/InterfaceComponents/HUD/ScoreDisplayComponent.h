@@ -1,13 +1,13 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 
 namespace dae
 {
     struct Event;
     class Score;
     class GameObject;
-    class TextComponent;
-    class ScoreDisplayComponent final : public BaseComponent
+    class Text;
+    class ScoreDisplayComponent final : public Component
     {
     public:
         ScoreDisplayComponent();
@@ -21,7 +21,7 @@ namespace dae
         Score* m_pScore;
         int m_Score;
         GameObject* m_pOwnerScore;
-        TextComponent* m_pTextcomponent;
+        Text* m_pTextcomponent;
     };
 }
 

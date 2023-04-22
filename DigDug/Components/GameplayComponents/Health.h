@@ -1,9 +1,9 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 
 namespace dae
 {
-	class Health final : public BaseComponent
+	class Health final : public Component
 	{
 	public:
 		Health();

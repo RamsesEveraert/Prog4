@@ -53,6 +53,12 @@
     <Filter Include="Utility">
       <UniqueIdentifier>{1e56fc3a-3bd0-4d81-8575-e88148ed3e1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Sprites">
+      <UniqueIdentifier>{bf1b4e24-85f7-4191-bf3c-76e687d7fa27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\AssetsComponents\RenderComponents">
+      <UniqueIdentifier>{929119fe-79f5-4da1-ac88-a602decf82b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\implot\implot.h">
@@ -88,16 +94,13 @@
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\TextureComponent.h">
+    <ClInclude Include="Components\AssetsComponents\Texture.h">
       <Filter>Components\AssetsComponents</Filter>
     </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\TextComponent.h">
+    <ClInclude Include="Components\AssetsComponents\Text.h">
       <Filter>Components\AssetsComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\Transform.h">
-      <Filter>Components\AssetsComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\RenderComponent.h">
       <Filter>Components\AssetsComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\Font.h">
@@ -127,7 +130,7 @@
     <ClInclude Include="Inputs\KeyboardInput.h">
       <Filter>Inputs</Filter>
     </ClInclude>
-    <ClInclude Include="Components\BaseComponent.h">
+    <ClInclude Include="Components\Component.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h">
@@ -187,9 +190,17 @@
     <ClInclude Include="Utility\Singleton.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Components\GameplayComponents\MoveComponent.h">
+    <ClInclude Include="Components\GameplayComponents\MovementComponent.h">
       <Filter>Components\GameplayComponents</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Sprites\Sprite.h">
+      <Filter>Graphics\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -231,13 +242,10 @@
     <ClCompile Include="Components\AssetsComponents\Font.cpp">
       <Filter>Components\AssetsComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\RenderComponent.cpp">
+    <ClCompile Include="Components\AssetsComponents\Text.cpp">
       <Filter>Components\AssetsComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\TextComponent.cpp">
-      <Filter>Components\AssetsComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\TextureComponent.cpp">
+    <ClCompile Include="Components\AssetsComponents\Texture.cpp">
       <Filter>Components\AssetsComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\Transform.cpp">
@@ -264,7 +272,7 @@
     <ClCompile Include="Inputs\KeyboardInput.cpp">
       <Filter>Inputs</Filter>
     </ClCompile>
-    <ClCompile Include="Components\BaseComponent.cpp">
+    <ClCompile Include="Components\Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp">
@@ -321,8 +329,16 @@
     <ClCompile Include="Utility\Timer.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Components\GameplayComponents\MoveComponent.cpp">
+    <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp">
       <Filter>Components\GameplayComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Sprites\Sprite.cpp">
+      <Filter>Graphics\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp" />
   </ItemGroup>
 </Project>

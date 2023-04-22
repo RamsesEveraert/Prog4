@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseComponent.h"
+#include "Component.h"
 #pragma warning( push )
 #pragma warning( disable: 4201 )
 //code with ThatWarning here
@@ -11,7 +11,7 @@
 
 namespace dae
 {
-	class Transform final : public BaseComponent
+	class Transform final : public Component
 	{
 	public:
 

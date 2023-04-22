@@ -9,6 +9,7 @@
 #include "imgui_plot.h"
 #include "../3rdParty/implot/implot.h"
 
+
 using namespace dae;
 
 
@@ -77,7 +78,7 @@ void dae::Renderer::Destroy()
 	}
 }
 
-void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+void dae::Renderer::RenderTexture(const Texture2D& texture,  float x,  float y) const
 {
 	SDL_Rect dst{};
 	dst.x = static_cast<int>(x);
@@ -86,7 +87,7 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
+void dae::Renderer::RenderTexture(const Texture2D& texture,  float x,  float y,  float width,  float height) const
 {
 	SDL_Rect dst{};
 	dst.x = static_cast<int>(x);
@@ -96,4 +97,94 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
 }
 
-inline SDL_Renderer* dae::Renderer::GetSDLRenderer() const { return m_renderer; }
+void dae::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect& dstRect) const
+{
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dstRect);
+}
+
+void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x,  float y) const
+{
+	SDL_Rect dst{};
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	dst.w = srcRect.w;
+	dst.h = srcRect.h;
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+}
+
+void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const
+{
+	SDL_Rect dst{};
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	dst.w = static_cast<int>(w);
+	dst.h = static_cast<int>(h);
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+}
+
+void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const
+{
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dstRect);
+}
+
+inline SDL_Renderer* dae::Renderer::GetSDLRenderer() const 
+{
+	return m_renderer; 
+}
+
+void Renderer::DrawLine(const glm::vec2& start, const glm::vec2& end, const SDL_Color& color) const
+{
+	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawLine(m_renderer, static_cast<int>(start.x), static_cast<int>(start.y), static_cast<int>(end.x), static_cast<int>(end.y));
+}
+
+void Renderer::DrawRect(const SDL_Rect& rect, const SDL_Color& color) const
+{
+	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawRect(m_renderer, &rect);
+}
+
+void dae::Renderer::DrawCircle(const glm::vec2& center, float radius, const SDL_Color& color) const
+{
+	// bron: https://iq.opengenus.org/bresenhams-circle-drawing-algorithm
+	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
+
+	int x = 0;
+	int y = static_cast<int>(radius);
+	int d = 3 - 2 * static_cast<int>(radius);
+
+	int cx = static_cast<int>(center.x);
+	int cy = static_cast<int>(center.y);
+
+	while (x <= y)
+	{
+		SDL_RenderDrawPoint(m_renderer, cx + x, cy + y);
+		SDL_RenderDrawPoint(m_renderer, cx - x, cy + y);
+		SDL_RenderDrawPoint(m_renderer, cx + x, cy - y);
+		SDL_RenderDrawPoint(m_renderer, cx - x, cy - y);
+		SDL_RenderDrawPoint(m_renderer, cx + y, cy + x);
+		SDL_RenderDrawPoint(m_renderer, cx - y, cy + x);
+		SDL_RenderDrawPoint(m_renderer, cx + y, cy - x);
+		SDL_RenderDrawPoint(m_renderer, cx - y, cy - x);
+
+		if (d < 0)
+		{
+			d = d + 4 * x + 6;
+		}
+		else
+		{
+			d = d + 4 * (x - y) + 10;
+			y--;
+		}
+		x++;
+	}
+}
+const SDL_Color& dae::Renderer::GetBackgroundColor() const
+{
+	return m_clearColor;
+}
+
+void dae::Renderer::SetBackgroundColor(const SDL_Color& color)
+{
+	m_clearColor = color;
+}

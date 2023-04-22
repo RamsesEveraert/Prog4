@@ -8,12 +8,14 @@
 #include "DemoSceneLoader.h"
 
 #include "Minigin.h"
+#include "GameScene.h"
 
 using namespace dae;
 
 void load()
 {
-	DemoSceneLoader demo;
+	GameScene game;
+	game.LoadScene();
 }
 
 int main(int, char* []) {

@@ -1,7 +1,7 @@
 #include "FPSComponent.h"
 
 #include "GameObject.h"
-#include "TextComponent.h"
+#include "Text.h"
 #include "Timer.h"
 
 dae::FPSComponent::FPSComponent()
@@ -16,7 +16,7 @@ void dae::FPSComponent::Update()
 
     if (!m_TextComponent)
     {
-        m_TextComponent = GetOwner()->GetComponent<TextComponent>();
+        m_TextComponent = GetOwner()->GetComponent<Text>();
 
         if (!m_TextComponent)
         {

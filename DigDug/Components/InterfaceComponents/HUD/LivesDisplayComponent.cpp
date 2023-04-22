@@ -4,8 +4,8 @@
 #include "Event.h"
 #include "GameObject.h"
 #include "Health.h"
-#include "TextComponent.h"
-#include "TextureComponent.h"
+#include "Text.h"
+#include "Texture.h"
 
 #include <sstream>
 
@@ -77,13 +77,13 @@ void dae::LivesDisplayComponent::SetOwnerLives(GameObject* gameObject)
 {
     m_pHealth = gameObject->GetComponent<Health>();
     m_Lives = m_pHealth->GetHealth();
-    m_pTextcomponent = gameObject->GetComponent<TextComponent>();
+    m_pTextcomponent = gameObject->GetComponent<Text>();
     m_pOwnerLives = gameObject;
 
     if (!m_pTextcomponent)
     {
-        if (!GetOwner()->HasComponent<TextureComponent>()) GetOwner()->AddComponent<TextureComponent>();
-        m_pTextcomponent = GetOwner()->AddComponent<TextComponent>();
+        if (!GetOwner()->HasComponent<Texture>()) GetOwner()->AddComponent<Texture>();
+        m_pTextcomponent = GetOwner()->AddComponent<Text>();
         m_pTextcomponent->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
     }
 

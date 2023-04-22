@@ -1,10 +1,15 @@
-#include "MoveComponent.h"
+#include "MovementComponent.h"
 
 #include "GameObject.h"
 #include "Transform.h"
 
 #include "Timer.h"
 
+
+dae::MovementComponent::MovementComponent()
+    :m_Speed{}
+{
+}
 
 void dae::MovementComponent::Move(const glm::vec2& direction)
 {

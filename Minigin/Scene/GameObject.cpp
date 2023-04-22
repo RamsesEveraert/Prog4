@@ -2,9 +2,8 @@
 #include "SceneManager.h"
 
 #include "Transform.h"
-#include "MoveComponent.h"
-//#include "Health.h"
-//#include "Score.h"
+#include "MovementComponent.h"
+#include "Sprite.h"
 
 #include <regex>
 
@@ -33,11 +32,6 @@ void dae::GameObject::InitGameObject()
 {
     m_pTransform = AddComponent<Transform>();
     m_pTransform->SetLocalPosition(glm::vec2(0, 0));
-
-    std::regex playerTag("player.*", std::regex_constants::icase); // .* every character after Player is also accepted and * idicates >= 0, icase : capital insensitive
-
-    if (std::regex_match(m_NameObject, playerTag)) InitPlayer();
-
 }
 
 void dae::GameObject::Update()
@@ -55,7 +49,11 @@ void dae::GameObject::Update()
     }
 
     if (m_pTransform->IsDirty())
+    {
         m_pTransform->UpdateWorldPosition();
+        if (HasComponent<Sprite>()) GetComponent<Sprite>()->SetPosition(m_pTransform->GetWorldPosition());
+    }
+       
 
 
 }
@@ -143,17 +141,6 @@ void dae::GameObject::SetParent(GameObject* pNewParent, bool keepWorldPosition)
 GameObject* dae::GameObject::GetParent() const
 {
     return m_pParent;
-}
-
-void dae::GameObject::InitPlayer()
-{
-
-    // TODO : add to project DIGDUG not in engin
-    
-
-    //AddComponent<Score>();
-    //AddComponent<Health>(); // standard 3, can be adapted
-    //AddComponent<MovementComponent>();
 }
 
 void dae::GameObject::AddChild(std::shared_ptr<GameObject> pChild)
