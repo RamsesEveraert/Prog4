@@ -26,12 +26,6 @@
     <Filter Include="Managers">
       <UniqueIdentifier>{07f8d8c4-c951-46a0-9d84-41a0c9e3d0d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\GameplayComponents">
-      <UniqueIdentifier>{58cac80b-bf63-4ba2-864a-db0032cdec00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\GameplayComponents\Commands">
-      <UniqueIdentifier>{77c8191c-7f70-45cf-849d-f22992bb71ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{c0f18a49-6613-4acc-b549-82b2d62a2235}</UniqueIdentifier>
     </Filter>
@@ -58,6 +52,12 @@
     </Filter>
     <Filter Include="Components\AssetsComponents\RenderComponents">
       <UniqueIdentifier>{929119fe-79f5-4da1-ac88-a602decf82b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameplayComponents">
+      <UniqueIdentifier>{cee06cff-8875-41c5-8d2c-9c8261c50bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GameplayComponents\Commands">
+      <UniqueIdentifier>{77c8191c-7f70-45cf-849d-f22992bb71ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -190,17 +190,21 @@
     <ClInclude Include="Utility\Singleton.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Components\GameplayComponents\MovementComponent.h">
-      <Filter>Components\GameplayComponents</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Sprites\Sprite.h">
       <Filter>Graphics\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h">
       <Filter>Components\AssetsComponents\RenderComponents</Filter>
     </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h" />
-    <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h" />
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\MovementComponent.h">
+      <Filter>Components\GameplayComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -329,16 +333,20 @@
     <ClCompile Include="Utility\Timer.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp">
-      <Filter>Components\GameplayComponents</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Sprites\Sprite.cpp">
       <Filter>Graphics\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp">
       <Filter>Components\AssetsComponents\RenderComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp" />
-    <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp" />
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp">
+      <Filter>Components\AssetsComponents\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp">
+      <Filter>Components\GameplayComponents</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -171,7 +171,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Components\GameplayComponents\Animation.cpp" />
+    <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp" />
     <ClCompile Include="Components\GameplayComponents\Health.cpp" />
     <ClCompile Include="Components\GameplayComponents\InstructionsComponent.cpp" />
     <ClCompile Include="Components\GameplayComponents\Player\Player.cpp" />
@@ -182,7 +182,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Scene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Components\GameplayComponents\Animation.h" />
+    <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h" />
     <ClInclude Include="Components\GameplayComponents\Health.h" />
     <ClInclude Include="Components\GameplayComponents\InstructionsComponent.h" />
     <ClInclude Include="Components\GameplayComponents\Player\Player.h" />

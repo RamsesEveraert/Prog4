@@ -9,7 +9,7 @@ namespace dae
     {
     public:
 
-        MovementComponent();
+        MovementComponent(float speed);
         void Move(const glm::vec2& direction);
         void SetSpeed(float speed);
         const float GetSpeed() const;

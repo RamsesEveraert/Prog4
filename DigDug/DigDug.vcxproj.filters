@@ -28,7 +28,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Components\GameplayComponents\Animation.cpp">
+    <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp">
       <Filter>Components\GameplayComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Health.cpp">
@@ -50,10 +50,12 @@
     <ClCompile Include="Scene\GameScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Components\GameplayComponents\Player\Player.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Player\Player.cpp">
+      <Filter>Components\GameplayComponents\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Components\GameplayComponents\Animation.h">
+    <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h">
       <Filter>Components\GameplayComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Health.h">
@@ -77,7 +79,9 @@
     <ClInclude Include="Scene\GameScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Components\GameplayComponents\Player\Player.h" />
+    <ClInclude Include="Components\GameplayComponents\Player\Player.h">
+      <Filter>Components\GameplayComponents\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DigDug.rc">

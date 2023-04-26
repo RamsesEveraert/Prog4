@@ -11,9 +11,10 @@ using namespace dae;
 
 dae::MoveStickCommand::MoveStickCommand(GameObject* go, float speed, const glm::vec2& direction)
     : m_Direction{ direction }
+    , m_GameObject {go}
+    , m_Speed{ speed }
 {
-    m_pMovementComponent = go->GetComponent<MovementComponent>();
-    m_pMovementComponent->SetSpeed(speed);
+    m_pMovementComponent = m_GameObject->AddComponent<MovementComponent>(speed);
 }
 
 void dae::MoveStickCommand::Execute() 

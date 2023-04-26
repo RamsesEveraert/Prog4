@@ -85,7 +85,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	load();
 
-	auto& timer = Timer::GetInstance();
+	auto& timeManager = TimeManager::GetInstance();
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
@@ -98,16 +98,14 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	while (doContinue)
 	{
-		timer.updateDeltaTime(timer);
+		timeManager.Update();
 
-		float dt = timer.getDeltaTimeSec();
-
+		const float dt = timeManager.GetDeltaTimeSec();
 		accumulatedTime += dt;
 
 		doContinue = input.ProcessInput();
 
-		// fixedtimestep update loop
-
+		// Perform fixed timestep updates
 		while (accumulatedTime >= fixedTimeStep)
 		{
 			sceneManager.FixedUpdate(/*fixedTimeStep*/);
@@ -118,11 +116,15 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		renderer.Render();
 
-		if (accumulatedTime < fixedTimeStep)
-		{
-			// sleep to avoid using GPU resources unnecessarily
-			std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>((fixedTimeStep - accumulatedTime) * 1000)));
-		}
+		// Sleep to ensure a fixed frame rate
+		const auto endTime = std::chrono::steady_clock::now() + std::chrono::microseconds(static_cast<int>(fixedTimeStep * 1000000));
+		std::this_thread::sleep_until(endTime);
+
+		//if (accumulatedTime < fixedTimeStep)
+		//{
+		//	// sleep to avoid using GPU resources unnecessarily
+		//	std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>((fixedTimeStep - accumulatedTime) * 1000)));
+		//}
 		
 	}
 

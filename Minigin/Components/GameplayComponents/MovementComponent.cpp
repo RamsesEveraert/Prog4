@@ -5,17 +5,22 @@
 
 #include "Timer.h"
 
+#include "Renderer.h"
 
-dae::MovementComponent::MovementComponent()
-    :m_Speed{}
+
+dae::MovementComponent::MovementComponent(float speed)
+    :m_Speed{speed}
 {
+
 }
 
 void dae::MovementComponent::Move(const glm::vec2& direction)
 {
     glm::vec2 currentPosition = GetOwner()->GetTransform()->GetLocalPosition();
-    glm::vec2 newPosition = currentPosition + direction * Timer::GetInstance().getDeltaTimeSec() * m_Speed;
+    glm::vec2 newPosition = currentPosition + direction * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed;
     GetOwner()->GetTransform()->SetPosition(newPosition);
+    std::cout << "Current Position: [" << GetOwner()->GetTransform()->GetWorldPosition().x
+        << ", " << GetOwner()->GetTransform()->GetWorldPosition().y << "\n";
 }
 
 void dae::MovementComponent::SetSpeed(float speed)

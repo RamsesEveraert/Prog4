@@ -79,7 +79,7 @@ void dae::ScoreDisplayComponent::SetOwnerScore(GameObject* gameObject)
 
     if (!m_pTextcomponent)
     {
-        if (!GetOwner()->HasComponent<Texture>()) GetOwner()->AddComponent<Texture>();
+        if (!GetOwner()->HasComponent<Texture>()) GetOwner()->AddComponent<Texture>("");
         m_pTextcomponent = GetOwner()->AddComponent<Text>();
         m_pTextcomponent->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 15));
     }

@@ -21,6 +21,8 @@ namespace dae
 
         // temporary
         void CreateBackground(Scene& scene);
+        void SpriteTest(Scene& scene);
+        void CreateFPSObject(Scene& scene);
 	};
 
 }

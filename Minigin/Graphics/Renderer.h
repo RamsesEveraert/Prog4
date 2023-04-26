@@ -23,9 +23,12 @@ namespace dae
 		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
 		void RenderTexture(const Texture2D& texture, const SDL_Rect& dstRect) const;
 
-		void RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x, float y) const;
-		void RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const;
-		void RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const;
+		void RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, float x, float y) const;
+		void RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const;
+		void RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const;
+
+		void SetKeyColor(const SDL_Color& keycolor);
+		const SDL_Color& GetKeyColor() const;
 
 		SDL_Renderer* GetSDLRenderer() const;
 
@@ -40,10 +43,15 @@ namespace dae
 		const SDL_Color& GetBackgroundColor() const;
 		void SetBackgroundColor(const SDL_Color& color);
 
+		SDL_Window* GetSDLWindow() const;
+
 	private:
-		SDL_Renderer* m_renderer{};
-		SDL_Window* m_window{};
-		SDL_Color m_clearColor{};
+
+		SDL_Color m_KeyColor;
+
+		SDL_Renderer* m_Renderer{};
+		SDL_Window* m_Window{};
+		SDL_Color m_ClearColor{};
 
 		
 

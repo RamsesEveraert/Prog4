@@ -12,11 +12,11 @@ namespace dae
     class Texture final : public Component
     {
     public:
-        Texture();
+        Texture(const std::string& path);
         ~Texture() = default;
 
         const std::shared_ptr<Texture2D> GetTexture() const;
-        void SetTextureByPath(const std::string& filename);
+        void SetTextureByPath(const std::string& path);
         void SetTexture(std::shared_ptr<Texture2D> texture);
 
     private:

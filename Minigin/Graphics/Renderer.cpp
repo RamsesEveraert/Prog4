@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <SDL_pixels.h>
 #include "Renderer.h"
 #include "SceneManager.h"
 #include "Texture2D.h"
@@ -8,6 +9,10 @@
 #include <backends/imgui_impl_opengl2.h>
 #include "imgui_plot.h"
 #include "../3rdParty/implot/implot.h"
+
+#include <iostream>
+
+
 
 
 using namespace dae;
@@ -29,12 +34,14 @@ int GetOpenGLDriverIndex()
 
 void dae::Renderer::Init(SDL_Window* window)
 {
-	m_window = window;
-	m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
-	if (m_renderer == nullptr) 
+	m_Window = window;
+	m_Renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
+	if (m_Renderer == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 	}
+
+	m_KeyColor = SDL_Color(155, 0, 0);
 
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -46,13 +53,13 @@ void dae::Renderer::Init(SDL_Window* window)
 void dae::Renderer::Render()
 {
 	const auto& color = GetBackgroundColor();
-	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderClear(m_renderer);
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderClear(m_Renderer);
 
 	SceneManager::GetInstance().Render();
 
 	ImGui_ImplOpenGL2_NewFrame();
-	ImGui_ImplSDL2_NewFrame(m_window);
+	ImGui_ImplSDL2_NewFrame(m_Window);
 	ImGui::NewFrame();
 
 	SceneManager::GetInstance().RenderImGui();
@@ -60,7 +67,7 @@ void dae::Renderer::Render()
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	
-	SDL_RenderPresent(m_renderer);
+	SDL_RenderPresent(m_Renderer);
 }
 
 void dae::Renderer::Destroy()
@@ -71,10 +78,10 @@ void dae::Renderer::Destroy()
 	ImPlot::DestroyContext();
 	ImGui::DestroyContext();
 
-	if (m_renderer != nullptr)
+	if (m_Renderer != nullptr)
 	{
-		SDL_DestroyRenderer(m_renderer);
-		m_renderer = nullptr;
+		SDL_DestroyRenderer(m_Renderer);
+		m_Renderer = nullptr;
 	}
 }
 
@@ -102,52 +109,67 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const SDL_Rect& dstR
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dstRect);
 }
 
-void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x,  float y) const
+void dae::Renderer::RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, float x,  float y) const
 {
-	SDL_Rect dst{};
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	dst.w = srcRect.w;
-	dst.h = srcRect.h;
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+	SDL_Rect dstRect{};
+	dstRect.x = static_cast<int>(x);
+	dstRect.y = static_cast<int>(y);
+	dstRect.w = srcRect.w;
+	dstRect.h = srcRect.h;
+
+	RenderSprite(texture, srcRect, dstRect);
 }
 
-void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const
+void dae::Renderer::RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const
 {
-	SDL_Rect dst{};
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	dst.w = static_cast<int>(w);
-	dst.h = static_cast<int>(h);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+	SDL_Rect dstRect{};
+	dstRect.x = static_cast<int>(x);
+	dstRect.y = static_cast<int>(y);
+	dstRect.w = static_cast<int>(w);
+	dstRect.h = static_cast<int>(h);
+
+	RenderSprite(texture, srcRect, dstRect);
 }
 
-void dae::Renderer::RenderSprite(const Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const
+
+void Renderer::RenderSprite(Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const
 {
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dstRect);
 }
 
+void dae::Renderer::SetKeyColor(const SDL_Color& keycolor)
+{
+	m_KeyColor = keycolor;
+}
+
+const SDL_Color& dae::Renderer::GetKeyColor() const
+{
+	return m_KeyColor;
+}
+
+
+
 inline SDL_Renderer* dae::Renderer::GetSDLRenderer() const 
 {
-	return m_renderer; 
+	return m_Renderer; 
 }
 
 void Renderer::DrawLine(const glm::vec2& start, const glm::vec2& end, const SDL_Color& color) const
 {
-	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderDrawLine(m_renderer, static_cast<int>(start.x), static_cast<int>(start.y), static_cast<int>(end.x), static_cast<int>(end.y));
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawLine(m_Renderer, static_cast<int>(start.x), static_cast<int>(start.y), static_cast<int>(end.x), static_cast<int>(end.y));
 }
 
 void Renderer::DrawRect(const SDL_Rect& rect, const SDL_Color& color) const
 {
-	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderDrawRect(m_renderer, &rect);
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawRect(m_Renderer, &rect);
 }
 
 void dae::Renderer::DrawCircle(const glm::vec2& center, float radius, const SDL_Color& color) const
 {
 	// bron: https://iq.opengenus.org/bresenhams-circle-drawing-algorithm
-	SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
 
 	int x = 0;
 	int y = static_cast<int>(radius);
@@ -158,14 +180,14 @@ void dae::Renderer::DrawCircle(const glm::vec2& center, float radius, const SDL_
 
 	while (x <= y)
 	{
-		SDL_RenderDrawPoint(m_renderer, cx + x, cy + y);
-		SDL_RenderDrawPoint(m_renderer, cx - x, cy + y);
-		SDL_RenderDrawPoint(m_renderer, cx + x, cy - y);
-		SDL_RenderDrawPoint(m_renderer, cx - x, cy - y);
-		SDL_RenderDrawPoint(m_renderer, cx + y, cy + x);
-		SDL_RenderDrawPoint(m_renderer, cx - y, cy + x);
-		SDL_RenderDrawPoint(m_renderer, cx + y, cy - x);
-		SDL_RenderDrawPoint(m_renderer, cx - y, cy - x);
+		SDL_RenderDrawPoint(m_Renderer, cx + x, cy + y);
+		SDL_RenderDrawPoint(m_Renderer, cx - x, cy + y);
+		SDL_RenderDrawPoint(m_Renderer, cx + x, cy - y);
+		SDL_RenderDrawPoint(m_Renderer, cx - x, cy - y);
+		SDL_RenderDrawPoint(m_Renderer, cx + y, cy + x);
+		SDL_RenderDrawPoint(m_Renderer, cx - y, cy + x);
+		SDL_RenderDrawPoint(m_Renderer, cx + y, cy - x);
+		SDL_RenderDrawPoint(m_Renderer, cx - y, cy - x);
 
 		if (d < 0)
 		{
@@ -181,10 +203,16 @@ void dae::Renderer::DrawCircle(const glm::vec2& center, float radius, const SDL_
 }
 const SDL_Color& dae::Renderer::GetBackgroundColor() const
 {
-	return m_clearColor;
+	return m_ClearColor;
 }
 
 void dae::Renderer::SetBackgroundColor(const SDL_Color& color)
 {
-	m_clearColor = color;
+	m_ClearColor = color;
 }
+
+SDL_Window* dae::Renderer::GetSDLWindow() const
+{
+	return m_Window;
+}
+

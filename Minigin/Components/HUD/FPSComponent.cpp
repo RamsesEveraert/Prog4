@@ -4,9 +4,13 @@
 #include "Text.h"
 #include "Timer.h"
 
+#include "Texture.h"
+
 dae::FPSComponent::FPSComponent()
-    :  m_Fps{ 0 }
-    , m_TimeRunning{ 0.0f }
+    :  m_Fps{ }
+    , m_TimeRunning{ }
+    , m_pTextComponent{}
+    , m_pTexture{}
 {
 
 }
@@ -14,38 +18,33 @@ dae::FPSComponent::FPSComponent()
 void dae::FPSComponent::Update()
 {
 
-    if (!m_TextComponent)
-    {
-        m_TextComponent = GetOwner()->GetComponent<Text>();
+    if (!m_pTextComponent) m_pTextComponent = GetOwner()->AddComponent<Text>();
 
-        if (!m_TextComponent)
-        {
-            std::cout << "No TextComponent found! \n";
-            return;
-        }
-    }
-
-    auto& timer = Timer::GetInstance();
-    m_TimeRunning += timer.getDeltaTimeSec();
+    auto& timeManager = TimeManager::GetInstance();
+    m_TimeRunning += timeManager.GetDeltaTimeSec();
     const float timeLimit = 1.f;
 
     if (m_TimeRunning >= timeLimit) // display fps every sec
     {
-        m_Fps = static_cast<int>(1 / timer.getDeltaTimeSec());
+        m_Fps = static_cast<int>(1 / timeManager.GetDeltaTimeSec());
 
-        if (m_TextComponent)
+        if (m_pTextComponent)
         {
-            m_TextComponent->SetText("FPS: " + std::to_string(m_Fps));
+            m_pTextComponent->SetText("FPS: " + std::to_string(m_Fps));
         }
 
         m_TimeRunning -= timeLimit;
     }
 
-
 }
-
 
 const int dae::FPSComponent::GetFPS() const
 {
     return m_Fps;
+}
+
+void dae::FPSComponent::SetColor(SDL_Color color)
+{
+    if (!m_pTextComponent) m_pTextComponent = GetOwner()->AddComponent<Text>();
+    m_pTextComponent->SetTextColor(color);
 }

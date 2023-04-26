@@ -15,9 +15,6 @@ namespace dae
 		StickCommand() = default;
 		virtual ~StickCommand() = default;
 
-	protected:
-
-	private:
 	};
 
 

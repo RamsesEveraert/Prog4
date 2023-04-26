@@ -1,49 +1,55 @@
+#pragma once
 #include "Singleton.h"
 #include <chrono>
-#include <iostream>
+ namespace dae
+        {
 
-namespace dae
-{
+            //stop watch
 
-    class Timer final : public Singleton<Timer> {
-    public:
-        
-        
-        virtual ~Timer() override = default;
+            class Stopwatch final : public Singleton<Stopwatch>
+            {
+            public:
+                Stopwatch();
 
-        // dt functions
+                void Start();
+                float Stop() const;
 
-        const float getDeltaTimeMs() const; 
-        const float getDeltaTimeSec() const; 
-        const float msToSeconds(float ms) const;
-       
-        void updateDeltaTime(Timer& timer);
-        
-        //stopwatch functions
+            private:
+                friend class Singleton<Stopwatch>;
+                std::chrono::time_point<std::chrono::steady_clock> m_StartTime;
+            };
 
-        void startStopwatch();
-        const float stopStopwatch();
+            // timer
 
-        // timer functions
+            class Timer final : public Singleton<Timer>
+            {
+            public:
+                Timer(float durationSeconds);
 
-        void startTimer(float durationSeconds);
-        bool isTimerFinished() const;
+                void Update();
+                bool IsFinished() const;
 
-    private:
-        friend class Singleton<Timer>;
-        Timer();
+            private:
+                friend class Singleton<Timer>;
+                Stopwatch m_Stopwatch;
+                std::chrono::duration<float> m_Duration;
+            };
 
-        
+            //TimeManager for delta tilme
 
+            class TimeManager final : public Singleton<TimeManager>
+            {
+            public:
+                TimeManager();
 
-        std::chrono::high_resolution_clock::time_point stopwatchStart;
-        std::chrono::high_resolution_clock::time_point timerStart;
-        std::chrono::duration<float> timerDuration;
-        std::chrono::duration<float> deltaTime;
+                float GetDeltaTimeMs() const;
+                float GetDeltaTimeSec() const;
+                void Update();
 
-       
-    };
+            private:
+                friend class Singleton<TimeManager>;
+                std::chrono::time_point<std::chrono::steady_clock> m_PreviousTime;
+                std::chrono::duration<float> m_DeltaTime;
+            };
+        }
 
-    
-
-}
