@@ -26,8 +26,14 @@ dae::GridMovementComponent::GridMovementComponent(float speed, Grid* pGrid)
 {
 }
 
+
+//************ TODO: only works for D-pad not for joystick  *******************************//
+
 void dae::GridMovementComponent::Move(const glm::vec2& direction)
 {
+    //check for diagonal inputs
+    if (direction.x != 0 && direction.y != 0) return;
+
     // Get current and new position of the object
     glm::vec2 currentPosition{ GetOwner()->GetTransform()->GetWorldPosition() };
     glm::vec2 newPosition{ currentPosition + direction * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed };
@@ -127,6 +133,11 @@ void dae::GridMovementComponent::MoveToNextCell(const glm::vec2& direction, cons
     }
 }
 
+
+
+
+
+
 void dae::GridMovementComponent::UpdateCurrentAndPreviousCell(int row, int col)
 {
     // Get current cell
@@ -147,4 +158,19 @@ void dae::GridMovementComponent::Render()
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // green color
     SDL_RenderDrawRect(renderer, &m_CurrentCell.dstRect);
 
+}
+
+void dae::GridMovementComponent::SetSpeed(float speed)
+{
+    m_Speed = speed;
+}
+
+const float dae::GridMovementComponent::GetSpeed() const
+{
+    return m_Speed;
+}
+
+void dae::GridMovementComponent::SetDirection(const glm::vec2& direction)
+{
+    m_CurrentDirection = direction;
 }

@@ -18,3 +18,13 @@ void dae::GridMoveCommand::Execute()
 {
     m_pGridMovementComponent->Move(m_Direction);
 }
+
+void dae::GridMoveCommand::SetDirection(const glm::vec2& direction)
+{
+    m_Direction = direction;
+}
+
+void dae::GridMoveCommand::SetSpeed(float speed)
+{
+    m_pGridMovementComponent->SetSpeed(speed);
+}

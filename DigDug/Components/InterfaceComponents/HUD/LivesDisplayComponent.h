@@ -6,7 +6,7 @@ namespace dae
     struct Event;
     class Health;
     class GameObject;
-    class Text;
+    class Sprite;
     class LivesDisplayComponent final : public Component
     {
     public:
@@ -23,7 +23,7 @@ namespace dae
         Health* m_pHealth;
         int m_Lives;
         GameObject* m_pOwnerLives;
-        Text* m_pTextcomponent;
+        Sprite* m_pSprite;
     };
 }
 

@@ -45,7 +45,7 @@ void Transform::SetDirty()
 
 		pTransform->SetDirty();
 	}
-
+	UpdateWorldPosition();
 }
 bool Transform::IsDirty()
 {

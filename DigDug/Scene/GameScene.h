@@ -16,9 +16,10 @@ namespace dae
         void LoadScene();
 
     private:
-        void CreatePlayer(Scene& scene);
+        void CreatePlayers(Scene& scene);
         void CreateEnemies(Scene& scene);
         void CreateGrid(Scene& scene);
+        void SetupHUD(Scene& scene);
 
         // temporary
         void CreateBackground(Scene& scene);

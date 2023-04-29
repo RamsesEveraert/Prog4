@@ -14,12 +14,12 @@ namespace dae
         void Move(const glm::vec2& direction);
         void SetSpeed(float speed);
         const float GetSpeed() const;
+        void SetDirection(const glm::vec2& direction);
         virtual void Render() override;
 
     private:
 
         void MoveToNextCell(const glm::vec2& direction, const glm::vec2& currentPosition, glm::vec2& newPosition, int row, int col);
-        glm::vec2 GetDirectionOnGridAxis(const glm::vec2& direction) const;
         void UpdateCurrentAndPreviousCell(int row, int col);
 
 

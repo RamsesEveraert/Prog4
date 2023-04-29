@@ -23,6 +23,10 @@
 #include "Grid.h"
 #include "GridMovementComponent.h"
 
+//HUD
+#include "LivesDisplayComponent.h"
+#include "ScoreDisplayComponent.h"
+
 
 // commands
 #include "MoveStickCommand.h"
@@ -46,41 +50,82 @@ void dae::GameScene::LoadScene()
 	// Create Grid
 	CreateGrid(scene);
 
-	// player
-	CreatePlayer(scene);
+	// players
+	CreatePlayers(scene);
 	std::cout << "Player created! \n";
 
-	// sprite test
-	SpriteTest(scene);
+	// HUD
+	SetupHUD(scene);
+	std::cout << "HUD Created \n";
 
 	// fps test
-
 	CreateFPSObject(scene);
 	
 
 
 }
 
-void dae::GameScene::CreatePlayer(Scene& scene)
+void dae::GameScene::CreatePlayers(Scene& scene)
 {
-	auto pPlayer{ std::make_shared<GameObject>("player") };
-	pPlayer->AddComponent<Player>()->InitPlayer();
-	pPlayer->GetTransform()->SetWorldPosition(250.f, 150.f);
+	auto gridObj{ scene.FindObject("grid") };
+	auto grid{ gridObj->GetComponent<Grid>() };
 
-	scene.Add(pPlayer);
+	auto player1{ std::make_shared<GameObject>("player1") };
+	player1->AddComponent<Player>()->InitPlayer();
+	player1->GetTransform()->SetPosition(grid->GetGridPosition());
+	scene.Add(player1);
+
+	auto controller{ InputManager::GetInstance().AddController() };
+
+	// Create a map of buttons and their corresponding directions
+	std::map<ControllerInput::ControllerButtons, glm::vec2> buttonDirections = {
+		{ ControllerInput::ControllerButtons::DPadUp, { 0.f, -1.f } },
+		{ ControllerInput::ControllerButtons::DPadDown, { 0.f, 1.f } },
+		{ ControllerInput::ControllerButtons::DPadRight, { 1.f, 0.f } },
+		{ ControllerInput::ControllerButtons::DPadLeft, { -1.f, 0.f } }
+	};
+
+	// Create a move command for each button/direction pair and attach it to the controller
+	const float speed{ 40.f };
+	for (const auto& [button, direction] : buttonDirections)
+	{
+		auto moveCommand{ std::make_shared<GridMoveCommand>(player1.get(), speed, direction, grid) };
+		controller->AttachCommandToButton(moveCommand, { button, ControllerInput::ButtonState::Pressed });
+	}
 }
 
+
 void dae::GameScene::CreateGrid(Scene& scene)
-{
-	const glm::vec2 positionGrid{ 0.f,100.f };
+{	
 	const float gameScale{ 1.5f };
-	const glm::vec2 sizeGrid{ 240.f * gameScale, 256.f * gameScale };
 	const float sizeTiles{ gameScale * 16.f };
+	const float rowTiles{ 15 };
+	const float columnTiles{ 14 };
+	const glm::vec2 positionGrid{ 0.f, 2 * sizeTiles };
+	const glm::vec2 sizeGrid{ columnTiles * sizeTiles, rowTiles * sizeTiles };
 
 	auto grid = std::make_shared<GameObject>("grid");
 	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid);
 
 	scene.Add(grid);
+}
+
+void dae::GameScene::SetupHUD(Scene& scene)
+{
+	// Get player 1 object
+	auto player1Object = scene.FindObject("player1");
+
+	// Add lives display for player 1
+	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer1");
+	livesPlayer1->GetTransform()->SetPosition(glm::vec2(0.f, 408.f));
+	livesPlayer1->AddComponent<LivesDisplayComponent>()->SetOwnerLives(player1Object.get());
+	scene.Add(livesPlayer1);
+
+	// Add score display for player 1
+	auto scorePlayer1 = std::make_shared<dae::GameObject>("ScorePlayer1");
+	scorePlayer1->GetTransform()->SetPosition(glm::vec2(110.f, 24.f));
+	scorePlayer1->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player1Object.get());
+	scene.Add(scorePlayer1);
 }
 
 // temporary
@@ -122,7 +167,7 @@ void dae::GameScene::SpriteTest(Scene& scene)
 	auto controller = dae::InputManager::GetInstance().AddController();
 	auto player = spriteObj.get();
 
-	//	dpad controls
+	//	dpad controls test
 
 	std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec2>> buttonDirections = {
 		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f} },
@@ -141,5 +186,11 @@ void dae::GameScene::SpriteTest(Scene& scene)
 		controller->AttachCommandToButton(pGridMoveCommand, button);
 	}	
 
+		// thumbsticks controls (doesn't work properly yet)
+	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
+	float stickSpeed{ 40.f };
+	auto pGridMoveCommand = std::make_shared<GridMoveCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick(), grid);
+
+	controller->AttachCommandToThumbStick(pGridMoveCommand, button);
 	
 }
