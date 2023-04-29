@@ -18,6 +18,7 @@ namespace dae
     private:
         void CreatePlayer(Scene& scene);
         void CreateEnemies(Scene& scene);
+        void CreateGrid(Scene& scene);
 
         // temporary
         void CreateBackground(Scene& scene);

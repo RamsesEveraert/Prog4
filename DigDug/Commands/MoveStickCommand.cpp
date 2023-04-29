@@ -5,16 +5,17 @@
 #include "Transform.h"
 #include "GameObject.h"
 #include "MovementComponent.h"
+#include "GridMovementComponent.h"
+#include "Grid.h"
 
 using namespace dae;
   
 
 dae::MoveStickCommand::MoveStickCommand(GameObject* go, float speed, const glm::vec2& direction)
     : m_Direction{ direction }
-    , m_GameObject {go}
     , m_Speed{ speed }
 {
-    m_pMovementComponent = m_GameObject->AddComponent<MovementComponent>(speed);
+    if (!go->HasComponent<MovementComponent>()) m_pMovementComponent = go->AddComponent<MovementComponent>(speed);
 }
 
 void dae::MoveStickCommand::Execute() 

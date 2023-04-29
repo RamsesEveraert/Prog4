@@ -20,10 +20,14 @@
 #include "MovementComponent.h"
 #include "Transform.h"
 #include "FPSComponent.h"
+#include "Grid.h"
+#include "GridMovementComponent.h"
+
 
 // commands
 #include "MoveStickCommand.h"
 #include "MoveCommand.h"
+#include "GridMoveCommand.h"
 
 
 
@@ -38,6 +42,9 @@ void dae::GameScene::LoadScene()
 	//background
 
 	CreateBackground(scene);
+
+	// Create Grid
+	CreateGrid(scene);
 
 	// player
 	CreatePlayer(scene);
@@ -58,8 +65,22 @@ void dae::GameScene::CreatePlayer(Scene& scene)
 {
 	auto pPlayer{ std::make_shared<GameObject>("player") };
 	pPlayer->AddComponent<Player>()->InitPlayer();
+	pPlayer->GetTransform()->SetWorldPosition(250.f, 150.f);
 
 	scene.Add(pPlayer);
+}
+
+void dae::GameScene::CreateGrid(Scene& scene)
+{
+	const glm::vec2 positionGrid{ 0.f,100.f };
+	const float gameScale{ 1.5f };
+	const glm::vec2 sizeGrid{ 240.f * gameScale, 256.f * gameScale };
+	const float sizeTiles{ gameScale * 16.f };
+
+	auto grid = std::make_shared<GameObject>("grid");
+	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid);
+
+	scene.Add(grid);
 }
 
 // temporary
@@ -86,20 +107,39 @@ void dae::GameScene::CreateBackground(Scene& scene)
 
 void dae::GameScene::SpriteTest(Scene& scene)
 {
+	auto GridObj = scene.FindObject("grid");
+	auto grid = GridObj->GetComponent<Grid>();
+
 	auto spriteObj{ std::make_shared<GameObject>("SpriteTest") };
-	spriteObj->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(75, 58, 16, 16), 2.f);
-	spriteObj->AddComponent<SpriteRenderer>();
+	spriteObj->GetTransform()->SetPosition(grid->GetGridPosition());
+	spriteObj->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(75, 58, 16, 16), 1.5f);
+	spriteObj->AddComponent<SpriteRenderer>();	
 
 	scene.Add(spriteObj);
+
+	// controller
 
 	auto controller = dae::InputManager::GetInstance().AddController();
 	auto player = spriteObj.get();
 
-	// thumbsticks controls
-	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
-	float stickSpeed{ 40.f };
-	auto pMoveCommandStick = std::make_shared<dae::MoveStickCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick());
-	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
+	//	dpad controls
+
+	std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec2>> buttonDirections = {
+		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadDown, {0.f, 1.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadRight, {1.f, 0.f} },
+		{ dae::ControllerInput::ControllerButtons::DPadLeft, {-1.f, 0.f} }
+	};
+
+	for (auto& buttonDirection : buttonDirections)
+	{
+		auto button = std::make_pair(buttonDirection.first, dae::ControllerInput::ButtonState::Pressed);
+		auto direction = buttonDirection.second;
+		float speed{ 40.f };
+
+		auto pGridMoveCommand = std::make_shared<GridMoveCommand>(player, speed, direction, grid);
+		controller->AttachCommandToButton(pGridMoveCommand, button);
+	}	
 
 	
 }

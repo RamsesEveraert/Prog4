@@ -131,7 +131,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputP
 xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -165,7 +165,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -201,7 +201,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputP
 xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -239,7 +239,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>xinput.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -267,8 +267,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\AssetsComponents\Transform.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\Command.h" />
-    <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h" />
-    <ClInclude Include="Components\GameplayComponents\Commands\MoveStickCommand.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h" />
     <ClInclude Include="Components\GameplayComponents\MovementComponent.h" />
     <ClInclude Include="Components\HUD\FPSComponent.h" />
@@ -342,8 +340,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\AssetsComponents\Transform.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp" />
-    <ClCompile Include="Components\GameplayComponents\Commands\MoveCommand.cpp" />
-    <ClCompile Include="Components\GameplayComponents\Commands\MoveStickCommand.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp" />
     <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp" />
     <ClCompile Include="Components\HUD\FPSComponent.cpp" />

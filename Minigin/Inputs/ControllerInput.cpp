@@ -4,10 +4,10 @@
 #pragma comment(lib, "xinput.lib")
 #include "ControllerInput.h"
 #include "Command.h"
-#include "MoveCommand.h"
 
 #include <string>
 #include <algorithm>
+#include <optional>
 
 
 using namespace dae;
@@ -26,7 +26,6 @@ public:
 
 	void ExecuteCommands()
 	{
-
 		for (const auto& command : m_ButtonCommands)
 		{
 			switch (command.first.second)
@@ -227,6 +226,8 @@ private:
 	const float m_Deadzone;
 
 	bool m_InvertYAxis;
+
+	std::optional<unsigned int> m_CurrentButtonPressed; // bron: https://en.cppreference.com/w/cpp/utility/optional
 };
 
 

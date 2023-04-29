@@ -62,16 +62,7 @@ void Transform::SetPosition(const glm::vec2& pos)
 	m_LocalPosition = pos;
 	SetDirty();
 }
-void Transform::SetLocalPosition(float x, float y)
-{
-	m_LocalPosition = glm::vec2(x, y);
-	SetDirty();
-}
-void Transform::SetLocalPosition(const glm::vec2& pos)
-{
-	m_LocalPosition = pos;
-	SetDirty();
-}
+
 void Transform::SetWorldPosition(float x, float y)
 {
 	m_WorldPosition = glm::vec2(x,y);

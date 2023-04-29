@@ -18,7 +18,6 @@ namespace dae
         virtual void Execute() override;
 
     private:
-        GameObject* m_GameObject;
         MovementComponent* m_pMovementComponent;
         glm::vec2 m_Direction;
         float m_Speed;

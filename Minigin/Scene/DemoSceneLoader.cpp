@@ -17,8 +17,6 @@
 
 // Commands
 
-#include "MoveCommand.h"
-#include "MoveStickCommand.h"
 #include "HealthCommand.h"
 #include "ScoreCommand.h"
 
@@ -78,84 +76,84 @@ void dae::DemoSceneLoader::CreateFPSObject(Scene& scene)
 }
 
 
-void dae::DemoSceneLoader::InputsExercice(Scene& scene)
-{
-    auto player1 = std::make_shared<dae::GameObject>("player1");
-    player1->GetTransform()->SetPosition(glm::vec2{ 300,300 });
-    player1->AddComponent<Texture>("char1.png");
-    player1->AddComponent<RenderComponent>();
-
-	//*** commands controller ***//
-
-	auto controller = dae::InputManager::GetInstance().AddController();
-	auto player = player1.get();
-
-	//dpad controls
-
-	std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec2>> buttonDirections = {
-		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f} },
-		{ dae::ControllerInput::ControllerButtons::DPadDown, {0.f, 1.f} },
-		{ dae::ControllerInput::ControllerButtons::DPadRight, {1.f, 0.f} },
-		{ dae::ControllerInput::ControllerButtons::DPadLeft, {-1.f, 0.f} }
-	};
-
-	for (auto& buttonDirection : buttonDirections)
-	{
-		auto button = std::make_pair(buttonDirection.first, dae::ControllerInput::ButtonState::Pressed);
-		auto direction = buttonDirection.second;
-		float speed{ 40.f };
-
-		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
-		controller->AttachCommandToButton(pMoveCommand, button);
-	}	
-
-	// thumbsticks controls
-	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
-	float stickSpeed{ 40.f };
-	auto pMoveCommandStick = std::make_shared<dae::MoveStickCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick());
-
-	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
-
-	// trigger controls
-
-	button = ControllerInput::ControllerButtons::RightBumper;
-	auto pMoveCommandTrigger = std::make_shared<dae::MoveCommand>(player, stickSpeed, glm::vec2{0,0}); // test purpose only
-	controller->AttachCommandToTrigger(pMoveCommandTrigger, button);
-	button = ControllerInput::ControllerButtons::LeftBumper;
-	pMoveCommandTrigger = std::make_shared<dae::MoveCommand>(player, stickSpeed, glm::vec2{ 0,0 }); // test purpose only
-	controller->AttachCommandToTrigger(pMoveCommandStick, button);
-
-	scene.Add(player1);
-
-
-	//*** commands keyboard ***//
-
-	auto player2 = std::make_shared<GameObject>("player2");
-	player2->GetTransform()->SetPosition(glm::vec2{ 350,350 });
-	player2->AddComponent<Texture>("char2.png");
-	player2->AddComponent<RenderComponent>();
-
-	player = player2.get();
-	auto keyboard = dae::InputManager::GetInstance().AddKeyboard();
-
-	std::vector<std::pair<SDL_Scancode, glm::vec2>> keyDirections = {
-	{ SDL_SCANCODE_W, {0.f, -1.f} },
-	{ SDL_SCANCODE_S, {0.f, 1.f} },
-	{ SDL_SCANCODE_D, {1.f, 0.f} },
-	{ SDL_SCANCODE_A, {-1.f, 0.f} }
-	};
-
-	for (auto& keyDirection : keyDirections)
-	{
-		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
-		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
-		auto direction = keyDirection.second;
-		float speed{ 80.f };
-		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
-		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
-	}
-	scene.Add(player2);
-}
+//void dae::DemoSceneLoader::InputsExercice(Scene& scene)
+//{
+//    auto player1 = std::make_shared<dae::GameObject>("player1");
+//    player1->GetTransform()->SetPosition(glm::vec2{ 300,300 });
+//    player1->AddComponent<Texture>("char1.png");
+//    player1->AddComponent<RenderComponent>();
+//
+//	//*** commands controller ***//
+//
+//	auto controller = dae::InputManager::GetInstance().AddController();
+//	auto player = player1.get();
+//
+//	//dpad controls
+//
+//	/*std::vector<std::pair<dae::ControllerInput::ControllerButtons, glm::vec2>> buttonDirections = {
+//		{ dae::ControllerInput::ControllerButtons::DPadUp, {0.f, -1.f} },
+//		{ dae::ControllerInput::ControllerButtons::DPadDown, {0.f, 1.f} },
+//		{ dae::ControllerInput::ControllerButtons::DPadRight, {1.f, 0.f} },
+//		{ dae::ControllerInput::ControllerButtons::DPadLeft, {-1.f, 0.f} }
+//	};
+//
+//	for (auto& buttonDirection : buttonDirections)
+//	{
+//		auto button = std::make_pair(buttonDirection.first, dae::ControllerInput::ButtonState::Pressed);
+//		auto direction = buttonDirection.second;
+//		float speed{ 40.f };
+//
+//		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
+//		controller->AttachCommandToButton(pMoveCommand, button);
+//	}	*/
+//
+//	// thumbsticks controls
+//	/*auto button = ControllerInput::ControllerButtons::LeftThumbstick;
+//	float stickSpeed{ 40.f };*/
+//	//auto pMoveCommandStick = std::make_shared<dae::MoveStickCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick());
+//
+//	//controller->AttachCommandToThumbStick(pMoveCommandStick, button);
+//
+//	// trigger controls
+//
+//	//button = ControllerInput::ControllerButtons::RightBumper;
+//	//auto pMoveCommandTrigger = std::make_shared<dae::MoveCommand>(player, stickSpeed, glm::vec2{0,0}); // test purpose only
+//	//controller->AttachCommandToTrigger(pMoveCommandTrigger, button);
+//	//button = ControllerInput::ControllerButtons::LeftBumper;
+//	//pMoveCommandTrigger = std::make_shared<dae::MoveCommand>(player, stickSpeed, glm::vec2{ 0,0 }); // test purpose only
+//	//controller->AttachCommandToTrigger(pMoveCommandStick, button);
+//
+//	scene.Add(player1);
+//
+//
+//	//*** commands keyboard ***//
+//
+//	auto player2 = std::make_shared<GameObject>("player2");
+//	player2->GetTransform()->SetPosition(glm::vec2{ 350,350 });
+//	player2->AddComponent<Texture>("char2.png");
+//	player2->AddComponent<RenderComponent>();
+//
+//	player = player2.get();
+//	auto keyboard = dae::InputManager::GetInstance().AddKeyboard();
+//
+//	std::vector<std::pair<SDL_Scancode, glm::vec2>> keyDirections = {
+//	{ SDL_SCANCODE_W, {0.f, -1.f} },
+//	{ SDL_SCANCODE_S, {0.f, 1.f} },
+//	{ SDL_SCANCODE_D, {1.f, 0.f} },
+//	{ SDL_SCANCODE_A, {-1.f, 0.f} }
+//	};
+//
+//	for (auto& keyDirection : keyDirections)
+//	{
+//		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
+//		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
+//		auto direction = keyDirection.second;
+//		float speed{ 80.f };
+//		auto pMoveCommand = std::make_shared<dae::MoveCommand>(player, speed, direction);
+//		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
+//	}
+//	scene.Add(player2);
+//}
 
 //void dae::DemoSceneLoader::EventExercice(Scene& scene)
 //{

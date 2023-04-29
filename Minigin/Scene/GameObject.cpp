@@ -31,7 +31,7 @@ const std::string& dae::GameObject::GetObjectName() const
 void dae::GameObject::InitGameObject()
 {
     m_pTransform = AddComponent<Transform>();
-    m_pTransform->SetLocalPosition(glm::vec2(0, 0));
+    m_pTransform->SetPosition(glm::vec2(0, 0));
 }
 
 void dae::GameObject::Update()

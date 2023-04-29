@@ -83,6 +83,18 @@ std::vector<std::shared_ptr<GameObject>> dae::Scene::GetSceneObjects() const
 	return m_Objects;
 }
 
+std::shared_ptr<GameObject> dae::Scene::FindObject(const std::string& name) const
+{
+	auto objectIt = std::find_if(m_Objects.begin(), m_Objects.end(),
+		[&name](const auto& object)
+		{
+			return object->GetObjectName() == name;
+		});
+
+	return objectIt != m_Objects.end() ? *objectIt : nullptr;
+}
+
+
 
 std::vector<std::shared_ptr<GameObject>> Scene::DeleteMarkedObjects(std::vector<std::shared_ptr<GameObject>> objects)
 {

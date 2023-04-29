@@ -4,6 +4,7 @@
 
 #include "Sprite.h"
 #include "Transform.h"
+#include "Texture2D.h"
 
 #include "Renderer.h"
 
@@ -19,12 +20,14 @@ void dae::SpriteRenderer::Render()
 	if (!m_pSprite) return;
 
 	auto pos = GetOwner()->GetTransform()->GetWorldPosition();
-	auto scale = m_pSprite->GetScale();
+
+
+  	auto scale = m_pSprite->GetScale();
 
 	auto texture = m_pSprite->GetTexture();
 	auto srcRect = m_pSprite->GetSpriteSrc();
-	SDL_Rect dstRect{ static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(srcRect.w * scale.x), static_cast<int>(srcRect.h * scale.y) };
 
+	SDL_Rect dstRect{ static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(srcRect.w * scale.x), static_cast<int>(srcRect.h * scale.y) };
 	Renderer::GetInstance().RenderSprite(*texture, srcRect, dstRect);
 }
 

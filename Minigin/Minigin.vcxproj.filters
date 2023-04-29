@@ -133,12 +133,6 @@
     <ClInclude Include="Components\Component.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\GameplayComponents\Commands\MoveCommand.h">
-      <Filter>Components\GameplayComponents\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\GameplayComponents\Commands\MoveStickCommand.h">
-      <Filter>Components\GameplayComponents\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h">
       <Filter>Components\GameplayComponents\Commands</Filter>
     </ClInclude>
@@ -280,12 +274,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp">
-      <Filter>Components\GameplayComponents\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\GameplayComponents\Commands\MoveCommand.cpp">
-      <Filter>Components\GameplayComponents\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\GameplayComponents\Commands\MoveStickCommand.cpp">
       <Filter>Components\GameplayComponents\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp">

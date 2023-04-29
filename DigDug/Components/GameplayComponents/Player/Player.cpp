@@ -7,7 +7,7 @@
 #include "Health.h"
 #include "Score.h"
 //#include "Sprite.h"
-#include "Animation.h"
+#include "SpriteAnimation.h"
 #include "MovementComponent.h"
 using namespace dae;
 
@@ -37,7 +37,7 @@ void dae::Player::AddRequiredComponents()
     if (!owner->HasComponent<Score>()) {  owner->AddComponent<Score>(); std::cout << "Added Score comp Player \n";}
     //if (!owner->HasComponent<Sprite>()) { owner->AddComponent<Sprite>(); std::cout << "Added Sprite comp Player \n"; }
     //if (!owner->HasComponent<Animation>()) { owner->AddComponent<Animation>(); std::cout << "Added Animation comp Player \n"; }
-    if (!owner->HasComponent<MovementComponent>()) { owner->AddComponent<MovementComponent>(); std::cout << "Added MoveComponent Player \n"; }
+   // if (!owner->HasComponent<MovementComponent>()) { owner->AddComponent<MovementComponent>(40.f); std::cout << "Added MoveComponent Player \n"; }
 }
     
 

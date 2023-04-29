@@ -85,7 +85,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents\Grid;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Commands;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -104,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents\Grid;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Commands;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents\Grid;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Commands;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -150,7 +150,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\imgui-1.89.4;$(SolutionDir)DigDug\Components\GameplayComponents\Player;$(SolutionDir)DigDug\Components\GameplayComponents\Grid;$(SolutionDir)DigDug\Components\GameplayComponents;$(SolutionDir)DigDug\Components\HUD;$(SolutionDir)DigDug\Components\MechanicsComponents;$(SolutionDir)DigDug\Commands;$(SolutionDir)DigDug\Scene;$(SolutionDir)Minigin\Utility;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\GameplayComponents\;$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -171,6 +171,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Commands\GridMoveCommand.cpp" />
+    <ClCompile Include="Commands\MoveCommand.cpp" />
+    <ClCompile Include="Commands\MoveStickCommand.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Grid\Grid.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Grid\GridMovementComponent.cpp" />
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp" />
     <ClCompile Include="Components\GameplayComponents\Health.cpp" />
     <ClCompile Include="Components\GameplayComponents\InstructionsComponent.cpp" />
@@ -182,6 +187,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Scene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Commands\GridMoveCommand.h" />
+    <ClInclude Include="Commands\MoveCommand.h" />
+    <ClInclude Include="Commands\MoveStickCommand.h" />
+    <ClInclude Include="Components\GameplayComponents\Grid\Grid.h" />
+    <ClInclude Include="Components\GameplayComponents\Grid\GridMovementComponent.h" />
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h" />
     <ClInclude Include="Components\GameplayComponents\Health.h" />
     <ClInclude Include="Components\GameplayComponents\InstructionsComponent.h" />

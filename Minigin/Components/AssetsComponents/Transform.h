@@ -28,8 +28,6 @@ namespace dae
 
 		void SetPosition(float x, float y);
 		void SetPosition(const glm::vec2& pos);
-		void SetLocalPosition(float x, float y);
-		void SetLocalPosition(const glm::vec2& pos);
 		void SetWorldPosition(float x, float y);
 		void SetWorldPosition(const glm::vec2& pos);
 
