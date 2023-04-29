@@ -11,7 +11,7 @@ namespace dae
     {
     public:
         LivesDisplayComponent();
-        ~LivesDisplayComponent();
+        ~LivesDisplayComponent() = default;
 
         void OnPlayerDied(const dae::Event& event);
 

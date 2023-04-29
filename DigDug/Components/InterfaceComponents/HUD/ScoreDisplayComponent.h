@@ -11,7 +11,7 @@ namespace dae
     {
     public:
         ScoreDisplayComponent();
-        ~ScoreDisplayComponent();
+        ~ScoreDisplayComponent() = default;
 
         void UpdateScoreDisplay(const dae::Event& event);
         void SetOwnerScore(GameObject* gameObject);

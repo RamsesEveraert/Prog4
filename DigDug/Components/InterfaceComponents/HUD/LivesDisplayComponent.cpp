@@ -21,13 +21,6 @@ dae::LivesDisplayComponent::LivesDisplayComponent()
     EventQueue::GetInstance().AddListener("HealEvent", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
 }
 
-dae::LivesDisplayComponent::~LivesDisplayComponent()
-{
-    EventQueue::GetInstance().RemoveListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); 
-    EventQueue::GetInstance().RemoveListener("HitEvent", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
-    EventQueue::GetInstance().RemoveListener("HealEvent", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
-}
-
 void dae::LivesDisplayComponent::OnPlayerDied(const dae::Event& event)
 {
     std::string ownerName{};
@@ -101,13 +94,13 @@ void dae::LivesDisplayComponent::SetOwnerLives(GameObject* gameObject)
     // Add multiple Sprite components to the GameObject, one for each life, and a SpriteRenderer component to render it
     for (int i = 0; i <= m_Lives; ++i)
     {
-        auto spriteName{ "Life" + std::to_string(i) };
-        auto spriteGO{ std::make_shared<GameObject>(spriteName) };
-        spriteGO->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(109, 58, 16, 16), 1.5f);
-        spriteGO->AddComponent<SpriteRenderer>();
-        spriteGO->SetParent(GetOwner(), false);
+        auto name{ "Life" + std::to_string(i) };
+        auto lifeSprite{ std::make_shared<GameObject>(name) };
+        lifeSprite->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(109, 58, 16, 16), 1.5f);
+        lifeSprite->AddComponent<SpriteRenderer>();
+        lifeSprite->SetParent(GetOwner(), false);
 
         // Set the position of the sprite relative to the parent object
-        spriteGO->GetTransform()->SetPosition(i * 32.f, 0);
+        lifeSprite->GetTransform()->SetPosition(i * 32.f, 0);
     }
 }

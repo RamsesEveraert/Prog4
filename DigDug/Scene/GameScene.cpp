@@ -22,6 +22,7 @@
 #include "FPSComponent.h"
 #include "Grid.h"
 #include "GridMovementComponent.h"
+#include "Health.h"
 
 //HUD
 #include "LivesDisplayComponent.h"
@@ -118,7 +119,8 @@ void dae::GameScene::SetupHUD(Scene& scene)
 	// Add lives display for player 1
 	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer1");
 	livesPlayer1->GetTransform()->SetPosition(glm::vec2(0.f, 408.f));
-	livesPlayer1->AddComponent<LivesDisplayComponent>()->SetOwnerLives(player1Object.get());
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>();
+	display->SetOwnerLives(player1Object.get());
 	scene.Add(livesPlayer1);
 
 	// Add score display for player 1

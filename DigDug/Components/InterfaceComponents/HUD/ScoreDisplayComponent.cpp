@@ -17,13 +17,6 @@ dae::ScoreDisplayComponent::ScoreDisplayComponent()
     EventQueue::GetInstance().AddListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
 }
 
-dae::ScoreDisplayComponent::~ScoreDisplayComponent()
-{
-    EventQueue::GetInstance().RemoveListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
-    EventQueue::GetInstance().RemoveListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
-    EventQueue::GetInstance().RemoveListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
-}
-
 void dae::ScoreDisplayComponent::UpdateScoreDisplay(const dae::Event& event)
 {
     if (event.data.empty())
