@@ -62,6 +62,49 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     GetOwner()->GetTransform()->SetPosition(newPosition);
 }
 
+//void dae::GridMovementComponent::MoveToNextCell(const glm::vec2& direction, const glm::vec2& currentPosition, glm::vec2& newPosition, int row, int col)
+//{
+//    // Grid properties
+//    std::vector<Grid::Cell> cells{ m_pGrid->GetCells() };
+//    const glm::vec2 gridPosition{ m_pGrid->GetGridPosition() };
+//    const glm::vec2 cellSize{ m_pGrid->GetCellSize() };
+//
+//
+//    // Get current cell
+//    int currentCellIdx{ m_pGrid->GetCellIdx(row, col) };
+//    Grid::Cell currentCell = cells[currentCellIdx];
+//
+//    // Check if player is close enough to next cell on y-axis, and move to it if true
+//    if (direction.y != 0.0f)
+//    {
+//        int nextRow{ row + static_cast<int>(std::round(direction.y)) };
+//        int nextRowCellIdx{ m_pGrid->GetCellIdx(nextRow, col) };
+//
+//        if (nextRow >= 0 && nextRow < m_pGrid->GetNrRows() &&
+//            std::abs(currentPosition.y - cells[nextRowCellIdx].dstRect.y) < m_Tolerance)
+//        {
+//            newPosition.y = static_cast<float>(cells[nextRowCellIdx].dstRect.y);
+//            newPosition.x = static_cast<float>(col) * cellSize.x + gridPosition.x;
+//            // Snap to cell center to avoid snapping issue
+//            newPosition.y += cellSize.y * 0.5f;
+//        }
+//    }
+//    // Check if player is close enough to next cell on x-axis, and move to it if true
+//    else if (direction.x != 0.0f)
+//    {
+//        int nextCol = col + static_cast<int>(std::round(direction.x));
+//        int nextColCellIdx{ m_pGrid->GetCellIdx(row, nextCol) };
+//        if (nextCol >= 0 && nextCol < m_pGrid->GetNrColumns() &&
+//            std::abs(currentPosition.x - cells[nextColCellIdx].dstRect.x) < m_Tolerance)
+//        {
+//            newPosition.x = static_cast<float>(cells[nextColCellIdx].dstRect.x);
+//            newPosition.y = static_cast<float>(row) * cellSize.y + gridPosition.y;
+//            // Snap to cell center to avoid snapping issue
+//            newPosition.x += cellSize.x * 0.5f;
+//        }
+//    }
+//}
+
 void dae::GridMovementComponent::MoveToNextCell(const glm::vec2& direction, const glm::vec2& currentPosition, glm::vec2& newPosition, int row, int col)
 {
     // Grid properties
@@ -126,6 +169,9 @@ void dae::GridMovementComponent::MoveToNextCell(const glm::vec2& direction, cons
         }
     }
 }
+
+
+
 
 void dae::GridMovementComponent::UpdateCurrentAndPreviousCell(int row, int col)
 {
