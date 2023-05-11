@@ -34,7 +34,10 @@ namespace dae
 		int GetNrColumns() const;
 		int GetNrRows() const;
 
+		const glm::ivec2& GetStepsPerCell() const;
+
 		int GetCellIdx(int row, int col) const;
+		int GetCellIdxFromPosition(const glm::vec2& position) const;
 		std::vector<Cell> GetCells() const;
 
 		const glm::vec2& GetCellSize() const;
@@ -47,10 +50,11 @@ namespace dae
 
 		
 
-		glm::vec2 m_PositionGrid;
+		glm::vec2 m_GridOffset;
 		glm::vec2 m_SizeCells;
 		glm::vec2 m_GridSize;
 		int m_AmountOfColumns, m_AmountOfRows;
+		glm::ivec2 m_MoveStepsPerCell;
 		std::vector<Cell> m_Cells;
 
 	};

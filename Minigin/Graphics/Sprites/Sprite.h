@@ -45,8 +45,6 @@ namespace dae
         void SetTexture(const std::string& path);
         const std::shared_ptr<dae::Texture2D> GetTexture() const;
 
-
-
     private:
         std::shared_ptr<Texture2D> m_pTexture;
         SDL_Rect m_SrcRect;

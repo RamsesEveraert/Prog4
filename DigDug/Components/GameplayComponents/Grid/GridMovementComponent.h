@@ -14,26 +14,37 @@ namespace dae
         void Move(const glm::vec2& direction);
         void SetSpeed(float speed);
         const float GetSpeed() const;
-        void SetDirection(const glm::vec2& direction);
         virtual void Render() override;
 
     private:
 
-        void MoveToNextCell(const glm::vec2& direction, const glm::vec2& currentPosition, glm::vec2& newPosition, int row, int col);
-        void UpdateCurrentAndPreviousCell(int row, int col);
+        enum class Direction
+        {
+            horizontal, vertical
+        };
+
+        void UpdateCurrenCell(const glm::vec2& currentPosition);
+        void UpdateTargetCell(const glm::vec2& normalizedDirection);
+        void SetDirectionAxis(glm::vec2& normalizedDirection);
+        bool IsPlayerInGrid(const glm::vec2& newPosition);
 
 
-
-        static Grid::Cell m_CurrentCell, m_PreviousCell;
-        Grid::Cell m_TargetCell;
-
-        int m_PreviousCellIdx;
-
-        glm::vec2 m_CurrentDirection;
-        float m_Speed;
+        // Grid properties
         Grid* m_pGrid;
-        float m_Tolerance;
-        bool m_SnappedToCell;
+        const glm::vec2 m_GridOffset;
+        const glm::ivec2 m_GridSize;
+
+
+        // cell properties
+        static Grid::Cell m_CurrentCell, m_PreviousCell, m_TargetCell;
+        int m_PreviousCellIdx;
+        float m_SnapRange;
+        const glm::ivec2 m_CellSize;
+        std::vector<Grid::Cell> m_Cells;
+
+        // player movement properties
+        Direction m_CurrentDirection, m_PreviousDirection;
+        float m_Speed;       
 	};
 }
 

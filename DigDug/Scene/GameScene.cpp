@@ -93,6 +93,12 @@ void dae::GameScene::CreatePlayers(Scene& scene)
 		auto moveCommand{ std::make_shared<GridMoveCommand>(player1.get(), speed, direction, grid) };
 		controller->AttachCommandToButton(moveCommand, { button, ControllerInput::ButtonState::Pressed });
 	}
+
+		// thumbsticks controls
+	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
+	auto pMoveCommandStick{ std::make_shared<GridMoveCommand>(player1.get(), speed, controller->GetDirectionLeftThumbStick(), grid) };
+
+	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
 }
 
 

@@ -74,6 +74,9 @@
     <ClCompile Include="Commands\MoveCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Grid\CollisionComponent.cpp">
+      <Filter>Components\GameplayComponents\Grid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h">
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="Commands\MoveCommand.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Grid\CollisionComponent.h">
+      <Filter>Components\GameplayComponents\Grid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
