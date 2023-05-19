@@ -36,9 +36,6 @@ dae::GridMovementComponent::GridMovementComponent(float speed, Grid* pGrid)
 {
 }
 
-
-//************ TODO: only works for joystick not for dpad  *******************************//
-
 void dae::GridMovementComponent::Move(const glm::vec2& direction)
 {
     // Get the current center position of the sprite

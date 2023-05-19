@@ -62,6 +62,9 @@
     <Filter Include="SDL_Mixer">
       <UniqueIdentifier>{01908563-ff72-4f76-885b-5d82fe3a947b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\AssetsComponents\Audio">
+      <UniqueIdentifier>{e8c93bfc-a3a8-4703-9a6b-b619f56faedd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\implot\implot.h">
@@ -107,9 +110,6 @@
       <Filter>Components\AssetsComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\Font.h">
-      <Filter>Components\AssetsComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\Audio.h">
       <Filter>Components\AssetsComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\HUD\FPSComponent.h">
@@ -205,6 +205,12 @@
     <ClInclude Include="..\3rdParty\SDL2_mixer-2.6.3\include\SDL_mixer.h">
       <Filter>SDL_Mixer</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\SoundSystem.h">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\ServiceLocator.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -239,9 +245,6 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\Audio.cpp">
-      <Filter>Components\AssetsComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\Font.cpp">
       <Filter>Components\AssetsComponents</Filter>
@@ -341,6 +344,12 @@
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp">
       <Filter>Components\GameplayComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\SoundSystem.cpp">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\ServiceLocator.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

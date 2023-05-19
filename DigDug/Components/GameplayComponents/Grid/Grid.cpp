@@ -77,12 +77,10 @@ int dae::Grid::GetCellIdxFromPosition(const glm::vec2& position) const
 	// Check if the calculated indices are within the grid boundaries
 	if (row < 0 || row >= m_AmountOfRows || col < 0 || col >= m_AmountOfColumns)
 	{
-		// The position is outside the grid, return -1 to indicate that
 		return -1;
 	}
 	else
 	{
-		// The position is inside the grid, calculate the index and return it
 		return GetCellIdx(row, col);
 	}
 }

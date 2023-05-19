@@ -262,7 +262,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\implot\implot.h" />
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
     <ClInclude Include="..\3rdParty\SDL2_mixer-2.6.3\include\SDL_mixer.h" />
-    <ClInclude Include="Components\AssetsComponents\Audio.h" />
+    <ClInclude Include="Components\AssetsComponents\SoundSystem.h" />
     <ClInclude Include="Components\AssetsComponents\Font.h" />
     <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h" />
     <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h" />
@@ -284,6 +284,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Inputs\KeyboardInput.h" />
     <ClInclude Include="Main\Debugger.h" />
     <ClInclude Include="Main\Minigin.h" />
+    <ClInclude Include="Main\ServiceLocator.h" />
     <ClInclude Include="Managers\AchievementManager.h" />
     <ClInclude Include="Managers\InputManager.h" />
     <ClInclude Include="Managers\ResourceManager.h" />
@@ -335,7 +336,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="..\3rdParty\implot\implot.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_demo.cpp" />
     <ClCompile Include="..\3rdParty\implot\implot_items.cpp" />
-    <ClCompile Include="Components\AssetsComponents\Audio.cpp" />
+    <ClCompile Include="Components\AssetsComponents\SoundSystem.cpp" />
     <ClCompile Include="Components\AssetsComponents\Font.cpp" />
     <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp" />
     <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp" />
@@ -357,6 +358,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Inputs\KeyboardInput.cpp" />
     <ClCompile Include="Main\Debugger.cpp" />
     <ClCompile Include="Main\Minigin.cpp" />
+    <ClCompile Include="Main\ServiceLocator.cpp" />
     <ClCompile Include="Managers\AchievementManager.cpp" />
     <ClCompile Include="Managers\InputManager.cpp" />
     <ClCompile Include="Managers\ResourceManager.cpp" />
