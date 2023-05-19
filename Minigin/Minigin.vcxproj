@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -132,6 +132,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -144,7 +145,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -166,6 +167,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2_mixer-2.6.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -180,7 +182,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -202,6 +204,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -216,7 +219,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minigin\Components\AssetsComponents\RenderComponents;$(SolutionDir)Minigin\Components\AssetsComponents;$(SolutionDir)Minigin\Components\GameplayComponents;$(SolutionDir)Minigin\Components\GameplayComponents\Commands;$(SolutionDir)Minigin\Components\HUD;$(SolutionDir)Minigin\Components;$(SolutionDir)Minigin\Events;$(SolutionDir)Minigin\Graphics\Sprites;$(SolutionDir)Minigin\Graphics;$(SolutionDir)Minigin\Inputs;$(SolutionDir)Minigin\Main;$(SolutionDir)Minigin\Managers;$(SolutionDir)Minigin\Observer;$(SolutionDir)Minigin\Scene;$(SolutionDir)Minigin\Temporary;$(SolutionDir)Minigin\Utility;$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\include;$(SolutionDir)3rdParty\imgui-1.89.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -240,6 +243,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2_mixer-2.6.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -257,6 +261,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h" />
     <ClInclude Include="..\3rdParty\implot\implot.h" />
     <ClInclude Include="..\3rdParty\implot\implot_internal.h" />
+    <ClInclude Include="..\3rdParty\SDL2_mixer-2.6.3\include\SDL_mixer.h" />
     <ClInclude Include="Components\AssetsComponents\Audio.h" />
     <ClInclude Include="Components\AssetsComponents\Font.h" />
     <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h" />

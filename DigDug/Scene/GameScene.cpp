@@ -99,6 +99,26 @@ void dae::GameScene::CreatePlayers(Scene& scene)
 	auto pMoveCommandStick{ std::make_shared<GridMoveCommand>(player1.get(), speed, controller->GetDirectionLeftThumbStick(), grid) };
 
 	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
+
+	// keyboard controls
+
+	auto keyboard = dae::InputManager::GetInstance().AddKeyboard();
+
+	std::vector<std::pair<SDL_Scancode, glm::vec2>> keyDirections = {
+	{ SDL_SCANCODE_W, {0.f, -1.f} },
+	{ SDL_SCANCODE_S, {0.f, 1.f} },
+	{ SDL_SCANCODE_D, {1.f, 0.f} },
+	{ SDL_SCANCODE_A, {-1.f, 0.f} }
+	};
+
+	for (auto& keyDirection : keyDirections)
+	{
+		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
+		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
+		auto direction = keyDirection.second;
+		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(player1.get(), speed, direction, grid);
+		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
+	}
 }
 
 

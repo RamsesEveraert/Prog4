@@ -20,13 +20,16 @@ namespace dae
 
         enum class Direction
         {
-            horizontal, vertical
+            horizontal, vertical, null
         };
 
-        void UpdateCurrenCell(const glm::vec2& currentPosition);
+        void UpdateCurrentCell(const glm::vec2& currentPosition);
         void UpdateTargetCell(const glm::vec2& normalizedDirection);
         void SetDirectionAxis(glm::vec2& normalizedDirection);
         bool IsPlayerInGrid(const glm::vec2& newPosition);
+        bool IsPlayerHorizontalAligned(const glm::vec2& newPosition);
+        bool IsPlayerVerticalAligned(const glm::vec2& newPosition);
+
 
 
         // Grid properties
@@ -43,7 +46,7 @@ namespace dae
         std::vector<Grid::Cell> m_Cells;
 
         // player movement properties
-        Direction m_CurrentDirection, m_PreviousDirection;
+        static Direction m_CurrentDirection, m_PreviousDirection;
         float m_Speed;       
 	};
 }

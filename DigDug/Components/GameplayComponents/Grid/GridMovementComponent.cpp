@@ -18,13 +18,17 @@ Grid::Cell GridMovementComponent::m_CurrentCell{}; // had to be static because e
 Grid::Cell GridMovementComponent::m_TargetCell{};
 Grid::Cell GridMovementComponent::m_PreviousCell{};
 
+GridMovementComponent::Direction GridMovementComponent::m_CurrentDirection = Direction::null;
+GridMovementComponent::Direction GridMovementComponent::m_PreviousDirection = Direction::null;
+
+
 dae::GridMovementComponent::GridMovementComponent(float speed, Grid* pGrid)
-    : m_CurrentDirection{}
-    , m_PreviousDirection {}
-    , m_Speed{ speed }
+    /*: m_CurrentDirection{Direction::null}
+    , m_PreviousDirection {Direction::null}*/
+    : m_Speed{ speed }
     , m_pGrid{ pGrid }
     , m_PreviousCellIdx{}
-    , m_SnapRange {12.f}
+    , m_SnapRange {6.f}
     , m_CellSize{ static_cast<glm::ivec2>(pGrid->GetCellSize()) }
     , m_GridOffset{ static_cast<glm::ivec2>(pGrid->GetGridPosition()) }
     , m_GridSize{ static_cast<glm::ivec2>(pGrid->GetGridSize()) }
@@ -44,7 +48,7 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     const glm::vec2 playerCenter{ currentPosition + spriteSize * 0.5f };
 
     // Find the current and target cells
-    UpdateCurrenCell(playerCenter);
+    UpdateCurrentCell(playerCenter);
     UpdateTargetCell(direction);
 
     // Normalize direction
@@ -53,49 +57,30 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Set the Direction axis
     SetDirectionAxis(normalizedDirection);
 
-   // Calculate the new position of the sprite based on the given direction
+    // Calculate the new position of the sprite based on the given direction
     glm::vec2 newPosition{ currentPosition + (normalizedDirection * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed) };
 
-
-    // Check if the new position is within the bounds of the grid
+    // Keep player in grid bounds
     if (IsPlayerInGrid(newPosition))
     {
-        // Find the next tile in direction of the movement
-        UpdateTargetCell(normalizedDirection);
-           
-        // check if the player changes the direction
-        if (m_PreviousDirection != m_CurrentDirection)
+        // Snap player's position with the gridlines
+        if (m_CurrentDirection == Direction::horizontal && abs(m_TargetCell.dstRect.y - currentPosition.y) <= m_SnapRange)
         {
-            // check if the player can change his direction + move : player has to be in bounds of the grid + withing snaprange of the center of the next cell
-            // player center has to be in snap range of targetcell center before it can snap and move
-
-            const glm::vec2 tileSize{ m_pGrid->GetCellSize() };
-            const glm::vec2 targetCellCenter{ m_TargetCell.dstRect.x + tileSize.x * 0.5f, m_TargetCell.dstRect.y + tileSize.y * 0.5f };
-
-            // Calculate the offset from the target cell's center to the player's center
-            glm::vec2 offsetFromCenter = playerCenter - targetCellCenter;
-
-            if ((m_CurrentDirection == Direction::horizontal && std::abs(offsetFromCenter.x) <= m_SnapRange)
-                || (m_CurrentDirection == Direction::vertical && std::abs(offsetFromCenter.y) <= m_SnapRange))
-            {
-                // Snap player to target grid center
-                glm::vec2 snappedPosition{ glm::vec2(m_TargetCell.dstRect.x + m_TargetCell.dstRect.w * 0.5f,
-                                         m_TargetCell.dstRect.y + m_TargetCell.dstRect.h * 0.5f) - spriteSize * 0.5f };
-                pPlayerTransform->SetPosition(snappedPosition);
-            }
-            else
-            {
-                pPlayerTransform->SetPosition(newPosition);
-            }
-        }
-        else
-        {
+            newPosition.y = static_cast<float>(m_CurrentCell.dstRect.y);
             pPlayerTransform->SetPosition(newPosition);
         }
+        else if (m_CurrentDirection == Direction::vertical && abs(m_TargetCell.dstRect.x - currentPosition.x) <= m_SnapRange)
+        {
+            newPosition.x = static_cast<float>(m_CurrentCell.dstRect.x);
+            pPlayerTransform->SetPosition(newPosition);
+        }        
     }
+
     m_PreviousDirection = m_CurrentDirection;
 }
-void dae::GridMovementComponent::UpdateCurrenCell(const glm::vec2& currentPosition)
+
+
+void dae::GridMovementComponent::UpdateCurrentCell(const glm::vec2& currentPosition)
 {
     const int currentCellIdx = m_pGrid->GetCellIdxFromPosition(currentPosition);
     m_CurrentCell = m_Cells[currentCellIdx];   
@@ -138,11 +123,22 @@ void dae::GridMovementComponent::SetDirectionAxis(glm::vec2& normalizedDirection
         normalizedDirection.x = 0;
         normalizedDirection.y = glm::sign(normalizedDirection.y);
     }
+
 }
 bool dae::GridMovementComponent::IsPlayerInGrid(const glm::vec2& newPosition)
 {
     return (newPosition.x >= m_GridOffset.x && newPosition.x + m_CellSize.x <= m_GridOffset.x + m_pGrid->GetNrColumns() * m_CellSize.x &&
         newPosition.y >= m_GridOffset.y && newPosition.y + m_CellSize.y <= m_GridOffset.y + m_pGrid->GetNrRows() * m_CellSize.y);
+}
+
+bool dae::GridMovementComponent::IsPlayerHorizontalAligned(const glm::vec2& newPosition)
+{
+    return (newPosition.y == m_CurrentCell.dstRect.y);
+}
+
+bool dae::GridMovementComponent::IsPlayerVerticalAligned(const glm::vec2& newPosition)
+{
+    return (newPosition.x == m_CurrentCell.dstRect.x);
 }
 
 
@@ -155,9 +151,16 @@ void dae::GridMovementComponent::Render()
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // green color
     SDL_RenderDrawRect(renderer, &m_CurrentCell.dstRect);
 
-    // Next cell
+    // target cell
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // bleu color
     SDL_RenderDrawRect(renderer, &m_TargetCell.dstRect);
+
+    // player
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); // white color
+    SDL_Rect sprite{ static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().x), static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().y), 24, 24 }; // debug purpose
+    SDL_RenderDrawRect(renderer, &sprite);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // purple color
+    SDL_RenderDrawPoint(renderer, sprite.x, sprite.y);
 
 }
 

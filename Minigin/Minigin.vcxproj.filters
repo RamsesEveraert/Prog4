@@ -59,6 +59,9 @@
     <Filter Include="Components\GameplayComponents\Commands">
       <UniqueIdentifier>{77c8191c-7f70-45cf-849d-f22992bb71ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SDL_Mixer">
+      <UniqueIdentifier>{01908563-ff72-4f76-885b-5d82fe3a947b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\implot\implot.h">
@@ -198,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\MovementComponent.h">
       <Filter>Components\GameplayComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\SDL2_mixer-2.6.3\include\SDL_mixer.h">
+      <Filter>SDL_Mixer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
