@@ -23,8 +23,8 @@ namespace dae
         EventQueue& operator= (const EventQueue&) = delete;
         EventQueue& operator= (const EventQueue&&) = delete;
 
-        void AddListener(const std::string& eventName, std::function<void(const Event&)> listener);
-        void RemoveListener(const std::string& eventName, std::function<void(const Event&)> listener);
+        void AddListener(const std::string& eventName, std::function<void(const Event&)> function);
+        void RemoveListener(const std::string& eventName, std::function<void(const Event&)> function);
         void Dispatch(const Event& event);
 
     private:

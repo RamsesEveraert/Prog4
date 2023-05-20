@@ -35,8 +35,6 @@ void dae::LivesDisplayComponent::OnPlayerDied(const dae::Event& event)
 
     if (ownerName != m_pOwnerLives->GetObjectName()) return; // Event is not for this player
 
-   /* if (event.name == "PlayerDied")*/
-        /*m_pSprite->SetText(m_pOwnerLives->GetObjectName() + " just died, GameOver!");*/
 }
 
 void dae::LivesDisplayComponent::UpdateLivesDisplay(const dae::Event& event)
