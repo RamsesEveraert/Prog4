@@ -19,6 +19,8 @@ namespace dae
         void CreatePlayers(Scene& scene);
         void CreateEnemies(Scene& scene);
         void CreateGrid(Scene& scene);
+        void CreateWorldTiles(Scene& scene);
+
         void SetupHUD(Scene& scene);
 
         // temporary

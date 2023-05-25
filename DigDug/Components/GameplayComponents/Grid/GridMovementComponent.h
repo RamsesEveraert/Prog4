@@ -7,6 +7,7 @@ namespace dae
 {
 	class GameObject;
     class Grid;
+    class Transform;
 	class GridMovementComponent : public Component
 	{
     public:
@@ -26,10 +27,8 @@ namespace dae
         void UpdateCurrentCell(const glm::vec2& currentPosition);
         void UpdateTargetCell(const glm::vec2& normalizedDirection);
         void SetDirectionAxis(glm::vec2& normalizedDirection);
+        void SnapPlayerToCell(const glm::vec2& currentPosition, glm::vec2 newPosition, Transform* pPlayerTransform);
         bool IsPlayerInGrid(const glm::vec2& newPosition);
-        bool IsPlayerHorizontalAligned(const glm::vec2& newPosition);
-        bool IsPlayerVerticalAligned(const glm::vec2& newPosition);
-
 
 
         // Grid properties
@@ -39,7 +38,7 @@ namespace dae
 
 
         // cell properties
-        static Grid::Cell m_CurrentCell, m_PreviousCell, m_TargetCell;
+        static Grid::Cell m_CurrentCell, m_PreviousTargetCell, m_TargetCell;
         int m_PreviousCellIdx;
         float m_SnapRange;
         const glm::ivec2 m_CellSize;

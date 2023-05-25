@@ -8,6 +8,8 @@
 
 #include "Renderer.h"
 
+// debug purpose
+
 #include <SDL.h>
 
 using namespace dae;
@@ -52,6 +54,9 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
 
     // Set the Direction axis
     SetDirectionAxis(normalizedDirection);
+
+
+    // DISABLED: kleine bug te fixen: keert soms terug naar vorige cel
 
     // Check if player wants to change direction and if it's possible
     if (m_CurrentDirection != m_PreviousDirection && (abs(currentPosition.x - m_TargetCell.dstRect.x) > m_SnapRange || abs(currentPosition.y - m_TargetCell.dstRect.y) > m_SnapRange))

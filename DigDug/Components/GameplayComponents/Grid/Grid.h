@@ -15,6 +15,7 @@ namespace dae
 		{
 			int row, col;
 			SDL_Rect dstRect;
+			bool IsDug;
 		};
 
 		// Rule of 6

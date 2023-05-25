@@ -26,6 +26,7 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 			cell.dstRect.x = static_cast<int>(m_GridOffset.x + col * m_SizeCells.x);
 			cell.dstRect.y = static_cast<int>(m_GridOffset.y + row * m_SizeCells.y);
 			cell.dstRect.w = cell.dstRect.h = static_cast<int>(m_SizeCells.x);
+			cell.IsDug = false;
 
 			m_Cells.emplace_back(cell);
 		}
@@ -34,7 +35,7 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 
 void dae::Grid::Render()
 {
-	// debug purpose
+#ifdef _DEBUG
 
 	SDL_Renderer* renderer = Renderer::GetInstance().GetSDLRenderer();
 	SDL_SetRenderDrawColor(Renderer::GetInstance().GetSDLRenderer(), 255, 0, 0, 255); // red color
@@ -43,6 +44,9 @@ void dae::Grid::Render()
 	{
 		SDL_RenderDrawRect(renderer, &cell.dstRect);
 	}
+#endif
+
+	
 }
 
 int dae::Grid::GetNrColumns() const

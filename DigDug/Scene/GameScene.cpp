@@ -51,6 +51,9 @@ void dae::GameScene::LoadScene()
 	// Create Grid
 	CreateGrid(scene);
 
+	//Create WorldTiles
+	CreateWorldTiles(scene);
+
 	// players
 	CreatePlayers(scene);
 	std::cout << "Player created! \n";
@@ -126,15 +129,31 @@ void dae::GameScene::CreateGrid(Scene& scene)
 {	
 	const float gameScale{ 1.5f };
 	const float sizeTiles{ gameScale * 16.f };
-	const float rowTiles{ 15 };
+	const float rowTiles{ 14 };
 	const float columnTiles{ 14 };
-	const glm::vec2 positionGrid{ 0.f, 2 * sizeTiles };
+	const glm::vec2 positionGrid{ 0.f, 3 * sizeTiles };
 	const glm::vec2 sizeGrid{ columnTiles * sizeTiles, rowTiles * sizeTiles };
 
 	auto grid = std::make_shared<GameObject>("grid");
 	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid);
 
 	scene.Add(grid);
+}
+
+void dae::GameScene::CreateWorldTiles(Scene& scene)
+{
+	const auto gridObj{ scene.FindObject("grid") };
+	const auto gridCells{ gridObj->GetComponent<Grid>()->GetCells() };
+	int tileNr{ 1 };
+	for (const auto& cell : gridCells)
+	{
+		auto worldTile = std::make_shared<GameObject>("WorldTile" + std::to_string(tileNr++));
+
+		auto temp = cell;
+
+		scene.Add(worldTile);
+	}
+
 }
 
 void dae::GameScene::SetupHUD(Scene& scene)
@@ -171,9 +190,13 @@ void dae::GameScene::CreateFPSObject(Scene& scene)
 
 void dae::GameScene::CreateBackground(Scene& scene)
 {
+	const float gameScale{ 1.5f };
 	auto background = std::make_shared<dae::GameObject>("background");
-	background->AddComponent<Texture>("background.tga");
-	background->AddComponent<TextureRenderer>();
+	/*background->AddComponent<Texture>("background.tga");
+	background->AddComponent<TextureRenderer>();*/
+	const SDL_Rect LvlOneBg{ 6,852,224,272 };
+	background->AddComponent<Sprite>("Level_Backgrounds.png", LvlOneBg, gameScale);
+	background->AddComponent<SpriteRenderer>();
 
 	scene.Add(background);
 }
@@ -214,7 +237,7 @@ void dae::GameScene::SpriteTest(Scene& scene)
 		controller->AttachCommandToButton(pGridMoveCommand, button);
 	}	
 
-		// thumbsticks controls (doesn't work properly yet)
+		// thumbsticks controls 
 	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
 	float stickSpeed{ 40.f };
 	auto pGridMoveCommand = std::make_shared<GridMoveCommand>(player, stickSpeed, controller->GetDirectionLeftThumbStick(), grid);
