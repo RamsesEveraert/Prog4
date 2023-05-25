@@ -211,6 +211,12 @@
     <ClInclude Include="Main\ServiceLocator.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\LoggingSoundSystem.h">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\SDLSoundSystem.h">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -345,11 +351,14 @@
     <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp">
       <Filter>Components\GameplayComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\SoundSystem.cpp">
-      <Filter>Components\AssetsComponents\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="Main\ServiceLocator.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\LoggingSoundSystem.cpp">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\SDLSoundSystem.cpp">
+      <Filter>Components\AssetsComponents\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
