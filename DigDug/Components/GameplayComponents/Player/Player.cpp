@@ -33,7 +33,7 @@ void dae::Player::AddRequiredComponents()
     GameObject* owner{ GetOwner() };
     std::cout << "Adding Required Components Player \n";
 
-    owner->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(75, 58, 16, 16), 1.5f); 
+    owner->AddComponent<Sprite>("General Sprites.png", SDL_Rect(128, 16, 16, 16), 1.5f); 
     std::cout << "Added Sprite comp Player \n";
 
     owner->AddComponent<SpriteRenderer>();

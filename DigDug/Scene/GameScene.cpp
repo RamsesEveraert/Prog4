@@ -23,6 +23,7 @@
 #include "Grid.h"
 #include "GridMovementComponent.h"
 #include "Health.h"
+#include "Tile.h"
 
 //HUD
 #include "LivesDisplayComponent.h"
@@ -143,13 +144,18 @@ void dae::GameScene::CreateGrid(Scene& scene)
 void dae::GameScene::CreateWorldTiles(Scene& scene)
 {
 	const auto gridObj{ scene.FindObject("grid") };
+	auto grid{ gridObj->GetComponent<Grid>() };
 	const auto gridCells{ gridObj->GetComponent<Grid>()->GetCells() };
+	const float gameScale{ 1.5f };
+	
+
 	int tileNr{ 1 };
+
 	for (const auto& cell : gridCells)
 	{
 		auto worldTile = std::make_shared<GameObject>("WorldTile" + std::to_string(tileNr++));
-
-		auto temp = cell;
+		worldTile->GetTransform()->SetPosition(static_cast<float>(cell.dstRect.x), static_cast<float>(cell.dstRect.y));
+		worldTile->AddComponent<Tile>(cell.dstRect, grid, gameScale);
 
 		scene.Add(worldTile);
 	}

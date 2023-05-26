@@ -77,6 +77,9 @@
     <ClCompile Include="Components\GameplayComponents\Grid\CollisionComponent.cpp">
       <Filter>Components\GameplayComponents\Grid</Filter>
     </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Grid\Tile.cpp">
+      <Filter>Components\GameplayComponents\Grid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h">
@@ -122,6 +125,9 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Grid\CollisionComponent.h">
+      <Filter>Components\GameplayComponents\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Grid\Tile.h">
       <Filter>Components\GameplayComponents\Grid</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,8 +5,10 @@
 #include "Sprite.h"
 
 #include "Timer.h"
-
 #include "Renderer.h"
+#include "EventQueue.h"
+
+#include "Event.h"
 
 #include <SDL.h>
 
@@ -14,6 +16,7 @@ using namespace dae;
 
 Grid::Cell GridMovementComponent::m_CurrentCell{}; // had to be static because every direction button needs acces to the same variable
 Grid::Cell GridMovementComponent::m_TargetCell{};
+Grid::Cell GridMovementComponent::m_PreviousCell{};
 Grid::Cell GridMovementComponent::m_PreviousTargetCell{};
 
 GridMovementComponent::Direction GridMovementComponent::m_CurrentDirection = Direction::null;
@@ -21,12 +24,10 @@ GridMovementComponent::Direction GridMovementComponent::m_PreviousDirection = Di
 
 
 dae::GridMovementComponent::GridMovementComponent(float speed, Grid* pGrid)
-    /*: m_CurrentDirection{Direction::null}
-    , m_PreviousDirection {Direction::null}*/
     : m_Speed{ speed }
     , m_pGrid{ pGrid }
     , m_PreviousCellIdx{}
-    , m_SnapRange {3.f}
+    , m_SnapRange {1.f}
     , m_CellSize{ static_cast<glm::ivec2>(pGrid->GetCellSize()) }
     , m_GridOffset{ static_cast<glm::ivec2>(pGrid->GetGridPosition()) }
     , m_GridSize{ static_cast<glm::ivec2>(pGrid->GetGridSize()) }
@@ -45,6 +46,13 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Find the current and target cells
     UpdateCurrentCell(playerCenter);
     UpdateTargetCell(direction);
+
+    // Send event current cell as digged
+    if (m_PreviousCell.row != m_CurrentCell.row || m_PreviousCell.col != m_CurrentCell.col)
+    {
+        Event digEvent{ "DiggedCell", {m_CurrentCell} };
+        EventQueue::GetInstance().Dispatch(digEvent);
+    }
 
     // Normalize direction
     glm::vec2 normalizedDirection{ glm::normalize(direction) };
@@ -86,6 +94,7 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
 
     m_PreviousDirection = m_CurrentDirection;
     m_PreviousTargetCell = m_TargetCell;
+    m_PreviousCell = m_CurrentCell;
 }
 
 

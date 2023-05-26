@@ -9,7 +9,7 @@
 #include "Renderer.h"
 
 dae::SpriteRenderer::SpriteRenderer()
-	: m_pSprite{}
+	: m_pSprite{nullptr}
 {
 	
 }
@@ -33,6 +33,7 @@ void dae::SpriteRenderer::Render()
 
 void dae::SpriteRenderer::CheckSprite()
 {
+	if (m_pSprite) return;
 	auto owner = GetOwner();
 	if (owner->HasComponent<Sprite>()) m_pSprite = owner->GetComponent<Sprite>();
 	if (!m_pSprite)

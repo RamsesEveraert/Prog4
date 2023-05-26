@@ -4,6 +4,8 @@
 #include "Transform.h"
 
 #include "Renderer.h"
+#include "EventQueue.h"
+#include "Event.h"
 
 using namespace dae;
 
@@ -11,9 +13,11 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 	: m_AmountOfRows { static_cast<int>(height / sizeCells) }
 	, m_AmountOfColumns { static_cast<int>(width / sizeCells) }
 	, m_SizeCells {sizeCells, sizeCells}
-	, m_MoveStepsPerCell{static_cast<glm::ivec2>(m_SizeCells)}
 	, m_GridOffset{position}
 {
+
+	EventQueue::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { SetDug(event); });
+
 	m_GridSize = glm::vec2{ m_AmountOfColumns ,  m_AmountOfRows } * m_SizeCells;
 
 	for (int row{}; row < m_AmountOfRows; ++row)
@@ -57,11 +61,6 @@ int dae::Grid::GetNrColumns() const
 int dae::Grid::GetNrRows() const
 {
 	return m_AmountOfRows;
-}
-
-const glm::ivec2& dae::Grid::GetStepsPerCell() const
-{
-	return m_MoveStepsPerCell;
 }
 
 int dae::Grid::GetCellIdx(int row, int col) const
@@ -109,4 +108,23 @@ const glm::vec2& dae::Grid::GetGridPosition() const
 const glm::vec2& dae::Grid::GetGridSize() const
 {
 	return m_GridSize;
+}
+
+void dae::Grid::SetDug(const dae::Event& event)
+{
+	for (const auto& data : event.data)
+	{
+		if (data.type() == typeid(dae::Grid::Cell))
+		{
+			std::cout << "cell data is checked by event data \n";
+			dae::Grid::Cell cell = std::any_cast<dae::Grid::Cell>(data);
+			if (m_Cells[GetCellIdx(cell.row, cell.col)].IsDug == false)
+			{
+				m_Cells[GetCellIdx(cell.row, cell.col)].IsDug = true;
+				std::cout << "Cell [" << std::to_string(cell.row) << ", " << std::to_string(cell.col) << "] is set to Digged \n";
+			}
+			
+		}
+		
+	}
 }

@@ -38,7 +38,7 @@ namespace dae
 
 
         // cell properties
-        static Grid::Cell m_CurrentCell, m_PreviousTargetCell, m_TargetCell;
+        static Grid::Cell m_CurrentCell, m_PreviousCell, m_PreviousTargetCell, m_TargetCell;
         int m_PreviousCellIdx;
         float m_SnapRange;
         const glm::ivec2 m_CellSize;

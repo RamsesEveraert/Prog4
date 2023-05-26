@@ -177,6 +177,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\GameplayComponents\Grid\CollisionComponent.cpp" />
     <ClCompile Include="Components\GameplayComponents\Grid\Grid.cpp" />
     <ClCompile Include="Components\GameplayComponents\Grid\GridMovementComponent.cpp" />
+    <ClCompile Include="Components\GameplayComponents\Grid\Tile.cpp" />
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp" />
     <ClCompile Include="Components\GameplayComponents\Health.cpp" />
     <ClCompile Include="Components\GameplayComponents\InstructionsComponent.cpp" />
@@ -194,6 +195,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\GameplayComponents\Grid\CollisionComponent.h" />
     <ClInclude Include="Components\GameplayComponents\Grid\Grid.h" />
     <ClInclude Include="Components\GameplayComponents\Grid\GridMovementComponent.h" />
+    <ClInclude Include="Components\GameplayComponents\Grid\Tile.h" />
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h" />
     <ClInclude Include="Components\GameplayComponents\Health.h" />
     <ClInclude Include="Components\GameplayComponents\InstructionsComponent.h" />
