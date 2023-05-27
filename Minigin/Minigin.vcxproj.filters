@@ -217,6 +217,9 @@
     <ClInclude Include="Components\AssetsComponents\SDLSoundSystem.h">
       <Filter>Components\AssetsComponents\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Button.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -359,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\SDLSoundSystem.cpp">
       <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Button.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

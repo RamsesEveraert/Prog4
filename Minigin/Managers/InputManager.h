@@ -8,6 +8,7 @@
 
 namespace dae
 {
+	class Button;
 	class InputManager final : public Singleton<InputManager>
 	{
 	public:
@@ -18,12 +19,14 @@ namespace dae
 		KeyboardInput* GetKeyboard(int idx);
 		ControllerInput* GetController(int idx);
 
-		int GetAmountOfControllers() const { return static_cast<int>(m_Controllers.size()); }
+		int GetAmountOfControllers() const;
+		void AddHUDButton(Button* pHUDButton);
 
 	private:
 
 		std::vector<std::unique_ptr<ControllerInput>> m_Controllers{};
 		std::vector<std::unique_ptr<KeyboardInput>> m_Keyboards{};
+		std::vector<Button*> m_HUDButtonPtrs{};
 
 	};
 

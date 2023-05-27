@@ -1,6 +1,8 @@
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
 
+#include "Button.h"
+
 
 #include <iostream>
 
@@ -14,7 +16,17 @@ bool InputManager::ProcessInput()
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
 			return false;
-		}		
+		}	
+
+		if (e.type == SDL_MOUSEBUTTONDOWN) {
+			if (e.button.button == SDL_BUTTON_LEFT)
+			{
+				for (auto& button : m_HUDButtonPtrs)
+				{
+					button->OnMouseClick(glm::vec2(static_cast<float>(e.button.x), static_cast<float>(e.button.y)));
+				}
+			}
+		}
 
 		for (auto& keyboard : m_Keyboards)
 		{
@@ -80,6 +92,16 @@ ControllerInput* InputManager::GetController(int idx)
 		std::cout << "Error: Controller index out of range.\n";
 		return nullptr;
 	}
+}
+
+int dae::InputManager::GetAmountOfControllers() const
+{
+	return static_cast<int>(m_Controllers.size());
+}
+
+void dae::InputManager::AddHUDButton(Button* pHUDButton)
+{
+	m_HUDButtonPtrs.emplace_back(pHUDButton);
 }
 
 

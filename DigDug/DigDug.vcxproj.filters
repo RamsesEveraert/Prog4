@@ -32,6 +32,9 @@
     <Filter Include="Managers">
       <UniqueIdentifier>{4a0ffb57-a99e-43c6-bd19-89b057878adb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\GameplayComponents\Enemies">
+      <UniqueIdentifier>{4cff6ce8-31da-4d10-ba5a-9ae7d12417f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Managers\LevelManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\Enemies\Enemy.cpp">
+      <Filter>Components\GameplayComponents\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Managers\LevelManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\Enemies\Enemy.h">
+      <Filter>Components\GameplayComponents\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

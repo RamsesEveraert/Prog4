@@ -12,8 +12,10 @@ using namespace dae;
 
 void load()
 {
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartUp");
-	LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 2);
+	//LevelManager::GetInstance().LoadStartScreen();
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
+	LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1);
+	
 
 }
 

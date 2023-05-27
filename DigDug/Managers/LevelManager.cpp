@@ -3,12 +3,14 @@
 // Singletons
 #include "SceneManager.h"
 #include "SpriteRenderer.h"
+#include "TextureRenderer.h"
 #include "EventQueue.h"
 #include "InputManager.h"
 
 // GameAssets
 #include "GameObject.h"
 #include "Event.h"
+#include "Texture2D.h"
 
 // Components
 #include "Sprite.h"
@@ -20,6 +22,7 @@
 #include "LivesDisplayComponent.h"
 #include "ScoreDisplayComponent.h"
 #include "FPSComponent.h"
+#include "Button.h"
 
 // Commands
 #include "GridMoveCommand.h"
@@ -28,6 +31,62 @@
 #include <fstream>
 #include <sstream>
 #include <SDL.h>
+
+void dae::LevelManager::LoadStartScreen()
+{
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartOptions");
+
+	//********** Game Window *************//
+
+	// Background
+	auto background = std::make_shared<dae::GameObject>("background");
+	background->AddComponent<Texture>("background.tga");
+	background->AddComponent<TextureRenderer>();
+	scene.Add(background);
+
+	// School Logo
+	auto logo = std::make_shared<dae::GameObject>("logo");
+	logo->GetTransform()->SetPosition(glm::vec2{ 65.f,40.f });
+	logo->AddComponent<Texture>("logo.tga");
+	logo->AddComponent<TextureRenderer>();
+	scene.Add(logo);
+
+	// Game Logo
+	auto gameLogo = std::make_shared<dae::GameObject>("gameLogo");
+	gameLogo->GetTransform()->SetPosition(glm::vec2{ 65.f,135.f });
+	gameLogo->AddComponent<Texture>("GameLogo.png");
+	gameLogo->AddComponent<TextureRenderer>();
+	scene.Add(gameLogo);
+
+	//********** Game Modes  *************//
+
+	// Single Player
+	auto singlePlayer = std::make_shared<dae::GameObject>("SinglePlayer");
+	glm::vec2 buttonPosition{ 95.f,285.f };
+	singlePlayer->GetTransform()->SetPosition(buttonPosition);
+	singlePlayer->AddComponent<Texture>("SinglePlayer.png");
+	singlePlayer->AddComponent<TextureRenderer>();
+
+	auto onClickSinglePlayer = [&]() { std::cout << "singleplayer button clicked \n"; LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
+	const glm::ivec2 sizeButton{ 150, 23 };
+	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
+
+	scene.Add(singlePlayer);
+
+	// Co_Op
+	auto co_op = std::make_shared<dae::GameObject>("co_op");
+	co_op->GetTransform()->SetPosition(glm::vec2{ 95.f, 315.f });
+	co_op->AddComponent<Texture>("co_op.png");
+	co_op->AddComponent<TextureRenderer>();
+	scene.Add(co_op);
+
+	// Versus
+	auto versus = std::make_shared<dae::GameObject>("versus");
+	versus->GetTransform()->SetPosition(glm::vec2{ 95.f, 345.f });
+	versus->AddComponent<Texture>("Versus.png");
+	versus->AddComponent<TextureRenderer>();
+	scene.Add(versus);
+}
 
 void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 {

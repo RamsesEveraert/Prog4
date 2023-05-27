@@ -12,6 +12,7 @@ namespace dae
 	class LevelManager final : public Singleton<LevelManager>
 	{
 	public:
+		void LoadStartScreen();
 		void LoadLevel(Scene& scene, GameMode mode, int nrLevel);
 		void StartNextLevel(const Event& event);
 	private:
