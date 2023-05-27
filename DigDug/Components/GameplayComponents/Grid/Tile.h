@@ -8,6 +8,7 @@ namespace dae
 	struct Cell;
 	struct Event;
 	class Grid;
+	class Sprite;
 	class Tile final : public Component
 	{
 

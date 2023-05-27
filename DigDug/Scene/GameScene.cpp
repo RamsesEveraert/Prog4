@@ -35,11 +35,6 @@
 #include "MoveCommand.h"
 #include "GridMoveCommand.h"
 
-
-
-
-
-
 void dae::GameScene::LoadScene()
 {
 	// Create scene
@@ -77,7 +72,7 @@ void dae::GameScene::CreatePlayers(Scene& scene)
 
 	auto player1{ std::make_shared<GameObject>("player1") };
 	player1->AddComponent<Player>()->InitPlayer();
-	player1->GetTransform()->SetPosition(grid->GetGridPosition());
+	player1->GetTransform()->SetPosition(grid->GetPlayerStartPoint());
 	scene.Add(player1);
 
 	auto controller{ InputManager::GetInstance().AddController() };
@@ -134,9 +129,15 @@ void dae::GameScene::CreateGrid(Scene& scene)
 	const float columnTiles{ 14 };
 	const glm::vec2 positionGrid{ 0.f, 3 * sizeTiles };
 	const glm::vec2 sizeGrid{ columnTiles * sizeTiles, rowTiles * sizeTiles };
+	std::vector<std::string> levelLayout{};
 
 	auto grid = std::make_shared<GameObject>("grid");
-	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid);
+	/*auto gridComponent = */grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid, levelLayout);
+
+	// player start pos
+	//gridComponent->SetPlayerStartPoint(4, 6);
+	
+
 
 	scene.Add(grid);
 }
@@ -157,6 +158,14 @@ void dae::GameScene::CreateWorldTiles(Scene& scene)
 		worldTile->GetTransform()->SetPosition(static_cast<float>(cell.dstRect.x), static_cast<float>(cell.dstRect.y));
 		worldTile->AddComponent<Tile>(cell.dstRect, grid, gameScale);
 
+
+
+		if (cell.IsPlayerStartPoint)
+		{
+			SDL_Rect tunnel{ 128, 0, 16,16 };
+			worldTile->AddComponent<Sprite>("General Sprites.png", tunnel, gameScale);
+			worldTile->AddComponent<SpriteRenderer>();
+		}
 		scene.Add(worldTile);
 	}
 
@@ -168,15 +177,19 @@ void dae::GameScene::SetupHUD(Scene& scene)
 	auto player1Object = scene.FindObject("player1");
 
 	// Add lives display for player 1
+	glm::vec2 posLives{ 0.f, 408.f };
+
 	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer1");
-	livesPlayer1->GetTransform()->SetPosition(glm::vec2(0.f, 408.f));
+	livesPlayer1->GetTransform()->SetPosition(posLives);
 	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>();
 	display->SetOwnerLives(player1Object.get());
 	scene.Add(livesPlayer1);
 
 	// Add score display for player 1
+	glm::vec2 posScore{ 110.f, 24.f};
+
 	auto scorePlayer1 = std::make_shared<dae::GameObject>("ScorePlayer1");
-	scorePlayer1->GetTransform()->SetPosition(glm::vec2(110.f, 24.f));
+	scorePlayer1->GetTransform()->SetPosition(posScore);
 	scorePlayer1->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player1Object.get());
 	scene.Add(scorePlayer1);
 }
@@ -185,11 +198,14 @@ void dae::GameScene::SetupHUD(Scene& scene)
 
 void dae::GameScene::CreateFPSObject(Scene& scene)
 {
+	glm::vec2 posFPS{ 20,20 };
+	SDL_Color color{ 255,0,0 };
+
 	auto fpsCounter = std::make_shared<dae::GameObject>("fpsCounter");
-	fpsCounter->GetTransform()->SetPosition(glm::vec2{ 20,20 });
+	fpsCounter->GetTransform()->SetPosition(posFPS);
 	fpsCounter -> AddComponent<Texture>(""); // empty texture
 	auto fpsComponent = fpsCounter->AddComponent<dae::FPSComponent>();
-	fpsComponent->SetColor(SDL_Color{255,0,0});
+	fpsComponent->SetColor(color);
 	scene.Add(fpsCounter);
 }
 
@@ -200,7 +216,7 @@ void dae::GameScene::CreateBackground(Scene& scene)
 	auto background = std::make_shared<dae::GameObject>("background");
 	/*background->AddComponent<Texture>("background.tga");
 	background->AddComponent<TextureRenderer>();*/
-	const SDL_Rect LvlOneBg{ 6,852,224,272 };
+	const SDL_Rect LvlOneBg{ 5,852,224,272 };
 	background->AddComponent<Sprite>("Level_Backgrounds.png", LvlOneBg, gameScale);
 	background->AddComponent<SpriteRenderer>();
 
@@ -212,9 +228,12 @@ void dae::GameScene::SpriteTest(Scene& scene)
 	auto GridObj = scene.FindObject("grid");
 	auto grid = GridObj->GetComponent<Grid>();
 
+	const SDL_Rect& spriteSrc{ 75, 58, 16, 16 };
+	const float gameScale{ 1.5f };
+
 	auto spriteObj{ std::make_shared<GameObject>("SpriteTest") };
 	spriteObj->GetTransform()->SetPosition(grid->GetGridPosition());
-	spriteObj->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(75, 58, 16, 16), 1.5f);
+	spriteObj->AddComponent<Sprite>("General_Sprites.png", spriteSrc, gameScale);
 	spriteObj->AddComponent<SpriteRenderer>();	
 
 	scene.Add(spriteObj);

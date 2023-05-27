@@ -5,17 +5,21 @@
 #endif
 #endif
 
-#include "DemoSceneLoader.h"
-
 #include "Minigin.h"
 #include "GameScene.h"
+
+#include "LevelManager.h"
 
 using namespace dae;
 
 void load()
 {
-	GameScene game;
-	game.LoadScene();
+	/*GameScene game;
+	game.LoadScene();*/
+
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartUp");
+	LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1);
+
 }
 
 int main(int, char* []) {

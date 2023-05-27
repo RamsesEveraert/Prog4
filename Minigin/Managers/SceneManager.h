@@ -19,6 +19,9 @@ namespace dae
 		void FixedUpdate(/* float fixedTimeStep */);
 		void Render();
 		void RenderImGui();
+
+		void RemoveScene(Scene* scene);
+
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;

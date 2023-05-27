@@ -9,7 +9,7 @@
 
 using namespace dae;
 
-dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& position)
+dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& position, const std::vector<std::string>& levelLayout)
 	: m_AmountOfRows { static_cast<int>(height / sizeCells) }
 	, m_AmountOfColumns { static_cast<int>(width / sizeCells) }
 	, m_SizeCells {sizeCells, sizeCells}
@@ -30,7 +30,15 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 			cell.dstRect.x = static_cast<int>(m_GridOffset.x + col * m_SizeCells.x);
 			cell.dstRect.y = static_cast<int>(m_GridOffset.y + row * m_SizeCells.y);
 			cell.dstRect.w = cell.dstRect.h = static_cast<int>(m_SizeCells.x);
-			cell.IsDug = false;
+
+			// p = player, r = red / pooka, g = green / fygar, & = rock
+
+			char layoutChar = levelLayout[row][col];
+			cell.IsDug = (layoutChar == '.' || layoutChar == 'p' || layoutChar == 'r' || layoutChar == 'g');
+			cell.IsRockStartPoint = (layoutChar == '&');
+			cell.IsPlayerStartPoint = (layoutChar == 'p');
+			cell.IsPookaStartPoint = (layoutChar == 'r');
+			cell.IsFygarStartpoint = (layoutChar == 'g');
 
 			m_Cells.emplace_back(cell);
 		}
@@ -51,6 +59,40 @@ void dae::Grid::Render()
 #endif
 
 	
+}
+
+const glm::vec2 dae::Grid::GetStartPoint(std::function<bool(const Cell&)> predicate) const
+{
+	auto it = std::find_if(m_Cells.begin(), m_Cells.end(), predicate);
+
+	if (it != m_Cells.end()) {
+		const Cell& startCell = *it;
+		const glm::vec2 startPosition{ static_cast<float>(startCell.dstRect.x), static_cast<float>(startCell.dstRect.y) };
+		return startPosition;
+	}
+	else {
+		return glm::vec2{};
+	}
+}
+
+const glm::vec2 dae::Grid::GetPlayerStartPoint() const
+{
+	return GetStartPoint([](const Cell& cell) { return cell.IsPlayerStartPoint; }); // lamda functie als predicate
+}
+
+const glm::vec2 dae::Grid::GetPookaStartPoint() const
+{
+	return GetStartPoint([](const Cell& cell) { return cell.IsPookaStartPoint; });
+}
+
+const glm::vec2 dae::Grid::GetFygarStartPoint() const
+{
+	return GetStartPoint([](const Cell& cell) { return cell.IsFygarStartpoint; });
+}
+
+const glm::vec2 dae::Grid::GetRockStartPoint() const
+{
+	return GetStartPoint([](const Cell& cell) { return cell.IsRockStartPoint; });
 }
 
 int dae::Grid::GetNrColumns() const
@@ -95,6 +137,12 @@ std::vector<Grid::Cell> dae::Grid::GetCells() const
 	return m_Cells;
 }
 
+const glm::vec2 dae::Grid::GetCellPosition(int row, int col) const
+{
+	Cell wantedCell{ m_Cells[GetCellIdx(row,col)] };
+	return glm::vec2{ static_cast<float>(wantedCell.dstRect.x), static_cast<float>(wantedCell.dstRect.y) };
+}
+
 const glm::vec2& dae::Grid::GetCellSize() const
 {
 	return m_SizeCells;
@@ -116,15 +164,13 @@ void dae::Grid::SetDug(const dae::Event& event)
 	{
 		if (data.type() == typeid(dae::Grid::Cell))
 		{
-			std::cout << "cell data is checked by event data \n";
 			dae::Grid::Cell cell = std::any_cast<dae::Grid::Cell>(data);
 			if (m_Cells[GetCellIdx(cell.row, cell.col)].IsDug == false)
 			{
 				m_Cells[GetCellIdx(cell.row, cell.col)].IsDug = true;
-				std::cout << "Cell [" << std::to_string(cell.row) << ", " << std::to_string(cell.col) << "] is set to Digged \n";
 			}
-			
 		}
 		
 	}
 }
+

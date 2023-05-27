@@ -32,6 +32,9 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{ce4af6da-3404-49fd-a4c9-83dd682d7f49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{4a0ffb57-a99e-43c6-bd19-89b057878adb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Grid\Tile.cpp">
       <Filter>Components\GameplayComponents\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\LevelManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Grid\Tile.h">
       <Filter>Components\GameplayComponents\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\LevelManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

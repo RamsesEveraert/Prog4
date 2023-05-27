@@ -17,9 +17,10 @@ dae::Tile::Tile(const SDL_Rect& dstTile, Grid* pGrid, float gameScale)
 	EventQueue::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { OnCellDig(event); });
 }
 
+
 void dae::Tile::OnCellDig(const Event& event)
 {
-	if (GetOwner()->HasComponent<Sprite>()) { std::cout << "tile has componetn sprite \n";  return; }
+	if (GetOwner()->HasComponent<Sprite>()) return; 
 
 	Grid::Cell eventCell{};
 
@@ -33,9 +34,7 @@ void dae::Tile::OnCellDig(const Event& event)
 
 	}
 
-	Grid::Cell currentCell{ m_pGrid->GetCells()[m_pGrid->GetCellIdxFromPosition(glm::vec2{static_cast<float>(m_DstTile.x), static_cast<float>(m_DstTile.y)})] };
-
-	if (currentCell.dstRect.x == eventCell.dstRect.x && currentCell.dstRect.y == eventCell.dstRect.y)
+	if (m_TileCell.dstRect.x == eventCell.dstRect.x && m_TileCell.dstRect.y == eventCell.dstRect.y)
 	{
 		SDL_Rect tunnel{ 128, 0, 16,16 };
 		GetOwner()->AddComponent<Sprite>("General Sprites.png", tunnel, m_gameScale);
@@ -46,5 +45,4 @@ void dae::Tile::OnCellDig(const Event& event)
 
 	
 }
-
 

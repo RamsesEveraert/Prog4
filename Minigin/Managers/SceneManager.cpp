@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 
+
 using namespace dae;
 
 void SceneManager::Update()
@@ -12,7 +13,7 @@ void SceneManager::Update()
 	}
 }
 
-//todo ^for physics
+//todo for physics later (?)
 
 void SceneManager::FixedUpdate()
 {
@@ -39,6 +40,11 @@ void dae::SceneManager::RenderImGui()
 	{
 		scene->RenderImGui();
 	}
+}
+
+void dae::SceneManager::RemoveScene(Scene* scene)
+{
+	m_scenes.erase(std::remove_if(m_scenes.begin(), m_scenes.end(), [&](std::shared_ptr<Scene> pScene) { return scene == pScene.get(); }));
 }
 
 std::vector<std::shared_ptr<Scene>> dae::SceneManager::GetScenes() const

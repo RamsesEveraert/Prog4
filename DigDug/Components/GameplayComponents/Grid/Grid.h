@@ -4,6 +4,8 @@
 #include <vector>
 #include <SDL.h>
 #include <glm/glm.hpp>
+#include <algorithm>
+#include <functional>
 
 namespace dae
 {
@@ -16,12 +18,12 @@ namespace dae
 		{
 			int row, col;
 			SDL_Rect dstRect;
-			bool IsDug;
+			bool IsDug, IsRockStartPoint, IsPlayerStartPoint, IsPookaStartPoint, IsFygarStartpoint;
 		};
 
 		// Rule of 6
 
-		Grid(float width, float height, float sizeCells, const glm::vec2& position);
+		Grid(float width, float height, float sizeCells, const glm::vec2& position, const std::vector<std::string>& levelLayout);
 		virtual ~Grid() = default;
 
 		Grid(const Grid& other) = delete;
@@ -33,6 +35,12 @@ namespace dae
 
 		virtual void Render() override;
 
+		const glm::vec2 GetPlayerStartPoint() const;
+		const glm::vec2 GetPookaStartPoint() const;
+		const glm::vec2 GetFygarStartPoint() const;
+		const glm::vec2 GetRockStartPoint() const;
+
+
 		int GetNrColumns() const;
 		int GetNrRows() const;
 
@@ -40,13 +48,17 @@ namespace dae
 		int GetCellIdxFromPosition(const glm::vec2& position) const;
 		std::vector<Cell> GetCells() const;
 
+		const glm::vec2 GetCellPosition(int row, int col) const;
+
 		const glm::vec2& GetCellSize() const;
 		const glm::vec2& GetGridPosition()const;
 		const glm::vec2& GetGridSize()const;
 
 	private:
 
-		void SetDug(const dae::Event& event);		
+		const glm::vec2 GetStartPoint(std::function<bool(const Cell&)> predicate) const; // helper function
+
+		void SetDug(const dae::Event& event);	
 
 		glm::vec2 m_GridOffset;
 		glm::vec2 m_SizeCells;
