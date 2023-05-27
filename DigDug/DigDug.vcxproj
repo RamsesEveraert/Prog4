@@ -187,7 +187,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\InterfaceComponents\HUD\ScoreDisplayComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Managers\LevelManager.cpp" />
-    <ClCompile Include="Scene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\GridMoveCommand.h" />
@@ -206,7 +205,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\InterfaceComponents\HUD\ScoreDisplayComponent.h" />
     <ClInclude Include="Managers\LevelManager.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Scene\GameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DigDug.rc" />

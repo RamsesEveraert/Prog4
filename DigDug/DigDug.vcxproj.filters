@@ -20,9 +20,6 @@
     <Filter Include="Components\InterfaceComponents\HUD">
       <UniqueIdentifier>{d3660f23-eec4-40dc-b098-a3a2869eca3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{828e5a32-762f-451d-a98b-f0a4b772dd04}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\GameplayComponents\Player">
       <UniqueIdentifier>{b985f3b5-f120-4d24-ba6a-ab3123ca1739}</UniqueIdentifier>
     </Filter>
@@ -56,9 +53,6 @@
       <Filter>Components\InterfaceComponents\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Scene\GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Components\GameplayComponents\Player\Player.cpp">
       <Filter>Components\GameplayComponents\Player</Filter>
     </ClCompile>
@@ -108,9 +102,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\GameScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Player\Player.h">
       <Filter>Components\GameplayComponents\Player</Filter>

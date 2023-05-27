@@ -24,6 +24,8 @@ namespace dae
 		void CreateWorldTiles(Scene& scene);
 		void CreatePlayer(Scene& scene, const GameMode& gameMode);
 		void CreateSinglePlayer(Scene& scene);
+		void SetupHUD(Scene& scene);
+		void CreateFPSObject(Scene& scene);
 
 		Scene* m_CurrentScene{};
 		GameMode m_GameMode{};

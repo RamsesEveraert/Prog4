@@ -1,24 +1,19 @@
 #if _DEBUG
 // ReSharper disable once CppUnusedIncludeDirective
 #if __has_include(<vld.h>)
-//#include <vld.h>
+#include <vld.h>
 #endif
 #endif
 
 #include "Minigin.h"
-#include "GameScene.h"
-
 #include "LevelManager.h"
 
 using namespace dae;
 
 void load()
 {
-	/*GameScene game;
-	game.LoadScene();*/
-
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartUp");
-	LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1);
+	LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 2);
 
 }
 

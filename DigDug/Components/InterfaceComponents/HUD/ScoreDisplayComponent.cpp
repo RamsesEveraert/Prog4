@@ -42,7 +42,7 @@ void dae::ScoreDisplayComponent::UpdateScoreDisplay(const dae::Event& event)
     if (ownerName != m_pOwnerScore->GetObjectName()) return; // Event is not for this player
     
     std::stringstream ss;
-    ss << "Score " << m_pOwnerScore->GetObjectName() << ":    " << updatedScore;
+    ss << "Score " << m_pOwnerScore->GetObjectName() << ":" << updatedScore;
     m_pTextcomponent->SetText(ss.str());
 }
 

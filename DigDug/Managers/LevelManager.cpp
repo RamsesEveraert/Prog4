@@ -12,10 +12,14 @@
 
 // Components
 #include "Sprite.h"
+#include "Texture.h"
 #include "Grid.h"
 #include "Tile.h"
 #include "Transform.h"
 #include "Player.h"
+#include "LivesDisplayComponent.h"
+#include "ScoreDisplayComponent.h"
+#include "FPSComponent.h"
 
 // Commands
 #include "GridMoveCommand.h"
@@ -67,6 +71,12 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 
 	//Create Players
 	CreatePlayer(level, mode);
+
+	//Setup HUD
+	SetupHUD(level);
+
+	// Add (temporary) fps counter
+	CreateFPSObject(level);
 
 }
 
@@ -223,4 +233,40 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(player.get(), speed, direction, grid);
 		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
 	}
+}
+
+void dae::LevelManager::SetupHUD(Scene& scene)
+{
+	// Get player 1 object
+	auto player1Object = scene.FindObject("player");
+
+	// Add lives display for player 1
+	glm::vec2 posLives{ 0.f, 408.f };
+
+	auto livesPlayer = std::make_shared<dae::GameObject>("livesPlayer");
+	livesPlayer->GetTransform()->SetPosition(posLives);
+	auto display = livesPlayer->AddComponent<LivesDisplayComponent>();
+	display->SetOwnerLives(player1Object.get());
+	scene.Add(livesPlayer);
+
+	// Add score display for player 1
+	glm::vec2 posScore{ 220.f, 412.f };
+
+	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
+	scorePlayer->GetTransform()->SetPosition(posScore);
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player1Object.get());
+	scene.Add(scorePlayer);
+}
+
+void dae::LevelManager::CreateFPSObject(Scene& scene)
+{
+	glm::vec2 posFPS{ 150.f,20.f };
+	SDL_Color color{ 255,0,0 };
+
+	auto fpsCounter = std::make_shared<dae::GameObject>("fpsCounter");
+	fpsCounter->GetTransform()->SetPosition(posFPS);
+	fpsCounter->AddComponent<Texture>(""); // empty texture
+	auto fpsComponent = fpsCounter->AddComponent<dae::FPSComponent>();
+	fpsComponent->SetColor(color);
+	scene.Add(fpsCounter);
 }
