@@ -4,6 +4,9 @@
 #include "Transform.h"
 #include "MovementComponent.h"
 #include "Sprite.h"
+#include "CollisionHandler.h"
+#include "BoxCollider.h"
+
 
 #include <regex>
 
@@ -40,6 +43,7 @@ void dae::GameObject::Update()
     {
         if (component)
             component->Update();
+        //if (HasComponent<BoxCollider>()) dae::CollisionHandler::GetInstance().Update();
     }
 
     for (const auto& child : m_Children)
@@ -51,7 +55,8 @@ void dae::GameObject::Update()
     if (m_pTransform->IsDirty())
     {
         m_pTransform->UpdateWorldPosition();
-        if (HasComponent<Sprite>()) GetComponent<Sprite>()->SetPosition(m_pTransform->GetWorldPosition());
+        if (HasComponent<Sprite>()) GetComponent<Sprite>()->SetPosition(m_pTransform->GetWorldPosition()); // update sprite position after object position change
+        std::cout << "position changed \n";
     }
        
 
@@ -187,6 +192,17 @@ Transform* dae::GameObject::GetTransform() const
 {
     const auto transform = GetComponent<Transform>();
     return transform ? transform : nullptr;
+}
+
+glm::vec2 dae::GameObject::GetSpriteCenterPoint()
+{
+    if (!HasComponent<Sprite>()) return glm::vec2{}; // no sprite no need for this function
+    const glm::vec2 spritePosition{ m_pTransform->GetWorldPosition() };
+    const glm::vec2 spriteScale{ 1.5f,1.5f };
+    const glm::vec2 spriteSize{GetComponent<Sprite>()->GetSize() };
+    const glm::vec2 spriteCenter{ spritePosition + spriteSize * 0.5f };
+
+    return spriteCenter;
 }
 
 void dae::GameObject::MarkForDelete()

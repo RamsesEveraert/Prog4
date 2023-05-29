@@ -19,10 +19,12 @@
 #include "Tile.h"
 #include "Transform.h"
 #include "Player.h"
+#include "Enemies/Enemy.h"
 #include "LivesDisplayComponent.h"
 #include "ScoreDisplayComponent.h"
 #include "FPSComponent.h"
 #include "Button.h"
+#include "BoxCollider.h"
 
 // Commands
 #include "GridMoveCommand.h"
@@ -68,7 +70,7 @@ void dae::LevelManager::LoadStartScreen()
 	singlePlayer->AddComponent<TextureRenderer>();
 
 	auto onClickSinglePlayer = [&]() { std::cout << "singleplayer button clicked \n"; LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
-	const glm::ivec2 sizeButton{ 150, 23 };
+	const glm::vec2 sizeButton{ 150.f, 23.f };
 	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
 
 	scene.Add(singlePlayer);
@@ -125,13 +127,16 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	// Create Grid
 	CreateGrid(level, levelLayout);
 
-	// Create the world tiles
+	// Create world tiles
 	CreateWorldTiles(level);
 
-	//Create Players
+	// Create Players
 	CreatePlayer(level, mode);
 
-	//Setup HUD
+	// Create Enemies
+	CreateEnemies(level, mode);
+
+	// Setup HUD
 	SetupHUD(level);
 
 	// Add (temporary) fps counter
@@ -239,14 +244,27 @@ void dae::LevelManager::CreatePlayer(Scene& scene, const GameMode& gameMode)
 	
 }
 
+void dae::LevelManager::CreateEnemies(Scene& scene, const GameMode& /*gameMode*/)
+{
+	auto gridObj{ scene.FindObject("grid") };
+	auto pGrid{ gridObj->GetComponent<Grid>() };
+
+	for (int index{}; index < pGrid->GetPookaStartPoints().size(); index++)
+	{
+		auto pooka{ std::make_shared<GameObject>("pooka" + std::to_string(index+1)) };
+		pooka->AddComponent<Enemy>(pGrid, index)->InitEnemy();
+		scene.Add(pooka);
+	}
+}
+
 void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 {
 	auto gridObj{ scene.FindObject("grid") };
-	auto grid{ gridObj->GetComponent<Grid>() };
+	auto pGrid{ gridObj->GetComponent<Grid>() };
 
 	auto player{ std::make_shared<GameObject>("player") };
-	player->AddComponent<Player>()->InitPlayer();
-	player->GetTransform()->SetPosition(grid->GetPlayerStartPoint());
+	player->AddComponent<Player>(pGrid)->InitPlayer();
+
 	scene.Add(player);
 
 	auto controller{ InputManager::GetInstance().AddController() };
@@ -263,13 +281,13 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 	const float speed{ 40.f };
 	for (const auto& [button, direction] : buttonDirections)
 	{
-		auto moveCommand{ std::make_shared<GridMoveCommand>(player.get(), speed, direction, grid) };
+		auto moveCommand{ std::make_shared<GridMoveCommand>(player.get(), speed, direction, pGrid) };
 		controller->AttachCommandToButton(moveCommand, { button, ControllerInput::ButtonState::Pressed });
 	}
 
 	// thumbsticks controls
 	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
-	auto pMoveCommandStick{ std::make_shared<GridMoveCommand>(player.get(), speed, controller->GetDirectionLeftThumbStick(), grid) };
+	auto pMoveCommandStick{ std::make_shared<GridMoveCommand>(player.get(), speed, controller->GetDirectionLeftThumbStick(), pGrid) };
 
 	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
 
@@ -289,7 +307,7 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
 		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
 		auto direction = keyDirection.second;
-		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(player.get(), speed, direction, grid);
+		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(player.get(), speed, direction, pGrid);
 		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
 	}
 }

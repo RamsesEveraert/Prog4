@@ -34,6 +34,7 @@ namespace dae
 
         // transform 
         Transform* GetTransform()const;
+        glm::vec2 GetSpriteCenterPoint();
 
         // parent and children
 

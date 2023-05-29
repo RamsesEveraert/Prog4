@@ -3,11 +3,12 @@
 
 namespace dae
 {
+	class Grid;
 	class Player final : public Component
 	{
 	public:
-		Player() = default;
-		~Player() = default;
+		Player(Grid* pGrid);
+		virtual ~Player() = default;
 
 		Player(const Player& other) = delete;
 		Player(Player&& other) noexcept = delete;
@@ -17,6 +18,8 @@ namespace dae
 		void InitPlayer();
 	private:		
 		void AddRequiredComponents();
+
+		Grid* m_pGrid;
 
 	};
 }

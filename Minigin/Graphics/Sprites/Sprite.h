@@ -22,7 +22,7 @@ namespace dae
         const glm::vec2& GetPosition() const;
 
         void SetSize(int width, int height);
-        glm::ivec2 GetSize() const;
+        glm::vec2 GetSize() const;
 
         void SetColor(const SDL_Color& color);
         const SDL_Color& GetColor() const;
@@ -49,7 +49,7 @@ namespace dae
         std::shared_ptr<Texture2D> m_pTexture;
         SDL_Rect m_SrcRect;
         glm::vec2 m_Position;
-        glm::ivec2 m_Size;
+        glm::vec2 m_Size;
         SDL_Color m_Color;
         Uint8 m_Alpha;
         SDL_RendererFlip m_Flip;

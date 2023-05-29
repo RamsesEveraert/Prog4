@@ -39,12 +39,6 @@ void dae::LivesDisplayComponent::OnPlayerDied(const dae::Event& event)
 
 void dae::LivesDisplayComponent::UpdateLivesDisplay(const dae::Event& event)
 {
-    if (event.data.empty())
-    {
-        std::cerr << "Error: HitEvent data vector is empty" << std::endl;
-        return;
-    }
-
     int remainingLives{};
     std::string ownerName{};
     for (const auto& data : event.data)

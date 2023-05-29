@@ -272,7 +272,9 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\AssetsComponents\Text.h" />
     <ClInclude Include="Components\AssetsComponents\Texture.h" />
     <ClInclude Include="Components\AssetsComponents\Transform.h" />
+    <ClInclude Include="Components\BoxCollider.h" />
     <ClInclude Include="Components\Button.h" />
+    <ClInclude Include="Components\CollisionHandler.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\Command.h" />
     <ClInclude Include="Components\GameplayComponents\Commands\StickCommand.h" />
@@ -348,7 +350,9 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\AssetsComponents\Text.cpp" />
     <ClCompile Include="Components\AssetsComponents\Texture.cpp" />
     <ClCompile Include="Components\AssetsComponents\Transform.cpp" />
+    <ClCompile Include="Components\BoxCollider.cpp" />
     <ClCompile Include="Components\Button.cpp" />
+    <ClCompile Include="Components\CollisionHandler.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\Command.cpp" />
     <ClCompile Include="Components\GameplayComponents\Commands\StickCommand.cpp" />

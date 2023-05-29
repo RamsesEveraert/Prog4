@@ -18,7 +18,7 @@ namespace dae
 		{
 			int row, col;
 			SDL_Rect dstRect;
-			bool IsDug, IsRockStartPoint, IsPlayerStartPoint, IsPookaStartPoint, IsFygarStartpoint;
+			bool IsDug, IsRockStartPoint, IsPlayerStartPoint, IsOponentStartPoint, IsPookaStartPoint, IsFygarStartpoint;
 		};
 
 		// Rule of 6
@@ -35,10 +35,11 @@ namespace dae
 
 		virtual void Render() override;
 
-		const glm::vec2 GetPlayerStartPoint() const;
-		const glm::vec2 GetPookaStartPoint() const;
-		const glm::vec2 GetFygarStartPoint() const;
-		const glm::vec2 GetRockStartPoint() const;
+		glm::vec2 GetPlayerStartPoint() ;
+		glm::vec2 GetOponentStartPoint() ;
+		std::vector<glm::vec2> GetPookaStartPoints() ;
+		std::vector<glm::vec2> GetFygarStartPoints() ;
+		std::vector<glm::vec2> GetRockStartPoints() ;
 
 
 		int GetNrColumns() const;
@@ -57,6 +58,7 @@ namespace dae
 	private:
 
 		const glm::vec2 GetStartPoint(std::function<bool(const Cell&)> predicate) const; // helper function
+		std::vector<glm::vec2> GetStartPoints(std::function<bool(const Cell&)> predicate) const; // helper function
 
 		void SetDug(const dae::Event& event);	
 

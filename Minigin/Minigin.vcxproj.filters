@@ -65,6 +65,9 @@
     <Filter Include="Components\AssetsComponents\Audio">
       <UniqueIdentifier>{e8c93bfc-a3a8-4703-9a6b-b619f56faedd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{2c67e79c-ac26-43e7-b5df-3dc8c858cd99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdParty\implot\implot.h">
@@ -220,6 +223,12 @@
     <ClInclude Include="Components\Button.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\BoxCollider.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionHandler.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -365,6 +374,12 @@
     </ClCompile>
     <ClCompile Include="Components\Button.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BoxCollider.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionHandler.cpp">
+      <Filter>Components\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

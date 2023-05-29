@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Grid.h"
 #include "Sprite.h"
+#include "GameObject.h"
 
 #include "Timer.h"
 #include "Renderer.h"
@@ -40,8 +41,13 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Get the current center position of the sprite
     Transform* pPlayerTransform{ GetOwner()->GetTransform() };
     const glm::vec2 currentPosition{ pPlayerTransform->GetWorldPosition() };
-    const glm::vec2 spriteSize{ GetOwner()->GetComponent<Sprite>()->GetSize() };
-    const glm::vec2 playerCenter{ currentPosition + spriteSize * 0.5f };
+    const glm::vec2 playerCenter{ GetOwner()->GetSpriteCenterPoint()};
+
+    // Notify Move Event
+    {
+        Event moveEvent{ "PlayerMoved",{GetOwner()->GetObjectName(), playerCenter}};
+        EventQueue::GetInstance().Dispatch(moveEvent);
+    }
 
     // Find the current and target cells
     UpdateCurrentCell(playerCenter);
@@ -184,11 +190,9 @@ void dae::GridMovementComponent::Render()
     SDL_RenderDrawRect(renderer, &m_TargetCell.dstRect);
 
     // player
-    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); // white color
-    SDL_Rect sprite{ static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().x), static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().y), 24, 24 }; // debug purpose
-    SDL_RenderDrawRect(renderer, &sprite);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // purple color
-    SDL_RenderDrawPoint(renderer, sprite.x, sprite.y);
+    //SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); // purple color
+    //SDL_Rect sprite{ static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().x), static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().y), 24, 24 }; // debug purpose
+    //SDL_RenderDrawRect(renderer, &sprite);
 #endif
 }
 

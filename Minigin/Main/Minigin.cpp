@@ -9,6 +9,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "CollisionHandler.h"
 
 #include "Timer.h"
 
@@ -89,6 +90,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	auto& collisionHandler = CollisionHandler::GetInstance();
 
 	const float targetFPS = 60.f;
 	const float fixedTimeStep = 1.0f / targetFPS; // target frame time is 1/60th of a second
@@ -106,6 +108,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		doContinue = input.ProcessInput();
 
 		// Perform fixed timestep updates
+
 		while (accumulatedTime >= fixedTimeStep)
 		{
 			sceneManager.FixedUpdate(/*fixedTimeStep*/);
@@ -113,19 +116,13 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		}
 				
 		sceneManager.Update();
+		collisionHandler.Update();
 
 		renderer.Render();
 
 		// Sleep to ensure a fixed frame rate
 		const auto endTime = std::chrono::steady_clock::now() + std::chrono::microseconds(static_cast<int>(fixedTimeStep * 1000000));
-		std::this_thread::sleep_until(endTime);
-
-		//if (accumulatedTime < fixedTimeStep)
-		//{
-		//	// sleep to avoid using GPU resources unnecessarily
-		//	std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>((fixedTimeStep - accumulatedTime) * 1000)));
-		//}
-		
+		std::this_thread::sleep_until(endTime);		
 	}
 
 

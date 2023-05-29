@@ -29,9 +29,9 @@ void dae::Sprite::SetSize(int width, int height)
 	m_Size = { width, height };
 }
 
-glm::ivec2 dae::Sprite::GetSize() const
+glm::vec2 dae::Sprite::GetSize() const
 {
-	return m_Size;
+	return m_Size * m_Scale;
 }
 
 void dae::Sprite::SetColor(const SDL_Color& color)

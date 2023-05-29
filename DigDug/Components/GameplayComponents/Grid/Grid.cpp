@@ -31,12 +31,13 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 			cell.dstRect.y = static_cast<int>(m_GridOffset.y + row * m_SizeCells.y);
 			cell.dstRect.w = cell.dstRect.h = static_cast<int>(m_SizeCells.x);
 
-			// p = player, r = red / pooka, g = green / fygar, & = rock
+			// p = player, r = red / pooka, g = green / fygar, & = rock, o = oponent
 
 			char layoutChar = levelLayout[row][col];
-			cell.IsDug = (layoutChar == '.' || layoutChar == 'p' || layoutChar == 'r' || layoutChar == 'g');
+			cell.IsDug = (layoutChar == '.' || layoutChar == 'p' || layoutChar == 'r' || layoutChar == 'g' || layoutChar == 'g');
 			cell.IsRockStartPoint = (layoutChar == '&');
 			cell.IsPlayerStartPoint = (layoutChar == 'p');
+			cell.IsOponentStartPoint = (layoutChar == 'o');
 			cell.IsPookaStartPoint = (layoutChar == 'r');
 			cell.IsFygarStartpoint = (layoutChar == 'g');
 
@@ -75,24 +76,40 @@ const glm::vec2 dae::Grid::GetStartPoint(std::function<bool(const Cell&)> predic
 	}
 }
 
-const glm::vec2 dae::Grid::GetPlayerStartPoint() const
+std::vector<glm::vec2> dae::Grid::GetStartPoints(std::function<bool(const Cell&)> predicate) const
 {
-	return GetStartPoint([](const Cell& cell) { return cell.IsPlayerStartPoint; }); // lamda functie als predicate
+	std::vector<glm::vec2> startPoints;
+
+	for (const Cell& cell : m_Cells) {
+		if (predicate(cell)) {
+			const glm::vec2 startPosition{ static_cast<float>(cell.dstRect.x), static_cast<float>(cell.dstRect.y) };
+			startPoints.emplace_back(startPosition);
+		}
+	}
+	return startPoints;
 }
 
-const glm::vec2 dae::Grid::GetPookaStartPoint() const
+
+glm::vec2 dae::Grid::GetPlayerStartPoint()
 {
-	return GetStartPoint([](const Cell& cell) { return cell.IsPookaStartPoint; });
+	
+	return GetStartPoint([](const Cell& cell) { return cell.IsPlayerStartPoint; }); // lamda functie als predicate;
 }
 
-const glm::vec2 dae::Grid::GetFygarStartPoint() const
+
+std::vector<glm::vec2> dae::Grid::GetPookaStartPoints() 
 {
-	return GetStartPoint([](const Cell& cell) { return cell.IsFygarStartpoint; });
+	return GetStartPoints([](const Cell& cell) { return cell.IsPookaStartPoint; });
 }
 
-const glm::vec2 dae::Grid::GetRockStartPoint() const
+std::vector<glm::vec2> dae::Grid::GetFygarStartPoints() 
 {
-	return GetStartPoint([](const Cell& cell) { return cell.IsRockStartPoint; });
+	return GetStartPoints([](const Cell& cell) { return cell.IsFygarStartpoint; });
+}
+
+std::vector<glm::vec2> dae::Grid::GetRockStartPoints() 
+{
+	return GetStartPoints([](const Cell& cell) { return cell.IsRockStartPoint; });
 }
 
 int dae::Grid::GetNrColumns() const

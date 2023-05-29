@@ -175,7 +175,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Commands\MoveCommand.cpp" />
     <ClCompile Include="Commands\MoveStickCommand.cpp" />
     <ClCompile Include="Components\GameplayComponents\Enemies\Enemy.cpp" />
-    <ClCompile Include="Components\GameplayComponents\Grid\CollisionComponent.cpp" />
     <ClCompile Include="Components\GameplayComponents\Grid\Grid.cpp" />
     <ClCompile Include="Components\GameplayComponents\Grid\GridMovementComponent.cpp" />
     <ClCompile Include="Components\GameplayComponents\Grid\Tile.cpp" />
@@ -194,7 +193,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Commands\MoveCommand.h" />
     <ClInclude Include="Commands\MoveStickCommand.h" />
     <ClInclude Include="Components\GameplayComponents\Enemies\Enemy.h" />
-    <ClInclude Include="Components\GameplayComponents\Grid\CollisionComponent.h" />
     <ClInclude Include="Components\GameplayComponents\Grid\Grid.h" />
     <ClInclude Include="Components\GameplayComponents\Grid\GridMovementComponent.h" />
     <ClInclude Include="Components\GameplayComponents\Grid\Tile.h" />
