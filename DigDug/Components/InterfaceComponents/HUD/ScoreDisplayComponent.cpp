@@ -10,7 +10,9 @@
 #include <sstream>
 
 dae::ScoreDisplayComponent::ScoreDisplayComponent()
-    : m_pScore{nullptr}, m_Score{0}, m_pOwnerScore {nullptr}, m_pTextcomponent{ nullptr }
+    : m_pScore{ nullptr }, m_Score{ 0 }, m_HighScore{ 0 }, m_pOwnerScore {
+    nullptr
+}, m_pTextcomponent{ nullptr }
 {
     EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); // []scope, () parameters, {} fction body
     EventQueue::GetInstance().AddListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
@@ -63,7 +65,7 @@ void dae::ScoreDisplayComponent::OnPlayerDied(const dae::Event& event)
         m_pTextcomponent->SetText("Score " + m_pOwnerScore->GetObjectName() + ":    0, Player died :(");
 }
 
-void dae::ScoreDisplayComponent::SetOwnerScore(GameObject* gameObject)
+void dae::ScoreDisplayComponent::ShowScore(GameObject* gameObject)
 {
     m_pScore = gameObject->GetComponent<Score>();
     m_Score = m_pScore->GetScore();
@@ -78,4 +80,21 @@ void dae::ScoreDisplayComponent::SetOwnerScore(GameObject* gameObject)
     }
 
     m_pTextcomponent->SetText("Score " + m_pOwnerScore->GetObjectName() + ":    " + std::to_string(m_Score));
+}
+
+void dae::ScoreDisplayComponent::ShowHighScore(GameObject* gameObject)
+{
+    m_pScore = gameObject->GetComponent<Score>();
+    m_HighScore = m_pScore->GetHighScore();
+    m_pTextcomponent = gameObject->GetComponent<Text>();
+    m_pOwnerScore = gameObject;
+
+    if (!m_pTextcomponent)
+    {
+        if (!GetOwner()->HasComponent<Texture>()) GetOwner()->AddComponent<Texture>("");
+        m_pTextcomponent = GetOwner()->AddComponent<Text>();
+        m_pTextcomponent->SetFont(ResourceManager::GetInstance().LoadFont("Lingua.otf", 20));
+    }
+
+    m_pTextcomponent->SetText(m_pOwnerScore->GetObjectName() + ": " + std::to_string(m_HighScore));
 }

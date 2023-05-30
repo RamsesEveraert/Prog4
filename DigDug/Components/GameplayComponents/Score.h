@@ -3,20 +3,22 @@
 
 namespace dae 
 {
+	struct Event;
 	class Score final : public Component
 	{
 	public:
 		Score();
 		~Score() = default;
 
-		void IncrementScore(); // temporary
-		void DecrementScore(); // Temporary
-
 		void SetScore(int score);
+		void AddPoints(int points);
+
 		int GetScore() const;
+		int GetHighScore();
 
 	private:
-		int m_Score;
+		void OnPlayerDied(const Event& event);
+		int m_Score, m_HighScore;
 	};
 
 }

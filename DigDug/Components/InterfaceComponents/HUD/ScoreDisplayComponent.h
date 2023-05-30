@@ -14,12 +14,13 @@ namespace dae
         ~ScoreDisplayComponent() = default;
 
         void UpdateScoreDisplay(const dae::Event& event);
-        void SetOwnerScore(GameObject* gameObject);
+        void ShowScore(GameObject* gameObject);
+        void ShowHighScore(GameObject* gameObject);
         void OnPlayerDied(const dae::Event& event);
 
     private:
         Score* m_pScore;
-        int m_Score;
+        int m_Score, m_HighScore;
         GameObject* m_pOwnerScore;
         Text* m_pTextcomponent;
     };

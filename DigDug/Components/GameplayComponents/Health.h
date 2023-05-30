@@ -15,9 +15,6 @@ namespace dae
 
 		void Initialize();
 		void OnHit(const dae::Event& event);
-		void HitPlayer();
-		void HitEnemy();
-		void Heal();
 
 		void SetHealth(int health);
 		int GetHealth() const;

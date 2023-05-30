@@ -6,26 +6,12 @@
 #include <iostream>
 
 dae::Score::Score()
-	: m_Score{ 0 }
+	: m_Score{}
+	, m_HighScore{}
 {
-
+	EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
 }
 
-void dae::Score::DecrementScore()
-{
-	if (m_Score >= 100) m_Score -= 100;
-	
-	Event decrementEvent{ "DecrementEvent", { m_Score, GetOwner()->GetObjectName()}};
-	EventQueue::GetInstance().Dispatch(decrementEvent);
-}
-
-void dae::Score::IncrementScore()
-{
-	if (m_Score >= 0) m_Score += 100;
-
-	Event incrementScore{ "IncrementScore", { m_Score, GetOwner()->GetObjectName() } };
-	EventQueue::GetInstance().Dispatch(incrementScore);
-}
 
 void dae::Score::SetScore(int score)
 {
@@ -33,8 +19,35 @@ void dae::Score::SetScore(int score)
 	
 }
 
+void dae::Score::AddPoints(int points)
+{
+	m_Score += points;
+}
+
 int dae::Score::GetScore() const
 {
 	return m_Score;
+}
+
+int dae::Score::GetHighScore()
+{
+	return m_HighScore;
+}
+
+void dae::Score::OnPlayerDied(const Event& event)
+{
+	std::string ownerName{};
+	for (const auto& data : event.data)
+	{
+		if (data.type() == typeid(std::string))
+		{
+			ownerName = std::any_cast<std::string>(data);
+		}
+	}
+
+	if (GetOwner()->GetObjectName() != ownerName) return; // not for this object
+
+	if (m_Score > m_HighScore) m_HighScore = m_Score;
+	m_Score = 0;
 }
 

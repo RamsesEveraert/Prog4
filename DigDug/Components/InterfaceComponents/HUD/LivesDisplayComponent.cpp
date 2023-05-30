@@ -16,15 +16,12 @@ using namespace dae;
 dae::LivesDisplayComponent::LivesDisplayComponent(GameObject* player)
     : m_pHealth{nullptr}, m_Lives{}, m_pSprite{ nullptr }, m_pOwnerLives{ player }
 {
-    EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); // []scope, () parameters, {} fction body
     EventQueue::GetInstance().AddListener("LiveDecreased", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
-    EventQueue::GetInstance().AddListener("HealEvent", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
 
 }
 
 void dae::LivesDisplayComponent::UpdateLivesDisplay(const dae::Event& event)
 {
-    std::cout << "livesdisplaycomponent update called\n";
     int remainingLives{};
     std::string ownerName{};
     for (const auto& data : event.data)

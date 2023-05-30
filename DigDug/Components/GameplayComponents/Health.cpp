@@ -45,37 +45,27 @@ void dae::Health::OnHit(const dae::Event& event)
 	{
 		if (m_pOwner->HasComponent<Player>())
 		{
-			if (m_Health > 0) --m_Health;
-
-			else if (m_Health <= 0)
+			if (m_Health > 0)
 			{
-				Event dieEvent{ "PlayerDied", { m_Health, m_pOwner->GetObjectName() } };
-				EventQueue::GetInstance().Dispatch(dieEvent);
-				return;
-			}
+				--m_Health;
 
-			{
 				Event decreaseLives{ "LiveDecreased", { m_Health, m_pOwner->GetObjectName() } };
 				EventQueue::GetInstance().Dispatch(decreaseLives);
 
 				m_pOwner->GetComponent<Player>()->ResetPlayerStartPosition();
+			}
+
+
+			if (m_Health <= 0) 
+			{
+				Event playerDiedEvent{ "PlayerDied", { m_pOwner->GetObjectName() } };
+				EventQueue::GetInstance().Dispatch(playerDiedEvent);
 			}
 		}
 	}
 
 }
 
-
-
-void dae::Health::Heal()
-{
-	if (m_Health >= 0)++m_Health;
-	{
-		Event healEvent{ "HealEvent", { m_Health, GetOwner()->GetObjectName() } };
-		EventQueue::GetInstance().Dispatch(healEvent);
-	}
-	
-}
 
 void dae::Health::SetHealth(int health)
 {

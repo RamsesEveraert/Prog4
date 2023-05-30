@@ -14,6 +14,7 @@
 
 // Components
 #include "Sprite.h"
+#include "Score.h"
 #include "Texture.h"
 #include "Grid.h"
 #include "Tile.h"
@@ -40,54 +41,16 @@ void dae::LevelManager::LoadStartScreen()
 
 	//********** Game Window *************//
 
-	// Background
-	auto background = std::make_shared<dae::GameObject>("background");
-	background->AddComponent<Texture>("background.tga");
-	background->AddComponent<TextureRenderer>();
-	scene.Add(background);
-
-	// School Logo
-	auto logo = std::make_shared<dae::GameObject>("logo");
-	logo->GetTransform()->SetPosition(glm::vec2{ 65.f,40.f });
-	logo->AddComponent<Texture>("logo.tga");
-	logo->AddComponent<TextureRenderer>();
-	scene.Add(logo);
-
-	// Game Logo
-	auto gameLogo = std::make_shared<dae::GameObject>("gameLogo");
-	gameLogo->GetTransform()->SetPosition(glm::vec2{ 65.f,135.f });
-	gameLogo->AddComponent<Texture>("GameLogo.png");
-	gameLogo->AddComponent<TextureRenderer>();
-	scene.Add(gameLogo);
+	CreateSchoolBackground(scene);
+	CreateSchoolLogo(scene);
+	CreateGameLogo(scene);
 
 	//********** Game Modes  *************//
 
-	// Single Player
-	auto singlePlayer = std::make_shared<dae::GameObject>("SinglePlayer");
-	glm::vec2 buttonPosition{ 95.f,285.f };
-	singlePlayer->GetTransform()->SetPosition(buttonPosition);
-	singlePlayer->AddComponent<Texture>("SinglePlayer.png");
-	singlePlayer->AddComponent<TextureRenderer>();
-
-	auto onClickSinglePlayer = [&]() { std::cout << "singleplayer button clicked \n"; LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
-	const glm::vec2 sizeButton{ 150.f, 23.f };
-	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
-
-	scene.Add(singlePlayer);
-
-	// Co_Op
-	auto co_op = std::make_shared<dae::GameObject>("co_op");
-	co_op->GetTransform()->SetPosition(glm::vec2{ 95.f, 315.f });
-	co_op->AddComponent<Texture>("co_op.png");
-	co_op->AddComponent<TextureRenderer>();
-	scene.Add(co_op);
-
-	// Versus
-	auto versus = std::make_shared<dae::GameObject>("versus");
-	versus->GetTransform()->SetPosition(glm::vec2{ 95.f, 345.f });
-	versus->AddComponent<Texture>("Versus.png");
-	versus->AddComponent<TextureRenderer>();
-	scene.Add(versus);
+	CreateSinglePlayerButton(scene);
+	Create_Co_Op_Button(scene); //Todo implement in game
+	CreateVersusButton(scene); // Todo implement in Game
+	
 }
 
 void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
@@ -122,7 +85,7 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	levelFile.close();
 
 	// Create Background
-	CreateBackground(level, nrLevel);
+	CreateLevelBackground(level, nrLevel);
 
 	// Create Grid
 	CreateGrid(level, levelLayout);
@@ -148,18 +111,46 @@ void dae::LevelManager::StartNextLevel(const Event& /*event*/)
 {
 }
 
+void dae::LevelManager::LoadGameOver(const Event& event)
+{
+	const auto player{ m_CurrentScene->FindObject("player") };
+
+	std::string ownerName{};
+	for (const auto& data : event.data)
+	{
+		if (data.type() == typeid(std::string))
+		{
+			ownerName = std::any_cast<std::string>(data);
+		}
+	}
+
+	if (player.get()->GetObjectName() != ownerName) return; // not for this player
+
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("GameOver");
+
+	ResetLevel(*m_CurrentScene);
+
+	CreateScoreDisplay(scene, player.get());
+
+	CreateSchoolBackground(scene);
+	CreateGameOverLogo(scene);
+	CreateContinueButton(scene);
+
+}
+
 void dae::LevelManager::ResetLevel(Scene& scene)
 {
 	if (!m_IsAddedAsListener)
 	{
 		EventQueue::GetInstance().AddListener("NextLevel", [this](const dae::Event& event) { StartNextLevel(event); });
+		//EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& /*event*/) { LoadGameOver(); });
 		m_IsAddedAsListener = true;
 	}
 
 	dae::SceneManager::GetInstance().RemoveScene(&scene);
 }
 
-void dae::LevelManager::CreateBackground(Scene& scene, int nrLevel)
+void dae::LevelManager::CreateLevelBackground(Scene& scene, int nrLevel)
 {
 	const float gameScale{ 1.5f };
 	auto background = std::make_shared<dae::GameObject>("background");
@@ -331,7 +322,7 @@ void dae::LevelManager::SetupHUD(Scene& scene)
 
 	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
 	scorePlayer->GetTransform()->SetPosition(posScore);
-	scorePlayer->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player.get());
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowScore(player.get());
 	scene.Add(scorePlayer);
 }
 
@@ -346,4 +337,99 @@ void dae::LevelManager::CreateFPSObject(Scene& scene)
 	auto fpsComponent = fpsCounter->AddComponent<dae::FPSComponent>();
 	fpsComponent->SetColor(color);
 	scene.Add(fpsCounter);
+}
+
+void dae::LevelManager::CreateGameLogo(Scene& scene)
+{
+	auto gameLogo = std::make_shared<dae::GameObject>("gameLogo");
+	gameLogo->GetTransform()->SetPosition(glm::vec2{ 65.f,135.f });
+	gameLogo->AddComponent<Texture>("GameLogo.png");
+	gameLogo->AddComponent<TextureRenderer>();
+	scene.Add(gameLogo);
+}
+
+void dae::LevelManager::CreateGameOverLogo(Scene& scene)
+{
+	auto gameOverLogo = std::make_shared<dae::GameObject>("gameOverLogo");
+	gameOverLogo->GetTransform()->SetPosition(glm::vec2{ 65.f,180.f });
+	gameOverLogo->AddComponent<Texture>("gameOver.png");
+	gameOverLogo->AddComponent<TextureRenderer>();
+	scene.Add(gameOverLogo);
+}
+
+void dae::LevelManager::CreateScoreDisplay(Scene& scene, GameObject* player)
+{
+
+	glm::vec2 posScore{ 220.f, 412.f };
+
+	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
+	scorePlayer->GetTransform()->SetPosition(posScore);
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowHighScore(player);
+	scene.Add(scorePlayer);
+}
+
+void dae::LevelManager::CreateSchoolBackground(Scene& scene)
+{
+	auto background = std::make_shared<dae::GameObject>("background");
+	background->AddComponent<Texture>("background.tga");
+	background->AddComponent<TextureRenderer>();
+	scene.Add(background);
+}
+
+void dae::LevelManager::CreateSchoolLogo(Scene& scene)
+{
+	auto logo = std::make_shared<dae::GameObject>("logo");
+	logo->GetTransform()->SetPosition(glm::vec2{ 65.f,40.f });
+	logo->AddComponent<Texture>("logo.tga");
+	logo->AddComponent<TextureRenderer>();
+	scene.Add(logo);
+}
+
+void dae::LevelManager::CreateSinglePlayerButton(Scene& scene)
+{
+	auto singlePlayer = std::make_shared<dae::GameObject>("SinglePlayer");
+	glm::vec2 buttonPosition{ 95.f,285.f };
+	singlePlayer->GetTransform()->SetPosition(buttonPosition);
+	singlePlayer->AddComponent<Texture>("SinglePlayer.png");
+	singlePlayer->AddComponent<TextureRenderer>();
+
+	auto onClickSinglePlayer = [&]() { LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
+	const glm::vec2 sizeButton{ 150.f, 23.f };
+	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
+
+	scene.Add(singlePlayer);
+}
+
+void dae::LevelManager::Create_Co_Op_Button(Scene& scene)
+{
+	auto co_op = std::make_shared<dae::GameObject>("co_op");
+	co_op->GetTransform()->SetPosition(glm::vec2{ 95.f, 315.f });
+	co_op->AddComponent<Texture>("co_op.png");
+	co_op->AddComponent<TextureRenderer>();
+	scene.Add(co_op);
+}
+
+void dae::LevelManager::CreateVersusButton(Scene& scene)
+{
+	auto versus = std::make_shared<dae::GameObject>("versus");
+	versus->GetTransform()->SetPosition(glm::vec2{ 95.f, 345.f });
+	versus->AddComponent<Texture>("Versus.png");
+	versus->AddComponent<TextureRenderer>();
+	scene.Add(versus);
+}
+
+void dae::LevelManager::CreateContinueButton(Scene& scene)
+{
+	const auto continueButton = std::make_shared<dae::GameObject>("continue");
+	const auto buttonPosition{ glm::vec2{ 95.f, 250.f } };
+
+	continueButton->GetTransform()->SetPosition(buttonPosition);
+	continueButton->AddComponent<Texture>("Continue.png");
+	continueButton->AddComponent<TextureRenderer>();
+
+	auto onClickSinglePlayer = [&]() { LevelManager::GetInstance().LoadStartScreen(); };
+	const glm::vec2 sizeButton{ 150.f, 23.f };
+	continueButton->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
+
+	scene.Add(continueButton);
 }
