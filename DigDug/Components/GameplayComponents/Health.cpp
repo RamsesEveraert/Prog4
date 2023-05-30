@@ -3,46 +3,69 @@
 #include "Event.h"
 #include "GameObject.h"
 #include "BoxCollider.h"
+#include "Player.h"
+#include "Enemies/Enemy.h"
 
 dae::Health::Health()
-	: m_Health{ 3 }
+	: m_Health{ 4 }
+	, m_pPlayer{nullptr}
+	, m_pEnemy {nullptr}
+	, m_pOwner{nullptr}
+{
+	
+}
+
+void dae::Health::Initialize()
 {
 	EventQueue::GetInstance().AddListener("HitEvent", [this](const dae::Event& event) { OnHit(event); });
+
+	m_pOwner = GetOwner();
+	if (m_pOwner->HasComponent<Player>()) m_pPlayer = m_pOwner->GetComponent<Player>();
+	if (m_pOwner->HasComponent<Enemy>()) m_pEnemy = m_pOwner->GetComponent<Enemy>();
 }
 
 void dae::Health::OnHit(const dae::Event& event)
 {
-	std::string ownerName{};
+	BoxCollider* playerCollider{};
+	BoxCollider* enemyCollider{};
+	/*BoxCollider* pumpCollider{};
+	BoxCollider* rockCollider{};*/
+
 	for (const auto& data : event.data)
 	{
 		if (data.type() == typeid(BoxCollider*))
 		{
-			//BoxCollider* collisionObject = std::any_cast<BoxCollider*>(data); 
-			//if (collisionObject->GetOwner()->GetObjectName() != GetOwner()->GetObjectName()) return; // owner of collision object is not the owner of this health component
-			//else 
+			BoxCollider* collider = std::any_cast<BoxCollider*>(data);
+			if (collider->GetOwner()->HasComponent<Player>()) playerCollider = collider;
+			else if (collider->GetOwner()->HasComponent<Enemy>()) enemyCollider = collider;;
 		}
-			
-		if (data.type() == typeid(std::string))
+	}
+
+	if (playerCollider && enemyCollider)
+	{
+		if (m_pOwner->HasComponent<Player>())
 		{
-			ownerName = std::any_cast<std::string>(data);
+			if (m_Health > 0) --m_Health;
+
+			else if (m_Health <= 0)
+			{
+				Event dieEvent{ "PlayerDied", { m_Health, m_pOwner->GetObjectName() } };
+				EventQueue::GetInstance().Dispatch(dieEvent);
+				return;
+			}
+
+			{
+				Event decreaseLives{ "LiveDecreased", { m_Health, m_pOwner->GetObjectName() } };
+				EventQueue::GetInstance().Dispatch(decreaseLives);
+
+				m_pOwner->GetComponent<Player>()->ResetPlayerStartPosition();
+			}
 		}
 	}
 
-	//if (ownerName != m_pOwnerLives->GetObjectName()) return; // Event is not for this player
-	if (m_Health > 0) --m_Health;
-	if (m_Health <= 0)
-	{
-		Event dieEvent{ "PlayerDied", { m_Health, GetOwner()->GetObjectName() } };
-		EventQueue::GetInstance().Dispatch(dieEvent);
-		return;
-	}
-
-	{
-		Event hitEvent{ "HitEvent", { m_Health, GetOwner()->GetObjectName() } };
-		EventQueue::GetInstance().Dispatch(hitEvent);
-	}
-	
 }
+
+
 
 void dae::Health::Heal()
 {

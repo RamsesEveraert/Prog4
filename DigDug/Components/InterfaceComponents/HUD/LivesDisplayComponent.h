@@ -10,14 +10,12 @@ namespace dae
     class LivesDisplayComponent final : public Component
     {
     public:
-        LivesDisplayComponent();
+        LivesDisplayComponent(GameObject* player);
         ~LivesDisplayComponent() = default;
-
-        void OnPlayerDied(const dae::Event& event);
 
         void UpdateLivesDisplay(const dae::Event& event);
 
-        void SetOwnerLives(GameObject* gameObject);
+        void InitializeLivesSprites();
 
     private:
         Health* m_pHealth;

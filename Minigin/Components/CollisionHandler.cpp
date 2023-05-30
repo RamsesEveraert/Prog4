@@ -18,21 +18,20 @@ void dae::CollisionHandler::RemoveCollider(BoxCollider* pCollider)
 
 void dae::CollisionHandler::Update()
 {
+	bool hasBeenHit{};
 	for (auto pSelf : m_ColliderPtrs)
 	{
 		for (auto pOther : m_ColliderPtrs)
 		{
 			if (pSelf == pOther) continue;
-			if (DoCollide(pSelf, pOther))
+			if (DoCollide(pSelf, pOther) && !hasBeenHit)
 			{
+				hasBeenHit = true;
 				pSelf->Hit(pOther);
 			}
 		}
 	}
 }
-
-
-
 
 
 bool dae::CollisionHandler::DoCollide(BoxCollider* pSelf, BoxCollider* pOther) const

@@ -314,24 +314,24 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 
 void dae::LevelManager::SetupHUD(Scene& scene)
 {
-	// Get player 1 object
-	auto player1Object = scene.FindObject("player");
+	// Get player object
+	auto player = scene.FindObject("player");
 
-	// Add lives display for player 1
+	// Add lives display for player
 	glm::vec2 posLives{ 0.f, 408.f };
 
 	auto livesPlayer = std::make_shared<dae::GameObject>("livesPlayer");
 	livesPlayer->GetTransform()->SetPosition(posLives);
-	auto display = livesPlayer->AddComponent<LivesDisplayComponent>();
-	display->SetOwnerLives(player1Object.get());
+	auto display = livesPlayer->AddComponent<LivesDisplayComponent>(player.get());
+	display->InitializeLivesSprites();
 	scene.Add(livesPlayer);
 
-	// Add score display for player 1
+	// Add score display for player
 	glm::vec2 posScore{ 220.f, 412.f };
 
 	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
 	scorePlayer->GetTransform()->SetPosition(posScore);
-	scorePlayer->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player1Object.get());
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->SetOwnerScore(player.get());
 	scene.Add(scorePlayer);
 }
 

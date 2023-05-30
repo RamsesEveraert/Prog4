@@ -34,7 +34,6 @@ void dae::BoxCollider::Render()
 
 void dae::BoxCollider::Hit(BoxCollider* pOther)
 {
-	std::cout << "hitevent dispatched \n";
 	Event hitEvent{ "HitEvent", {this, pOther} };
 	EventQueue::GetInstance().Dispatch(hitEvent);
 }

@@ -16,6 +16,7 @@ namespace dae
 		Player& operator=(Player&& other) noexcept = delete;
 
 		void InitPlayer();
+		void ResetPlayerStartPosition();
 	private:		
 		void AddRequiredComponents();
 

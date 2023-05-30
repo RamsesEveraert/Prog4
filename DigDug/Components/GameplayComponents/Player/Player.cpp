@@ -26,20 +26,14 @@ void dae::Player::InitPlayer()
     // todo add method to define sprite for player 1 , player 2 etc...
 }
 
+void dae::Player::ResetPlayerStartPosition()
+{
+    auto startPosition{ m_pGrid->GetPlayerStartPoint() };
+    GetOwner()->GetTransform()->SetPosition(startPosition);
+}
+
 void dae::Player::AddRequiredComponents()
 {
-    /* requitred components
-
-    - Sprite
-    - sprite renderer
-    - Health
-    - Score
-    - Animation
-    - Movement Component
-    - collisionbox
-
-    */
-
     GameObject* owner{ GetOwner() };
     std::cout << "Adding Required Components Player \n";
 
@@ -60,14 +54,14 @@ void dae::Player::AddRequiredComponents()
     owner->AddComponent<BoxCollider>(centerSprite.x, centerSprite.y, spriteSize.x * spriteScale, spriteSize.y * spriteScale);
     std::cout << "Added box colldier Player \n";
 
-    owner->AddComponent<Health>(); 
+    auto health = owner->AddComponent<Health>(); 
+    health->Initialize();
     std::cout << "Added Health comp Player \n"; 
 
     owner->AddComponent<Score>(); 
     std::cout << "Added Score comp Player \n";
     
     //if (!owner->HasComponent<Animation>()) { owner->AddComponent<Animation>(); std::cout << "Added Animation comp Player \n"; }
-   // if (!owner->HasComponent<MovementComponent>()) { owner->AddComponent<MovementComponent>(40.f); std::cout << "Added MoveComponent Player \n"; }
 }
     
 
