@@ -6,8 +6,8 @@ dae::LoggingSoundSystem::LoggingSoundSystem(std::unique_ptr<SoundSystem>&& sound
 {
 }
 
-void dae::LoggingSoundSystem::Play(unsigned short id, int volume, const std::string& soundPath, bool canLoop)
+void dae::LoggingSoundSystem::Play(unsigned short id, int volume)
 {
-	m_RealSoundSystem->Play(id, volume, soundPath, canLoop);
+	m_RealSoundSystem->Play(id, volume);
 	std::cout << "playing " << id << " at volume " << volume << "\n";
 }

@@ -229,6 +229,9 @@
     <ClInclude Include="Components\CollisionHandler.h">
       <Filter>Components\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AssetsComponents\AudioClip.h">
+      <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\implot\implot.cpp">
@@ -380,6 +383,9 @@
     </ClCompile>
     <ClCompile Include="Components\CollisionHandler.cpp">
       <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AssetsComponents\AudioClip.cpp">
+      <Filter>Components\AssetsComponents\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

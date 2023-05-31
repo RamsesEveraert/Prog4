@@ -10,7 +10,7 @@ namespace dae
 		LoggingSoundSystem(std::unique_ptr<SoundSystem>&& soundSystem);
 		virtual ~LoggingSoundSystem() = default;
 
-		virtual void Play(unsigned short id, int volume, const std::string& soundPath, bool canLoop = false) override;
+		virtual void Play(unsigned short id, int volume) override;
 
 	private:
 		std::unique_ptr<SoundSystem> m_RealSoundSystem;

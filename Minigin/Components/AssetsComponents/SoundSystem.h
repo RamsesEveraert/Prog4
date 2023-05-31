@@ -9,14 +9,14 @@ namespace dae
 	public:
 		virtual ~SoundSystem() = default;
 
-		virtual void Initialize() = 0;
-		virtual void Load(const std::string& path) = 0;
+		virtual unsigned short AddSound(const std::string& path) = 0;
+		virtual void Play(unsigned short id, int volume) = 0;
+		virtual void Pause() = 0;
+		virtual void Resume() = 0;
+		virtual void Mute() = 0;
+		virtual void Unmute() = 0;
 
-		virtual void Play(unsigned short id, int volume, const std::string& filePath, bool canLoop = false) = 0;
-		virtual void Pause(unsigned short id) = 0;
-		virtual void Resume(unsigned short id) = 0;
-		virtual void Stop(unsigned short id) = 0;
-
-		virtual void SetLoop(unsigned short id, bool isLooping) = 0;
+		virtual void SetVolume(float volume) = 0;
+		//virtual void SetLoop(unsigned short id, bool isLooping) = 0;
 	};
 }

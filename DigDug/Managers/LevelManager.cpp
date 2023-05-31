@@ -12,6 +12,7 @@
 #include "Event.h"
 #include "Texture2D.h"
 
+
 // Components
 #include "Sprite.h"
 #include "Score.h"
@@ -37,6 +38,8 @@
 
 void dae::LevelManager::LoadStartScreen()
 {
+	EventQueue::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
+	EventQueue::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartOptions");
 
 	//********** Game Window *************//
@@ -111,44 +114,70 @@ void dae::LevelManager::StartNextLevel(const Event& /*event*/)
 {
 }
 
+
+
 void dae::LevelManager::LoadGameOver(const Event& event)
 {
-	const auto player{ m_CurrentScene->FindObject("player") };
+	auto player{ m_CurrentScene->FindObject("player") };
 
-	std::string ownerName{};
-	for (const auto& data : event.data)
+	if (player.get() == nullptr)
 	{
-		if (data.type() == typeid(std::string))
+		std::cout << "player is nullptr \n";
+	}
+	else
+	{
+		std::string ownerName{};
+		for (const auto& data : event.data)
 		{
-			ownerName = std::any_cast<std::string>(data);
+			if (data.type() == typeid(std::string))
+			{
+				ownerName = std::any_cast<std::string>(data);
+			}
 		}
+
+		//if (player.get()->GetObjectName() != ownerName) return; // not for this player
+
+		auto& scene = dae::SceneManager::GetInstance().CreateScene("GameOver");
+
+		if (m_CurrentScene)
+		{
+			std::cout << "currentscene isn't nullptr \n";
+			ResetLevel(*m_CurrentScene);
+		}
+		else
+		{
+			std::cout << "currentscene is nullptr \n";
+		}
+
+		// Debug output
+		std::cout << "LoadGameOver called\n";
+
+		CreateScoreDisplay(scene, player.get());
+
+		CreateSchoolBackground(scene);
+		CreateGameOverLogo(scene);
+		CreateContinueButton(scene);
 	}
 
-	if (player.get()->GetObjectName() != ownerName) return; // not for this player
-
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("GameOver");
-
-	ResetLevel(*m_CurrentScene);
-
-	CreateScoreDisplay(scene, player.get());
-
-	CreateSchoolBackground(scene);
-	CreateGameOverLogo(scene);
-	CreateContinueButton(scene);
-
+	// Debug output
+	std::cout << "LoadGameOver finished\n";
 }
+
+	
+
 
 void dae::LevelManager::ResetLevel(Scene& scene)
 {
-	if (!m_IsAddedAsListener)
+	/*if (!m_IsAddedAsListener)
 	{
-		EventQueue::GetInstance().AddListener("NextLevel", [this](const dae::Event& event) { StartNextLevel(event); });
-		//EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& /*event*/) { LoadGameOver(); });
+		EventQueue::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
+		EventQueue::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
 		m_IsAddedAsListener = true;
-	}
+	}*/
 
 	dae::SceneManager::GetInstance().RemoveScene(&scene);
 }
+
 
 void dae::LevelManager::CreateLevelBackground(Scene& scene, int nrLevel)
 {

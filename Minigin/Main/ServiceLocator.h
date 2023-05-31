@@ -7,23 +7,22 @@ namespace dae
 {
 	class DefaultSoundSystem final : public SoundSystem
 	{
-		virtual void Initialize() override {};
-		virtual void Load(const std::string& /*path*/) override {};
+		virtual unsigned short AddSound(const std::string& /*path*/) override { return 0; };
 
-		virtual void Play(unsigned short /*id*/, int /*volume*/, const std::string& /*filePath*/, bool /*canLoop*/ = false) override {};
-		virtual void Pause(unsigned short /*id*/) override {};
-		virtual void Resume(unsigned short /*id*/) override {};
-		virtual void Stop(unsigned short /*id*/) override{};
+		virtual void Play(unsigned short /*id*/, int /*volume*/) override {};
+		virtual void Pause() override {};
+		virtual void Resume() override {};
+		virtual void Mute() override {};
+		virtual void Unmute() override {};
 
-		virtual void SetLoop(unsigned short /*id*/, bool /*isLooping*/) override {};
-
+		virtual void SetVolume(float /*volume*/) override {};
+		//virtual void SetLoop(unsigned short /*id*/, bool /*isLooping*/) override {};
 	};
-
 
 	class ServiceLocator final
 	{
 	public:
-		static SoundSystem& GetAudio();
+		static SoundSystem& GetSoundSystem();
 		static void RegisterAudioSystem(std::unique_ptr<SoundSystem>&& soundsystem);
 	private:
 		static std::unique_ptr<SoundSystem> m_pSoundSystemInstance;

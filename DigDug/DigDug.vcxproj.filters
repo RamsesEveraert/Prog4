@@ -83,6 +83,9 @@
     <ClCompile Include="Components\GameplayComponents\Enemies\Enemy.cpp">
       <Filter>Components\GameplayComponents\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Components\GameplayComponents\SoundComponent.cpp">
+      <Filter>Components\GameplayComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h">
@@ -132,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\Enemies\Enemy.h">
       <Filter>Components\GameplayComponents\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameplayComponents\SoundComponent.h">
+      <Filter>Components\GameplayComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

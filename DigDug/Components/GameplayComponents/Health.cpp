@@ -7,7 +7,7 @@
 #include "Enemies/Enemy.h"
 
 dae::Health::Health()
-	: m_Health{ 4 }
+	: m_Health{ 1 }
 	, m_pPlayer{nullptr}
 	, m_pEnemy {nullptr}
 	, m_pOwner{nullptr}
@@ -58,8 +58,8 @@ void dae::Health::OnHit(const dae::Event& event)
 
 			if (m_Health <= 0) 
 			{
-				Event playerDiedEvent{ "PlayerDied", { m_pOwner->GetObjectName() } };
-				EventQueue::GetInstance().Dispatch(playerDiedEvent);
+			/*	Event playerDiedEvent{ "PlayerDied", {m_pOwner->GetObjectName()} };
+				EventQueue::GetInstance().Dispatch(playerDiedEvent);*/
 			}
 		}
 	}
@@ -72,8 +72,8 @@ void dae::Health::SetHealth(int health)
 	m_Health = health;
 	if (m_Health <= 0)
 	{
-		Event dieEvent{ "PlayerDied", { m_Health, GetOwner()->GetObjectName() } };
-		EventQueue::GetInstance().Dispatch(dieEvent);
+		Event playerDiedEvent{ "PlayerDied", { } };
+		EventQueue::GetInstance().Dispatch(playerDiedEvent);
 	}; 
 }
 

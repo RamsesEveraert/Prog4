@@ -9,7 +9,7 @@ dae::Score::Score()
 	: m_Score{}
 	, m_HighScore{}
 {
-	EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
+	//EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
 }
 
 

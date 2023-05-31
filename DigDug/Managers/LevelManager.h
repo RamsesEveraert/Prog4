@@ -16,6 +16,8 @@ namespace dae
 		void LoadStartScreen();
 		void LoadLevel(Scene& scene, GameMode mode, int nrLevel);
 		void StartNextLevel(const Event& event);
+
+		void LoadGameOver(const Event& event);
 		
 	private:
 		friend class Singleton<LevelManager>;
@@ -53,7 +55,7 @@ namespace dae
 
 		// events
 
-		void LoadGameOver(const Event& event);
+		
 
 		// member variables
 

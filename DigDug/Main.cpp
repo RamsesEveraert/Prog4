@@ -8,6 +8,9 @@
 #include "Minigin.h"
 #include "LevelManager.h"
 
+#include "Event.h"
+
+
 using namespace dae;
 
 void load()

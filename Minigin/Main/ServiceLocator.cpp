@@ -2,7 +2,7 @@
 
 using namespace dae;
 
-SoundSystem& dae::ServiceLocator::GetAudio()
+SoundSystem& dae::ServiceLocator::GetSoundSystem()
 {
 	return m_pSoundSystemInstance == nullptr ? *m_pDefaultSoundSystemInstance : *m_pSoundSystemInstance;
 }
