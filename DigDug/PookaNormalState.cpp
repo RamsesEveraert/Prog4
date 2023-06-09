@@ -26,6 +26,8 @@ dae::PookaNormalState::PookaNormalState(GameObject* pPooka, GameObject* pPlayer,
     , m_TransitionTime{}
     , m_HuntRange {30.f}
     , m_PookaDirection{}
+    , m_TargetCell {}
+    , m_CurrentCell{}
 {
 }
 

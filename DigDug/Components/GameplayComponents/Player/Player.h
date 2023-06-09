@@ -15,10 +15,10 @@ namespace dae
 		Player& operator=(const Player& other) = delete;
 		Player& operator=(Player&& other) noexcept = delete;
 
-		void InitPlayer();
+		void InitPlayer(bool isPlayer1);
 		void ResetPlayerStartPosition();
 	private:		
-		void AddRequiredComponents();
+		void AddRequiredComponents(bool isPlayer1);
 
 		Grid* m_pGrid;
 

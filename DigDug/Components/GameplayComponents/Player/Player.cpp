@@ -19,10 +19,9 @@ dae::Player::Player(Grid* pGrid)
 {
 }
 
-void dae::Player::InitPlayer()
+void dae::Player::InitPlayer(bool isPlayer1)
 {
-    AddRequiredComponents();
-    // todo add method to define sprite for player 1 , player 2 etc...
+    AddRequiredComponents(isPlayer1);
 }
 
 void dae::Player::ResetPlayerStartPosition()
@@ -31,19 +30,33 @@ void dae::Player::ResetPlayerStartPosition()
     GetOwner()->GetTransform()->SetPosition(startPosition);
 }
 
-void dae::Player::AddRequiredComponents()
+void dae::Player::AddRequiredComponents(bool isPlayer1)
 {
     GameObject* owner{ GetOwner() };
     std::cout << "Adding Required Components Player \n";
 
-    glm::vec2 spriteOffset{ 128, 16 };
+    glm::vec2 spriteOffsetP1 { 128, 16 };
+    glm::vec2 spriteOffsetP2 { 75, 75 };
+
+    std::string spritePathP1{ "General Sprites.png" };
+    std::string spritePathP2{ "General_Sprites.png" };
+
     float spriteScale{ 1.5f };
     glm::vec2 spriteSize{ 16, 16 };
 
-    owner->AddComponent<Sprite>("General Sprites.png", SDL_Rect(static_cast<int>(spriteOffset.x), static_cast<int>(spriteOffset.y), static_cast<int>(spriteSize.x), static_cast<int>(spriteSize.y)), spriteScale);
-    std::cout << "Added Sprite comp Player \n";
+    if (isPlayer1)
+    {
+        owner->AddComponent<Sprite>(spritePathP1, SDL_Rect(static_cast<int>(spriteOffsetP1.x), static_cast<int>(spriteOffsetP1.y), static_cast<int>(spriteSize.x), static_cast<int>(spriteSize.y)), spriteScale);
+        std::cout << "Added Sprite comp Player \n";
+    }
+    else
+    {
+        owner->AddComponent<Sprite>(spritePathP2, SDL_Rect(static_cast<int>(spriteOffsetP2.x), static_cast<int>(spriteOffsetP2.y), static_cast<int>(spriteSize.x), static_cast<int>(spriteSize.y)), spriteScale);
+        std::cout << "Added Sprite comp Player \n";
+    }
+    
 
-    owner->GetTransform()->SetPosition(m_pGrid->GetPlayerStartPoint());
+    isPlayer1 ? owner->GetTransform()->SetPosition(m_pGrid->GetPlayerStartPoint()) : owner->GetTransform()->SetPosition(m_pGrid->GetOponentStartPoint());
     
     glm::vec2 centerSprite{ GetOwner()->GetSpriteCenterPoint() };
 

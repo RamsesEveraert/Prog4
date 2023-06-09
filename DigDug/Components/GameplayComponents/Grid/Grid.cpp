@@ -34,7 +34,7 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 			// p = player, r = red / pooka, g = green / fygar, & = rock, o = oponent
 
 			char layoutChar = levelLayout[row][col];
-			cell.IsDug = (layoutChar == '.' || layoutChar == 'p' || layoutChar == 'r' || layoutChar == 'g' || layoutChar == 'g');
+			cell.IsDug = (layoutChar == '.' || layoutChar == 'p' || layoutChar == 'r' || layoutChar == 'g' || layoutChar == 'o');
 			cell.IsRockStartPoint = (layoutChar == '&');
 			cell.IsPlayerStartPoint = (layoutChar == 'p');
 			cell.IsOponentStartPoint = (layoutChar == 'o');
@@ -94,6 +94,12 @@ glm::vec2 dae::Grid::GetPlayerStartPoint()
 {
 	
 	return GetStartPoint([](const Cell& cell) { return cell.IsPlayerStartPoint; }); // lamda functie als predicate;
+}
+
+glm::vec2 dae::Grid::GetOponentStartPoint()
+{
+
+	return GetStartPoint([](const Cell& cell) { return cell.IsOponentStartPoint; }); // lamda functie als predicate;
 }
 
 

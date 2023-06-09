@@ -31,7 +31,8 @@ bool InputManager::ProcessInput()
 		for (auto& keyboard : m_Keyboards)
 		{
 			keyboard->Update(e);
-		}	
+
+		}
 
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);
@@ -41,6 +42,7 @@ bool InputManager::ProcessInput()
 	{
 		keyboard->UpdateWhenPressed();
 	}
+
 
 	// update controllers
 

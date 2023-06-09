@@ -188,6 +188,11 @@ void dae::GridMovementComponent::Render()
     // target cell
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // bleu color
     SDL_RenderDrawRect(renderer, &m_TargetCell.dstRect);
+
+    // player
+    //SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255); // purple color
+    //SDL_Rect sprite{ static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().x), static_cast<int>(GetOwner()->GetTransform()->GetWorldPosition().y), 24, 24 }; // debug purpose
+    //SDL_RenderDrawRect(renderer, &sprite);
 #endif
 }
 

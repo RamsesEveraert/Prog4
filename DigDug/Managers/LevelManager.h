@@ -32,7 +32,6 @@ namespace dae
 		void CreateWorldTiles(Scene& scene);
 		void CreatePlayer(Scene& scene, const GameMode& gameMode);
 		void CreateEnemies(Scene& scene, const GameMode& gameMode);
-		void CreateSinglePlayer(Scene& scene);
 		void SetupHUD(Scene& scene);
 		void CreateFPSObject(Scene& scene);
 
@@ -47,6 +46,9 @@ namespace dae
 		void CreateSchoolLogo(Scene& scene);
 
 		//GameModes and buttons
+
+		void CreateSinglePlayer(Scene& scene);
+		void Create_Co_Op_Players(Scene& scene);
 
 		void CreateSinglePlayerButton(Scene& scene);
 		void Create_Co_Op_Button(Scene& scene);

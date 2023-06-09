@@ -50,7 +50,7 @@ void dae::LevelManager::LoadStartScreen()
 	//********** Game Modes  *************//
 
 	CreateSinglePlayerButton(scene);
-	Create_Co_Op_Button(scene); //Todo implement in game
+	Create_Co_Op_Button(scene); 
 	CreateVersusButton(scene); // Todo implement in Game
 	
 }
@@ -68,10 +68,13 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	m_CurrentScene = &level;
 
 	// parse data from file
-	std::stringstream levelPath;
-	levelPath << "../Data/level" << nrLevel << ".txt";
+	std::stringstream levelPathSinglePlayer;
+	levelPathSinglePlayer << "../Data/SinglePlayer/level" << nrLevel << ".txt";
 
-	std::ifstream levelFile{ levelPath.str() };
+	std::stringstream levelPathCoOp;
+	levelPathCoOp << "../Data/CO_OP/level" << nrLevel << ".txt";
+
+	std::ifstream levelFile{ (mode == GameMode::SINGLEPLAYER) ? levelPathSinglePlayer.str() : levelPathCoOp.str()};
 
 	if (!levelFile.is_open()) std::cout << "levelLayout can't be found \n";
 
@@ -207,8 +210,6 @@ void dae::LevelManager::CreateGrid(Scene& scene, const std::vector<std::string>&
 	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid, levelLayout);
 
 	scene.Add(grid);
-
-	std::cout << "Grid creation sucessful : rows = " << std::to_string(rowTiles) << " columns = " << std::to_string(columnTiles) << "\n";
 }
 
 void dae::LevelManager::CreateWorldTiles(Scene& scene)
@@ -243,6 +244,7 @@ void dae::LevelManager::CreatePlayer(Scene& scene, const GameMode& gameMode)
 		CreateSinglePlayer(scene);
 		break;
 	case dae::GameMode::CO_OP:
+		Create_Co_Op_Players(scene);
 		break;
 	case dae::GameMode::VERSUS:
 		break;
@@ -273,7 +275,7 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 	auto pGrid{ gridObj->GetComponent<Grid>() };
 
 	auto player{ std::make_shared<GameObject>("player") };
-	player->AddComponent<Player>(pGrid)->InitPlayer();
+	player->AddComponent<Player>(pGrid)->InitPlayer(true);
 
 	scene.Add(player);
 
@@ -322,26 +324,92 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 	}
 }
 
+void dae::LevelManager::Create_Co_Op_Players(Scene& scene)
+{
+	// get grid information 
+
+	auto gridObj{ scene.FindObject("grid") };
+	auto pGrid{ gridObj->GetComponent<Grid>() };
+
+	//create p1
+	auto p1{ std::make_shared<GameObject>("player1") };
+	p1->AddComponent<Player>(pGrid)->InitPlayer(true);
+
+	scene.Add(p1);
+
+	// create p2
+	auto p2{ std::make_shared<GameObject>("player2") };
+	p2->AddComponent<Player>(pGrid)->InitPlayer(false);
+
+	scene.Add(p2);
+
+	// add controller to player 1
+
+	auto controller{ InputManager::GetInstance().AddController() };
+
+	// Create a map of buttons and their corresponding directions
+	std::map<ControllerInput::ControllerButtons, glm::vec2> buttonDirections = {
+		{ ControllerInput::ControllerButtons::DPadUp, { 0.f, -1.f } },
+		{ ControllerInput::ControllerButtons::DPadDown, { 0.f, 1.f } },
+		{ ControllerInput::ControllerButtons::DPadRight, { 1.f, 0.f } },
+		{ ControllerInput::ControllerButtons::DPadLeft, { -1.f, 0.f } }
+	};
+
+	// Create a move command for each button/direction pair and attach it to the controller
+	const float speed{ 40.f };
+	for (const auto& [button, direction] : buttonDirections)
+	{
+		auto moveCommand{ std::make_shared<GridMoveCommand>(p1.get(), speed, direction, pGrid) };
+		controller->AttachCommandToButton(moveCommand, { button, ControllerInput::ButtonState::Pressed });
+	}
+
+	// thumbsticks controls
+	auto button = ControllerInput::ControllerButtons::LeftThumbstick;
+	auto pMoveCommandStick{ std::make_shared<GridMoveCommand>(p1.get(), speed, controller->GetDirectionLeftThumbStick(), pGrid) };
+
+	controller->AttachCommandToThumbStick(pMoveCommandStick, button);
+
+	// add keyboard to p2
+
+	auto keyboard = dae::InputManager::GetInstance().AddKeyboard();
+
+	std::vector<std::pair<SDL_Scancode, glm::vec2>> keyDirections = {
+	{ SDL_SCANCODE_W, {0.f, -1.f} },
+	{ SDL_SCANCODE_S, {0.f, 1.f} },
+	{ SDL_SCANCODE_D, {1.f, 0.f} },
+	{ SDL_SCANCODE_A, {-1.f, 0.f} }
+	};
+
+	for (auto& keyDirection : keyDirections)
+	{
+		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
+		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
+		auto direction = keyDirection.second;
+		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(p2.get(), speed, direction, pGrid);
+		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
+	}
+}
+
 void dae::LevelManager::SetupHUD(Scene& scene)
 {
-	// Get player object
-	auto player = scene.FindObject("player");
+	// Get player lives player 1
+	auto p1 = scene.FindObject("player1");
 
-	// Add lives display for player
+	// Add lives display for player 1
 	glm::vec2 posLives{ 0.f, 408.f };
 
-	auto livesPlayer = std::make_shared<dae::GameObject>("livesPlayer");
-	livesPlayer->GetTransform()->SetPosition(posLives);
-	auto display = livesPlayer->AddComponent<LivesDisplayComponent>(player.get());
+	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer");
+	livesPlayer1->GetTransform()->SetPosition(posLives);
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1.get());
 	display->InitializeLivesSprites();
-	scene.Add(livesPlayer);
+	scene.Add(livesPlayer1);
 
-	// Add score display for player
+	// Add score display for player 1
 	glm::vec2 posScore{ 220.f, 412.f };
 
 	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
 	scorePlayer->GetTransform()->SetPosition(posScore);
-	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowScore(player.get());
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowScore(p1.get());
 	scene.Add(scorePlayer);
 }
 
@@ -412,9 +480,9 @@ void dae::LevelManager::CreateSinglePlayerButton(Scene& scene)
 	singlePlayer->AddComponent<Texture>("SinglePlayer.png");
 	singlePlayer->AddComponent<TextureRenderer>();
 
-	auto onClickSinglePlayer = [&]() { LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
+	auto onClick = [&]() { LevelManager::GetInstance().LoadLevel(scene, GameMode::SINGLEPLAYER, 1); };
 	const glm::vec2 sizeButton{ 150.f, 23.f };
-	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClickSinglePlayer);
+	singlePlayer->AddComponent<Button>(buttonPosition, sizeButton, onClick);
 
 	scene.Add(singlePlayer);
 }
@@ -422,9 +490,15 @@ void dae::LevelManager::CreateSinglePlayerButton(Scene& scene)
 void dae::LevelManager::Create_Co_Op_Button(Scene& scene)
 {
 	auto co_op = std::make_shared<dae::GameObject>("co_op");
-	co_op->GetTransform()->SetPosition(glm::vec2{ 95.f, 315.f });
+	glm::vec2 buttonPosition{ 95.f, 315.f };
+	co_op->GetTransform()->SetPosition(buttonPosition);
 	co_op->AddComponent<Texture>("co_op.png");
 	co_op->AddComponent<TextureRenderer>();
+
+	auto onClick = [&]() { LevelManager::GetInstance().LoadLevel(scene, GameMode::CO_OP, 1); };
+	const glm::vec2 sizeButton{ 150.f, 23.f };
+	co_op->AddComponent<Button>(buttonPosition, sizeButton, onClick);
+
 	scene.Add(co_op);
 }
 
