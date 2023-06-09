@@ -1,15 +1,15 @@
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 
 #include <vector>
 #include <any>
 
-dae::EventQueue::EventQueue()
+dae::EventHandler::EventHandler()
     : m_Listeners{}
 {
 }
 
-void dae::EventQueue::AddListener(const std::string& eventName, std::function<void(const Event&)> function)
+void dae::EventHandler::AddListener(const std::string& eventName, std::function<void(const Event&)> function)
 {
     for (auto& [name, listener] : m_Listeners)
     {
@@ -26,7 +26,7 @@ void dae::EventQueue::AddListener(const std::string& eventName, std::function<vo
 }
 
 
-void dae::EventQueue::RemoveListener(const std::string& eventName, std::function<void(const Event&)> function)
+void dae::EventHandler::RemoveListener(const std::string& eventName, std::function<void(const Event&)> function)
 {
     auto it = m_Listeners.find(eventName);
     if (it != m_Listeners.end())
@@ -39,7 +39,7 @@ void dae::EventQueue::RemoveListener(const std::string& eventName, std::function
 }
 
 
-void dae::EventQueue::Dispatch(const Event& event)
+void dae::EventHandler::Dispatch(const Event& event)
 {
     const auto& eventName = event.name;
     if (m_Listeners.find(eventName) == m_Listeners.end()) return; // event doesn't exist

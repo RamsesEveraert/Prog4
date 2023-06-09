@@ -5,7 +5,7 @@
 #include "Transform.h"
 
 #include "Renderer.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 
 #include "Event.h"
 
@@ -14,7 +14,7 @@ dae::BoxCollider::BoxCollider(float centerX, float centerY, float w, float h)
 	, m_Size{ w, h }
 {
 	dae::CollisionHandler::GetInstance().AddCollider(this);
-	EventQueue::GetInstance().AddListener("PlayerMoved", [this](const dae::Event& event) { OnPlayerMove(event); }); 
+	EventHandler::GetInstance().AddListener("PlayerMoved", [this](const dae::Event& event) { OnPlayerMove(event); });
 }
 
 dae::BoxCollider::~BoxCollider()
@@ -35,7 +35,7 @@ void dae::BoxCollider::Render()
 void dae::BoxCollider::Hit(BoxCollider* pOther)
 {
 	Event hitEvent{ "HitEvent", {this, pOther} };
-	EventQueue::GetInstance().Dispatch(hitEvent);
+	EventHandler::GetInstance().Dispatch(hitEvent);
 }
 
 

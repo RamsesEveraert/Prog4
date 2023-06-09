@@ -9,7 +9,7 @@ namespace dae
 	public:
 		virtual ~SoundSystem() = default;
 
-		virtual unsigned short AddSound(const std::string& path) = 0;
+		virtual unsigned short AddSound(const std::string& name, const std::string& path) = 0;
 		virtual void Play(unsigned short id, int volume) = 0;
 		virtual void Pause() = 0;
 		virtual void Resume() = 0;

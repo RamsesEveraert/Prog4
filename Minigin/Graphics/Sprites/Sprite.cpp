@@ -5,6 +5,15 @@
 
 #include "ResourceManager.h"
 
+
+// main
+
+#include "GameObject.h"
+
+// components
+#include "Transform.h"
+
+
 using namespace dae;
 
 dae::Sprite::Sprite(const std::string& spritePath, const SDL_Rect& spriteSrc, float scale)
@@ -12,6 +21,18 @@ dae::Sprite::Sprite(const std::string& spritePath, const SDL_Rect& spriteSrc, fl
 	m_Size{ spriteSrc.w, spriteSrc.h }, m_Color{ }, m_Alpha{},
 	m_Flip{ SDL_FLIP_NONE }, m_Angle{ }, m_Scale{scale}
 {
+}
+
+void dae::Sprite::Render()
+{
+	auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+	auto scale = m_Scale;
+
+	auto texture = m_pTexture;
+	auto srcRect = m_SrcRect;
+
+	SDL_Rect dstRect{ static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(srcRect.w * scale.x), static_cast<int>(srcRect.h * scale.y) };
+	Renderer::GetInstance().RenderSprite(*texture, srcRect, dstRect);
 }
 
 void dae::Sprite::SetPosition(const glm::vec2& position)

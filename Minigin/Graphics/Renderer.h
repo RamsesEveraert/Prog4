@@ -27,18 +27,7 @@ namespace dae
 		void RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, float x, float y, float w, float h) const;
 		void RenderSprite( Texture2D& texture, const SDL_Rect& srcRect, const SDL_Rect& dstRect) const;
 
-		void SetKeyColor(const SDL_Color& keycolor);
-		const SDL_Color& GetKeyColor() const;
-
 		SDL_Renderer* GetSDLRenderer() const;
-
-		// basic shape rendering for debugging purpose , possible useful
-
-		void DrawLine(const glm::vec2& start, const glm::vec2& end, const SDL_Color& color) const;
-
-		void DrawRect(const SDL_Rect& rect, const SDL_Color& color) const;
-
-		void DrawCircle(const glm::vec2& center, float radius, const SDL_Color& color) const;
 
 		const SDL_Color& GetBackgroundColor() const;
 		void SetBackgroundColor(const SDL_Color& color);

@@ -131,7 +131,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputP
 xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -166,7 +166,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2_mixer-2.6.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -203,7 +203,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutputP
 xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPath)" /R /Y</Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2_mixer-2.6.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -242,7 +242,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
 </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2_mixer-2.6.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -268,7 +268,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\AssetsComponents\SoundSystem.h" />
     <ClInclude Include="Components\AssetsComponents\Font.h" />
     <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h" />
-    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h" />
     <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h" />
     <ClInclude Include="Components\AssetsComponents\Text.h" />
     <ClInclude Include="Components\AssetsComponents\Texture.h" />
@@ -282,13 +281,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Components\GameplayComponents\MovementComponent.h" />
     <ClInclude Include="Components\HUD\FPSComponent.h" />
     <ClInclude Include="Events\Event.h" />
-    <ClInclude Include="Events\EventQueue.h" />
+    <ClInclude Include="Events\EventHandler.h" />
     <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Graphics\Sprites\Sprite.h" />
     <ClInclude Include="Graphics\Texture2D.h" />
     <ClInclude Include="Inputs\ControllerInput.h" />
     <ClInclude Include="Inputs\KeyboardInput.h" />
-    <ClInclude Include="Main\Debugger.h" />
     <ClInclude Include="Main\Minigin.h" />
     <ClInclude Include="Main\ServiceLocator.h" />
     <ClInclude Include="Managers\AchievementManager.h" />
@@ -297,7 +295,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="Managers\SceneManager.h" />
     <ClInclude Include="Observer\Observer.h" />
     <ClInclude Include="Observer\Subject.h" />
-    <ClInclude Include="Scene\DemoSceneLoader.h" />
     <ClInclude Include="Scene\GameObject.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Temporary\HealthCommand.h" />
@@ -347,7 +344,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\AssetsComponents\SDLSoundSystem.cpp" />
     <ClCompile Include="Components\AssetsComponents\Font.cpp" />
     <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp" />
-    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp" />
     <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp" />
     <ClCompile Include="Components\AssetsComponents\Text.cpp" />
     <ClCompile Include="Components\AssetsComponents\Texture.cpp" />
@@ -361,13 +357,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Components\GameplayComponents\MovementComponent.cpp" />
     <ClCompile Include="Components\HUD\FPSComponent.cpp" />
     <ClCompile Include="Events\Event.cpp" />
-    <ClCompile Include="Events\EventQueue.cpp" />
+    <ClCompile Include="Events\EventHandler.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
     <ClCompile Include="Graphics\Sprites\Sprite.cpp" />
     <ClCompile Include="Graphics\Texture2D.cpp" />
     <ClCompile Include="Inputs\ControllerInput.cpp" />
     <ClCompile Include="Inputs\KeyboardInput.cpp" />
-    <ClCompile Include="Main\Debugger.cpp" />
     <ClCompile Include="Main\Minigin.cpp" />
     <ClCompile Include="Main\ServiceLocator.cpp" />
     <ClCompile Include="Managers\AchievementManager.cpp" />
@@ -376,7 +371,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="Managers\SceneManager.cpp" />
     <ClCompile Include="Observer\Observer.cpp" />
     <ClCompile Include="Observer\Subject.cpp" />
-    <ClCompile Include="Scene\DemoSceneLoader.cpp" />
     <ClCompile Include="Scene\GameObject.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Temporary\HealthCommand.cpp" />

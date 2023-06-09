@@ -43,7 +43,6 @@ void dae::GameObject::Update()
     {
         if (component)
             component->Update();
-        //if (HasComponent<BoxCollider>()) dae::CollisionHandler::GetInstance().Update();
     }
 
     for (const auto& child : m_Children)
@@ -56,7 +55,6 @@ void dae::GameObject::Update()
     {
         m_pTransform->UpdateWorldPosition();
         if (HasComponent<Sprite>()) GetComponent<Sprite>()->SetPosition(m_pTransform->GetWorldPosition()); // update sprite position after object position change
-        std::cout << "position changed \n";
     }
        
 

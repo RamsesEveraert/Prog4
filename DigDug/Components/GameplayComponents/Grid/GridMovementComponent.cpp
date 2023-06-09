@@ -7,7 +7,7 @@
 
 #include "Timer.h"
 #include "Renderer.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 
 #include "Event.h"
 
@@ -46,7 +46,7 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Notify Move Event
     {
         Event moveEvent{ "PlayerMoved",{GetOwner()->GetObjectName(), playerCenter}};
-        EventQueue::GetInstance().Dispatch(moveEvent);
+        EventHandler::GetInstance().Dispatch(moveEvent);
     }
 
     // Find the current and target cells
@@ -57,7 +57,7 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     if (m_PreviousCell.row != m_CurrentCell.row || m_PreviousCell.col != m_CurrentCell.col)
     {
         Event digEvent{ "DiggedCell", {m_CurrentCell} };
-        EventQueue::GetInstance().Dispatch(digEvent);
+        EventHandler::GetInstance().Dispatch(digEvent);
     }
 
     // Normalize direction

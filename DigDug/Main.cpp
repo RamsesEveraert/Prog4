@@ -7,6 +7,9 @@
 
 #include "Minigin.h"
 #include "LevelManager.h"
+#include "ServiceLocator.h"
+#include "LoggingSoundSystem.h"
+#include "SDLSoundSystem.h"
 
 #include "Event.h"
 
@@ -15,10 +18,14 @@ using namespace dae;
 
 void load()
 {
+//#if _DEBUG
+//	ServiceLocator::RegisterAudioSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SDLSoundSystem>()));
+//#else
+//	ServiceLocator::RegisterSoundSystem(std::make_unique<SDLSoundSystem>());
+//#endif
+
 	LevelManager::GetInstance().LoadStartScreen();
 	
-	
-
 }
 
 int main(int, char* []) {

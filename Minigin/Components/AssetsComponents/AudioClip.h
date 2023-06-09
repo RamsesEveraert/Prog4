@@ -5,7 +5,7 @@ namespace dae
 	class AudioClip final
 	{
 	public:
-		AudioClip(std::string_view filepath);
+		AudioClip(std::string filepath);
 
 		void Play(int volume);
 		void Load();

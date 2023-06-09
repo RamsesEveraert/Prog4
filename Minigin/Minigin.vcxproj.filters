@@ -148,7 +148,7 @@
     <ClInclude Include="Events\Event.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Events\EventQueue.h">
+    <ClInclude Include="Events\EventHandler.h">
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Renderer.h">
@@ -156,9 +156,6 @@
     </ClInclude>
     <ClInclude Include="Graphics\Texture2D.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Main\Debugger.h">
-      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Main\Minigin.h">
       <Filter>Main</Filter>
@@ -168,12 +165,6 @@
     </ClInclude>
     <ClInclude Include="Observer\Subject.h">
       <Filter>Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\DemoSceneLoader.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\GameObject.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">
       <Filter>Scene</Filter>
@@ -194,9 +185,6 @@
       <Filter>Graphics\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\RenderComponents\RenderComponent.h">
-      <Filter>Components\AssetsComponents\RenderComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.h">
       <Filter>Components\AssetsComponents\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\RenderComponents\TextureRenderer.h">
@@ -231,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="Components\AssetsComponents\AudioClip.h">
       <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameObject.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -312,7 +303,7 @@
     <ClCompile Include="Events\Event.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="Events\EventQueue.cpp">
+    <ClCompile Include="Events\EventHandler.cpp">
       <Filter>Events</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Renderer.cpp">
@@ -320,9 +311,6 @@
     </ClCompile>
     <ClCompile Include="Graphics\Texture2D.cpp">
       <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Main\Debugger.cpp">
-      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Main\Minigin.cpp">
       <Filter>Main</Filter>
@@ -332,12 +320,6 @@
     </ClCompile>
     <ClCompile Include="Observer\Subject.cpp">
       <Filter>Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\DemoSceneLoader.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\GameObject.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>Scene</Filter>
@@ -355,9 +337,6 @@
       <Filter>Graphics\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\RenderComponents\RenderComponent.cpp">
-      <Filter>Components\AssetsComponents\RenderComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\AssetsComponents\RenderComponents\SpriteRenderer.cpp">
       <Filter>Components\AssetsComponents\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\RenderComponents\TextureRenderer.cpp">
@@ -386,6 +365,9 @@
     </ClCompile>
     <ClCompile Include="Components\AssetsComponents\AudioClip.cpp">
       <Filter>Components\AssetsComponents\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameObject.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

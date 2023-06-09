@@ -13,7 +13,7 @@
 #include <condition_variable>
 #include <queue>
 
-#include "EventQueue.h"
+#include "EventHandler.h"
 
 using namespace dae;
 
@@ -33,22 +33,17 @@ public:
 		}
 	}
 
-	unsigned short AddSound(const std::string& path)
+	unsigned short AddSound(const std::string& name, const std::string& path)
 	{
-		std::string audioPath{ path };
-
-		// check if audio has already been added & returns it
-
-		auto it = m_MapSoundId.find(audioPath);
+		auto it = m_MapSoundId.find(name);
 		if (it != m_MapSoundId.end())
 		{
+			// Sound with the same name already exists, return its ID
 			return it->second;
 		}
 
-		// if it doesn't exist: add it to the soundmap & returns it
-
 		auto id = static_cast<unsigned short>(m_AudioClips.size());
-		m_MapSoundId.emplace(audioPath, id);
+		m_MapSoundId.emplace(name, id);
 
 		{
 			std::lock_guard lock{ m_Mutex };
@@ -57,6 +52,7 @@ public:
 
 		return id;
 	}
+
 
 	 void Play(unsigned short id, int volume)
 	 {
@@ -155,9 +151,9 @@ SDLSoundSystem::~SDLSoundSystem()
    
 }
 
-unsigned short dae::SDLSoundSystem::AddSound(const std::string& path)
+unsigned short dae::SDLSoundSystem::AddSound(const std::string& name, const std::string& path)
 {
-	return m_pImplSoundSystem->AddSound(path);
+	return m_pImplSoundSystem->AddSound(name, path);
 }
 
 void dae::SDLSoundSystem::Play(unsigned short id, int volume)

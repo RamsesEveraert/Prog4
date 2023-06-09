@@ -7,7 +7,7 @@ namespace dae
 {
 	class DefaultSoundSystem final : public SoundSystem
 	{
-		virtual unsigned short AddSound(const std::string& /*path*/) override { return 0; };
+		virtual unsigned short AddSound(const std::string& /*name*/, const std::string& /*path*/) override { return 0; };
 
 		virtual void Play(unsigned short /*id*/, int /*volume*/) override {};
 		virtual void Pause() override {};

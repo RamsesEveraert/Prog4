@@ -2,6 +2,10 @@
 
 using namespace dae;
 
+std::unique_ptr<SoundSystem> ServiceLocator::m_pSoundSystemInstance = nullptr;
+std::unique_ptr<DefaultSoundSystem> ServiceLocator::m_pDefaultSoundSystemInstance = nullptr;
+
+
 SoundSystem& dae::ServiceLocator::GetSoundSystem()
 {
 	return m_pSoundSystemInstance == nullptr ? *m_pDefaultSoundSystemInstance : *m_pSoundSystemInstance;

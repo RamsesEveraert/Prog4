@@ -12,16 +12,16 @@
 namespace dae
 {
     struct Event;
-    class EventQueue final : public Singleton<EventQueue>
+    class EventHandler final : public Singleton<EventHandler>
     {
     public:
 
-        EventQueue();
-        ~EventQueue() = default;
-        EventQueue(const EventQueue&) = delete;
-        EventQueue(EventQueue&&) = delete;
-        EventQueue& operator= (const EventQueue&) = delete;
-        EventQueue& operator= (const EventQueue&&) = delete;
+        EventHandler();
+        ~EventHandler() = default;
+        EventHandler(const EventHandler&) = delete;
+        EventHandler(EventHandler&&) = delete;
+        EventHandler& operator= (const EventHandler&) = delete;
+        EventHandler& operator= (const EventHandler&&) = delete;
 
         void AddListener(const std::string& eventName, std::function<void(const Event&)> function);
         void RemoveListener(const std::string& eventName, std::function<void(const Event&)> function);

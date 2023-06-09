@@ -1,5 +1,5 @@
 #include "Health.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 #include "GameObject.h"
 #include "BoxCollider.h"
@@ -17,7 +17,7 @@ dae::Health::Health()
 
 void dae::Health::Initialize()
 {
-	EventQueue::GetInstance().AddListener("HitEvent", [this](const dae::Event& event) { OnHit(event); });
+	EventHandler::GetInstance().AddListener("HitEvent", [this](const dae::Event& event) { OnHit(event); });
 
 	m_pOwner = GetOwner();
 	if (m_pOwner->HasComponent<Player>()) m_pPlayer = m_pOwner->GetComponent<Player>();
@@ -50,7 +50,7 @@ void dae::Health::OnHit(const dae::Event& event)
 				--m_Health;
 
 				Event decreaseLives{ "LiveDecreased", { m_Health, m_pOwner->GetObjectName() } };
-				EventQueue::GetInstance().Dispatch(decreaseLives);
+				EventHandler::GetInstance().Dispatch(decreaseLives);
 
 				m_pOwner->GetComponent<Player>()->ResetPlayerStartPosition();
 			}
@@ -59,7 +59,7 @@ void dae::Health::OnHit(const dae::Event& event)
 			if (m_Health <= 0) 
 			{
 			/*	Event playerDiedEvent{ "PlayerDied", {m_pOwner->GetObjectName()} };
-				EventQueue::GetInstance().Dispatch(playerDiedEvent);*/
+				EventHandler::GetInstance().Dispatch(playerDiedEvent);*/
 			}
 		}
 	}
@@ -73,7 +73,7 @@ void dae::Health::SetHealth(int health)
 	if (m_Health <= 0)
 	{
 		Event playerDiedEvent{ "PlayerDied", { } };
-		EventQueue::GetInstance().Dispatch(playerDiedEvent);
+		EventHandler::GetInstance().Dispatch(playerDiedEvent);
 	}; 
 }
 

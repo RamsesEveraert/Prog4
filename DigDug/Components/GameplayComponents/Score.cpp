@@ -1,5 +1,5 @@
  #include "Score.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 #include "GameObject.h"
 
@@ -9,7 +9,7 @@ dae::Score::Score()
 	: m_Score{}
 	, m_HighScore{}
 {
-	//EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
+	//EventHandler::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); });
 }
 
 

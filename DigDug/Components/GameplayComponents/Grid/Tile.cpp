@@ -2,9 +2,8 @@
 
 #include "GameObject.h"
 #include "Sprite.h"
-#include "SpriteRenderer.h"
 
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 
 dae::Tile::Tile(const SDL_Rect& dstTile, Grid* pGrid, float gameScale)
@@ -14,7 +13,7 @@ dae::Tile::Tile(const SDL_Rect& dstTile, Grid* pGrid, float gameScale)
 	, m_gameScale {gameScale}
 {
 	m_TileCell = m_pGrid->GetCells()[m_pGrid->GetCellIdxFromPosition(glm::vec2{ static_cast<float>(m_DstTile.x), static_cast<float>(m_DstTile.y) })];
-	EventQueue::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { OnCellDig(event); });
+	EventHandler::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { OnCellDig(event); });
 }
 
 
@@ -38,7 +37,6 @@ void dae::Tile::OnCellDig(const Event& event)
 	{
 		SDL_Rect tunnel{ 128, 0, 16,16 };
 		GetOwner()->AddComponent<Sprite>("General Sprites.png", tunnel, m_gameScale);
-		GetOwner()->AddComponent<SpriteRenderer>();
 	}
 
 	

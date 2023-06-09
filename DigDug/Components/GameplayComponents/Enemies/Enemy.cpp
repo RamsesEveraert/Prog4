@@ -4,7 +4,6 @@
 
 //components
 #include "Sprite.h"
-#include "SpriteRenderer.h"
 #include "Health.h"
 #include "Score.h"
 #include "SpriteAnimation.h"
@@ -49,9 +48,6 @@ void dae::Enemy::AddRequiredComponents()
     owner->AddComponent<Sprite>("General Sprites.png", SDL_Rect(static_cast<int>(spriteOffset.x), static_cast<int>(spriteOffset.y), static_cast<int>(spriteSize.x), static_cast<int>(spriteSize.y)), spriteScale);
     std::cout << "Added Sprite comp Enemy \n";
 
-    owner->AddComponent<SpriteRenderer>();
-    std::cout << "Added SpriteRenderer comp Enemy \n";
-
     owner->GetTransform()->SetPosition(m_pGrid->GetPookaStartPoints()[m_IndexEnemy]);
 
     glm::vec2 centerSprite{ GetOwner()->GetSpriteCenterPoint() };
@@ -62,8 +58,6 @@ void dae::Enemy::AddRequiredComponents()
     owner->AddComponent<Health>();
     std::cout << "Added Health comp Enemy \n";
 
-
-    //if (!owner->HasComponent<Animation>()) { owner->AddComponent<Animation>(); std::cout << "Added Animation comp Player \n"; }
    // if (!owner->HasComponent<MovementComponent>()) { owner->AddComponent<MovementComponent>(40.f); std::cout << "Added MoveComponent Player \n"; }
 }
 

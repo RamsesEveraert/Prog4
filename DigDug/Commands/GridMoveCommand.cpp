@@ -10,8 +10,9 @@ using namespace dae;
 
 dae::GridMoveCommand::GridMoveCommand(GameObject* go, float speed, const glm::vec2& direction, Grid* pGrid)
     : m_Direction{ direction }
+    , m_pGridMovementComponent { go->GetComponent<GridMovementComponent>() }
 {
-    m_pGridMovementComponent = go->AddComponent<GridMovementComponent>(speed, pGrid);
+    if(m_pGridMovementComponent == nullptr) m_pGridMovementComponent = go->AddComponent<GridMovementComponent>(speed, pGrid);
 }
 
 void dae::GridMoveCommand::Execute()

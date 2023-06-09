@@ -14,7 +14,8 @@ namespace dae
         virtual void Render() override;
 
     private:
-        void CheckSprite();
+        bool HasSprite();
+
 
         Sprite* m_pSprite;
     };

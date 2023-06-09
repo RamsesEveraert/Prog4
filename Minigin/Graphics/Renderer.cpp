@@ -137,70 +137,11 @@ void Renderer::RenderSprite(Texture2D& texture, const SDL_Rect& srcRect, const S
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dstRect);
 }
 
-void dae::Renderer::SetKeyColor(const SDL_Color& keycolor)
-{
-	m_KeyColor = keycolor;
-}
-
-const SDL_Color& dae::Renderer::GetKeyColor() const
-{
-	return m_KeyColor;
-}
-
-
-
 inline SDL_Renderer* dae::Renderer::GetSDLRenderer() const 
 {
 	return m_Renderer; 
 }
 
-void Renderer::DrawLine(const glm::vec2& start, const glm::vec2& end, const SDL_Color& color) const
-{
-	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderDrawLine(m_Renderer, static_cast<int>(start.x), static_cast<int>(start.y), static_cast<int>(end.x), static_cast<int>(end.y));
-}
-
-void Renderer::DrawRect(const SDL_Rect& rect, const SDL_Color& color) const
-{
-	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
-	SDL_RenderDrawRect(m_Renderer, &rect);
-}
-
-void dae::Renderer::DrawCircle(const glm::vec2& center, float radius, const SDL_Color& color) const
-{
-	// bron: https://iq.opengenus.org/bresenhams-circle-drawing-algorithm
-	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
-
-	int x = 0;
-	int y = static_cast<int>(radius);
-	int d = 3 - 2 * static_cast<int>(radius);
-
-	int cx = static_cast<int>(center.x);
-	int cy = static_cast<int>(center.y);
-
-	while (x <= y)
-	{
-		SDL_RenderDrawPoint(m_Renderer, cx + x, cy + y);
-		SDL_RenderDrawPoint(m_Renderer, cx - x, cy + y);
-		SDL_RenderDrawPoint(m_Renderer, cx + x, cy - y);
-		SDL_RenderDrawPoint(m_Renderer, cx - x, cy - y);
-		SDL_RenderDrawPoint(m_Renderer, cx + y, cy + x);
-		SDL_RenderDrawPoint(m_Renderer, cx - y, cy + x);
-		SDL_RenderDrawPoint(m_Renderer, cx + y, cy - x);
-		SDL_RenderDrawPoint(m_Renderer, cx - y, cy - x);
-
-		if (d < 0)
-		{
-			d = d + 4 * x + 6;
-		}
-		else
-		{
-			d = d + 4 * (x - y) + 10;
-			y--;
-		}
-		x++;
-	}
-}
 const SDL_Color& dae::Renderer::GetBackgroundColor() const
 {
 	return m_ClearColor;

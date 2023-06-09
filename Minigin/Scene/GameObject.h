@@ -110,6 +110,13 @@ namespace dae
     inline T* GameObject::AddComponent(Args&&... args) {
         static_assert(std::is_base_of<Component, T>(), "Component is NOT derived from the ComponentBase class");
 
+        // Check if a component of the same type already exists
+        if (HasComponent<T>())
+        {
+            std::cout << "Component of type " << typeid(T).name() << " already exists on GameObject." << std::endl;
+            return nullptr;
+        }
+
         auto pComponent = std::make_unique<T>(std::forward<Args>(args)...);
         T* returnComponentPtr = pComponent.get();
 

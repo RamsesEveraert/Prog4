@@ -2,9 +2,8 @@
 
 // Singletons
 #include "SceneManager.h"
-#include "SpriteRenderer.h"
 #include "TextureRenderer.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "InputManager.h"
 
 // GameAssets
@@ -38,8 +37,8 @@
 
 void dae::LevelManager::LoadStartScreen()
 {
-	EventQueue::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
-	EventQueue::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
+	EventHandler::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
+	EventHandler::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartOptions");
 
 	//********** Game Window *************//
@@ -76,7 +75,7 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 
 	if (!levelFile.is_open()) std::cout << "levelLayout can't be found \n";
 
-	std::vector<std::string> levelLayout{}; // stores a row in ea index
+	std::vector<std::string> levelLayout{}; // stores a line in ea index
 	std::string line;
 
 	while (std::getline(levelFile, line)) 
@@ -168,13 +167,6 @@ void dae::LevelManager::LoadGameOver(const Event& event)
 
 void dae::LevelManager::ResetLevel(Scene& scene)
 {
-	/*if (!m_IsAddedAsListener)
-	{
-		EventQueue::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
-		EventQueue::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
-		m_IsAddedAsListener = true;
-	}*/
-
 	dae::SceneManager::GetInstance().RemoveScene(&scene);
 }
 
@@ -193,7 +185,6 @@ void dae::LevelManager::CreateLevelBackground(Scene& scene, int nrLevel)
 									,spriteSize.y }; 
 
 	background->AddComponent<Sprite>("Level_Backgrounds.png", levelBackground, gameScale);
-	background->AddComponent<SpriteRenderer>();
 
 	scene.Add(background);
 }
@@ -239,7 +230,6 @@ void dae::LevelManager::CreateWorldTiles(Scene& scene)
 		{
 			SDL_Rect tunnel{ 128, 0, 16,16 }; // offset.x, offset.y spritesize.w , spritesize.h
 			worldTile->AddComponent<Sprite>("General Sprites.png", tunnel, m_GameScale);
-			worldTile->AddComponent<SpriteRenderer>();
 		}
 		scene.Add(worldTile);
 	}
@@ -269,7 +259,7 @@ void dae::LevelManager::CreateEnemies(Scene& scene, const GameMode& /*gameMode*/
 	auto gridObj{ scene.FindObject("grid") };
 	auto pGrid{ gridObj->GetComponent<Grid>() };
 
-	for (int index{}; index < pGrid->GetPookaStartPoints().size(); index++)
+	for (int index{}; index < static_cast<int>( pGrid->GetPookaStartPoints().size()); index++)
 	{
 		auto pooka{ std::make_shared<GameObject>("pooka" + std::to_string(index+1)) };
 		pooka->AddComponent<Enemy>(pGrid, index)->InitEnemy();

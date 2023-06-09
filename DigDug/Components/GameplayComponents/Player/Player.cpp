@@ -4,7 +4,6 @@
 
 //components
 #include "Sprite.h"
-#include "SpriteRenderer.h"
 #include "Health.h"
 #include "Score.h"
 #include "SpriteAnimation.h"
@@ -44,9 +43,6 @@ void dae::Player::AddRequiredComponents()
     owner->AddComponent<Sprite>("General Sprites.png", SDL_Rect(static_cast<int>(spriteOffset.x), static_cast<int>(spriteOffset.y), static_cast<int>(spriteSize.x), static_cast<int>(spriteSize.y)), spriteScale);
     std::cout << "Added Sprite comp Player \n";
 
-    owner->AddComponent<SpriteRenderer>();
-    std::cout << "Added SpriteRenderer comp Player \n";
-
     owner->GetTransform()->SetPosition(m_pGrid->GetPlayerStartPoint());
     
     glm::vec2 centerSprite{ GetOwner()->GetSpriteCenterPoint() };
@@ -61,7 +57,6 @@ void dae::Player::AddRequiredComponents()
     owner->AddComponent<Score>(); 
     std::cout << "Added Score comp Player \n";
     
-    //if (!owner->HasComponent<Animation>()) { owner->AddComponent<Animation>(); std::cout << "Added Animation comp Player \n"; }
 }
     
 

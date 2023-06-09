@@ -1,5 +1,5 @@
 #include "ScoreDisplayComponent.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "ResourceManager.h"
 #include "Event.h"
 #include "GameObject.h"
@@ -14,9 +14,9 @@ dae::ScoreDisplayComponent::ScoreDisplayComponent()
     nullptr
 }, m_pTextcomponent{ nullptr }
 {
-    EventQueue::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); // []scope, () parameters, {} fction body
-    EventQueue::GetInstance().AddListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
-    EventQueue::GetInstance().AddListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
+    EventHandler::GetInstance().AddListener("PlayerDied", [this](const dae::Event& event) { OnPlayerDied(event); }); // []scope, () parameters, {} fction body
+    EventHandler::GetInstance().AddListener("DecrementEvent", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
+    EventHandler::GetInstance().AddListener("IncrementScore", [this](const dae::Event& event) { UpdateScoreDisplay(event); });
 }
 
 void dae::ScoreDisplayComponent::UpdateScoreDisplay(const dae::Event& event)

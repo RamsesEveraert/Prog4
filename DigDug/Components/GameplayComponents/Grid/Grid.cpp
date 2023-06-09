@@ -4,7 +4,7 @@
 #include "Transform.h"
 
 #include "Renderer.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 
 using namespace dae;
@@ -16,7 +16,7 @@ dae::Grid::Grid(float width, float height, float sizeCells, const glm::vec2& pos
 	, m_GridOffset{position}
 {
 
-	EventQueue::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { SetDug(event); });
+	EventHandler::GetInstance().AddListener("DiggedCell", [this](const dae::Event& event) { SetDug(event); });
 
 	m_GridSize = glm::vec2{ m_AmountOfColumns ,  m_AmountOfRows } * m_SizeCells;
 

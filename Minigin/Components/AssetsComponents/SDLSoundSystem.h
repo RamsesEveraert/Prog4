@@ -2,7 +2,7 @@
 
 #include "SoundSystem.h"
 
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "Event.h"
 
 namespace dae
@@ -18,7 +18,7 @@ namespace dae
 		SDLSoundSystem& operator=(const SDLSoundSystem& other) = delete;
 		SDLSoundSystem& operator=(SDLSoundSystem&& other) = delete;
 
-		virtual unsigned short AddSound(const std::string& path) override;
+		virtual unsigned short AddSound(const std::string& name, const std::string& path) override;
 
 		virtual void Play(unsigned short id, int volume) override;
 		virtual void Pause() override;

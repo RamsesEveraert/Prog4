@@ -1,6 +1,5 @@
 #pragma once
 #include "SceneManager.h"
-#include "Debugger.h"
 
 namespace dae
 {
@@ -39,8 +38,6 @@ namespace dae
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};
 		std::vector < std::shared_ptr<GameObject>> m_DeletedObjects{};
 
-		// debugger
-		//std::unique_ptr<Debugger> m_pDebugger;
 		bool m_Debug;
 
 		static unsigned int m_idCounter; 

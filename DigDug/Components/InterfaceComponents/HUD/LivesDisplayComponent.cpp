@@ -1,12 +1,11 @@
 #include "LivesDisplayComponent.h"
-#include "EventQueue.h"
+#include "EventHandler.h"
 #include "ResourceManager.h"
 #include "Event.h"
 #include "GameObject.h"
 #include "Health.h"
 #include "Text.h"
 #include "Sprite.h"
-#include "SpriteRenderer.h"
 #include "Transform.h"
 
 #include <sstream>
@@ -16,7 +15,7 @@ using namespace dae;
 dae::LivesDisplayComponent::LivesDisplayComponent(GameObject* player)
     : m_pHealth{nullptr}, m_Lives{}, m_pSprite{ nullptr }, m_pOwnerLives{ player }
 {
-    EventQueue::GetInstance().AddListener("LiveDecreased", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
+    EventHandler::GetInstance().AddListener("LiveDecreased", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
 
 }
 
@@ -74,7 +73,6 @@ void dae::LivesDisplayComponent::InitializeLivesSprites()
         auto name{ "Life" + std::to_string(i) };
         auto lifeSprite{ std::make_shared<GameObject>(name) };
         lifeSprite->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(109, 58, 16, 16), 1.5f);
-        lifeSprite->AddComponent<SpriteRenderer>();
         lifeSprite->SetParent(GetOwner(), false);
 
         // Set the position of the sprite relative to the parent object

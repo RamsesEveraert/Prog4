@@ -35,6 +35,15 @@
     <Filter Include="Components\GameplayComponents\Enemies">
       <UniqueIdentifier>{4cff6ce8-31da-4d10-ba5a-9ae7d12417f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{e0f3e42b-6723-47d3-a8ba-4caa736df427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Fygar">
+      <UniqueIdentifier>{9f434c44-21d4-4001-b560-1c34683da194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Pooka">
+      <UniqueIdentifier>{bc23d8d8-7bf7-4e85-aecb-e741624af3d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp">
@@ -85,6 +94,28 @@
     </ClCompile>
     <ClCompile Include="Components\GameplayComponents\SoundComponent.cpp">
       <Filter>Components\GameplayComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="FygarAttackState.cpp">
+      <Filter>States\Fygar</Filter>
+    </ClCompile>
+    <ClCompile Include="FygarPumpedState.cpp">
+      <Filter>States\Fygar</Filter>
+    </ClCompile>
+    <ClCompile Include="FygarNormalState.cpp">
+      <Filter>States\Fygar</Filter>
+    </ClCompile>
+    <ClCompile Include="FygarGhostState.cpp">
+      <Filter>States\Fygar</Filter>
+    </ClCompile>
+    <ClCompile Include="PookaNormalState.cpp">
+      <Filter>States\Pooka</Filter>
+    </ClCompile>
+    <ClCompile Include="PookaPumpedState.cpp">
+      <Filter>States\Pooka</Filter>
+    </ClCompile>
+    <ClCompile Include="PookaGhostState.cpp">
+      <Filter>States\Pooka</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +169,34 @@
     </ClInclude>
     <ClInclude Include="Components\GameplayComponents\SoundComponent.h">
       <Filter>Components\GameplayComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="FygarAttackState.h">
+      <Filter>States\Fygar</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarPumpedState.h">
+      <Filter>States\Fygar</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarNormalState.h">
+      <Filter>States\Fygar</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarGhostState.h">
+      <Filter>States\Fygar</Filter>
+    </ClInclude>
+    <ClInclude Include="PookaNormalState.h">
+      <Filter>States\Pooka</Filter>
+    </ClInclude>
+    <ClInclude Include="PookaPumpedState.h">
+      <Filter>States\Pooka</Filter>
+    </ClInclude>
+    <ClInclude Include="PookaGhostState.h">
+      <Filter>States\Pooka</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarStateInterface.h">
+      <Filter>States\Fygar</Filter>
+    </ClInclude>
+    <ClInclude Include="PookaStateInterface.h">
+      <Filter>States\Pooka</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

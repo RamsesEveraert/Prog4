@@ -16,7 +16,7 @@ namespace dae
         virtual ~Sprite() = default;
 
         virtual void Update() override {};
-        virtual void Render()  override {};
+        virtual void Render()  override;
 
         void SetPosition(const glm::vec2& position);
         const glm::vec2& GetPosition() const;
