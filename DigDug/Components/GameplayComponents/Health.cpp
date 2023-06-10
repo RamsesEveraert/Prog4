@@ -7,7 +7,7 @@
 #include "Enemies/Enemy.h"
 
 dae::Health::Health()
-	: m_Health{ 1 }
+	: m_Health{ 4 }
 	, m_pPlayer{nullptr}
 	, m_pEnemy {nullptr}
 	, m_pOwner{nullptr}
@@ -41,6 +41,8 @@ void dae::Health::OnHit(const dae::Event& event)
 		}
 	}
 
+	if (playerCollider->GetOwner() != GetOwner()) return; // Event is not for this player
+
 	if (playerCollider && enemyCollider)
 	{
 		if (m_pOwner->HasComponent<Player>())
@@ -51,6 +53,8 @@ void dae::Health::OnHit(const dae::Event& event)
 
 				Event decreaseLives{ "LiveDecreased", { m_Health, m_pOwner->GetObjectName() } };
 				EventHandler::GetInstance().Dispatch(decreaseLives);
+
+				//std::cout << "event livedecreased dispatcht for Player: " << m_pOwner->GetObjectName() << "\n";
 
 				m_pOwner->GetComponent<Player>()->ResetPlayerStartPosition();
 			}

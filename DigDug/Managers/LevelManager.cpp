@@ -68,27 +68,9 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	m_CurrentScene = &level;
 
 	// parse data from file
-	std::stringstream levelPathSinglePlayer;
-	levelPathSinglePlayer << "../Data/SinglePlayer/level" << nrLevel << ".txt";
-
-	std::stringstream levelPathCoOp;
-	levelPathCoOp << "../Data/CO_OP/level" << nrLevel << ".txt";
-
-	std::ifstream levelFile{ (mode == GameMode::SINGLEPLAYER) ? levelPathSinglePlayer.str() : levelPathCoOp.str()};
-
-	if (!levelFile.is_open()) std::cout << "levelLayout can't be found \n";
-
-	std::vector<std::string> levelLayout{}; // stores a line in ea index
-	std::string line;
-
-	while (std::getline(levelFile, line)) 
-	{
-		
-		levelLayout.push_back(line); // pushback: copy needed
- 	}
-
-	levelFile.close();
-
+	std::ifstream levelFile{ GetLevelPath(m_NrLevel)};
+	std::vector<std::string> levelLayout{GetLevelLayout(levelFile)};
+	
 	// Create Background
 	CreateLevelBackground(level, nrLevel);
 
@@ -102,10 +84,10 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	CreatePlayer(level, mode);
 
 	// Create Enemies
-	CreateEnemies(level, mode);
+	if(m_GameMode != GameMode::VERSUS) CreateEnemies(level, mode);
 
 	// Setup HUD
-	SetupHUD(level);
+	SetupHUD(level, mode);
 
 	// Add (temporary) fps counter
 	CreateFPSObject(level);
@@ -165,14 +147,10 @@ void dae::LevelManager::LoadGameOver(const Event& event)
 	std::cout << "LoadGameOver finished\n";
 }
 
-	
-
-
 void dae::LevelManager::ResetLevel(Scene& scene)
 {
 	dae::SceneManager::GetInstance().RemoveScene(&scene);
 }
-
 
 void dae::LevelManager::CreateLevelBackground(Scene& scene, int nrLevel)
 {
@@ -210,6 +188,8 @@ void dae::LevelManager::CreateGrid(Scene& scene, const std::vector<std::string>&
 	grid->AddComponent<Grid>(sizeGrid.x, sizeGrid.y, sizeTiles, positionGrid, levelLayout);
 
 	scene.Add(grid);
+
+	std::cout << "grid added";
 }
 
 void dae::LevelManager::CreateWorldTiles(Scene& scene)
@@ -247,6 +227,7 @@ void dae::LevelManager::CreatePlayer(Scene& scene, const GameMode& gameMode)
 		Create_Co_Op_Players(scene);
 		break;
 	case dae::GameMode::VERSUS:
+		Create_Versus_Players(scene);
 		break;
 	default:
 		break;
@@ -274,7 +255,7 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 	auto gridObj{ scene.FindObject("grid") };
 	auto pGrid{ gridObj->GetComponent<Grid>() };
 
-	auto player{ std::make_shared<GameObject>("player") };
+	auto player{ std::make_shared<GameObject>("P1") };
 	player->AddComponent<Player>(pGrid)->InitPlayer(true);
 
 	scene.Add(player);
@@ -332,13 +313,13 @@ void dae::LevelManager::Create_Co_Op_Players(Scene& scene)
 	auto pGrid{ gridObj->GetComponent<Grid>() };
 
 	//create p1
-	auto p1{ std::make_shared<GameObject>("player1") };
+	auto p1{ std::make_shared<GameObject>("P1") };
 	p1->AddComponent<Player>(pGrid)->InitPlayer(true);
 
 	scene.Add(p1);
 
 	// create p2
-	auto p2{ std::make_shared<GameObject>("player2") };
+	auto p2{ std::make_shared<GameObject>("P2") };
 	p2->AddComponent<Player>(pGrid)->InitPlayer(false);
 
 	scene.Add(p2);
@@ -390,27 +371,109 @@ void dae::LevelManager::Create_Co_Op_Players(Scene& scene)
 	}
 }
 
-void dae::LevelManager::SetupHUD(Scene& scene)
+void dae::LevelManager::Create_Versus_Players(Scene& /*scene*/)
 {
-	// Get player lives player 1
-	auto p1 = scene.FindObject("player1");
+}
 
+std::string dae::LevelManager::GetLevelPath(int nrLevel)
+{
+	std::stringstream levelPath;
+	levelPath << "../Data/";
+
+	if (m_GameMode == GameMode::SINGLEPLAYER) levelPath << "SinglePlayer/";
+	else if (m_GameMode == GameMode::CO_OP) levelPath << "CO_OP/";
+	else if (m_GameMode == GameMode::VERSUS) levelPath << "Versus/";
+
+	levelPath << "level" << nrLevel << ".txt";
+
+	return levelPath.str();
+}
+
+std::vector<std::string> dae::LevelManager::GetLevelLayout(std::ifstream& levelFile)
+{
+	if (!levelFile.is_open()) std::cout << "levelLayout can't be found \n";
+
+	std::vector<std::string> levelLayout{}; // stores a line in ea index
+	std::string line;
+
+	while (std::getline(levelFile, line))
+	{
+		levelLayout.push_back(line); // pushback: copy needed
+	}
+
+	levelFile.close();
+
+	return levelLayout;
+}
+
+void dae::LevelManager::CreateSingplayerHUD(Scene& scene, GameObject* p1)
+{
 	// Add lives display for player 1
 	glm::vec2 posLives{ 0.f, 408.f };
 
 	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer");
 	livesPlayer1->GetTransform()->SetPosition(posLives);
-	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1.get());
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1);
 	display->InitializeLivesSprites();
 	scene.Add(livesPlayer1);
 
 	// Add score display for player 1
-	glm::vec2 posScore{ 220.f, 412.f };
+	glm::vec2 posScore{ 200.f, 412.f };
 
 	auto scorePlayer = std::make_shared<dae::GameObject>("ScorePlayer");
 	scorePlayer->GetTransform()->SetPosition(posScore);
-	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowScore(p1.get());
+	scorePlayer->AddComponent<ScoreDisplayComponent>()->ShowScore(p1);
 	scene.Add(scorePlayer);
+}
+
+void dae::LevelManager::Create_CO_OP_HUD(Scene& scene, GameObject* p1, GameObject* p2)
+{
+	// Add lives display for player 1
+	glm::vec2 posLives{ 0.f, 408.f };
+
+	auto livesPlayer1 = std::make_shared<dae::GameObject>("lives P1");
+	livesPlayer1->GetTransform()->SetPosition(posLives);
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1);
+	display->InitializeLivesSprites();
+	scene.Add(livesPlayer1);
+
+	// Add lives display for player 2
+	glm::vec2 posLives2{ 210.f, 408.f };
+
+	auto livesPlayer2 = std::make_shared<dae::GameObject>("lives P2");
+	livesPlayer2->GetTransform()->SetPosition(posLives2);
+	auto display2 = livesPlayer2->AddComponent<LivesDisplayComponent>(p2);
+	display2->InitializeLivesSprites();
+	scene.Add(livesPlayer2);
+
+}
+
+void dae::LevelManager::CreateVersusHUD(Scene& /*scene*/, GameObject* /*p1*/, GameObject* /*p2*/)
+{
+}
+
+void dae::LevelManager::SetupHUD(Scene& scene, const GameMode& gameMode)
+{
+
+	// Get P1 & P2
+	auto p1 = scene.FindObject("P1");
+	auto p2 = scene.FindObject("P2");
+
+	// Create HUD
+	switch (gameMode)
+	{
+	case dae::GameMode::SINGLEPLAYER:
+		CreateSingplayerHUD(scene, p1.get());
+		break;
+	case dae::GameMode::CO_OP:
+		Create_CO_OP_HUD(scene, p1.get(), p2.get());
+		break;
+	case dae::GameMode::VERSUS:
+		CreateVersusHUD(scene, p1.get(), p2.get());
+		break;
+	default:
+		break;
+	}
 }
 
 void dae::LevelManager::CreateFPSObject(Scene& scene)

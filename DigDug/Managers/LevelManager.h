@@ -27,12 +27,15 @@ namespace dae
 
 		// game assets
 
+		std::string GetLevelPath(int nrLevel);
+		std::vector<std::string> GetLevelLayout(std::ifstream& levelFile);
+
 		void CreateLevelBackground(Scene& scene, int nrLevel);
 		void CreateGrid(Scene& scene, const std::vector<std::string>& levelLayout);
 		void CreateWorldTiles(Scene& scene);
 		void CreatePlayer(Scene& scene, const GameMode& gameMode);
 		void CreateEnemies(Scene& scene, const GameMode& gameMode);
-		void SetupHUD(Scene& scene);
+		void SetupHUD(Scene& scene, const GameMode& gameMode);
 		void CreateFPSObject(Scene& scene);
 
 		void CreateGameLogo(Scene& scene);
@@ -49,6 +52,11 @@ namespace dae
 
 		void CreateSinglePlayer(Scene& scene);
 		void Create_Co_Op_Players(Scene& scene);
+		void Create_Versus_Players(Scene& scene);
+
+		void CreateSingplayerHUD(Scene& scene, GameObject* p1);
+		void Create_CO_OP_HUD(Scene& scene, GameObject* p1, GameObject* p2);
+		void CreateVersusHUD(Scene& scene, GameObject* p1, GameObject* p2);
 
 		void CreateSinglePlayerButton(Scene& scene);
 		void Create_Co_Op_Button(Scene& scene);

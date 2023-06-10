@@ -38,14 +38,14 @@ namespace dae
 
 
         // cell properties
-        static Grid::Cell m_CurrentCell, m_PreviousCell, m_PreviousTargetCell, m_TargetCell;
+        Grid::Cell m_CurrentCell, m_PreviousCell, m_PreviousTargetCell, m_TargetCell;
         int m_PreviousCellIdx;
         float m_SnapRange;
         const glm::ivec2 m_CellSize;
         std::vector<Grid::Cell> m_Cells;
 
         // player movement properties
-        static Direction m_CurrentDirection, m_PreviousDirection;
+        Direction m_CurrentDirection, m_PreviousDirection;
         float m_Speed;       
 	};
 }

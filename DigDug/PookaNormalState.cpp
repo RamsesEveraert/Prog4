@@ -25,6 +25,7 @@ dae::PookaNormalState::PookaNormalState(GameObject* pPooka, GameObject* pPlayer,
     , m_NormalTime{}
     , m_TransitionTime{}
     , m_HuntRange {30.f}
+    , m_Speed {50.f}
     , m_PookaDirection{}
     , m_TargetCell {}
     , m_CurrentCell{}
@@ -44,6 +45,12 @@ void dae::PookaNormalState::OnEnter()
     float maxTransitionTime{ 10.f };
     m_TransitionTime = static_cast<float>(rand()) / RAND_MAX * (maxTransitionTime - minTransitionTime) + minTransitionTime;
 
+    // random start direction
+
+    m_PookaDirection = GetRandomDirection();
+
+
+
 }
 
 void dae::PookaNormalState::OnEnd()
@@ -52,6 +59,7 @@ void dae::PookaNormalState::OnEnd()
 
 std::unique_ptr<PookaStateInterface> dae::PookaNormalState::Update()
 {
+    UpdateMovement();
     return std::unique_ptr<PookaNormalState>();
 }
 
@@ -61,7 +69,9 @@ void dae::PookaNormalState::UpdateMovement()
     glm::vec2 playerPosition{ m_pPlayer->GetTransform()->GetWorldPosition() };
     glm::vec2 pookaPosition{ m_pPooka->GetTransform()->GetWorldPosition() };
 
-    // check if pooka is in range of player , if so it hunts the player
+    glm::vec2 newPosition = pookaPosition + m_PookaDirection * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed;
+
+  /*  // check if pooka is in range of player , if so it hunts the player
 
     if (abs(playerPosition.x - pookaPosition.x) <= m_HuntRange && abs(playerPosition.x - pookaPosition.x) <= m_HuntRange)
     {
@@ -81,7 +91,7 @@ void dae::PookaNormalState::UpdateMovement()
 
     // Get first cell in direction of the player
 
-
+    */
 
 }
 
@@ -96,5 +106,23 @@ bool dae::PookaNormalState::CanMove(const glm::vec2& /*pookaPosition*/)
    // else if (!m_TargetCell.IsDug && abs(m_pPooka->GetComponent<>)) 
 
     return false;
+}
+
+glm::vec2 dae::PookaNormalState::GetRandomDirection() const
+{
+    // Random value between -1 and 1
+
+    int randomX = (rand() % 3) - 1; 
+    int randomY = (rand() % 3) - 1; 
+
+    // one direction has to be 0
+
+    if (randomX != 0 && randomY != 0)
+    {
+        randomX = (rand() % 2 == 0) ? 0 : randomX;
+        randomY = (randomX == 0) ? ((rand() % 2 == 0) ? 1 : -1) : 0;
+    }
+
+    return glm::vec2(randomX, randomY);
 }
 

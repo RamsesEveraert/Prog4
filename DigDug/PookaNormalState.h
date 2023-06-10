@@ -25,6 +25,7 @@ namespace dae
 
 		void UpdateMovement();
 		bool CanMove(const glm::vec2& pookaPosition);
+		glm::vec2 GetRandomDirection() const;
 
 		GameObject* m_pPooka;
 		GameObject* m_pPlayer;
@@ -33,6 +34,7 @@ namespace dae
 		const float m_GhostTime;
 		float m_NormalTime, m_TransitionTime;
 		float m_HuntRange;
+		float m_Speed;
 
 		glm::vec2 m_PookaDirection;
 
