@@ -9,6 +9,9 @@ namespace dae
 		~InstructionsComponent() = default;
 
 		virtual void RenderImGui() override;
+
+	private:
+		bool m_ShowInstructionsWindow{ true };
 	};
 
 }

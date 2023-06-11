@@ -11,6 +11,7 @@
 #include "BoxCollider.h"
 #include "Transform.h"
 #include "Grid.h"
+#include "SoundComponent.h"
 
 using namespace dae;
 
@@ -69,6 +70,8 @@ void dae::Player::AddRequiredComponents(bool isPlayer1)
 
     owner->AddComponent<Score>(); 
     std::cout << "Added Score comp Player \n";
+
+  //  owner->AddComponent<SoundComponent>("WalkSound", "walking.wav", 10);
     
 }
     

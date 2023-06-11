@@ -185,3 +185,4 @@ void dae::SDLSoundSystem::SetVolume(float volume)
 {
 	m_pImplSoundSystem->SetVolume(volume);
 }
+

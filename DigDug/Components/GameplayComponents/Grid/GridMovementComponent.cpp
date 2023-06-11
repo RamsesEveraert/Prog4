@@ -6,10 +6,12 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "../Pooka.h"
+#include "SoundComponent.h"
 
 #include "Timer.h"
 #include "Renderer.h"
 #include "EventHandler.h"
+#include "ServiceLocator.h"
 
 #include "Event.h"
 
@@ -46,6 +48,10 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Notify Move Event
   if(GetOwner()->HasComponent<Player>())  
   {
+     
+      /*auto& soundSystem = ServiceLocator::GetSoundSystem();
+      auto sound = soundSystem.AddSound("walksound", "walking.wav");
+      soundSystem.Play(sound, 10);*/
         Event moveEvent{ "PlayerMoved",{GetOwner()->GetObjectName(), center}};
         EventHandler::GetInstance().Dispatch(moveEvent);
   }

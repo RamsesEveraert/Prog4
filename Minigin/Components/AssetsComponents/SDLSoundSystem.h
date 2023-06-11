@@ -30,6 +30,7 @@ namespace dae
 		//virtual void SetLoop(unsigned short id, bool canLoop) override;
 
 
+
 	private:
 
 		class SoundSystemImpl;

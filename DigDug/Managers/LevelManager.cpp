@@ -26,6 +26,7 @@
 #include "FPSComponent.h"
 #include "Button.h"
 #include "BoxCollider.h"
+#include "InstructionsComponent.h"
 
 #include "../Pooka.h"
 
@@ -43,6 +44,13 @@ void dae::LevelManager::LoadStartScreen()
 	EventHandler::GetInstance().AddListener("NextLevel", [&](const dae::Event& event) { StartNextLevel(event); });
 	EventHandler::GetInstance().AddListener("PlayerDied", [&](const dae::Event& event) { LoadGameOver(event); });
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("StartOptions");
+
+	//****** instruction *****//////
+
+	auto instructions = std::make_shared<dae::GameObject>("Instructions");
+	instructions->AddComponent<InstructionsComponent>();
+	scene.Add(instructions);
+
 
 	//********** Game Window *************//
 
@@ -156,7 +164,6 @@ void dae::LevelManager::LoadGameOver(const Event& event)
 
 void dae::LevelManager::ResetLevel(Scene* scene)
 {
-	dae::InputManager::GetInstance().RemoveAllCommandsAndControlers();
 	dae::SceneManager::GetInstance().RemoveScene(scene);
 }
 

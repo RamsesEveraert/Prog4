@@ -31,7 +31,6 @@ bool InputManager::ProcessInput()
 		for (auto& keyboard : m_Keyboards)
 		{
 			keyboard->Update(e);
-
 		}
 
 		//process event for IMGUI

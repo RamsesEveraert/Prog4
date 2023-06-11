@@ -18,11 +18,11 @@ using namespace dae;
 
 void load()
 {
-//#if _DEBUG
-//	ServiceLocator::RegisterAudioSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SDLSoundSystem>()));
-//#else
-//	ServiceLocator::RegisterSoundSystem(std::make_unique<SDLSoundSystem>());
-//#endif
+#if _DEBUG
+	ServiceLocator::RegisterAudioSystem(std::make_unique<LoggingSoundSystem>(std::make_unique<SDLSoundSystem>()));
+#else
+	ServiceLocator::RegisterAudioSystem(std::make_unique<SDLSoundSystem>());
+#endif
 
 	LevelManager::GetInstance().LoadStartScreen();
 	
