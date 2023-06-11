@@ -1,7 +1,14 @@
 #pragma once
 #include "PookaStateInterface.h"
 
+// components
 #include "Grid.h"
+
+// states
+#include "PookaGhostState.h"
+
+//singleton
+#include "Timer.h"
 
 #include <glm/glm.hpp>
 
@@ -9,7 +16,9 @@
 
 namespace dae
 {
+	struct Event;
 	class Grid;
+	class Transform;
 	class GameObject;
 	class PookaNormalState final : public PookaStateInterface
 	{
@@ -24,11 +33,12 @@ namespace dae
 	private:
 
 		void UpdateMovement();
-		bool CanMove(const glm::vec2& pookaPosition);
+		void onCantMove(const Event& event);
 		glm::vec2 GetRandomDirection() const;
 
 		GameObject* m_pPooka;
 		GameObject* m_pPlayer;
+		Transform* m_pPookaTransform;
 		Grid* m_pGrid;
 
 		const float m_GhostTime;
@@ -39,6 +49,7 @@ namespace dae
 		glm::vec2 m_PookaDirection;
 
 		Grid::Cell m_CurrentCell, m_TargetCell;
+		std::vector<Grid::Cell> m_Cells;
 
 	};
 }

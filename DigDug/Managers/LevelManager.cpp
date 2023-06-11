@@ -27,6 +27,8 @@
 #include "Button.h"
 #include "BoxCollider.h"
 
+#include "../Pooka.h"
+
 // Commands
 #include "GridMoveCommand.h"
 
@@ -242,10 +244,12 @@ void dae::LevelManager::CreateEnemies(Scene& scene, const GameMode& /*gameMode*/
 	auto gridObj{ scene.FindObject("grid") };
 	auto pGrid{ gridObj->GetComponent<Grid>() };
 
+	auto p1{ scene.FindObject("P1") };
+
 	for (int index{}; index < static_cast<int>( pGrid->GetPookaStartPoints().size()); index++)
 	{
 		auto pooka{ std::make_shared<GameObject>("pooka" + std::to_string(index+1)) };
-		pooka->AddComponent<Enemy>(pGrid, index)->InitEnemy();
+		pooka->AddComponent<Pooka>(p1.get(), pGrid, index)->Initialize();
 		scene.Add(pooka);
 	}
 }
@@ -413,7 +417,7 @@ void dae::LevelManager::CreateSingplayerHUD(Scene& scene, GameObject* p1)
 
 	auto livesPlayer1 = std::make_shared<dae::GameObject>("livesPlayer");
 	livesPlayer1->GetTransform()->SetPosition(posLives);
-	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1);
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1, true);
 	display->InitializeLivesSprites();
 	scene.Add(livesPlayer1);
 
@@ -433,7 +437,7 @@ void dae::LevelManager::Create_CO_OP_HUD(Scene& scene, GameObject* p1, GameObjec
 
 	auto livesPlayer1 = std::make_shared<dae::GameObject>("lives P1");
 	livesPlayer1->GetTransform()->SetPosition(posLives);
-	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1);
+	auto display = livesPlayer1->AddComponent<LivesDisplayComponent>(p1, true);
 	display->InitializeLivesSprites();
 	scene.Add(livesPlayer1);
 
@@ -442,7 +446,7 @@ void dae::LevelManager::Create_CO_OP_HUD(Scene& scene, GameObject* p1, GameObjec
 
 	auto livesPlayer2 = std::make_shared<dae::GameObject>("lives P2");
 	livesPlayer2->GetTransform()->SetPosition(posLives2);
-	auto display2 = livesPlayer2->AddComponent<LivesDisplayComponent>(p2);
+	auto display2 = livesPlayer2->AddComponent<LivesDisplayComponent>(p2, false);
 	display2->InitializeLivesSprites();
 	scene.Add(livesPlayer2);
 

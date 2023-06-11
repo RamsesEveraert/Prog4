@@ -13,9 +13,16 @@ namespace dae
     public:
         GridMovementComponent(float speed, Grid* pGrid);
         void Move(const glm::vec2& direction);
+
         void SetSpeed(float speed);
         const float GetSpeed() const;
+
+        const Grid::Cell& GetCurrentCell() const;
+
+        const Grid::Cell& GetTargetCell() const;
+
         virtual void Render() override;
+
 
     private:
 
@@ -30,6 +37,7 @@ namespace dae
         void SnapPlayerToCell(const glm::vec2& currentPosition, glm::vec2 newPosition, Transform* pPlayerTransform);
         bool IsPlayerInGrid(const glm::vec2& newPosition);
 
+        bool CanMove(const glm::vec2& pookaPosition, const glm::vec2& direction);
 
         // Grid properties
         Grid* m_pGrid;

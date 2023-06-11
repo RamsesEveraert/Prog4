@@ -2,17 +2,21 @@
 
 #include "GameObject.h"
 #include "SDL.h"
+#include "glm/glm.hpp"
 
 // singletons
 
 #include "Timer.h"
+#include "EventHandler.h"
 
 //components
 
 #include "Sprite.h"
 #include "Transform.h"
+#include "GridMovementComponent.h"
 
 // utilities
+#include "Event.h"
 
 
 using namespace dae;
@@ -20,6 +24,7 @@ using namespace dae;
 dae::PookaNormalState::PookaNormalState(GameObject* pPooka, GameObject* pPlayer, Grid* pGrid)
     : m_pPooka {pPooka}
     , m_pPlayer {pPlayer}
+    , m_pPookaTransform{}
     , m_pGrid {pGrid}
     , m_GhostTime {6.f}
     , m_NormalTime{}
@@ -29,11 +34,16 @@ dae::PookaNormalState::PookaNormalState(GameObject* pPooka, GameObject* pPlayer,
     , m_PookaDirection{}
     , m_TargetCell {}
     , m_CurrentCell{}
+    , m_Cells{ pGrid->GetCells()}
 {
+    EventHandler::GetInstance().AddListener("PookaCantMove", [this](const dae::Event& event) { onCantMove(event); });
 }
 
 void dae::PookaNormalState::OnEnter()
 {
+    std::cout << "entered normal state \n";
+
+    m_pPookaTransform = m_pPooka->GetTransform();
     SDL_Rect spriteSrc{0, 144, 16, 16};  // offset x, y , w, h
     m_pPooka->GetComponent<Sprite>()->SetSpriteSrc(spriteSrc);
 
@@ -41,8 +51,8 @@ void dae::PookaNormalState::OnEnter()
     m_NormalTime = 0.f;
 
     // give a random time to become a ghost
-    float minTransitionTime{ 6.f };
-    float maxTransitionTime{ 10.f };
+    float minTransitionTime{ 4.f };
+    float maxTransitionTime{ 7.f };
     m_TransitionTime = static_cast<float>(rand()) / RAND_MAX * (maxTransitionTime - minTransitionTime) + minTransitionTime;
 
     // random start direction
@@ -59,53 +69,47 @@ void dae::PookaNormalState::OnEnd()
 
 std::unique_ptr<PookaStateInterface> dae::PookaNormalState::Update()
 {
-    UpdateMovement();
-    return std::unique_ptr<PookaNormalState>();
+    /*UpdateMovement();*/
+    m_NormalTime += TimeManager::GetInstance().GetDeltaTimeSec();
+    if (m_NormalTime > m_TransitionTime) return std::make_unique<PookaGhostState>(m_pPooka, m_pPlayer, m_pGrid);
+    return nullptr;
 }
 
 void dae::PookaNormalState::UpdateMovement()
 {
-    // get position of pooka and player
-    glm::vec2 playerPosition{ m_pPlayer->GetTransform()->GetWorldPosition() };
-    glm::vec2 pookaPosition{ m_pPooka->GetTransform()->GetWorldPosition() };
-
-    glm::vec2 newPosition = pookaPosition + m_PookaDirection * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed;
-
-  /*  // check if pooka is in range of player , if so it hunts the player
-
-    if (abs(playerPosition.x - pookaPosition.x) <= m_HuntRange && abs(playerPosition.x - pookaPosition.x) <= m_HuntRange)
-    {
-        // get the desired direction to the player
-        glm::vec2 directionPooka{ glm::normalize(playerPosition - pookaPosition) };
-    }
-    else
-    {
-        // check if player can move to the next cell
-       
-    }
+    m_pPooka->GetComponent<GridMovementComponent>()->Move(m_PookaDirection);
+    //// get position of pooka and player
+    //glm::vec2 playerPosition{ m_pPlayer->GetTransform()->GetWorldPosition() };
+    //glm::vec2 pookaPosition{ m_pPooka->GetTransform()->GetWorldPosition() };
 
 
-    // Get current Cell of Pooka
-    const int currentCellIdx = m_pGrid->GetCellIdxFromPosition(pookaPosition);
-    m_CurrentCell = m_pGrid->GetCells()[currentCellIdx];
+    //glm::vec2 newPosition = pookaPosition + m_PookaDirection * TimeManager::GetInstance().GetDeltaTimeSec() * m_Speed;
 
-    // Get first cell in direction of the player
+    //if (CanMove(newPosition))
+    //{
+    //    m_pPookaTransform->SetPosition(newPosition);
+    //    return;
+    //}
 
-    */
+    //std::cout << "player can't move anymore \n";
 
 }
 
-bool dae::PookaNormalState::CanMove(const glm::vec2& /*pookaPosition*/)
+
+void dae::PookaNormalState::onCantMove(const Event& event)
 {
-    // check if pooka can move
+    GameObject* stuckPooka{};
+    for (const auto& data : event.data)
+    {
+        if (data.type() == typeid(GridMovementComponent*))
+        {
+            stuckPooka = std::any_cast<GridMovementComponent*>(data)->GetOwner();
+        }
+    }
 
-    if (m_TargetCell.IsDug) return true;
+    if (m_pPooka != stuckPooka) return; // not this pooka
 
-    //int distanceTargetCell{abs(m_TargetCell.dstRect.x)};
-
-   // else if (!m_TargetCell.IsDug && abs(m_pPooka->GetComponent<>)) 
-
-    return false;
+    m_PookaDirection = GetRandomDirection();
 }
 
 glm::vec2 dae::PookaNormalState::GetRandomDirection() const

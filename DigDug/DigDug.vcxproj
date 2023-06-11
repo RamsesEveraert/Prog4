@@ -192,6 +192,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="FygarPumpedState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Managers\LevelManager.cpp" />
+    <ClCompile Include="Pooka.cpp" />
     <ClCompile Include="PookaGhostState.cpp" />
     <ClCompile Include="PookaNormalState.cpp" />
     <ClCompile Include="PookaPumpedState.cpp" />
@@ -219,6 +220,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="FygarPumpedState.h" />
     <ClInclude Include="FygarStateInterface.h" />
     <ClInclude Include="Managers\LevelManager.h" />
+    <ClInclude Include="Pooka.h" />
     <ClInclude Include="PookaGhostState.h" />
     <ClInclude Include="PookaNormalState.h" />
     <ClInclude Include="PookaPumpedState.h" />

@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "BoxCollider.h"
 #include "Player.h"
-#include "Enemies/Enemy.h"
+#include "../Pooka.h"
 
 dae::Health::Health()
 	: m_Health{ 4 }
@@ -26,6 +26,7 @@ void dae::Health::Initialize()
 
 void dae::Health::OnHit(const dae::Event& event)
 {
+	
 	BoxCollider* playerCollider{};
 	BoxCollider* enemyCollider{};
 	/*BoxCollider* pumpCollider{};
@@ -37,7 +38,7 @@ void dae::Health::OnHit(const dae::Event& event)
 		{
 			BoxCollider* collider = std::any_cast<BoxCollider*>(data);
 			if (collider->GetOwner()->HasComponent<Player>()) playerCollider = collider;
-			else if (collider->GetOwner()->HasComponent<Enemy>()) enemyCollider = collider;;
+			else if (collider->GetOwner()->HasComponent<Pooka>()) enemyCollider = collider;;
 		}
 	}
 
@@ -53,8 +54,6 @@ void dae::Health::OnHit(const dae::Event& event)
 
 				Event decreaseLives{ "LiveDecreased", { m_Health, m_pOwner->GetObjectName() } };
 				EventHandler::GetInstance().Dispatch(decreaseLives);
-
-				//std::cout << "event livedecreased dispatcht for Player: " << m_pOwner->GetObjectName() << "\n";
 
 				m_pOwner->GetComponent<Player>()->ResetPlayerStartPosition();
 			}

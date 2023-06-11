@@ -117,6 +117,9 @@
     <ClCompile Include="PookaGhostState.cpp">
       <Filter>States\Pooka</Filter>
     </ClCompile>
+    <ClCompile Include="Pooka.cpp">
+      <Filter>Components\GameplayComponents\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\GameplayComponents\SpriteAnimation.h">
@@ -197,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="PookaStateInterface.h">
       <Filter>States\Pooka</Filter>
+    </ClInclude>
+    <ClInclude Include="Pooka.h">
+      <Filter>Components\GameplayComponents\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

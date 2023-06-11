@@ -12,8 +12,8 @@
 
 using namespace dae;
 
-dae::LivesDisplayComponent::LivesDisplayComponent(GameObject* player)
-    : m_pHealth{nullptr}, m_Lives{}, m_pSprite{ nullptr }, m_pOwnerLives{ player }
+dae::LivesDisplayComponent::LivesDisplayComponent(GameObject* player, bool isPlayer1)
+    : m_pHealth{ nullptr }, m_Lives{}, m_IsPlayer1{ isPlayer1 }, m_pSprite {nullptr}, m_pOwnerLives{ player }
 {
     EventHandler::GetInstance().AddListener("LiveDecreased", [this](const dae::Event& event) { UpdateLivesDisplay(event); });
 
@@ -72,7 +72,10 @@ void dae::LivesDisplayComponent::InitializeLivesSprites()
     {
         auto name{ "Life" + std::to_string(i) };
         auto lifeSprite{ std::make_shared<GameObject>(name) };
-        lifeSprite->AddComponent<Sprite>("General_Sprites.png", SDL_Rect(109, 58, 16, 16), 1.5f);
+        SDL_Rect spriteLivesP1{ 109, 59, 16, 16 };
+        SDL_Rect spriteLivesP2{109, 75, 16, 16 };
+        float scale{ 1.5f };
+        lifeSprite->AddComponent<Sprite>("General_Sprites.png", (m_IsPlayer1) ? spriteLivesP1 : spriteLivesP2, scale);
         lifeSprite->SetParent(GetOwner(), false);
 
         // Set the position of the sprite relative to the parent object

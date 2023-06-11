@@ -4,6 +4,8 @@
 #include "Grid.h"
 #include "Sprite.h"
 #include "GameObject.h"
+#include "Player.h"
+#include "../Pooka.h"
 
 #include "Timer.h"
 #include "Renderer.h"
@@ -35,23 +37,25 @@ dae::GridMovementComponent::GridMovementComponent(float speed, Grid* pGrid)
 
 void dae::GridMovementComponent::Move(const glm::vec2& direction)
 {
+
     // Get the current center position of the sprite
-    Transform* pPlayerTransform{ GetOwner()->GetTransform() };
-    const glm::vec2 currentPosition{ pPlayerTransform->GetWorldPosition() };
-    const glm::vec2 playerCenter{ GetOwner()->GetSpriteCenterPoint()};
+    Transform* transforComponent{ GetOwner()->GetTransform() };
+    const glm::vec2 currentPosition{ transforComponent->GetWorldPosition() };
+    const glm::vec2 center{ GetOwner()->GetSpriteCenterPoint()};
 
     // Notify Move Event
-    {
-        Event moveEvent{ "PlayerMoved",{GetOwner()->GetObjectName(), playerCenter}};
+  if(GetOwner()->HasComponent<Player>())  
+  {
+        Event moveEvent{ "PlayerMoved",{GetOwner()->GetObjectName(), center}};
         EventHandler::GetInstance().Dispatch(moveEvent);
-    }
+  }
 
     // Find the current and target cells
-    UpdateCurrentCell(playerCenter);
+    UpdateCurrentCell(center);
     UpdateTargetCell(direction);
 
     // Send event current cell as digged
-    if (m_PreviousCell.row != m_CurrentCell.row || m_PreviousCell.col != m_CurrentCell.col)
+    if (m_PreviousCell.row != m_CurrentCell.row || m_PreviousCell.col != m_CurrentCell.col && GetOwner()->HasComponent<Player>())
     {
         Event digEvent{ "DiggedCell", {m_CurrentCell} };
         EventHandler::GetInstance().Dispatch(digEvent);
@@ -63,6 +67,16 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
 
     // Set the Direction axis
     SetDirectionAxis(normalizedDirection);
+
+    //check if player or enemy can't move
+    if (GetOwner()->HasComponent<Pooka>() && !CanMove(currentPosition, normalizedDirection))
+    {
+        std::cout << "Pooka can't move \n";
+        Event cantMove{ "PookaCantMove", { this } };
+        EventHandler::GetInstance().Dispatch(cantMove);
+
+        return;
+    }
 
     // Check if player wants to change direction and if it's possible
     if (m_CurrentDirection != m_PreviousDirection && (abs(currentPosition.x - m_TargetCell.dstRect.x) > m_SnapRange || abs(currentPosition.y - m_TargetCell.dstRect.y) > m_SnapRange))
@@ -92,7 +106,7 @@ void dae::GridMovementComponent::Move(const glm::vec2& direction)
     // Keep player in grid bounds
     if (IsPlayerInGrid(newPosition))
     {
-        SnapPlayerToCell(currentPosition, newPosition, pPlayerTransform);
+        SnapPlayerToCell(currentPosition, newPosition, transforComponent);
     }
 
     m_PreviousDirection = m_CurrentDirection;
@@ -172,6 +186,58 @@ bool dae::GridMovementComponent::IsPlayerInGrid(const glm::vec2& newPosition)
         newPosition.y >= m_GridOffset.y && newPosition.y + m_CellSize.y <= m_GridOffset.y + m_pGrid->GetNrRows() * m_CellSize.y);
 }
 
+//bool dae::GridMovementComponent::CanMove(const glm::vec2& pookaPosition, const glm::vec2& direction)
+//{
+//    if (!m_TargetCell.IsDug) return false;
+//
+//    // if a cell has horizontal move range before getting to the target cell
+//    int spriteWidth{ static_cast<int>(GetOwner()->GetComponent<Sprite>()->GetSize().x)};
+//    if (glm::sign(direction.x) >= 0 && abs(m_TargetCell.dstRect.x + spriteWidth - pookaPosition.x) >= 0
+//        || glm::sign(direction.x) <= 0 && abs(m_TargetCell.dstRect.x - pookaPosition.x) >= 0)
+//        return true;
+//
+//    // if a cell has vertical move range before getting to the target cell
+//    int spriteHeight{ static_cast<int>(GetOwner()->GetComponent<Sprite>()->GetSize().y)};
+//    if (glm::sign(direction.y) >= 0 && abs(m_TargetCell.dstRect.y + spriteHeight - pookaPosition.y) >= 0
+//        || glm::sign(direction.y) <= 0 && abs(m_TargetCell.dstRect.y - pookaPosition.y) >= 0)
+//        return true;
+//
+//    // check if the target cell is dug
+//
+//   
+//
+//    return false;
+//}
+
+bool dae::GridMovementComponent::CanMove(const glm::vec2& /*pookaPosition*/, const glm::vec2& /*direction*/)
+{
+    // DOESN4T WORK YET
+
+   /* int spriteWidth = static_cast<int>(GetOwner()->GetComponent<Sprite>()->GetSize().x);
+    int spriteHeight = static_cast<int>(GetOwner()->GetComponent<Sprite>()->GetSize().y);*/
+
+    if (!m_TargetCell.IsDug) return false;
+
+    //// Check horizontal move range
+    //if (!m_TargetCell.IsDug && (glm::sign(direction.x) >= 0 && (m_TargetCell.dstRect.x + spriteWidth - pookaPosition.x) >= 0)
+    //    || (glm::sign(direction.x) <= 0 && (m_TargetCell.dstRect.x - pookaPosition.x) >= 0))
+    //{
+    //    return true;
+    //}
+
+    //// Check vertical move range
+    //if (!m_TargetCell.IsDug && (glm::sign(direction.y) >= 0 && (m_TargetCell.dstRect.y + spriteHeight - pookaPosition.y) >= 0)
+    //    || (glm::sign(direction.y) <= 0 && (m_TargetCell.dstRect.y - pookaPosition.y) >= 0))
+    //{
+    //    return true;
+    //}
+
+    //// The target cell is not within the allowed move range
+    //return false;
+    return true;
+}
+
+
 
 void dae::GridMovementComponent::Render()
 {
@@ -196,4 +262,14 @@ void dae::GridMovementComponent::SetSpeed(float speed)
 const float dae::GridMovementComponent::GetSpeed() const
 {
     return m_Speed;
+}
+
+const Grid::Cell& dae::GridMovementComponent::GetCurrentCell() const
+{
+    return m_CurrentCell;
+}
+
+const Grid::Cell& dae::GridMovementComponent::GetTargetCell() const
+{
+    return m_TargetCell;
 }
