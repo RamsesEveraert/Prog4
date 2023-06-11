@@ -192,11 +192,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClCompile Include="FygarPumpedState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Managers\LevelManager.cpp" />
+    <ClCompile Include="NextLevelCommand.cpp" />
     <ClCompile Include="Pooka.cpp" />
     <ClCompile Include="PookaGhostState.cpp" />
     <ClCompile Include="PookaNormalState.cpp" />
     <ClCompile Include="PookaPumpedState.cpp" />
-    <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands\GridMoveCommand.h" />
@@ -220,13 +220,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "$(OutputPat
     <ClInclude Include="FygarPumpedState.h" />
     <ClInclude Include="FygarStateInterface.h" />
     <ClInclude Include="Managers\LevelManager.h" />
+    <ClInclude Include="NextLevelCommand.h" />
     <ClInclude Include="Pooka.h" />
     <ClInclude Include="PookaGhostState.h" />
     <ClInclude Include="PookaNormalState.h" />
     <ClInclude Include="PookaPumpedState.h" />
     <ClInclude Include="PookaStateInterface.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DigDug.rc" />

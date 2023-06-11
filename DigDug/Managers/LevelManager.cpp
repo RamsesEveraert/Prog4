@@ -31,6 +31,7 @@
 
 // Commands
 #include "GridMoveCommand.h"
+#include "../NextLevelCommand.h"
 
 // Other includes
 #include <fstream>
@@ -63,7 +64,7 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 	m_GameMode = mode;
 	m_NrLevel = nrLevel;
 
-	ResetLevel(scene);
+	ResetLevel(&scene);
 
 	// start new LevelScene
 	auto& level = dae::SceneManager::GetInstance().CreateScene("Level");
@@ -98,13 +99,17 @@ void dae::LevelManager::LoadLevel(Scene& scene, GameMode mode, int nrLevel)
 
 void dae::LevelManager::StartNextLevel(const Event& /*event*/)
 {
+	// Crashes: todo fix button life time -> new level = nullptr /dangling pointers  issue (?)z
+
+	int nextLevel{ m_NrLevel >= 3 ? 1 : m_NrLevel + 1 };
+	LoadLevel(*m_CurrentScene, m_GameMode, nextLevel);
 }
 
 
 
 void dae::LevelManager::LoadGameOver(const Event& event)
 {
-	auto player{ m_CurrentScene->FindObject("player") };
+	auto player{ m_CurrentScene->FindObject("P1") };
 
 	if (player.get() == nullptr)
 	{
@@ -128,7 +133,7 @@ void dae::LevelManager::LoadGameOver(const Event& event)
 		if (m_CurrentScene)
 		{
 			std::cout << "currentscene isn't nullptr \n";
-			ResetLevel(*m_CurrentScene);
+			ResetLevel(m_CurrentScene);
 		}
 		else
 		{
@@ -149,9 +154,10 @@ void dae::LevelManager::LoadGameOver(const Event& event)
 	std::cout << "LoadGameOver finished\n";
 }
 
-void dae::LevelManager::ResetLevel(Scene& scene)
+void dae::LevelManager::ResetLevel(Scene* scene)
 {
-	dae::SceneManager::GetInstance().RemoveScene(&scene);
+	dae::InputManager::GetInstance().RemoveAllCommandsAndControlers();
+	dae::SceneManager::GetInstance().RemoveScene(scene);
 }
 
 void dae::LevelManager::CreateLevelBackground(Scene& scene, int nrLevel)
@@ -231,8 +237,6 @@ void dae::LevelManager::CreatePlayer(Scene& scene, const GameMode& gameMode)
 	case dae::GameMode::VERSUS:
 		Create_Versus_Players(scene);
 		break;
-	default:
-		break;
 	}
 
 
@@ -302,11 +306,16 @@ void dae::LevelManager::CreateSinglePlayer(Scene& scene)
 	for (auto& keyDirection : keyDirections)
 	{
 		auto keyPressed = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Pressed);
-		auto keyDown = std::make_pair(keyDirection.first, dae::KeyboardInput::KeyState::Down);
 		auto direction = keyDirection.second;
 		auto pMoveCommand = std::make_shared<dae::GridMoveCommand>(player.get(), speed, direction, pGrid);
 		keyboard->AttachCommandToButton(pMoveCommand, keyPressed);
 	}
+
+	// add skip level button
+	auto keyPressed = std::make_pair(SDL_SCANCODE_N, dae::KeyboardInput::KeyState::Pressed);
+	if(!m_NextLevelCommand) m_NextLevelCommand = std::make_shared<dae::NextLevelCommand>();
+	keyboard->AttachCommandToButton(m_NextLevelCommand, keyPressed);
+
 }
 
 void dae::LevelManager::Create_Co_Op_Players(Scene& scene)

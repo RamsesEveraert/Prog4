@@ -1,6 +1,8 @@
 #include <windows.h>
 #include "KeyboardInput.h"
 
+#include <iostream>
+
 using namespace dae;
 
 KeyboardInput::KeyboardInput(int idx)
@@ -46,10 +48,14 @@ void KeyboardInput::UpdateWhenPressed()
 	{
 		if (m_pKeyboardState[keyboardKey.first])
 		{
+			if(command)
 			command->Execute();
 		}
 	}
 }
+
+
+
 
 
 void KeyboardInput::AttachCommandToButton(std::shared_ptr<Command> command, const KeyboardKey& key)
@@ -82,6 +88,13 @@ void KeyboardInput::DetachCommandFromButton(std::shared_ptr<Command> command, co
 		m_KeyCommandsMapPressed.erase(key);
 		break;
 	}
+}
+
+void dae::KeyboardInput::ClearCommands()
+{
+	m_KeyCommandsMapPressed.clear();
+	m_KeyCommandsMapDown.clear();
+	m_KeyCommandsMapUp.clear();
 }
 
 KeyboardInput::KeyState KeyboardInput::GetButtonState(SDL_Scancode key) const

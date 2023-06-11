@@ -59,6 +59,8 @@ namespace dae
 
 		const glm::vec2& GetDirectionLeftThumbStick() const;
 		const glm::vec2& GetDirectionRightThumbStick() const;
+
+		void ClearCommands();
 		
 
 		explicit ControllerInput(int controllerIndex, bool inertYAxis = true);

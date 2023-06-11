@@ -2,10 +2,13 @@
 #include "Singleton.h"
 #include "Scene.h"
 
+#include <memory>
+
 namespace dae
 {
 	struct Event;
 	class GameObject;
+	class NextLevelCommand;
 	enum class GameMode
 	{
 		SINGLEPLAYER, CO_OP, VERSUS
@@ -23,7 +26,7 @@ namespace dae
 		friend class Singleton<LevelManager>;
 		LevelManager() = default;
 
-		void ResetLevel(Scene& scene);
+		void ResetLevel(Scene* scene);
 
 		// game assets
 
@@ -74,6 +77,7 @@ namespace dae
 		const float m_GameScale{ 1.5f };
 		int m_NrLevel{};
 		bool m_IsAddedAsListener{};
+		std::shared_ptr<NextLevelCommand> m_NextLevelCommand{nullptr};
 	};
 
 }

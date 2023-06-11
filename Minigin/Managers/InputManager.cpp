@@ -106,4 +106,19 @@ void dae::InputManager::AddHUDButton(Button* pHUDButton)
 	m_HUDButtonPtrs.emplace_back(pHUDButton);
 }
 
+void dae::InputManager::RemoveAllCommandsAndControlers()
+{
+	for (auto& keyboard : m_Keyboards)
+	{
+		keyboard->ClearCommands();
+	}
+	for (auto& controller : m_Controllers)
+	{
+		controller->ClearCommands();
+	}
+	m_Controllers.clear();
+	m_Keyboards.clear();
+}
+
+
 

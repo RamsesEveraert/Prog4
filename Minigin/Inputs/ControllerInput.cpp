@@ -54,6 +54,13 @@ public:
 		}
 	}
 
+	void ClearCommands()
+	{
+		m_ButtonCommands.clear();
+		m_StickCommandMap.clear();
+		m_TriggerCommandMap.clear();
+	}
+
 	const glm::vec2& GetDirectionLeftThumbStick() const
 	{
 		return m_LeftStickDirection;
@@ -292,4 +299,9 @@ const glm::vec2& dae::ControllerInput::GetDirectionLeftThumbStick() const
 const glm::vec2& dae::ControllerInput::GetDirectionRightThumbStick() const
 {
 	return m_pImplController->GetDirectionRightThumbStick();
+}
+
+void dae::ControllerInput::ClearCommands()
+{
+	m_pImplController->ClearCommands();
 }

@@ -53,7 +53,7 @@ std::unique_ptr<PookaStateInterface> dae::PookaGhostState::Update()
     if (m_GhostFormTime < m_TransitionTime) m_GhostFormTime += TimeManager::GetInstance().GetDeltaTimeSec();
     else
     {
-        std::cout << "transition is over \n ";
+       // std::cout << "transition is over \n ";
         if (m_pPooka->GetComponent<GridMovementComponent>()->GetCurrentCell().IsDug)
         {
             std::cout << "current cell is dug \n";

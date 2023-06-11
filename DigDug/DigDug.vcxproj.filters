@@ -44,6 +44,9 @@
     <Filter Include="States\Pooka">
       <UniqueIdentifier>{bc23d8d8-7bf7-4e85-aecb-e741624af3d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\Level and GameMode">
+      <UniqueIdentifier>{969cc2c9-c6fc-4bcb-a417-c44a8b762571}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\GameplayComponents\SpriteAnimation.cpp">
@@ -95,7 +98,6 @@
     <ClCompile Include="Components\GameplayComponents\SoundComponent.cpp">
       <Filter>Components\GameplayComponents</Filter>
     </ClCompile>
-    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="FygarAttackState.cpp">
       <Filter>States\Fygar</Filter>
     </ClCompile>
@@ -119,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="Pooka.cpp">
       <Filter>Components\GameplayComponents\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="NextLevelCommand.cpp">
+      <Filter>Commands\Level and GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +178,6 @@
     <ClInclude Include="Components\GameplayComponents\SoundComponent.h">
       <Filter>Components\GameplayComponents</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.h" />
     <ClInclude Include="FygarAttackState.h">
       <Filter>States\Fygar</Filter>
     </ClInclude>
@@ -203,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="Pooka.h">
       <Filter>Components\GameplayComponents\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="NextLevelCommand.h">
+      <Filter>Commands\Level and GameMode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,8 @@ namespace dae
 		int GetAmountOfControllers() const;
 		void AddHUDButton(Button* pHUDButton);
 
+		void RemoveAllCommandsAndControlers();
+
 	private:
 
 		std::vector<std::unique_ptr<ControllerInput>> m_Controllers{};
